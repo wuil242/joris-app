@@ -1,7 +1,13 @@
-@layout('layouts/main')
+@layout('base')
 @set('title', 'Home|joris-app')
 @set('description', 'howsome joris app home')
 
+@section('menu')
+  @include('layouts/parts/header')
+@endsection
+
 @section('content')
+
+{{inspect(auth)}}
   @include('elements/temoignage')
 @endsection

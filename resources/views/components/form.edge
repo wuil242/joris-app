@@ -1,4 +1,13 @@
-<h1>Forn</h1>
-<form action="{{action}}" method="post">
-  
-</form>
+{{ csrfField() }}
+@each(field in fields)
+  <input class="form-input" 
+  type="{{field.type || 'text'}}" 
+  @if(field.name)
+    name="{{field.name}}"
+  @endif
+  @if(field.msg)
+    placeholder="{{field.msg}}"
+  @endif
+  value="{{field.value || ''}}"
+  >
+@endeach

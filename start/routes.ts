@@ -27,7 +27,7 @@ Route.get('/', async ({ view }) => {
 Route.get('/sign-up', 'AuthController.index').as('sign-up')
 Route.get('/login', 'AuthController.login').as('login')
 
-//TODO: mettre en place la connexion des utilisateurs
+//connexion de l'utilisateur
 Route.post('/login', 'UsersController.login')
 
 //TODO: mettre en place l'inscription des utilisateurs

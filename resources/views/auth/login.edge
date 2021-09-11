@@ -3,10 +3,29 @@
 @set('title', 'login')
 @set('description', 'the login page')
 
+@set('action', route('UsersController.login'))
+@set('fields', [
+  {
+    name: 'userId',
+    msg: 'email or phone number',
+  }, {
+    type: 'password',
+    name: 'password',
+    msg: 'passord',
+  },
+])
+
 @section('content')
-  <form action="/login" method="post">
-    <input type="text" name="userId" placeholder="email or tel">
-    <input type="password" name="password" placeholder="password">
-    <input class="button" type="submit" value="Connexion">
+  <h1>Login User</h1>
+
+  {{inspect(flashMessages.get('errors')?.userId)}}
+  
+  <form class="form" action="{{action}}" method="POST">
+    @!component('components/form', {action, fields})
+    <label class="form-input" for="remember-me">
+      Se souvenir de moi
+      <input class="form-input" type="checkbox" name="remember_me" id="remember_me">
+    </label>
+    <input class="form-input" type="submit" value="Log-In">
   </form>
 @endsection
