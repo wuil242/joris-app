@@ -10,9 +10,10 @@ export default class UsersController {
   }
   
   public async login({request, auth, response}:HttpContextContract) {
-      const remember_me = request.input('remember_me', false)
+      const remember_me = !!request.input('remember_me', false)
       const payload = await request.validate(UserLoginValidator)
-      auth.loginViaId(payload.userId, payload.password, remember_me)
+      console.log('Remenber',   remember_me)
+      await auth.use('web').attempt(payload.userId, payload.password)
 
       return response.redirect('/')
   }

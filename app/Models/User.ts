@@ -6,7 +6,7 @@ import {
   BaseModel,
 } from '@ioc:Adonis/Lucid/Orm'
 
-export default class user extends BaseModel {
+export default class User extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
