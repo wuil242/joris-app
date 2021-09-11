@@ -20,15 +20,29 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async ({ view }) => {
-  return view.render('home/index')
-})
+Route.group(() => {
+  Route.get('/', async ({view }) => {
+    return view.render('home/index')
+  })
 
-Route.get('/sign-up', 'AuthController.index').as('sign-up')
-Route.get('/login', 'AuthController.login').as('login')
+}).middleware('silentAuth')
+
+Route.group(() => {
+  Route.post('/logout', 'UsersController.logout').as('logout')
+  
+}).middleware('auth')
+
+
+Route.group(() => {
+  Route.get('/sign-up', 'AuthController.index').as('sign-up')
+  Route.post('/sign-up', 'UsersController.store')
+
+  Route.get('/login', 'AuthController.login').as('login')
+  Route.post('/login', 'UsersController.login')
+
+}).middleware('userGuard')
+
 
 //connexion de l'utilisateur
-Route.post('/login', 'UsersController.login')
 
 //TODO: mettre en place l'inscription des utilisateurs
-Route.post('/sign-up', 'UsersController.store')

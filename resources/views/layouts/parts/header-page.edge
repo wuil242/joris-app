@@ -4,7 +4,7 @@
       <h1 class="site-name">Joris-app</h1>    
   </div>
   @include('layouts/parts/header-menu')
-  @if(!auth.user)
+  @if(!auth.isLoggedIn)
     @include('layouts/parts/header-auth-btns')
   @endif
 </header>

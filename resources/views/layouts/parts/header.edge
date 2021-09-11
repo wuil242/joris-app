@@ -6,7 +6,9 @@
         </div>
             @include('layouts/parts/header-menu')
     </div>
-    @include('layouts/parts/header-auth-btns')
+    @if(!auth.isLoggedIn)
+        @include('layouts/parts/header-auth-btns')
+    @endif
     <div class="header-bottom">
         <h2 class="site-title">JORIS APP</h2>
         <p class="site-explain">
