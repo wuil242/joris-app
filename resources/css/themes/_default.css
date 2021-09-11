@@ -1,0 +1,17 @@
+:root {
+  /* Page */
+  --page-color: red;
+  --page-font-size: 16px;
+  --page-font-family: sans-serif;
+
+  /* Button */
+  --button-color: rgba(42, 4, 114, 0.932);
+  --button-text-color: white;
+  --button-hover-color: var(--button-text-color);
+  --button-hover-text-color: var(--button-color);
+
+  /* Layer | niveaux de chaque calque */
+  --layer-top: 99;
+  --layer-middle: 55;
+  --layer-bottom: 11
+}

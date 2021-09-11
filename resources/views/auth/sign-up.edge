@@ -1,0 +1,13 @@
+@layout('layouts/page')
+
+@set('title', 'sign-up')
+@set('description', 'the sign-up page')
+
+@section('content')
+<h1>Sign Up</h1>
+<form action="{{ route('sign-up') }}" method="post">
+  <input type="text" name="name">
+  <input type="submit">
+  {{ csrfField() }}
+</form>
+@endsection

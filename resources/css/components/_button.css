@@ -1,0 +1,27 @@
+.button {
+
+  border: none;
+  padding: .7em 1.4em;
+  border-radius: 4px;
+  flex: none;
+
+  font-size: .9rem;
+  text-align: center;
+  text-decoration: none;
+
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+
+  transition: .3s ease-in-out;
+
+  max-width: 45%;
+
+  cursor: pointer;
+}
+
+.button:hover,
+.button:active {
+  --button-color: var(--button-hover-color);
+  --button-text-color: var(--button-hover-text-color);
+  /* font-weight: 800; */
+}

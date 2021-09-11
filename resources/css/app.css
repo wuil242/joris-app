@@ -1,0 +1,12 @@
+@import 'utils/reset';
+@import 'themes/all';
+@import 'components/all';
+@import 'elements/all';
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  /* background: var(--page-color); */
+  font-size: var(--page-font-size);
+  font-family: var(--page-font-family);
+}

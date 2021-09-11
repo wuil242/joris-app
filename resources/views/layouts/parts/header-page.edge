@@ -1,0 +1,10 @@
+<header class="header-page">
+  <div class="header-page-site-infos">
+    <a href="/" class="site-logo"></a>
+      <h1 class="site-name">Joris-app</h1>    
+  </div>
+  @include('layouts/parts/header-menu')
+  @if(!auth.user)
+    @include('layouts/parts/header-auth-btns')
+  @endif
+</header>

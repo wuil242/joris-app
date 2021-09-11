@@ -1,0 +1,12 @@
+@layout('layouts/page')
+
+@set('title', 'login')
+@set('description', 'the login page')
+
+@section('content')
+  <form action="/login" method="post">
+    <input type="text" name="userId" placeholder="email or tel">
+    <input type="password" name="password" placeholder="password">
+    <input class="button" type="submit" value="Connexion">
+  </form>
+@endsection

@@ -1,0 +1,29 @@
+<nav class="js-close-menu header-menu hide">
+  <button class="header-menu-close" id="button-close">X</button>
+    <ul class="header-menu-items">
+      <li class="header-menu-item"><a href="/">Acceuil</a></li>
+      <li class="header-menu-item"><a href="#">Rechercher</a></li>
+      <li class="header-menu-item"><a href="#">Demande</a></li>
+      {{--  <li class="header-menu-item"><a href="#">Entreprise</a></li>  --}}
+      <li class="header-menu-item"><a href="#">Ils-Temoigne</a></li>
+      <li class="header-menu-item"><a href="#">Nous-Contater</a></li>
+      <li class="header-menu-item"><a href="#">A-Propos</a></li>
+      @if(!auth.user)
+      @include('layouts/parts/header-auth-btns')
+      
+      @else
+      {{--  User header-profil  --}}
+      <a href="#" class="header-profil">
+      </a>
+      <div class="header-profil-options">
+        <a href="#" class="button">Mes devis</a>        
+        <a href="#" class="button">Mes Favoris</a>  
+      </div>      
+      @endif
+    </ul>
+  </nav>
+  <button class="js-open-menu header-menu-button">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
