@@ -3,11 +3,66 @@
 @set('title', 'sign-up')
 @set('description', 'the sign-up page')
 
+@set('action', route('UsersController.store'))
+@set('fields', [
+  {
+    name: 'lastname',
+    msg: 'lastname',
+    value: flashMessages.get('lastname')
+  },
+  {
+    name: 'firstname',
+    msg: 'firstname',
+    value: flashMessages.get('firstname')
+  },
+  {
+    type: 'email',
+    name: 'email',
+    msg: 'email',
+    value: flashMessages.get('email')
+  },
+  {
+    type: 'tel',
+    name: 'tel',
+    msg: 'phone number',
+    value: flashMessages.get('tel')
+  },
+  {
+    type: 'password',
+    name: 'password',
+    msg: 'password',
+  },
+  {
+    type: 'password',
+    name: 'password_confirm',
+    msg: 'password confirm'
+  }
+])
+
 @section('content')
 <h1>Sign Up</h1>
-<form action="{{ route('sign-up') }}" method="post">
-  <input type="text" name="name">
-  <input type="submit">
-  {{ csrfField() }}
+{{--  {{inspect(flashMessages)}}    --}}
+{{inspect(flashMessages.get('errors'))}}
+<form class="form" action="{{ route('sign-up') }}" method="post">
+  @!component('components/form', {action, fields})
+  <label class="form-label" for="policy">
+    Politique de confidentialiter <a href="/policy">en savoir plus</a>
+    <input class="form-input" type="checkbox" name="policy" id="policy" {{flashMessages.has('policy') ? 'checked' : ''}}>
+  </label>
+  <input class="form-input" type="submit" value="Sign-in">
 </form>
+
+  <script>
+    const policy = document.getElementById('policy')
+    const msg = document.createElement('div')
+    msg.style.setProperty('color', 'red')
+    msg.classList.add('error')
+    msg.innerText = 'acceptez les condition policy'
+    document.forms[0].addEventListener('submit', e => {
+      if(!policy.checked) {
+        e.preventDefault()
+        policy.parentElement.insertBefore(msg, policy.parentElement.firstChild)
+      }
+    })
+  </script>
 @endsection
