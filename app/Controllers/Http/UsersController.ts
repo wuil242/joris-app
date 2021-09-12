@@ -1,19 +1,38 @@
+import Hash from '@ioc:Adonis/Core/Hash'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import {schema, rules} from '@ioc:Adonis/Core/Validator'
+import User from 'App/Models/User'
 import UserLoginValidator from 'App/Validators/UserLoginValidator'
+import UserSignInValidator from 'App/Validators/UserSignInValidator'
 
 export default class UsersController {
 
   
-  public async store({response}:HttpContextContract) {
-    return response.redirect('/')
+  public async store({request, view, response, session}:HttpContextContract) {
+    const payload = await request.validate(UserSignInValidator)
+   
+    const policy = request.input('policy') === 'on'
+    if(!policy) {
+      for (const item in payload) {
+        session.flash(item, payload[item])
+      }
+      session.flash('errors.policy', 'accepter la policy')
+      return response.redirect().back()
+    }
+    
+    const user = await User.create(payload)
+    return view.render('user/confirmation', {user})
   }
   
-  public async login({request, auth, response}:HttpContextContract) {
+  public async login({request, auth, response, session}:HttpContextContract) {
       const remember_me = !!request.input('remember_me', false)
       const payload = await request.validate(UserLoginValidator)
-
-      await auth.attempt(payload.userId, payload.password, remember_me)
+      const user = await auth.attempt(payload.userId, payload.password)
+      if(!user.confirmed) {
+        await auth.logout()
+        session.flash('errors.accout', 'not confirm')
+        return response.redirect().back()
+      }
+      await auth.login(user, remember_me)
       return response.redirect('/') 
   }
 

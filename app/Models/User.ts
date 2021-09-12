@@ -17,7 +17,7 @@ export default class User extends BaseModel {
   public firstname: string
   
   @column()
-  public tel:string
+  public tel?:string
 
   @column()
   public profil_image_path: string
@@ -29,6 +29,9 @@ export default class User extends BaseModel {
   public password: string
 
   @column()
+  public confirmed: boolean
+
+  @column()
   public rememberMeToken?: string
 
   @column.dateTime({ autoCreate: true })
@@ -36,6 +39,11 @@ export default class User extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @beforeSave()
+  public static async defaulttConfirmation(user: User) {
+    user.confirmed = false
+  }
 
   @beforeSave()
   public static async hashPassword (user: User) {
