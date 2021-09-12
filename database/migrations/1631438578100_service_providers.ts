@@ -15,7 +15,7 @@ export default class ServiceProviders extends BaseSchema {
       table.string('description', 255).notNullable()
       table.string('accroch_sentence', 255).nullable()
       table.string('introduce_video', 255).nullable()
-
+      table.enum('sexe', ['m', 'f']).notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

@@ -7,7 +7,7 @@ export default class Quaters extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('name', 255).notNullable()
-      table.integer('arrondissent_id').unsigned().references('arrondissents.id')
+      table.integer('arrondissent_id').unsigned().references('arrondissements.id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
