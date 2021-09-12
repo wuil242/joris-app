@@ -8,7 +8,13 @@ export default class Quater extends BaseModel {
   public id: number
 
   @column()
-  public value: string
+  public name: string
+
+  @column()
+  public cityId: number
+  
+  @column()
+  public arrondissementId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -16,9 +22,8 @@ export default class Quater extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-
   @belongsTo(() => Arrondissement)
-  public arrondissents: BelongsTo<typeof Arrondissement>
+  public arrondissement: BelongsTo<typeof Arrondissement>
 
   @belongsTo(() => City)
   public city: BelongsTo<typeof City>

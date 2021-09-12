@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasMany, hasMany, hasManyThrough } from '@ioc:Adonis/Lucid/Orm'
 import Arrondissement from './Arrondissement'
 import Quater from './Quater'
 
@@ -18,7 +18,5 @@ export default class City extends BaseModel {
 
   @hasMany(() => Arrondissement)
   public arrondissents: HasMany<typeof Arrondissement>
-
-  @hasMany(() => Quater)
-  public quaters: HasMany<typeof Quater>
+  
 }

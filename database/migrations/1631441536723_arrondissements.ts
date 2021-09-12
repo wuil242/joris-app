@@ -8,6 +8,7 @@ export default class Arrondissements extends BaseSchema {
       table.increments('id')
       table.string('name', 255).notNullable()
       table.integer('city_id').unsigned().references('cities.id')
+        .onDelete('CASCADE')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

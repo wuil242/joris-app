@@ -6,6 +6,12 @@ import City from './City'
 export default class Arrondissement extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+  
+  @column()
+  public name: string
+
+  @column()
+  public cityId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
