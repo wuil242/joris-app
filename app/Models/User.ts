@@ -27,23 +27,18 @@ export default class User extends BaseModel {
 
   @column({ serializeAs: null })
   public password: string
-
-  @column()
-  public confirmed: boolean
-
+  
   @column()
   public rememberMeToken?: string
+  
+  @column.dateTime()
+  public confirmed: DateTime
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-
-  @beforeSave()
-  public static async defaulttConfirmation(user: User) {
-    user.confirmed = false
-  }
 
   @beforeSave()
   public static async hashPassword (user: User) {

@@ -18,8 +18,9 @@ export default class UsersController {
       session.flash('errors.policy', 'accepter la policy')
       return response.redirect().back()
     }
-    
+    //TODO: ajouter la confirmation par mail
     const user = await User.create(payload)
+  
     return view.render('user/confirmation', {user})
   }
   
@@ -27,16 +28,18 @@ export default class UsersController {
       const remember_me = !!request.input('remember_me', false)
       const payload = await request.validate(UserLoginValidator)
       const user = await auth.attempt(payload.userId, payload.password)
+      
+      await auth.logout()
+      
       if(!user.confirmed) {
-        await auth.logout()
         session.flash('errors.accout', 'not confirm')
         return response.redirect().back()
       }
+
       await auth.login(user, remember_me)
       return response.redirect('/') 
   }
 
-  
   public async logout({auth, response}:HttpContextContract) {
     await auth.logout()
     return response.redirect('/prestaire/search')
