@@ -34,10 +34,10 @@ Route.group(() => {
 
 
 Route.group(() => {
-  Route.get('/sign-up', 'AuthController.index').as('sign-up')
+  Route.get('/inscription', 'AuthController.index').as('sign-up')
   Route.post('/sign-up', 'UsersController.store')
 
-  Route.get('/login', 'AuthController.login').as('login')
+  Route.get('/connexion', 'AuthController.login').as('login')
   Route.post('/login', 'UsersController.login')
 
 }).middleware('userGuard')
