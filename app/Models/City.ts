@@ -18,5 +18,4 @@ export default class City extends BaseModel {
 
   @hasMany(() => Arrondissement)
   public arrondissents: HasMany<typeof Arrondissement>
-  
 }

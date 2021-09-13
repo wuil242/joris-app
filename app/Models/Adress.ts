@@ -8,22 +8,22 @@ import Quater from './Quater'
 export default class Adress extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-  
+
   @column()
   public numberAdress: number
-  
+
   @column()
   public street: string
 
   @column()
   public serviceProviderId: number
-  
+
   @column()
   public cityId: number
-  
+
   @column()
   public arrondissementId: number
-  
+
   @column()
   public quaterId: number
 
@@ -37,11 +37,11 @@ export default class Adress extends BaseModel {
   public serviceProvider: BelongsTo<typeof ServiceProvider>
 
   @belongsTo(() => City)
-  public city:BelongsTo<typeof City>
+  public city: BelongsTo<typeof City>
 
   @belongsTo(() => Arrondissement)
-  public arrondissent:BelongsTo<typeof Arrondissement>
+  public arrondissent: BelongsTo<typeof Arrondissement>
 
   @belongsTo(() => Quater)
-  public quater:BelongsTo<typeof Quater>
+  public quater: BelongsTo<typeof Quater>
 }

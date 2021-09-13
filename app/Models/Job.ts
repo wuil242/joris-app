@@ -5,7 +5,7 @@ import ServiceProvider from './ServiceProvider'
 export default class Job extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-  
+
   @column()
   public name: string
 
@@ -22,7 +22,7 @@ export default class Job extends BaseModel {
   public updatedAt: DateTime
 
   @manyToMany(() => ServiceProvider, {
-    pivotTable: 'service_provider_jobs'
+    pivotTable: 'service_provider_jobs',
   })
   public serviceProviders: ManyToMany<typeof ServiceProvider>
 }

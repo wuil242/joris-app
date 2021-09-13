@@ -19,21 +19,26 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import Job from 'App/Models/Job'
 
 Route.group(() => {
-  Route.get('/', async ({view }) => {
+  Route.get('/', async ({ view }) => {
     return view.render('home/index')
   })
 
   Route.get('/search', 'ServiceProvidersController.index').as('serviceProvider.find')
 
+  Route.group(() => {
+    Route.get('/jobs/:job?', async ({ params }) => {
+      const jobs = await Job.all()
+      return jobs.filter((job) => !job.name.startsWith(params.job))
+    })
+  }).prefix('api')
 }).middleware('silentAuth')
 
 Route.group(() => {
   Route.post('/logout', 'UsersController.logout').as('logout')
-  
 }).middleware('auth')
-
 
 Route.group(() => {
   Route.get('/inscription', 'AuthController.index').as('sign-up')
@@ -41,9 +46,7 @@ Route.group(() => {
 
   Route.get('/connexion', 'AuthController.login').as('login')
   Route.post('/login', 'UsersController.login')
-
 }).middleware('userGuard')
-
 
 //connexion de l'utilisateur
 

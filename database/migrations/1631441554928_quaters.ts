@@ -3,14 +3,17 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 export default class Quaters extends BaseSchema {
   protected tableName = 'quaters'
 
-  public async up () {
+  public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('name', 255).notNullable()
-      table.integer('arrondissement_id').unsigned().references('arrondissements.id')
-        .notNullable().onDelete('CASCADE')
-      table.integer('city_id').unsigned().references('cities.id')
-        .notNullable().onDelete('CASCADE')
+      table
+        .integer('arrondissement_id')
+        .unsigned()
+        .references('arrondissements.id')
+        .notNullable()
+        .onDelete('CASCADE')
+      table.integer('city_id').unsigned().references('cities.id').notNullable().onDelete('CASCADE')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
@@ -20,7 +23,7 @@ export default class Quaters extends BaseSchema {
     })
   }
 
-  public async down () {
+  public async down() {
     this.schema.dropTable(this.tableName)
   }
 }

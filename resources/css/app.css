@@ -3,7 +3,8 @@
 @import 'components/all';
 @import 'elements/all';
 
-html, body {
+html,
+body {
   width: 100%;
   overflow-x: hidden;
   /* background: var(--page-color); */

@@ -4,7 +4,7 @@
 
 @section('content')
   <h1>Trouver Un Prestaire</h1>
-  <form class="form" action="#" method="POST" >
+  <form class="form" action="#" method="POST" id="js-search">
     <label for="jobs">
       <span>Jobs</span>
       <input type="text" name="job" id="jobs">
@@ -15,6 +15,43 @@
         @endeach
       </ul>
     </label>
-  
   </form>
+
+  <script>
+  /**
+   * 
+   * 
+   * @param {string[]} picks derniers choix de l'utlisateur
+   */
+  function lastPick(...picks) {
+    picks.forEach(pick => {
+      console.log(pick)
+    })
+  }
+
+  const $form = document.getElementById('js-search')
+    const $jobs = $form.querySelector('#jobs')
+    const $city = $form.querySelector('#js-city')
+    const $arrondissememnt = $form.querySelector('#js-arrondissememnt')
+    const $quater = $form.querySelector('#js-quater')
+    
+    const lastJobPick = sessionStorage.getItem('last_job_pick')
+    const lastCityPick = sessionStorage.getItem('last_city_pick')
+    const lastArrondissementPick = sessionStorage.getItem('last_arrondissement_pick')
+    const lastQuaterPick = sessionStorage.getItem('last_quater_pick')
+
+    lastPick(
+      lastJobPick, lastCityPick, lastArrondissementPick, lastQuaterPick
+    )
+
+    if($jobs) {
+      const ul = $jobs.nextElementSibling
+      $jobs.addEventListener('keyup', async (e) => {
+        const value = e.target.value
+        const res = await fetch('/api/jobs/' + value).then(r => r.json())
+        console.log(res)
+      })
+    }
+
+  </script>
 @endsection

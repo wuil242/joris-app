@@ -1,4 +1,4 @@
-declare const enum SEXE{
+declare const enum SEXE {
   MALE = 'm',
-  FEMALE = 'f'
+  FEMALE = 'f',
 }

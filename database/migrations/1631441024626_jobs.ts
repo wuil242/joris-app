@@ -3,10 +3,10 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 export default class Jobs extends BaseSchema {
   protected tableName = 'jobs'
 
-  public async up () {
+  public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('name', 255).notNullable()
+      table.string('name', 255).unique().notNullable()
       table.string('color', 10).notNullable()
       //la couleur de fond de la presentation d'une categorie de travaille
       table.string('bg_color', 10).nullable()
@@ -18,7 +18,7 @@ export default class Jobs extends BaseSchema {
     })
   }
 
-  public async down () {
+  public async down() {
     this.schema.dropTable(this.tableName)
   }
 }

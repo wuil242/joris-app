@@ -3,13 +3,16 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 export default class ServiceProviderJobs extends BaseSchema {
   protected tableName = 'service_provider_jobs'
 
-  public async up () {
+  public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('service_provider_id').references('service_providers.id')
-        .unsigned().notNullable().onDelete('CASCADE')
-      table.integer('job_id').references('jobs.id').unsigned()
-        .notNullable().onDelete('CASCADE')
+      table
+        .integer('service_provider_id')
+        .references('service_providers.id')
+        .unsigned()
+        .notNullable()
+        .onDelete('CASCADE')
+      table.integer('job_id').references('jobs.id').unsigned().notNullable().onDelete('CASCADE')
       table.unique(['service_provider_id', 'job_id'])
 
       /**
@@ -20,7 +23,7 @@ export default class ServiceProviderJobs extends BaseSchema {
     })
   }
 
-  public async down () {
+  public async down() {
     this.schema.dropTable(this.tableName)
   }
 }

@@ -6,7 +6,7 @@ import City from './City'
 export default class Arrondissement extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-  
+
   @column()
   public name: string
 
@@ -18,7 +18,6 @@ export default class Arrondissement extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-
 
   @belongsTo(() => City)
   public city: BelongsTo<typeof City>

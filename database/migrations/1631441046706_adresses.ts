@@ -3,12 +3,16 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 export default class Adresses extends BaseSchema {
   protected tableName = 'adresses'
 
-  public async up () {
+  public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.integer('number_adress').notNullable()
       table.string('street', 255).notNullable()
-      table.integer('service_provider_id').unique().unsigned().references('service_providers.id')
+      table
+        .integer('service_provider_id')
+        .unique()
+        .unsigned()
+        .references('service_providers.id')
         .onDelete('CASCADE')
       table.integer('city_id').unsigned().references('cities.id')
       table.integer('arrondissement_id').unsigned().references('arrondissements.id')
@@ -22,7 +26,7 @@ export default class Adresses extends BaseSchema {
     })
   }
 
-  public async down () {
+  public async down() {
     this.schema.dropTable(this.tableName)
   }
 }

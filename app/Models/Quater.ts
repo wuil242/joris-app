@@ -12,7 +12,7 @@ export default class Quater extends BaseModel {
 
   @column()
   public cityId: number
-  
+
   @column()
   public arrondissementId: number
 
