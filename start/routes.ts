@@ -25,6 +25,8 @@ Route.group(() => {
     return view.render('home/index')
   })
 
+  Route.get('/search', 'ServiceProvidersController.index').as('serviceProvider.find')
+
 }).middleware('silentAuth')
 
 Route.group(() => {

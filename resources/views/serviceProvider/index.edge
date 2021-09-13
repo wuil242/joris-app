@@ -1,0 +1,20 @@
+@layout('layouts/page')
+@set('title', 'Trouver un prestataire')
+@set('description', 'Trouver un prestataire')
+
+@section('content')
+  <h1>Trouver Un Prestaire</h1>
+  <form class="form" action="#" method="POST" >
+    <label for="jobs">
+      <span>Jobs</span>
+      <input type="text" name="job" id="jobs">
+      <ul name="job" id="jobs">
+        JOBS
+        @each(job in jobs)
+        <li value="{{job.id}}" style="border-left: 5px solid {{job.bgColor}}; color: {{job.color}};">{{job.name}}</li>
+        @endeach
+      </ul>
+    </label>
+  
+  </form>
+@endsection

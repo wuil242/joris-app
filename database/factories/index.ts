@@ -69,7 +69,8 @@ export const AdressFactory = Factory.define(Adress, async ({faker}) => {
 export const JobFactory = Factory.define(Job, ({faker}) => {
   return {
     name: faker.name.jobType(),
-    color: faker.internet.color(255, 255, 255)
+    color: faker.internet.color(255, 255, 255),
+    bgColor: faker.internet.color(255, 255, 255)
   }
 }).build()
 
@@ -82,7 +83,7 @@ export const ServiceProviderFactory = Factory.define(ServiceProvider, ({faker}) 
     email: faker.internet.email(),
     description: faker.lorem.sentences(3),
     accrochSentence: faker.lorem.sentence(1),
-    sexe: 'f',
+    sexe: 'f' as SEXE,
     age: faker.datatype.number({min: 18, max: 60}),
   }
 }).build()

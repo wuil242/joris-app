@@ -12,6 +12,9 @@ export default class Job extends BaseModel {
   @column()
   public color: string
 
+  @column()
+  public bgColor?: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

@@ -7,9 +7,9 @@ export default class ServiceProviderJobs extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.integer('service_provider_id').references('service_providers.id')
-        .unsigned().notNullable()//.unique()
+        .unsigned().notNullable().onDelete('CASCADE')
       table.integer('job_id').references('jobs.id').unsigned()
-        .notNullable()//.unique()
+        .notNullable().onDelete('CASCADE')
       table.unique(['service_provider_id', 'job_id'])
 
       /**
