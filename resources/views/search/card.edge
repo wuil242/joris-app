@@ -1,0 +1,29 @@
+<style>
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 5px;
+    background: #ccc;
+  }
+  .card {
+    padding: 10px;
+    border: solid 2px red;
+  }
+
+  .card strong {
+    font-weight: bold;
+  }
+
+  .card {
+    transform: scale(.8);
+    width: 90%
+  }
+</style>
+
+<div class="cards">
+  @each(sp in sericeProviders)
+   <div class="card">
+    {{inspect(sp)}}
+   </div>
+  @endeach
+</div>

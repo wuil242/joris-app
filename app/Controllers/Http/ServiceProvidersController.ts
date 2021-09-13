@@ -1,10 +1,10 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import City from 'App/Models/City'
 import Job from 'App/Models/Job'
 
 export default class ServiceProvidersController {
   public async index({ view }: HttpContextContract) {
-    const jobs = await Job.all()
-    return view.render('serviceProvider/index', { jobs: jobs })
+   
   }
 
   public async create({}: HttpContextContract) {}

@@ -1,0 +1,128 @@
+@layout('layouts/page')
+@set('title', 'Trouver un prestataire')
+@set('description', 'Trouver un prestataire')
+
+
+@section('content')
+  <style>
+    label > ul {border: solid 2px #CCC;}
+  </style>
+
+  <h1>Trouver Un Prestaire</h1>
+  <form class="form" action="{{route('serviceProvider.search')}}" method="GET" id="js-search" >
+      <label for="job">
+        <h2>Jobs</h2>
+        <select name="job" id="job">
+          @each(job in jobs)
+            <option value="{{job.name}}">{{job.name}}</option>
+          @endeach
+        </select>
+      </label>
+
+      <label for="city">
+        <h2>Jobs</h2>
+        <select name="city" id="city">
+          @each(city in cities)
+            <option value="{{city.name}}">{{city.name}}</option>
+          @endeach
+        </select>
+      </label>
+
+    <input type="submit" value="send">
+  </form>
+
+  <div>
+    <h1>Results</h1>
+    <hr>
+    <div id="results">
+      @if(sericeProviders)
+        @!component('search/card', {sericeProviders})        
+      @endif
+    </div>
+  </div>
+
+  <script>
+    let url = new URL(window.location.href + '/q')
+    const $csrf = document.getElementsByName('_csrf')[0]
+    
+  /**
+   * 
+   * 
+   * @param {string[]} picks derniers choix de l'utlisateur
+   */
+  function lastPick(...picks) {
+    picks.forEach(pick => {
+      console.log(pick)
+    })
+  }
+
+  /**
+   * @param {HTMLCollection} children
+   * @param {HTMLInputElement} input
+  */
+  function dataList(input, children) {  
+    Array.from(children).forEach(li => {
+      li.addEventListener('click', () => {
+        if(input.value === li.innerText) return
+        const type = input.dataset.type
+        console.log(li)
+        input.value = li.innerText
+        // updateQuery(type, li.dataset.id)
+      })
+    })
+  }
+
+  function dinamiseInput(input, children) {
+  }
+
+  async function updateQuery(query, value) {
+    url.searchParams.set(query, value)
+    url.searchParams.set($csrf.name, $csrf.value)
+    const method = 'GET'
+    const headers = {'X-Requested-With': 'xmlHttpRequest'}
+    const data = await fetch(url.href, {method, headers}).then(r => r.json())
+    if(data.html) {
+      console.log(data.html)
+      document.getElementById('results')
+        .innerHTML = data.html
+    }
+  }
+
+  const $form = document.getElementById('js-search')
+  const $jobs = $form.querySelector('#jobs')
+  const $cities = $form.querySelector('#cities')
+  const $arrondissememnt = $form.querySelector('#js-arrondissememnt')
+  const $quater = $form.querySelector('#js-quater')
+  
+  const lastJobPick = sessionStorage.getItem('last_job_pick')
+  const lastCityPick = sessionStorage.getItem('last_city_pick')
+  const lastArrondissementPick = sessionStorage.getItem('last_arrondissement_pick')
+  const lastQuaterPick = sessionStorage.getItem('last_quater_pick')
+
+    lastPick(
+      lastJobPick, lastCityPick, lastArrondissementPick, lastQuaterPick
+    )
+
+
+    if($jobs) {
+      const ul = $jobs.nextElementSibling
+      const jobs = JSON.parse($jobs.dataset.jobs)
+
+      dataList($jobs, ul.children)
+      dinamiseInput($jobs, ul.children)
+
+    }
+
+    if($cities) {
+      const ul = $cities.nextElementSibling
+      const cities = JSON.parse($cities.dataset.cities)
+
+      dataList($cities, ul.children)
+      dinamiseInput($cities, ul.children)
+
+    }
+
+    // updateQuery('job', undefined)
+
+  </script>
+@endsection

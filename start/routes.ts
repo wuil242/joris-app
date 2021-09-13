@@ -19,21 +19,21 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-import Job from 'App/Models/Job'
 
 Route.group(() => {
-  Route.get('/', async ({ view }) => {
-    return view.render('home/index')
-  })
 
-  Route.get('/search', 'ServiceProvidersController.index').as('serviceProvider.find')
+  Route.on('/').render('home/index')
+
+  Route.get('/recherche', 'SearchesController.index').as('serviceProvider.find')
+
+  // Route.get('/recherche/q', 'SearchesController.getSearch').as('serviceProvider.search')
+  Route.get('/recherche/q', 'SearchesController.search').as('serviceProvider.search')
 
   Route.group(() => {
-    Route.get('/jobs/:job?', async ({ params }) => {
-      const jobs = await Job.all()
-      return jobs.filter((job) => !job.name.startsWith(params.job))
-    })
+    Route.get('/sp/job/:id?', 'ApisController.getSp')
+
   }).prefix('api')
+
 }).middleware('silentAuth')
 
 Route.group(() => {
