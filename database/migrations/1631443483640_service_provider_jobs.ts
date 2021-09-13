@@ -6,11 +6,11 @@ export default class ServiceProviderJobs extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('servive_provider_id').references('service_providers.id')
+      table.integer('service_provider_id').references('service_providers.id')
         .unsigned().notNullable()//.unique()
       table.integer('job_id').references('jobs.id').unsigned()
         .notNullable()//.unique()
-      table.unique(['servive_provider_id', 'job_id'])
+      table.unique(['service_provider_id', 'job_id'])
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

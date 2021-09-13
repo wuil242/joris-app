@@ -6,7 +6,9 @@ export default class Jobs extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('service_provider_id').unsigned().references('service_providers.id')
+      table.string('name', 255).notNullable()
+      table.string('color', 9).notNullable()
+      // table.integer('service_provider_id').unsigned().references('service_providers.id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

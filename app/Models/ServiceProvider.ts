@@ -4,6 +4,7 @@ import Adress from './Adress'
 import Job from './Job'
 import ServiceProviderRealisation from './ServiceProviderRealisation'
 
+
 export default class ServiceProvider extends BaseModel {
   @column({ isPrimary: true })
   public id: number
@@ -12,28 +13,31 @@ export default class ServiceProvider extends BaseModel {
   public lastname: string
 
   @column()
-  public firstame: string
+  public firstname: string
+
+  @column()
+  public age: number
 
   @column()
   public tel: String
 
   @column()
-  public secureText: string
+  public secureTel: string
 
   @column()
   public email: string
 
   @column()
-  public photo: string
+  public photo?: string
 
   @column()
   public description: string
 
   @column()
-  public accrochSentence: string
+  public accrochSentence?: string
 
   @column()
-  public introduceVideo: string
+  public introduceVideo?: string
 
   @column()
   public sexe: SEXE
@@ -47,7 +51,9 @@ export default class ServiceProvider extends BaseModel {
   @hasOne(() => Adress)
   public adress: HasOne<typeof Adress>
 
-  @manyToMany(() => Job)
+  @manyToMany(() => Job, {
+    pivotTable: 'service_provider_jobs'
+  })
   public jobs: ManyToMany<typeof Job>
 
   @hasMany(() => ServiceProviderRealisation)

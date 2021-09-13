@@ -18,6 +18,8 @@ export default class Job extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @manyToMany(() => ServiceProvider)
+  @manyToMany(() => ServiceProvider, {
+    pivotTable: 'service_provider_jobs'
+  })
   public serviceProviders: ManyToMany<typeof ServiceProvider>
 }

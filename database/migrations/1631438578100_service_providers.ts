@@ -8,14 +8,16 @@ export default class ServiceProviders extends BaseSchema {
       table.increments('id')
       table.string('lastname', 255).notNullable()
       table.string('firstname', 255).notNullable()
+      table.integer('age', 65).unsigned().notNullable()
       table.string('tel', 14).unique().notNullable()
       table.string('secure_tel', 14).unique().notNullable()
       table.string('email', 255).unique().notNullable()
       table.string('photo', 255).defaultTo('/assets/avatar_service_provider.png').notNullable()
       table.string('description', 255).notNullable()
+      table.integer('score').unsigned().defaultTo(10).notNullable()
+      table.enum('sexe', ['m', 'f']).notNullable()
       table.string('accroch_sentence', 255).nullable()
       table.string('introduce_video', 255).nullable()
-      table.enum('sexe', ['m', 'f']).notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

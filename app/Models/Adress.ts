@@ -1,16 +1,31 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import City from './City'
 import Arrondissement from './Arrondissement'
-import Quater from './Quater'
 import ServiceProvider from './ServiceProvider'
+import Quater from './Quater'
 
 export default class Adress extends BaseModel {
   @column({ isPrimary: true })
   public id: number
   
   @column()
-  public name: string
+  public numberAdress: number
+  
+  @column()
+  public street: string
+
+  @column()
+  public serviceProviderId: number
+  
+  @column()
+  public cityId: number
+  
+  @column()
+  public arrondissementId: number
+  
+  @column()
+  public quaterId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -21,12 +36,12 @@ export default class Adress extends BaseModel {
   @belongsTo(() => ServiceProvider)
   public serviceProvider: BelongsTo<typeof ServiceProvider>
 
-  @hasOne(() => City)
-  public city:HasOne<typeof City>
+  @belongsTo(() => City)
+  public city:BelongsTo<typeof City>
 
-  @hasOne(() => Arrondissement)
-  public arrondissent:HasOne<typeof Arrondissement>
+  @belongsTo(() => Arrondissement)
+  public arrondissent:BelongsTo<typeof Arrondissement>
 
-  @hasOne(() => Quater)
-  public quater:HasOne<typeof Quater>
+  @belongsTo(() => Quater)
+  public quater:BelongsTo<typeof Quater>
 }
