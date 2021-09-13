@@ -16,7 +16,7 @@ export default class User extends BaseModel {
   public tel?: string
 
   @column()
-  public profil_image_path: string
+  public profilImagePath: string
 
   @column()
   public email: string

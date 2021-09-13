@@ -22,7 +22,7 @@ export default class UsersController {
   }
 
   public async login({ request, auth, response, session }: HttpContextContract) {
-    const remember_me = !!request.input('remember_me', false)
+    const rememberMe = !!request.input('remember_me', false)
     const payload = await request.validate(UserLoginValidator)
     const user = await auth.attempt(payload.userId, payload.password)
 
@@ -33,7 +33,7 @@ export default class UsersController {
       return response.redirect().back()
     }
 
-    await auth.login(user, remember_me)
+    await auth.login(user, rememberMe)
     return response.redirect('/')
   }
 
