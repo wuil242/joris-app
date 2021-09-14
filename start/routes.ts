@@ -30,7 +30,8 @@ Route.group(() => {
   Route.get('/recherche/q', 'SearchesController.search').as('serviceProvider.search')
 
   Route.group(() => {
-    Route.get('/sp/job/:id?', 'ApisController.getSp')
+    Route.get('/city/:name/arrs', 'ApisController.getAllArrs')
+    Route.get('/arrondissement/:name/quaters', 'ApisController.getAllQuaters')
 
   }).prefix('api')
 

@@ -35,7 +35,7 @@ export default class SearchesController {
         serviceProvidersData = await job.related('serviceProviders').query()
           .select('*').orderBy('score', 'desc').limit(this.usersCount).preload('adress').preload('jobs')
       } catch (error) {
-        if(jobName === 'ALL') {
+        if(jobName === '') {
           serviceProvidersData = await ServiceProvider.query()
             .select('*').orderBy('score', 'desc').limit(this.usersCount).preload('adress').preload('jobs')
         }

@@ -12,19 +12,37 @@
   <form class="form" action="{{route('serviceProvider.search')}}" method="GET" id="js-search" >
       <label for="job">
         <h2>Jobs</h2>
-        <select name="job" id="job">
+        <select name="job" id="job" value="Director">
+          <option value="">Tout</option>
           @each(job in jobs)
             <option value="{{job.name}}">{{job.name}}</option>
           @endeach
         </select>
       </label>
 
-      <label for="city">
-        <h2>Jobs</h2>
-        <select name="city" id="city">
+      <label for="cities">
+        <h2>Cities</h2>
+        <select name="city" id="cities">
+          <option value="">Tout</option>
           @each(city in cities)
             <option value="{{city.name}}">{{city.name}}</option>
           @endeach
+        </select>
+      </label>
+
+      <label for="arrondissements">
+        <h2>arrondissements</h2>
+        <select name="arrondissement" id="arrondissements">
+          <option value="">Tout</option>
+            
+        </select>
+      </label>
+
+      <label for="quaters">
+        <h2>arrondissements</h2>
+        <select name="arrondissement" id="quaters">
+          <option value="">Tout</option>
+            
         </select>
       </label>
 
@@ -88,10 +106,45 @@
     }
   }
 
+  /**
+   * 
+   * @param {HTMLSelectElement} el element qui apporte les nouvelles options de champ
+   * @param {string} selectId champs qui va recevoir les nouvelles options de champ
+   * @param {string} endpoint le lien de recuperation des champs manquant
+   * 
+   **/
+  function pickOptions(el, selectId, endpoint, autherSelectResetId = []) {
+    el.addEventListener('change', async (e) => {
+      const value = e.target.value
+      const select = document.getElementById(selectId)
+     
+      select.innerHTML = `<option value="">Tout</option>`
+      if(autherSelectResetId.length > 0) {
+          autherSelectResetId.forEach(id => {
+            document.getElementById(id).innerHTML = `<option value="">Tout</option>`
+          })
+        }
+      if(!value) {
+        
+        return
+      }
+
+      const datas = await fetch(endpoint.replace('value', value)).then(r => r.json())
+      let options = ''
+      for (const data of datas) {
+        options += `<option value=${data.name}>${data.name}</option>`
+      }
+      select.innerHTML += options
+      select.focus()
+      console.log(datas)
+
+    })
+  }
+
   const $form = document.getElementById('js-search')
   const $jobs = $form.querySelector('#jobs')
   const $cities = $form.querySelector('#cities')
-  const $arrondissememnt = $form.querySelector('#js-arrondissememnt')
+  const $arrondissements = $form.querySelector('#arrondissements')
   const $quater = $form.querySelector('#js-quater')
   
   const lastJobPick = sessionStorage.getItem('last_job_pick')
@@ -115,14 +168,21 @@
 
     if($cities) {
       const ul = $cities.nextElementSibling
-      const cities = JSON.parse($cities.dataset.cities)
+      // const cities = JSON.parse($cities.dataset.cities)
 
-      dataList($cities, ul.children)
-      dinamiseInput($cities, ul.children)
+      // dataList($cities, ul.children)
+      // dinamiseInput($cities, ul.children)
 
+      pickOptions($cities, 'arrondissements', '/api/city/value/arrs/', ['quaters'])
+    }
+
+    if($arrondissements) {
+
+      pickOptions($arrondissements, 'quaters', '/api/arrondissement/value/quaters')
     }
 
     // updateQuery('job', undefined)
+
 
   </script>
 @endsection
