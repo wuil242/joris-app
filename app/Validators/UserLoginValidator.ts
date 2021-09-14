@@ -1,5 +1,6 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Schema from '@ioc:Adonis/Lucid/Schema'
 
 export default class UserLoginValidator {
   constructor(protected ctx: HttpContextContract) {}
@@ -26,8 +27,7 @@ export default class UserLoginValidator {
   public schema = schema.create({
     userId: schema.string({ trim: true }, [rules.maxLength(255)]),
     password: schema.string({ trim: true }, [rules.minLength(4), rules.maxLength(32)]),
-    //FIXME: mettre une valeur par defaut pour le souvenir du user
-    // remember_me: schema.boolean([])
+    remember_me: schema.boolean.optional()
   })
 
   /**
