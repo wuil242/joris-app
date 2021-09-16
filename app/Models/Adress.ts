@@ -25,7 +25,7 @@ export default class Adress extends BaseModel {
   public arrondissementId: number
 
   @column()
-  public quaterId: number
+  public quaterId?: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -46,6 +46,6 @@ export default class Adress extends BaseModel {
   public quater: BelongsTo<typeof Quater>
 
   public get  full ():string {
-    return `${this?.numberAdress} rue ${this?.street}, ${this?.arrondissent.name} ${this?.quater.name}`
+    return `${this?.numberAdress} rue ${this?.street}, ${this?.arrondissent.name} ${this?.quater?.name}`
   }
 }

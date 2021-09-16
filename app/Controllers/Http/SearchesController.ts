@@ -72,7 +72,7 @@ export default class SearchesController {
         adress: adress?.full,
         city: adress?.city.name,
         arrondissement: adress?.arrondissent.name,
-        quater: adress?.quater.name,
+        quater: adress?.quater?.name,
       })
       
     }
@@ -85,7 +85,7 @@ export default class SearchesController {
     const jobs = await Job.all()
     const cities = await City.all()
 
-    return view.render('search/index', {sericeProviders: normalisedData, jobs, cities})
+    return view.render('search/index', {sericeProviders: normalisedData, jobs, cities, qs})
 
   }
 
