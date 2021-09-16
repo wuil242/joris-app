@@ -1,0 +1,29 @@
+/* Header Auth buttons */
+.header-auth-btns {
+  gap: 5px;
+  /* display: none; */
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 30px;
+}
+
+.header-menu .header-auth-btns {
+  display: flex;
+}
+
+/* Header Profil */
+.header-profil {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 2em;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+.header-profil-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

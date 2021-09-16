@@ -9,7 +9,7 @@
       <li class="header-menu-item"><a href="#">Nous-Contater</a></li>
       <li class="header-menu-item"><a href="#">A-Propos</a></li>
       @if(!auth?.isLoggedIn)
-      @include('layouts/parts/header-auth-btns')
+      @include('elements/header-auth-btns')
       
       @else
       {{--  User header-profil  --}}

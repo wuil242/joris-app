@@ -1,7 +1,7 @@
 @import 'utils/reset';
 @import 'themes/all';
 @import 'components/all';
-@import 'elements/all';
+@import 'home/all';
 
 html,
 body {
