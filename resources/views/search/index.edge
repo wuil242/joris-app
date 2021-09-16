@@ -8,6 +8,8 @@
     label > ul {border: solid 2px #CCC;}
   </style>
 
+  {{inspect(qs)}}
+
   <h1>Trouver Un Prestaire</h1>
   <form class="form" action="{{route('serviceProvider.search')}}" method="GET" id="js-search" >
       <label for="job">
@@ -15,7 +17,7 @@
         <select name="job" id="job" value="Director">
           <option value="">Tout</option>
           @each(job in jobs)
-            <option value="{{job.name}}">{{job.name}}</option>
+            <option value="{{job.name}}" {{qs?.job === job.name ? 'selected' : ''}}>{{job.name}}</option>
           @endeach
         </select>
       </label>
@@ -25,22 +27,22 @@
         <select name="city" id="cities">
           <option value="">Tout</option>
           @each(city in cities)
-            <option value="{{city.name}}">{{city.name}}</option>
+            <option value="{{city.name}}" {{qs?.city === city.name ? 'selected' : ''}}>{{city.name}}</option>
           @endeach
         </select>
       </label>
 
       <label for="arrondissements">
         <h2>arrondissements</h2>
-        <select name="arrondissement" id="arrondissements">
+        <select name="arrondissement" id="arrondissements" data-last="{{qs?.arrondissement || ''}}">
           <option value="">Tout</option>
             
         </select>
       </label>
 
-      <label for="quaters">
-        <h2>arrondissements</h2>
-        <select name="arrondissement" id="quaters">
+      <label for="">
+        <h2>quaters</h2>
+        <select name="quater" id="quaters" data-last="{{qs?.quater || ''}}">
           <option value="">Tout</option>
             
         </select>
@@ -110,13 +112,12 @@
    * 
    * @param {HTMLSelectElement} el element qui apporte les nouvelles options de champ
    * @param {string} selectId champs qui va recevoir les nouvelles options de champ
+   * @param {string} value la valeur selectionner
    * @param {string} endpoint le lien de recuperation des champs manquant
    * 
    **/
-  function pickOptions(el, selectId, endpoint, autherSelectResetId = []) {
-    el.addEventListener('change', async (e) => {
-      const value = e.target.value
-      const select = document.getElementById(selectId)
+  async function pickOptions(el, selectId, value, endpoint, autherSelectResetId = []) {
+    const select = document.getElementById(selectId)
      
       select.innerHTML = `<option value="">Tout</option>`
       if(autherSelectResetId.length > 0) {
@@ -136,9 +137,6 @@
       }
       select.innerHTML += options
       select.focus()
-      console.log(datas)
-
-    })
   }
 
   const $form = document.getElementById('js-search')
@@ -172,13 +170,32 @@
 
       // dataList($cities, ul.children)
       // dinamiseInput($cities, ul.children)
+      const option = Array.from($cities.children).filter(c => c.selected)[0]
 
-      pickOptions($cities, 'arrondissements', '/api/city/value/arrs/', ['quaters'])
+      if(option) {
+        pickOptions($cities, 'arrondissements', option.value, `/api/city/value/arrs/`, ['quaters'])
+      }
+      
+      $cities.addEventListener('change', e => {
+        pickOptions($cities, 'arrondissements',e.target.value, '/api/city/value/arrs/', ['quaters'])      
+      })
     }
 
     if($arrondissements) {
-
-      pickOptions($arrondissements, 'quaters', '/api/arrondissement/value/quaters')
+      const last = $arrondissements.dataset.last
+      //FIXME: mieux gerer les fontions asyncronne
+      if(last !== '') {
+        Array.from($arrondissements.children).forEach(arr => {
+          console.log('in', arr)
+          if(arr.value === last) {
+          }
+        })
+        // pickOptions($arrondissements, 'quaters', last, '/api/arrondissement/value/quaters')
+      }
+      
+      $arrondissements.addEventListener('change', e => {
+        pickOptions($arrondissements, 'quaters', e.target.value, '/api/arrondissement/value/quaters')
+      })
     }
 
     // updateQuery('job', undefined)
