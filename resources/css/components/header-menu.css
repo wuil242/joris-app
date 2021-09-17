@@ -11,6 +11,8 @@
   background-color: black;
 
   z-index: var(--layer-top);
+  overflow-x: none;
+  overflow-y: scroll;
 
 }
 
@@ -39,10 +41,12 @@
   align-items: center;
   gap: 5px;
   /* justify-content: ; */
+  overflow-x: hidden;
 }
 
 .header-menu-item {
   text-decoration: underline;
+  background-color: red;
   /* margin-top: 5px; */
 }
 

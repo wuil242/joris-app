@@ -1,61 +1,33 @@
 
 export default class HeaderMenuButton {
   /**
-   *
    * @param {{
-   * openBtnSelector:string,
-   * menuSelector:string,
-   * closeBtnSelector?:string,
-   * closeElementSelector?:string
-   * }} options options de configurations 
+   * buttonSelector:string
+   * }} options options du boutton dans le menu
    */
   constructor(options) {
-    this.$openBtn = document.querySelector(options.openBtnSelector)
-    this.$menu = document.querySelector(options.menuSelector)
-    this.$closeBtn = this.$menu.querySelector(options?.closeBtnSelector || '#button-close')
-    this.$closeElement = document.querySelector(options?.closeElementSelector)
-  
-    if (!this.$openBtn || !this.$menu || !this.$closeBtn || !this.$closeElement) {
-      throw new Error('define all options')
-    }
+    this.$btn = document.querySelector(options.buttonSelector)
 
-    this.openMenu = this.openMenu.bind(this)
-    this.closeMenu = this.closeMenu.bind(this)
+    if(!this.$btn) throw new Error('selecteur du boutton de menu non defini')
 
     this.init()
   }
 
-  openMenu() {
-    this.$menu.classList.replace('hide', 'show')
-    this.$closeElement.style.setProperty('display', 'block')
-    this.$menu.addEventListener('animationend', () => {
-      this.$closeElement.addEventListener('click', this.closeMenu, {once: true})
-    })
-  }
-  
-  closeMenu() {
-    this.$closeElement.style.setProperty('display', 'none')
-    this.$menu.classList.replace('show', 'leave')
-    this.$menu.addEventListener('animationend', e => {
-      this.$menu.classList.replace('leave', 'hide')
-    })
-  }
-
   init () {
-    this.$openBtn.addEventListener('click', this.openMenu)
-  
-    this.$closeBtn.addEventListener('click', this.closeMenu)
+    window.addEventListener('scroll', () => {
+      if(window.scrollY >= 45) {
+        this.$btn.classList.add('scroll')
+      }else if(window.scrollY < 45) {
+        this.$btn.classList.remove('scroll')
+      }
+    })
   }
 
-   /**
-   *
+  /**
    * @param {{
-    * openBtnSelector:string,
-    * menuSelector:string,
-    * closeBtnSelector?:string,
-    * closeElementSelector?:string
-    * }} options options de configurations 
-    */
+   * buttonSelector:string
+   * }} options options du boutton dans le menu
+   */
   static create(options) {
     return new HeaderMenuButton(options)
   }
