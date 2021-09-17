@@ -12,9 +12,13 @@
 
 .header-home-top {
   display: grid;
-  grid-template-columns: 25fr 75fr;
+  grid-template-columns: 30fr 70fr;
   /* align-items: center; */
   padding: 5px;
+}
+
+.header-home-title {
+  display: none;
 }
 
 .header-home-actions {
@@ -59,79 +63,9 @@
   color: rgb(226, 223, 223);
 }
 
-/* Responisve */
-@media screen and (min-width: 700px) {
-  /* Header infos */
-  .site-explain {
-    width: 50%;
-  }
-
-  /* Header profil */
-  .header-profil-options {
-    flex-direction: row;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  /*Header Menu*/
-  .header-menu {
-    background-color: transparent;
-  }
-
-  /* Header Menu */
-  .header {
-    background-position: top left;
-  }
-
-  .header-menu-items {
-    padding: 0;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
-  .header-menu-item {
-    /* background: transparent; */
-  }
-
-  .header-menu.hide,
-  .header-menu.show {
+/* Responsive */
+@media screen and (min-width:550px) {
+  .header-home-title {
     display: block;
-    position: relative;
-  }
-
-  .header-menu-close {
-    display: none;
-  }
-
-  .header-menu-button {
-    display: none;
-  }
-
-  /* Header auth buttons */
-  .header-menu .header-auth-btns {
-    display: none;
-  }
-
-  .header-auth-btns {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  /* Header profil */
-  .header-profil {
-    padding: 0;
-  }
-
-  .header-profil-options {
-    display: none;
-  }
-
-  /* Header infos */
-  .header-site-infos {
-    width: 25%;
-  }
-
-  .site-explain {
-    width: 40%;
   }
 }
