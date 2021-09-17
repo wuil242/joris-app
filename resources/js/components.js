@@ -16,12 +16,10 @@ export function headerMenuButton(
   if (!$openBtn || !$menu || !$closeBtn) return
 
   $openBtn.addEventListener('click', (e) => {
-    $menu.classList.remove('hide')
-    $menu.classList.add('show')
+    $menu.classList.replace('hide', 'show')
   })
 
   $closeBtn.addEventListener('click', (_) => {
-    $menu.classList.remove('show')
-    $menu.classList.add('hide')
+    $menu.classList.replace('show', 'hide')
   })
 }
