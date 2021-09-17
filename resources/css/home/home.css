@@ -26,4 +26,12 @@
   .home-login {
     display: inline-block;
   }
+
+}
+
+@media screen and (min-width:1024px) {
+  .home-sign_up,
+  .home-login {
+    display: none;
+  }
 }
