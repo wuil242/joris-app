@@ -1,0 +1,17 @@
+/* elements de la page d'acceuil */
+
+.home-site-title {
+  font-size: 3rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  color: rgb(226, 223, 223);
+}
+
+.home-site-explain {
+  width: 90%;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+.home-sign_up {
+}

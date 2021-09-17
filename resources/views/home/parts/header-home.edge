@@ -1,23 +1,24 @@
 <header class="header-home">
-    <div class="header-home-top">
-        <div class="header-home-site-infos">
-            <a href="/" class="site-logo"></a>
-            <h1 class="site-name">Joris-app</h1>    
-        </div>
-            @include('elements/header-menu')
+  <div class="header-home-top">
+    <div class="header-home-site-infos">
+        <a href="/" class="site-logo"></a>
     </div>
-    @if(!auth.isLoggedIn)
-        @include('elements/header-auth-btns')
+    <div class="header-home-actions">
+      @if(!auth.isLoggedIn)
+      <a class="home-sign_up button" href="{{ route('sign-up')}}">Créer un compte</a>
     @endif
-    <div class="header-bottom">
-        <h2 class="site-title">JORIS APP</h2>
-        <p class="site-explain">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo sunt optio 
-            voluptate perspiciatis veniam beatae velit asperiores ad consequuntur nobis nulla quia aspernatur ratione molestiae, ex corrupti vitae. Optio, soluta!
-        </p>
-            <div class="header-bottom-btns">
-                <a class="button" href="{{route('serviceProvider.find')}}">Rechercher   Prestataire</a>
-                <button class="header-btn-prestataire button">Devenir Prestataire</button>
-            </div>
+        @include('components/header-menu')
     </div>
+  </div>
+  <div class="header-home-bottom">
+    <h2 class="home-site-title">JORIS APP</h2>
+    <p class="home-site-explain">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo sunt optio 
+        voluptate perspiciatis veniam beatae velit asperiores ad consequuntur nobis nulla quia aspernatur ratione molestiae, ex corrupti vitae. Optio, soluta!
+    </p>
+    <div class="header-home-buttons">
+        <a class="button" href="{{route('serviceProvider.find')}}">Rechercher   Prestataire</a>
+        <button class="header-btn-prestataire button">Devenir Prestataire</button>
+    </div>
+  </div>
 </header>

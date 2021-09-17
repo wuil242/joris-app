@@ -1,2 +1,8 @@
+@import 'auth-buttons';
 @import 'button';
 @import 'form';
+@import 'header-menu';
+@import 'header-page';
+@import 'site-logo';
+@import 'site-name';
+@import 'temoignage';

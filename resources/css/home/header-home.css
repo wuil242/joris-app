@@ -1,4 +1,5 @@
-/* Header element */
+/* entête de la page d'acceuil */
+
 .header-home {
   --header-linear-color: rgba(0, 0, 0, 0.719) 25%;
   background: linear-gradient(90deg, var(--header-linear-color), transparent),
@@ -10,12 +11,17 @@
 }
 
 .header-home-top {
-  /* background: lime; */
+  display: grid;
+  grid-template-columns: 25fr 75fr;
+  /* align-items: center; */
+  padding: 5px;
+}
+
+.header-home-actions {
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px;
+  justify-content: flex-end;
   align-items: center;
+  gap: 10px;
 }
 
 .header-home-site-infos {
@@ -24,12 +30,6 @@
   gap: 10px;
   align-items: center;
 }
-
-
-
-
-
-
 
 /* bottom of the header */
 .header-home-bottom {
@@ -40,20 +40,7 @@
   /*  margin-left: 15px; */
 }
 
-.header-home-site-title {
-  font-size: 3rem;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: bolder;
-  color: rgb(226, 223, 223);
-}
-
-.header-home-site-explain {
-  width: 90%;
-  padding: 10px;
-  font-size: 1.2rem;
-}
-
-.header-home-bottom-buttons {
+.header-home-buttons {
   padding: 15px;
   display: flex;
   gap: 25px;
