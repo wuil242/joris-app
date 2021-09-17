@@ -32,7 +32,7 @@
 
 /* Responsive */ 
 
-@media screen and (min-width:1280px) {
+@media screen and (min-width:1300px) {
   .header-menu-button {
     display: none;
   }
