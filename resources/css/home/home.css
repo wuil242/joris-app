@@ -26,7 +26,18 @@
   .home-login {
     display: inline-block;
   }
+  
+    .home-site-title {
+      font-size: 3.5rem;
+    }
+    
+    .home-site-explain {
+      width: 50%;
+      font-size: 1.5rem;
+    }
+}
 
+@media screen and (min-width:950px) {
 }
 
 @media screen and (min-width:1024px) {
@@ -34,4 +45,5 @@
   .home-login {
     display: none;
   }
+
 }

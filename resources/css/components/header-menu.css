@@ -89,13 +89,12 @@
     overflow: visible;
     /* position: static; */
   }
-  
+    
   .header-menu-items {
     flex-direction: row;
     overflow: visible;
     align-items: center;
     justify-content: flex-end;
-
   } 
   
   .header-menu-item {

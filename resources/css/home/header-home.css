@@ -41,6 +41,7 @@
   margin-top: 3.5rem;
   padding: 0 15px;
   position: relative;
+  bottom: 0;
   /* margin-top: 2em; */
   /*  margin-left: 15px; */
 }
@@ -69,7 +70,9 @@
   .header-home-title {
     display: block;
   }
+
 }
+
 
 @media screen and (min-width:1024px) {
 
@@ -86,4 +89,5 @@
   .header-home-bottom {
     padding: 5vw 1.5vw;
   }
+
 }
