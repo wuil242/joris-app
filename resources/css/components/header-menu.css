@@ -81,34 +81,27 @@
 
 /* Responsive */ 
 
-@media screen and (min-width:1024px) {
+@media screen and (min-width:1280px) {
+
   .header-menu {
-    /* position: static; */
+    position: static;
+    display: block;
     height: auto;
-    background-color: teal;
     overflow: visible;
-    /* position: static; */
   }
-    
+
+  .header-menu.hide {
+    display: grid;
+  }
+
   .header-menu-items {
     flex-direction: row;
     overflow: visible;
-    align-items: center;
     justify-content: flex-end;
-  } 
-  
-  .header-menu-item {
   }
 
   .header-menu-close {
     display: none;
-  }
-  
-  .header-menu.hide {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: flex-end;
   }
 }
 

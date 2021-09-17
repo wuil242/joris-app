@@ -1,14 +1,5 @@
 /* Header Auth buttons */
-.header-auth-btns {
-  gap: 5px;
-  /* display: none; */
-  display: flex;
-  justify-content: flex-end;
-  padding: 5px 30px;
-}
-
-.header-menu .header-auth-btns {
-  display: flex;
+.header-auth-buttons {
 }
 
 /* Header Profil */

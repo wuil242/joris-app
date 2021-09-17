@@ -79,16 +79,9 @@
 }
 
 
-@media screen and (min-width:1024px) {
+@media screen and (min-width:1280px) {
 
   .header-home-site-infos {
-    top: 0;
-    left:  0;
-    position: fixed;
-    background-color: teal;
-    width: 100%;
-    
-    z-index: var(--layer-top);
   }
 
   .header-home-bottom {

@@ -65,7 +65,7 @@
 
 /* Responsive */
 
-@media screen and (min-width:1024px) {
+@media screen and (min-width:1280px) {
   .header-submenu-items {
     position: absolute;
     top: 120%;
