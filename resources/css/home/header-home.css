@@ -8,13 +8,18 @@
   background-position: 25% 0;
   min-height: 85vh;
   color: rgba(197, 193, 193, 0.877);
+  display: grid;
+  grid-template-columns: 100fr;
+  grid-template-rows: 10fr 50fr;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 .header-home-top {
   display: grid;
   grid-template-columns: 30fr 70fr;
   /* align-items: center; */
-  padding: 5px;
+  padding: 0 5px;
 }
 
 .header-home-title {
