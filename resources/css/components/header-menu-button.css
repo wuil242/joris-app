@@ -29,3 +29,11 @@
 
   z-index: var(--layer-middle);
 }
+
+/* Responsive */ 
+
+@media screen and (min-width:1024px) {
+  .header-menu-button {
+    display: none;
+  }
+}

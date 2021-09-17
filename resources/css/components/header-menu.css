@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  
+  padding: .5em;
   background-color: black;
 
   z-index: var(--layer-top);
@@ -48,6 +48,13 @@
   text-decoration: underline;
   background-color: red;
   /* margin-top: 5px; */
+
+  background-color: rgb(68, 16, 68);
+  padding: .3em .5em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 /* Events */
@@ -63,6 +70,47 @@
 .header-menu.show {
   display: block;
   animation: showMenu .4s ease-out forwards;
+}
+
+.header-menu .scroll {
+  left: 0;
+  right: 0;
+  width: 100%;
+  position: fixed;
+}
+
+/* Responsive */ 
+
+@media screen and (min-width:1024px) {
+  .header-menu {
+    /* position: static; */
+    height: auto;
+    background-color: teal;
+    overflow: visible;
+    /* position: static; */
+  }
+  
+  .header-menu-items {
+    flex-direction: row;
+    overflow: visible;
+    align-items: center;
+    justify-content: flex-end;
+
+  } 
+  
+  .header-menu-item {
+  }
+
+  .header-menu-close {
+    display: none;
+  }
+  
+  .header-menu.hide {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
 }
 
 /* Animations */

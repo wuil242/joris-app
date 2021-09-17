@@ -6,7 +6,7 @@
   
   /* Page */
   --page-color: red;
-  --page-font-size: 16px;
+  --page-font-size: 14px;
   --page-font-family: sans-serif;
 
   /* Button */
@@ -16,7 +16,7 @@
   --button-hover-text-color: var(--button-color);
 
   /* Layer | niveaux de chaque calque */
-  --layer-top: 99;
-  --layer-middle: 55;
-  --layer-bottom: 11;
+  --layer-top: 75;
+  --layer-middle: 50;
+  --layer-bottom: 25;
 }

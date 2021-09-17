@@ -21,8 +21,17 @@ export default class HeaderMenu {
 
     this.openMenu = this.openMenu.bind(this)
     this.closeMenu = this.closeMenu.bind(this)
+    this.scrolling = this.scrolling.bind(this)
 
     this.init()
+  }
+
+  scrolling() {
+    if(window.scrollY >= 45) {
+      this.$menu.classList.add('scroll')
+    }else if(window.scrollY < 45) {
+      this.$menu.classList.remove('scroll')
+    }
   }
 
   openMenu() {
@@ -42,6 +51,11 @@ export default class HeaderMenu {
   }
 
   init () {
+
+    // this.scrolling()
+
+    // window.addEventListener('scroll', this.scrolling)
+
     this.$openBtn.addEventListener('click', this.openMenu)
   
     this.$closeBtn.addEventListener('click', this.closeMenu)
