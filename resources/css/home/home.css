@@ -15,3 +15,15 @@
 
 .home-sign_up {
 }
+
+
+.home-login {
+  display: none;
+}
+
+/* Responsive */
+@media screen and (min-width:650px) {
+  .home-login {
+    display: inline-block;
+  }
+}

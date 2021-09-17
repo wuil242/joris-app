@@ -1,4 +1,8 @@
 import '../css/app.css'
-import { headerMenuButton } from './components'
+import HeaderMenuButton from './components/HeaderMenuButton';
 
-headerMenuButton('.js-open-menu', '.js-close-menu')
+HeaderMenuButton.create({
+  openBtnSelector: '.js-open-menu',
+  menuSelector: '.js-close-menu',
+  closeElementSelector: '.js-menu-hidden'
+})

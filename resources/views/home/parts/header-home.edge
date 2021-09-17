@@ -9,6 +9,7 @@
     <div class="header-home-actions">
       @if(!auth.isLoggedIn)
       <a class="home-sign_up button" href="{{ route('sign-up')}}">Créer un compte</a>
+      <a class="home-login button" href="{{ route('login')}}">Connexion</a>
     @endif
         @include('components/header-menu')
     </div>

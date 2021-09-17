@@ -1,4 +1,9 @@
 :root {
+  /* limite de media query |  */
+  --media-medium: 650px;
+  --media-xl: 1100px;
+  --media-xxl: 1280px;
+  
   /* Page */
   --page-color: red;
   --page-font-size: 16px;
