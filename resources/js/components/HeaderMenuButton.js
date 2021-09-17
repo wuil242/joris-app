@@ -10,17 +10,24 @@ export default class HeaderMenuButton {
 
     if(!this.$btn) throw new Error('selecteur du boutton de menu non defini')
 
+    this.scrolling = this.scrolling.bind(this)
+
     this.init()
   }
 
+  scrolling() {
+    if(window.scrollY >= 45) {
+      this.$btn.classList.add('scroll')
+    }else if(window.scrollY < 45) {
+      this.$btn.classList.remove('scroll')
+    }
+  }
+
   init () {
-    window.addEventListener('scroll', () => {
-      if(window.scrollY >= 45) {
-        this.$btn.classList.add('scroll')
-      }else if(window.scrollY < 45) {
-        this.$btn.classList.remove('scroll')
-      }
-    })
+
+    this.scrolling()
+
+    window.addEventListener('scroll', this.scrolling)
   }
 
   /**
