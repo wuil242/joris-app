@@ -9,13 +9,13 @@ export default class QuaterSeeder extends BaseSeeder {
     const mfilouQuater = {
       cityId: 1,
       arrId: 3,
-      content: ['la base', 'mouhoumi']
+      content: ['la base', 'mouhoumi'],
     }
 
     const moungaliQuater = {
       cityId: 1,
       arrId: 5,
-      content: ['moukondo']
+      content: ['moukondo'],
     }
 
     let quaterCount = 0
@@ -23,7 +23,7 @@ export default class QuaterSeeder extends BaseSeeder {
       return {
         name: moungaliQuater.content[quaterCount++],
         cityId: 1,
-        arrondissementId: moungaliQuater.arrId 
+        arrondissementId: moungaliQuater.arrId,
       }
     }).build()
 

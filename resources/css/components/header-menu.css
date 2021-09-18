@@ -7,13 +7,12 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: .5em;
+  padding: 0.5em;
   background-color: black;
 
   z-index: var(--layer-top);
   overflow-x: none;
   overflow-y: scroll;
-
 }
 
 .header-menu-hidden {
@@ -32,7 +31,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  padding: .25em;
+  padding: 0.25em;
 }
 
 .header-menu-items {
@@ -50,7 +49,7 @@
   /* margin-top: 5px; */
 
   background-color: rgb(68, 16, 68);
-  padding: .3em .5em;
+  padding: 0.3em 0.5em;
   text-align: center;
   display: flex;
   align-items: center;
@@ -64,12 +63,12 @@
 
 .header-menu.leave {
   display: block;
-  animation: hideMenu .3s ease-in forwards;
+  animation: hideMenu 0.3s ease-in forwards;
 }
 
 .header-menu.show {
   display: block;
-  animation: showMenu .4s ease-out forwards;
+  animation: showMenu 0.4s ease-out forwards;
 }
 
 .header-menu .scroll {
@@ -79,10 +78,9 @@
   position: fixed;
 }
 
-/* Responsive */ 
+/* Responsive */
 
-@media screen and (min-width:1300px) {
-
+@media screen and (min-width: 1300px) {
   .header-menu {
     position: static;
     display: block;

@@ -16,34 +16,32 @@
 .home-sign_up {
 }
 
-
 .home-login {
   display: none;
 }
 
 /* Responsive */
-@media screen and (min-width:650px) {
+@media screen and (min-width: 650px) {
   .home-login {
     display: inline-block;
   }
-  
-    .home-site-title {
-      font-size: 3.5rem;
-    }
-    
-    .home-site-explain {
-      width: 60%;
-      font-size: 1.5rem;
-    }
+
+  .home-site-title {
+    font-size: 3.5rem;
+  }
+
+  .home-site-explain {
+    width: 60%;
+    font-size: 1.5rem;
+  }
 }
 
-@media screen and (min-width:950px) {
+@media screen and (min-width: 950px) {
 }
 
-@media screen and (min-width:1300px) {
+@media screen and (min-width: 1300px) {
   .home-sign_up,
   .home-login {
     display: none;
   }
-
 }

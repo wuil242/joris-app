@@ -1,5 +1,5 @@
 .header-submenu {
-  --header-submenu-triangle-size: .5em;
+  --header-submenu-triangle-size: 0.5em;
 
   position: relative;
   display: flex;
@@ -9,14 +9,13 @@
 
 .header-submenu-label {
   background-color: rgb(68, 16, 68);
-  padding: .3em .5em;
+  padding: 0.3em 0.5em;
   text-align: center;
   display: flex;
   align-items: center;
   gap: 5px;
-  
+
   cursor: pointer;
-  
 }
 
 .header-submenu-label::selection {
@@ -47,11 +46,11 @@
 
 .header-submenu input:checked + .header-submenu-label::before {
   display: inline-block;
-} 
+}
 
 .header-submenu input:checked + .header-submenu-label::after {
   display: none;
-} 
+}
 
 .header-submenu input:checked + .header-submenu-label + .header-submenu-items {
   display: block;
@@ -65,7 +64,7 @@
 
 /* Responsive */
 
-@media screen and (min-width:1300px) {
+@media screen and (min-width: 1300px) {
   .header-submenu-items {
     position: absolute;
     top: 120%;

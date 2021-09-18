@@ -38,7 +38,7 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  padding: .5em;
+  padding: 0.5em;
 }
 
 /* bottom of the header */
@@ -75,17 +75,13 @@
   .header-home-title {
     display: block;
   }
-
 }
 
-
-@media screen and (min-width:1300px) {
-
+@media screen and (min-width: 1300px) {
   .header-home-site-infos {
   }
 
   .header-home-bottom {
     padding: 5vw 1.5vw;
   }
-
 }

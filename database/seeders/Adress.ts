@@ -8,10 +8,10 @@ export default class AdressSeeder extends BaseSeeder {
     // await Adress.truncate(true)
 
     let cityID = 1
-    let arrId = 5 
+    let arrId = 5
     let quaterId = 3
     let providerId = 2
-    const factory = Factory.define(Adress, ({faker}) => {
+    const factory = Factory.define(Adress, ({ faker }) => {
       return {
         street: faker.address.streetName(),
         numberAdress: faker.datatype.number({ min: 1, max: 100 }),
@@ -22,6 +22,6 @@ export default class AdressSeeder extends BaseSeeder {
       }
     }).build()
 
-      await factory.create()
+    await factory.create()
   }
 }

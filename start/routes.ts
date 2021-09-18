@@ -21,7 +21,6 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-
   Route.on('/').render('home/index')
 
   Route.get('/recherche', 'SearchesController.index').as('serviceProvider.find')
@@ -32,9 +31,7 @@ Route.group(() => {
   Route.group(() => {
     Route.get('/city/:name/arrs', 'ApisController.getAllArrs')
     Route.get('/arrondissement/:name/quaters', 'ApisController.getAllQuaters')
-
   }).prefix('api')
-
 }).middleware('silentAuth')
 
 Route.group(() => {

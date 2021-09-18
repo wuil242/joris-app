@@ -27,7 +27,7 @@ export default class UserLoginValidator {
   public schema = schema.create({
     userId: schema.string({ trim: true }, [rules.maxLength(255)]),
     password: schema.string({ trim: true }, [rules.minLength(4), rules.maxLength(32)]),
-    remember_me: schema.boolean.optional()
+    remember_me: schema.boolean.optional(),
   })
 
   /**

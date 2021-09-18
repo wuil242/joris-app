@@ -3,9 +3,7 @@ import City from 'App/Models/City'
 import Job from 'App/Models/Job'
 
 export default class ServiceProvidersController {
-  public async index({ view }: HttpContextContract) {
-   
-  }
+  public async index({ view }: HttpContextContract) {}
 
   public async create({}: HttpContextContract) {}
 

@@ -14,7 +14,7 @@ body {
 
 /* Responsive */
 
-@media screen and (min-width:650px) {
+@media screen and (min-width: 650px) {
   :root {
     --page-font-size: 15px;
   }

@@ -14,7 +14,7 @@ export default class CitySeeder extends BaseSeeder {
     let cityCount = 0
     const factory = Factory.define(City, ({}) => {
       return {
-        name: cities[cityCount++]
+        name: cities[cityCount++],
       }
     }).build()
 

@@ -1,4 +1,3 @@
-
 export default class HeaderMenuButton {
   /**
    * @param {{
@@ -8,7 +7,7 @@ export default class HeaderMenuButton {
   constructor(options) {
     this.$btn = document.querySelector(options.buttonSelector)
 
-    if(!this.$btn) throw new Error('selecteur du boutton de menu non defini')
+    if (!this.$btn) throw new Error('selecteur du boutton de menu non defini')
 
     this.scrolling = this.scrolling.bind(this)
 
@@ -16,15 +15,14 @@ export default class HeaderMenuButton {
   }
 
   scrolling() {
-    if(window.scrollY >= 45) {
+    if (window.scrollY >= 45) {
       this.$btn.classList.add('scroll')
-    }else if(window.scrollY < 45) {
+    } else if (window.scrollY < 45) {
       this.$btn.classList.remove('scroll')
     }
   }
 
-  init () {
-
+  init() {
     this.scrolling()
 
     window.addEventListener('scroll', this.scrolling)

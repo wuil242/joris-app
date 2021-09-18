@@ -9,20 +9,19 @@ export default class ArrondissementSeeder extends BaseSeeder {
 
     const brazzavilleArrondissent = {
       cityId: 1,
-      content: ['makelekele', 'bakongo',
-        'mfilou', 'kintele', 'moungali', 'poto-poto']
+      content: ['makelekele', 'bakongo', 'mfilou', 'kintele', 'moungali', 'poto-poto'],
     }
 
     const pointNoireArrs = {
       cityId: 2,
-      content: ['loumumba']
+      content: ['loumumba'],
     }
 
     let arrsCount = 0
-    const factory = Factory.define(Arrondissement, ({ }) => {
+    const factory = Factory.define(Arrondissement, ({}) => {
       return {
         name: pointNoireArrs.content[arrsCount++],
-        cityId: pointNoireArrs.cityId
+        cityId: pointNoireArrs.cityId,
       }
     }).build()
 

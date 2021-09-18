@@ -1,7 +1,7 @@
 .header-menu-button {
   width: 2.2rem;
   height: 2.2rem;
-  padding: .5em;
+  padding: 0.5em;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -16,7 +16,7 @@
 .header-menu-button .line {
   width: 90%;
   height: 1px;
-  padding: .05em;
+  padding: 0.05em;
   background-color: whitesmoke;
 }
 
@@ -30,9 +30,9 @@
   z-index: var(--layer-middle);
 }
 
-/* Responsive */ 
+/* Responsive */
 
-@media screen and (min-width:1300px) {
+@media screen and (min-width: 1300px) {
   .header-menu-button {
     display: none;
   }

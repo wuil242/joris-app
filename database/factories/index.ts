@@ -18,11 +18,11 @@ export const UserFactory = Factory.define(User, ({ faker }) => {
 }).build()
 
 let cityCount = 0
-export const CityFactory = Factory.define(City, ({faker}) => {
+export const CityFactory = Factory.define(City, ({ faker }) => {
   const cities = ['brazzaville', 'pointe-Noire', 'oyo']
-  
+
   return {
-    name: cities[cityCount++]
+    name: cities[cityCount++],
   }
 }).build()
 
