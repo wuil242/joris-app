@@ -12,7 +12,6 @@ export default class HeaderMenuButton {
     if (!this.$btn) throw new Error('selecteur du boutton de menu non defini')
 
     this.stickyMenu = null
-    this.scrolling = this.scrolling.bind(this)
 
     this.init()
   }
