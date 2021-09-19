@@ -8,13 +8,14 @@
     </div>
     <div class="header-home-actions">
       @if(!auth.isLoggedIn)
+      <a class="home-login header-menu-item" href="{{ route('login')}}">Se connecter</a>
       <a class="home-sign_up button" href="{{ route('sign-up')}}">Créer un compte</a>
-      <a class="home-login button" href="{{ route('login')}}">Connexion</a>
     @endif
         @include('components/header-menu')
     </div>
   </div>
   <div class="header-home-bottom">
+    <p class="home-welcome">Bienvenue</p>
     <h2 class="home-site-title">JORIS APP</h2>
     <p class="home-site-explain">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo sunt optio 
@@ -22,7 +23,7 @@
     </p>
     <div class="header-home-buttons">
         <a class="button" href="{{route('serviceProvider.find')}}">Trouver un Prestataire</a>
-        <button class="header-btn-prestataire button">Devenir Prestataire</button>
+        <button class="home-provider-button button">Devenir Prestataire</button>
     </div>
   </div>
 </header>

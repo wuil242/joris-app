@@ -1,7 +1,7 @@
 /* entête de la page d'acceuil */
 
 .header-home {
-  --header-linear-color: rgba(0, 0, 0, 0.719) 25%;
+  --header-linear-color: rgba(0, 0, 0, 0.658) 100%;
   background: linear-gradient(90deg, var(--header-linear-color), transparent),
     url('../../images/header_bg.jpeg') no-repeat;
   background-size: cover;

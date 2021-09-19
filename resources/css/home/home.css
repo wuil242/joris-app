@@ -1,5 +1,11 @@
 /* elements de la page d'acceuil */
 
+.home-welcome {
+  padding: 30px 0;
+  color: var(--primary-text-color);
+  font-size: 1.2rem;
+}
+
 .home-site-title {
   font-size: 3rem;
   font-family: 'Times New Roman', Times, serif;
@@ -10,10 +16,22 @@
 .home-site-explain {
   width: 90%;
   padding: 10px;
-  font-size: 1.2rem;
+  font-size: 1.2em!important;
+}
+
+.home-provider-button {
+  border: solid 1px var(--secondary-color) ;
+  background-color: transparent;
+}
+
+.home-provider-button:hover {
+  border-color: var(--primary-color);
+  color: var(--text-color);
+  background-color: var(--primary-color);
 }
 
 .home-sign_up {
+
 }
 
 .home-login {
