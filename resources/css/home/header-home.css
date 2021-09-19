@@ -1,8 +1,8 @@
 /* entête de la page d'acceuil */
 
 .header-home {
-  --header-linear-color: rgba(0, 0, 0, 0.658) 100%;
-  background: linear-gradient(90deg, var(--header-linear-color), transparent),
+  --header-linear-color: rgba(0, 0, 0, .9) 15%;
+  background: linear-gradient(90deg, var(--header-linear-color), rgba(0, 0, 0, .89) 25%, transparent),
     url('../../images/header_bg.jpeg') no-repeat;
   background-size: cover;
   background-position: 25% 0;

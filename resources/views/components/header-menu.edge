@@ -1,7 +1,6 @@
 <div class="header-menu-hidden js-menu-hidden" title="cliquer pour fermer le menu"></div>
 <nav class="js-close-menu header-menu hide scroll">
   <button class="header-menu-close" id="button-close">X</button>
-  {{inspect(request.url())}}
   <ul class="header-menu-items">
     <li class="header-menu-item {{ request.url() === '/' ? 'active' : '' }}"><a href="/">Acceuil</a></li>
 
