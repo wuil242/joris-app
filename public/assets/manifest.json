@@ -1,5 +1,17 @@
 {
   "assets/app.css": "http://localhost:8080/assets/app.css",
   "assets/app.js": "http://localhost:8080/assets/app.js",
-  "assets/images/header_bg.jpeg": "http://localhost:8080/assets/images/header_bg.01ac1981.jpeg"
+  "assets/images/header_bg.jpeg": "http://localhost:8080/assets/images/header_bg.01ac1981.jpeg",
+  "assets/fonts/Montserrat-Regular.ttf": "http://localhost:8080/assets/fonts/Montserrat-Regular.3cd78665.ttf",
+  "assets/fonts/Montserrat-Medium.ttf": "http://localhost:8080/assets/fonts/Montserrat-Medium.e2d60bc4.ttf",
+  "assets/fonts/Montserrat-Light.ttf": "http://localhost:8080/assets/fonts/Montserrat-Light.02afb26f.ttf",
+  "assets/fonts/Montserrat-Thin.ttf": "http://localhost:8080/assets/fonts/Montserrat-Thin.4a799b11.ttf",
+  "assets/fonts/Montserrat-BoldItalic.ttf": "http://localhost:8080/assets/fonts/Montserrat-BoldItalic.a32ae5d9.ttf",
+  "assets/fonts/Montserrat-Italic.ttf": "http://localhost:8080/assets/fonts/Montserrat-Italic.e7728c27.ttf",
+  "assets/fonts/Montserrat-Bold.ttf": "http://localhost:8080/assets/fonts/Montserrat-Bold.079ca05d.ttf",
+  "assets/fonts/Montserrat-SemiBold.ttf": "http://localhost:8080/assets/fonts/Montserrat-SemiBold.fa8441f3.ttf",
+  "assets/fonts/Montserrat-ExtraBold.ttf": "http://localhost:8080/assets/fonts/Montserrat-ExtraBold.1944c8d1.ttf",
+  "assets/fonts/Montserrat-ExtraBoldItalic.ttf": "http://localhost:8080/assets/fonts/Montserrat-ExtraBoldItalic.6849a97d.ttf",
+  "assets/fonts/Montserrat-Black.ttf": "http://localhost:8080/assets/fonts/Montserrat-Black.46e8b3d6.ttf",
+  "assets/fonts/Montserrat-SemiBoldItalic.ttf": "http://localhost:8080/assets/fonts/Montserrat-SemiBoldItalic.b0400063.ttf"
 }
