@@ -95,6 +95,12 @@
   height: 100%;
 }
 
+/* Events */
+.header-submenu-item.active::after {
+  transition: none;
+  height: 100%;
+}
+
 /* Responsive */
 
 @media screen and (min-width: 1300px) {

@@ -1,10 +1,11 @@
 <div class="header-menu-hidden js-menu-hidden" title="cliquer pour fermer le menu"></div>
 <nav class="js-close-menu header-menu hide scroll">
   <button class="header-menu-close" id="button-close">X</button>
+  {{inspect(request.url())}}
   <ul class="header-menu-items">
-    <li class="header-menu-item"><a href="/">Acceuil</a></li>
+    <li class="header-menu-item {{ request.url() === '/' ? 'active' : '' }}"><a href="/">Acceuil</a></li>
 
-    <li class="header-menu-item"><a href="{{route('serviceProvider.search')}}">Trouver Un Prestataire</a></li>
+    <li class="header-menu-item {{ request.url() === route('serviceProvider.search') ? 'active' : '' }}"><a href="{{route('serviceProvider.search')}}">Trouver Un Prestataire</a></li>
 
     <nav class="header-submenu">
       <input type="checkbox" id="submenu-client" hidden aria-hidden="true">

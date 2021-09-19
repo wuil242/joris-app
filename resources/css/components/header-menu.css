@@ -110,6 +110,11 @@
   position: fixed;
 }
 
+.header-menu-item.active::after {
+  transition: none;
+  width: 100%;
+}
+
 /* Responsive */
 
 @media screen and (min-width: 1300px) {
