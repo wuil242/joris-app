@@ -1,0 +1,40 @@
+.top-button {
+  position: fixed;
+  top: 50%;
+  bottom: 50%;
+  right: 15px;
+  /* width: 2rem;
+  height: 2rem; */
+  /* border-radius: 50%; */
+  color: var(--text-color);
+  transform: scale(0);
+  transition: .3s;
+
+  z-index: var(--layer-top);
+}
+
+.top-button i {
+  background-color: var(--primary-color);
+  font-size: 2rem;
+  padding: .5em;
+  border-radius: 50%;
+}
+
+/* Events */
+
+.top-button.active {
+  transform: scale(1);
+}
+
+
+/* Annimation */
+
+@keyframes arrowMove {
+  0% {
+    transform: scale(0);
+  } 
+
+  100% {
+    transform: scale(1);
+  }
+}
