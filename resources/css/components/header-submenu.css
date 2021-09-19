@@ -67,11 +67,9 @@
   position: relative;
   gap: 5px;
   padding: 5px;
-  margin: 5px;
 
   /* background-color: rgba(0, 0, 0, 0.808); */
   color: var(--text-color);
-
 
   cursor: pointer;
 }
@@ -91,7 +89,8 @@
   transform: translateY(-50%);
 }
 
-.header-submenu-item:hover::after{
+.header-submenu-item:hover::after,
+.header-submenu-item:active::after {
   transition: .5s;
   height: 100%;
 }
@@ -101,12 +100,8 @@
 @media screen and (min-width: 1300px) {
   .header-submenu-items {
     position: absolute;
-    top: 120%;
-    left: 0;
-    right: 0;
+    top: 100%;
     width: 100%;
-    height: 100%;
-    z-index: 100;
   }
 
   .header-submenu {

@@ -70,7 +70,8 @@
   background-color: var(--text-color)
 }
 
-.header-menu-item:hover::after{
+.header-menu-item:hover::after, 
+.header-menu-item:active::after {
   transition: .7s;
   width: 100%;
 }
