@@ -1,2 +1,3 @@
-@import 'header-home.css';
-@import 'home.css';
+@import 'home';
+@import 'header-home';
+@import 'home-introduce';
