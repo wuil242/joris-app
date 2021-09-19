@@ -1,6 +1,7 @@
 import '../css/app.css'
 import HeaderMenu from './components/HeaderMenu'
 import HeaderMenuButton from './components/HeaderMenuButton'
+import Sticky from './components/Sticky'
 
 HeaderMenu.create({
   openBtnSelector: '.js-open-menu',
@@ -10,4 +11,9 @@ HeaderMenu.create({
 
 HeaderMenuButton.create({
   buttonSelector: '#menu-button',
+})
+
+Sticky.define({
+  element: '.top-button',
+  scrollValue: 350,
 })
