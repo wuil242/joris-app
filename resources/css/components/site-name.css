@@ -1,6 +1,8 @@
 .site-name {
-  font-size: 1.6rem;
-  color: rgb(226, 223, 223);
+  font-size: 1.8rem;
+  color: white;
+
+  font-family: "Montserrat-bold";
 }
 
 /* .site-name:hover {

@@ -1,13 +1,9 @@
 :root {
-  /* limite de media query |  */
-  --media-medium: 650px;
-  --media-xl: 11300px;
-  --media-xxl: 1300px;
 
   /* Page */
   --page-color: red;
   --page-font-size: 14px;
-  --page-font-family: "Montserrat", sans-serif;
+  --page-font-family: "Montserrat";
 
   /* Button */
   --button-color: rgba(42, 4, 114, 0.932);
