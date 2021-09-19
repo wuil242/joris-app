@@ -6,13 +6,21 @@
     url('../../images/header_bg.jpeg') no-repeat;
   background-size: cover;
   background-position: 25% 0;
-  min-height: 85vh;
+  min-height: 100vh;
   color: rgba(197, 193, 193, 0.877);
   display: grid;
   grid-template-columns: 100fr;
   grid-template-rows: 10fr 50fr;
   justify-content: space-around;
   align-items: flex-start;
+}
+
+.header-home-arrow {
+  /* background-color: red; */
+  text-align: center;
+  padding: 25px;
+
+  color: var(--text-color);
 }
 
 .header-home-top {
