@@ -1,13 +1,13 @@
 /* elements de la page d'acceuil */
 
 .home-welcome {
-  padding: 30px 0;
+  padding: 0 0 20px 0;
   color: var(--primary-text-color);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 .home-site-title {
-  font-size: 3rem;
+  font-size: 5rem!important;
   color: var(--text-color);
   /* font-family: "Montserrat-bold"; */
 }
@@ -15,7 +15,7 @@
 .home-site-explain {
   width: 90%;
   padding: 10px;
-  font-size: 1rem!important;
+  font-size: 1.5rem!important;
   color: var(--secondary-text-color);
 }
 

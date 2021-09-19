@@ -134,6 +134,7 @@
     flex-direction: row;
     overflow: visible;
     justify-content: flex-end;
+    padding: 0;
   }
 
   .header-menu-close {

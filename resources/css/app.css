@@ -20,6 +20,7 @@ body {
   /* background: var(--page-color); */
   font-size: var(--page-font-size);
   font-family: var(--page-font-family);
+  background-color: var(--dark-background-color);
 }
 
 /* Responsive */
