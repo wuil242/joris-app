@@ -10,7 +10,7 @@
   transform: scale(0);
   transition: .3s;
 
-  z-index: var(--layer-top);
+  z-index: var(--layer-middle);
 }
 
 .top-button i {
