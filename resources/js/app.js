@@ -3,6 +3,8 @@ import HeaderMenu from './components/HeaderMenu'
 import HeaderMenuButton from './components/HeaderMenuButton'
 import Sticky from './components/Sticky'
 
+/*
+
 HeaderMenu.create({
   openBtnSelector: '.js-open-menu',
   menuSelector: '.js-close-menu',
@@ -17,3 +19,5 @@ Sticky.define({
   element: '.top-button',
   scrollValue: 350,
 })
+
+*/
