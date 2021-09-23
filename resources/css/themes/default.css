@@ -7,6 +7,7 @@
 
   /* Text */
   --text-color: #FFFFFF;
+  --text-second-color: #252B42;
   --primary-text-color: rgba(141, 92, 246, 1);
   --secondary-text-color: rgba(231, 231, 231, 0.89);
 
@@ -15,6 +16,8 @@
   --dark-background-color: #26335D;
   --secondary-color: #E5E5E5;
   --danger-color: #E74040;
+  --grey-color: #737373;
+
 
 
 
