@@ -1,4 +1,5 @@
 import '../css/app.css'
+import Carroussel from './components/Carroussel'
 import HeaderMenu from './components/HeaderMenu'
 import HeaderMenuButton from './components/HeaderMenuButton'
 import Sticky from './components/Sticky'
@@ -21,3 +22,8 @@ Sticky.define({
 })
 
 */
+
+Carroussel.define({
+  auto: true,
+  time: 2
+})

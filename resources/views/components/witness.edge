@@ -1,6 +1,7 @@
-@each(witness in witnesses)
+@each((witness, key) in witnesses)
 <div class="witness">
   <img class="witness-image" src="#" alt="witness image">
+  <h1>{{key}}</h1>
   <p class="witness-text">{{witness.text}}</p>
   <p class="witness-name">{{witness.name}}</p>
 </div>
