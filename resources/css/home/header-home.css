@@ -34,6 +34,22 @@
   padding: 0 5px;
 }
 
+.header-home-top-fake {
+  display: none;
+}
+
+.header-home-top-fake.scroll {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--dark-background-color);
+  
+  z-index: var(--layer-top);
+  
+}
+
 .header-home-title {
   display: none;
 }

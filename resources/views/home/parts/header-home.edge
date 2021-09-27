@@ -1,5 +1,5 @@
 <header class="header-home">
-  <div class="header-home-top">
+  <div class="js-header-sticky header-home-top">
     <div class="header-home-site-infos">
         <a href="/" class="site-logo"></a>
         <h1 class="header-home-title site-name">
@@ -8,9 +8,9 @@
     </div>
     <div class="header-home-actions">
       @if(!auth.isLoggedIn)
-      <a class="home-login header-menu-item" href="{{ route('login')}}">Se connecter</a>
-      <a class="home-sign_up button" href="{{ route('sign-up')}}">Créer un compte</a>
-    @endif
+        <a class="home-login header-menu-item" href="{{ route('login')}}">Se connecter</a>
+        <a class="home-sign_up button" href="{{ route('sign-up')}}">Créer un compte</a>
+      @endif
         @include('components/header-menu')
     </div>
   </div>

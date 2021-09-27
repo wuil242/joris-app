@@ -1,3 +1,6 @@
+import CustumError from "../class/CustumError"
+import Sticky from "./Sticky"
+
 export default class HeaderMenu {
   /**
    *
@@ -6,6 +9,7 @@ export default class HeaderMenu {
    * menuSelector:string,
    * closeBtnSelector?:string,
    * closeElementSelector?:string
+   * stickyMenu?:string
    * }} options options de configurations
    */
   constructor(options) {
@@ -13,24 +17,37 @@ export default class HeaderMenu {
     this.$menu = document.querySelector(options.menuSelector)
     this.$closeBtn = this.$menu.querySelector(options?.closeBtnSelector || '#button-close')
     this.$closeElement = document.querySelector(options?.closeElementSelector)
+    this.$stickyMenu =  document.querySelector(options?.stickyMenu || '.js-header-sticky')
+
+    
 
     if (!this.$openBtn || !this.$menu || !this.$closeBtn || !this.$closeElement) {
       throw new Error('define all options')
     }
 
+    if(!this.$stickyMenu) {
+      CustumError.create('menu sticky not found with class "$0"', options.stickyMenu || '.js-header-sticky')
+    }
+
     this.openMenu = this.openMenu.bind(this)
-    this.closeMenu = this.closeMenu.bind(this)
-    this.scrolling = this.scrolling.bind(this)
+    this.closeMenu = this.closeMenu.bind(this)    
+    this.createStickyMenu = this.createStickyMenu.bind(this)
 
     this.init()
   }
 
-  scrolling() {
-    if (window.scrollY >= 45) {
-      this.$menu.classList.add('scroll')
-    } else if (window.scrollY < 45) {
-      this.$menu.classList.remove('scroll')
-    }
+  createStickyMenu () {
+    const parent = this.$stickyMenu.parentElement
+    const className = this.$stickyMenu.classList.item(1)
+    this.$stickyMenu = this.$stickyMenu.cloneNode(true)
+    this.$stickyMenu.classList.add(className + '-fake')
+    parent.appendChild(this.$stickyMenu)
+    console.log(this.$stickyMenu)
+    Sticky.define({
+      element: this.$stickyMenu,
+      scrollValue: 45,
+      activeClass: 'scroll'
+    })
   }
 
   openMenu() {
@@ -50,13 +67,12 @@ export default class HeaderMenu {
   }
 
   init() {
-    // this.scrolling()
-
-    // window.addEventListener('scroll', this.scrolling)
 
     this.$openBtn.addEventListener('click', this.openMenu)
 
     this.$closeBtn.addEventListener('click', this.closeMenu)
+
+    this.createStickyMenu()
   }
 
   /**

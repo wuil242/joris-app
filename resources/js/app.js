@@ -4,7 +4,6 @@ import HeaderMenu from './components/HeaderMenu'
 import HeaderMenuButton from './components/HeaderMenuButton'
 import Sticky from './components/Sticky'
 
-/*
 
 HeaderMenu.create({
   openBtnSelector: '.js-open-menu',
@@ -12,6 +11,7 @@ HeaderMenu.create({
   closeElementSelector: '.js-menu-hidden',
 })
 
+/*
 HeaderMenuButton.create({
   buttonSelector: '#menu-button',
 })
@@ -23,7 +23,8 @@ Sticky.define({
 
 */
 
-Carroussel.define({
-  auto: true,
-  time: 3
-})
+// Carroussel.define({
+//   auto: true,
+//   time: 3
+// })
+

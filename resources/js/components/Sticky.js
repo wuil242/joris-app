@@ -1,5 +1,6 @@
 
 export default class Sticky {
+  static defaultSelector = 'active'
 
   /**
    * 
@@ -18,7 +19,7 @@ export default class Sticky {
     }
     
     this.scrollValue = options.scrollValue
-    this.activeClass = options.activeClass || 'active'
+    this.activeClass = options.activeClass || Sticky.defaultSelector
 
     if(!this.el) throw new Error('element a rendre sticky non defini')
     if(!this.scrollValue) throw new Error('la valeur du scroll n\' est pas defini')
