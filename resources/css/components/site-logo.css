@@ -3,6 +3,8 @@
   height: 3rem;
   background: #ccc;
   border-radius: 50%;
+  
+  object-fit: cover;
 }
 
 /* Events */
