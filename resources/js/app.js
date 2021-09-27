@@ -25,5 +25,5 @@ Sticky.define({
 
 Carroussel.define({
   auto: true,
-  time: 2
+  time: 3
 })

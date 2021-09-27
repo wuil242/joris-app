@@ -13,6 +13,7 @@
   margin: 0 auto;
   border-radius: 50%;
   background-color: var(--grey-color);
+  object-fit: cover;
 }
 
 .witness-text {
@@ -21,4 +22,5 @@
 
 .witness-name {
   color: var(--grey-color);
+  margin-bottom: 1em;
 }

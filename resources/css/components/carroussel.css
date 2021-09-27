@@ -1,20 +1,45 @@
-
-.js-carroussel {
+/* TODO: ajout des bouutons redirigeant vers le bon item */
+.carroussel {
   position: relative;
   overflow: hidden;
   display: flex;
 }
 
-.js-carroussel-element {
+.carroussel-element {
   /* background-color: red; */
   position: relative;
   flex: none;
   width: 90%;
 }
 
-.js-carroussel-next_button {
+.carroussel-next_button {
   /* position: absolute; */
   padding: 1em;
   top: 0;
   right: 0;
+}
+
+.carroussel-buttons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: .6em 0;
+
+  display: flex;
+  justify-content: center;
+  gap: .5em;
+}
+
+.carroussel-button {
+  padding: .5em;
+  border-radius: 50%;
+  border: none;
+  display: block;
+  background-color: var(--grey-color);
+}
+
+/* Events */
+.carroussel-button.active {
+  background-color: var(--dark-background-color);
 }

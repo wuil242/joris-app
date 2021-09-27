@@ -1,7 +1,7 @@
 @each((witness, key) in witnesses)
-<div class="witness">
-  <img class="witness-image" src="#" alt="witness image">
-  <h1>{{key}}</h1>
+<div class="witness" >
+{{key + 1}}
+  <img class="witness-image"  src="{{asset('assets/images/header_bg.jpeg')}}" alt="witness image">
   <p class="witness-text">{{witness.text}}</p>
   <p class="witness-name">{{witness.name}}</p>
 </div>

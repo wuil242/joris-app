@@ -1,4 +1,4 @@
-
+//TODO: ajout du defilement par toucher
 export default class Carroussel {
   static selector = '.js-carroussel'
   static DIR = {LEFT: 0, RIGHT: 1}
@@ -22,27 +22,37 @@ export default class Carroussel {
     this.currentItem = this.items[this.index]
 
     
+
+    //Methods
     this.addStyle = this.addStyle.bind(this)
     this.addButtons = this.addButtons.bind(this)
     this.prevItem = this.prevItem.bind(this)
     this.nextItem = this.nextItem.bind(this)
     this.goTo = this.goTo.bind(this)
+    this.changeItem = this.changeItem.bind(this)
+    this.changeItemWithButton = this.changeItemWithButton.bind(this)
     
-    if(this.options.auto) {
-      if(this.options.time < 1) {
-        this.options.time = 1
-      }
-
-      this.changeItem = this.changeItem.bind(this)
-
-      this.direction = Carroussel.DIR.LEFT
-      this.timer = window.setInterval(this.changeItem, this.options.time * 1000)
-    }else {      
-      this.prev = this.addPrevButton()
-      this.nextButton = this.addNextButton()
-    }
+   
+    //Property
+    this.buttons = null
+    this.direction = Carroussel.DIR.LEFT
+    this.timer = null
 
     this.init()
+  }
+
+  /**
+   * change d'item apres un click sur le boutton du carrussel vers un item donner
+   * 
+   * @param {HTMLElement} e 
+   */
+  changeItemWithButton(e) {
+    const item = e.target.dataset.item
+
+    this.index = Number.parseInt(item, 10)
+
+    this.goTo(this.index)
+
   }
 
   changeItem() {
@@ -59,14 +69,24 @@ export default class Carroussel {
     else {
       this.nextItem()
     }
+
+    console.log('change')
   }
 
   goTo(index) {
     const left = index * this.items[index].scrollWidth
+    this.buttons.style.setProperty('transform', `translateX(${left}px)`)
     this.el.scroll({
       behavior: 'smooth',
       left
     })
+
+
+    for (const btn of this.buttons.children) {
+      btn.classList.remove('active')
+    }
+
+    this.buttons.children[index].classList.add('active')
   }
 
   prevItem() {
@@ -88,9 +108,29 @@ export default class Carroussel {
     this.goTo(this.index)
   }
 
+  /**
+   * ajout des bouttons de selection d'item suivant le nbre de celui ci
+   * 
+   */
+  addGetItemButtons() {
+    this.buttons = document.createElement('div')
+    this.buttons.classList.add('carroussel-buttons')
+
+    for (let i = 0; i < this.items.length; i++) {
+      const btn = document.createElement('button')
+      btn.classList.add('carroussel-button')
+      btn.dataset.item = i
+      btn.addEventListener('click', this.changeItemWithButton)
+      if(i === 0) btn.classList.add('active')
+      this.buttons.appendChild(btn)
+    }
+
+    this.el.appendChild(this.buttons)
+  }
+
   addPrevButton() {
     const text = 'Prev'
-    const className = 'js-carroussel-next_button'
+    const className = 'carroussel-next_button'
 
     this.addButtons(text, className, this.prevItem)
   }
@@ -98,7 +138,7 @@ export default class Carroussel {
 
   addNextButton() {
     const text = 'Next'
-    const className = 'js-carroussel-next_button'
+    const className = 'carroussel-next_button'
 
     this.addButtons(text, className, this.nextItem)
   }
@@ -124,14 +164,24 @@ export default class Carroussel {
   }
 
   addStyle() {
-    this.el.classList.add('js-carroussel')
+    this.el.classList.add('carroussel')
     for (const child of this.el.children) {
-      child.classList.add('js-carroussel-element')
+      child.classList.add('carroussel-element')
     }
+
   }
 
   init() {
+
+    if(this.options.time < 1) {
+      this.options.time = 1
+    }
+
+    this.addGetItemButtons()
     this.addStyle()
+
+    //lancement du defilement automatique
+    this.timer = window.setInterval(this.changeItem, this.options.time * 1000)
   }
 
    /**
