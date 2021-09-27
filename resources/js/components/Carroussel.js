@@ -31,6 +31,7 @@ export default class Carroussel {
     this.goTo = this.goTo.bind(this)
     this.changeItem = this.changeItem.bind(this)
     this.changeItemWithButton = this.changeItemWithButton.bind(this)
+    this.lunchTimer = this.lunchTimer.bind(this)
     
    
     //Property
@@ -50,6 +51,12 @@ export default class Carroussel {
     const item = e.target.dataset.item
 
     this.index = Number.parseInt(item, 10)
+
+    window.clearInterval(this.timer)
+    this.timer = null
+    
+    // changement de direction automatique
+    // this.direction = Carroussel.DIR.RIGHT
 
     this.goTo(this.index)
 
@@ -87,6 +94,10 @@ export default class Carroussel {
     }
 
     this.buttons.children[index].classList.add('active')
+
+    if(!this.timer) {
+      this.lunchTimer()
+    }
   }
 
   prevItem() {
@@ -171,6 +182,13 @@ export default class Carroussel {
 
   }
 
+  /**
+   * demarre un timer 
+   */
+  lunchTimer() {
+    this.timer = this.timer = window.setInterval(this.changeItem, this.options.time * 1000)
+  }
+
   init() {
 
     if(this.options.time < 1) {
@@ -181,7 +199,7 @@ export default class Carroussel {
     this.addStyle()
 
     //lancement du defilement automatique
-    this.timer = window.setInterval(this.changeItem, this.options.time * 1000)
+    this.lunchTimer()
   }
 
    /**
