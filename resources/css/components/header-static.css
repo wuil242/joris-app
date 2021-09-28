@@ -1,0 +1,15 @@
+.header-menu-static {
+  background: transparent;
+  display: none;
+}
+
+.header-menu-static .header-menu-items {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@media only screen and (min-width: 1300px) {
+  .header-menu-static {
+    display: block;
+  }
+}
