@@ -25,7 +25,7 @@
 .header-menu-content {
 
   background-color: black;
-  position: relative;
+  width: 80%;
 }
 
 
@@ -46,9 +46,6 @@
 .header-menu-close:hover,
 .header-menu-close:active {
   font-size: 1.5em;
-}
-
-.header-menu-content {
 }
 
 .header-menu-items {
@@ -124,7 +121,11 @@
 
 @media only screen and (min-width:650px) {
   .header-menu-hidden {
-    width: 100%;
+    width: 50%;
+  }
+
+  .header-menu-content {
+    width: 50%;
   }
 }
 
