@@ -2,6 +2,11 @@
 @set('title', 'Home|joris-app')
 @set('description', 'howsome joris app home')
 
+@section('head')
+   @entryPointStyles('home')
+  @entryPointScripts('home')
+@endsection
+
 @section('menu')
   @include('home/parts/header-home')
 @endsection
@@ -10,5 +15,6 @@
   @include('components/top-button')
   @include('home/parts/home-introduce')
   @include('home/parts/home-stats')
-  {{--  @include('components/witnesses')  --}}
+  @include('components/witnesses')
+  
 @endsection
