@@ -23,7 +23,14 @@
 <div class="cards">
   @each(sp in serviceProviders)
    <div class="card">
-    {{inspect(sp)}}
+     <ul>
+      <li>name: {{sp.lastname}}</li>
+      <li>job: {{sp.jobs ? sp.jobs[0]?.name : undfined}}</li>
+      <li>city: {{sp.adress?.city?.name}}</li>
+      <li>arr: {{sp.adress?.arrondissement?.name}}</li>
+      <li>quater: {{sp.adress?.quater?.name}}</li>
+    </ul>
+    {{--  {{inspect(sp.adress)}}  --}}
    </div>
   @endeach
 </div>

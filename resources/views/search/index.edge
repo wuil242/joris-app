@@ -11,7 +11,7 @@
   <style>
     label > ul {border: solid 2px #CCC;}
   </style>
-
+  
   {{inspect(qs)}}
 
   <h1>Trouver Un Prestaire</h1>
@@ -19,30 +19,31 @@
     @!component('search/parts/field', {
       title: 'JObs',
       items: jobs,
-      id: 'job'
+      id: 'job',
+      qs
     })
     
     @!component('search/parts/field', {
       title: 'Cities',
       items: cities,
-      id: 'city'
+      id: 'city',
+      qs
     })
 
-      <label for="arrondissements">
-        <h2>arrondissements</h2>
-        <select name="arrondissement" id="arrondissements" data-last="{{qs?.arrondissement || ''}}">
-          <option value="0">Tout</option>
-            
-        </select>
-      </label>
+    @!component('search/parts/field', {
+      title: 'Arrondissements',
+      items: arrondissements,
+      id: 'arrondissement',
+      qs
+    })
 
-      <label for="quaters">
-        <h2>quaters</h2>
-        <select name="quater" id="quaters" data-last="{{qs?.quater || ''}}">
-          <option value="0">Tout</option>
-            
-        </select>
-      </label>
+
+    @!component('search/parts/field', {
+      title: 'Quaters',
+      items: quaters,
+      id: 'quater',
+      qs
+    })
 
     <input type="submit" value="send">
   </form>
@@ -52,150 +53,150 @@
     <hr>
     <div id="results">
       @if(serviceProviders)
-        @!component('search/card', {serviceProviders})        
+        @!component('search/parts/card', {serviceProviders})        
       @endif
     </div>
   </div>
 
-  <script>
+  {{--  <script>
     let url = new URL(window.location.href + '/q')
     const $csrf = document.getElementsByName('_csrf')[0]
     
-  /**
-   * 
-   * 
-   * @param {string[]} picks derniers choix de l'utlisateur
-   */
-  function lastPick(...picks) {
-    picks.forEach(pick => {
-      console.log(pick)
-    })
-  }
-
-  /**
-   * @param {HTMLCollection} children
-   * @param {HTMLInputElement} input
-  */
-  function dataList(input, children) {  
-    Array.from(children).forEach(li => {
-      li.addEventListener('click', () => {
-        if(input.value === li.innerText) return
-        const type = input.dataset.type
-        console.log(li)
-        input.value = li.innerText
-        // updateQuery(type, li.dataset.id)
-      })
-    })
-  }
-
-  function dinamiseInput(input, children) {
-  }
-
-  async function updateQuery(query, value) {
-    url.searchParams.set(query, value)
-    url.searchParams.set($csrf.name, $csrf.value)
-    const method = 'GET'
-    const headers = {'X-Requested-With': 'xmlHttpRequest'}
-    const data = await fetch(url.href, {method, headers}).then(r => r.json())
-    if(data.html) {
-      console.log(data.html)
-      document.getElementById('results')
-        .innerHTML = data.html
-    }
-  }
-
-  /**
-   * 
-   * @param {HTMLSelectElement} el element qui apporte les nouvelles options de champ
-   * @param {string} selectId champs qui va recevoir les nouvelles options de champ
-   * @param {string} value la valeur selectionner
-   * @param {string} endpoint le lien de recuperation des champs manquant
-   * 
-   **/
-  async function pickOptions(el, selectId, value, endpoint, autherSelectResetId = []) {
-    const select = document.getElementById(selectId)
-     
-      select.innerHTML = `<option value="">Tout</option>`
-      if(autherSelectResetId.length > 0) {
-          autherSelectResetId.forEach(id => {
-            document.getElementById(id).innerHTML = `<option value="">Tout</option>`
-          })
-        }
-      if(!value) {
-        
-        return
-      }
-
-      const datas = await fetch(endpoint.replace('value', value)).then(r => r.json())
-      let options = ''
-      for (const data of datas) {
-        options += `<option value=${data.name}>${data.name}</option>`
-      }
-      select.innerHTML += options
-      select.focus()
-  }
-
-  const $form = document.getElementById('js-search')
-  const $jobs = $form.querySelector('#jobs')
-  const $cities = $form.querySelector('#cities')
-  const $arrondissements = $form.querySelector('#arrondissements')
-  const $quater = $form.querySelector('#js-quater')
-  
-  const lastJobPick = sessionStorage.getItem('last_job_pick')
-  const lastCityPick = sessionStorage.getItem('last_city_pick')
-  const lastArrondissementPick = sessionStorage.getItem('last_arrondissement_pick')
-  const lastQuaterPick = sessionStorage.getItem('last_quater_pick')
-
-    lastPick(
-      lastJobPick, lastCityPick, lastArrondissementPick, lastQuaterPick
-    )
-
-
-    if($jobs) {
-      const ul = $jobs.nextElementSibling
-      const jobs = JSON.parse($jobs.dataset.jobs)
-
-      dataList($jobs, ul.children)
-      dinamiseInput($jobs, ul.children)
-
-    }
-
-    if($cities) {
-      const ul = $cities.nextElementSibling
-      // const cities = JSON.parse($cities.dataset.cities)
-
-      // dataList($cities, ul.children)
-      // dinamiseInput($cities, ul.children)
-      const option = Array.from($cities.children).filter(c => c.selected)[0]
-
-      if(option) {
-        pickOptions($cities, 'arrondissements', option.value, `/api/city/value/arrs/`, ['quaters'])
-      }
-      
-      $cities.addEventListener('change', e => {
-        pickOptions($cities, 'arrondissements',e.target.value, '/api/city/value/arrs/', ['quaters'])      
+    /**
+     * 
+     * 
+     * @param {string[]} picks derniers choix de l'utlisateur
+     */
+    function lastPick(...picks) {
+      picks.forEach(pick => {
+        console.log(pick)
       })
     }
 
-    if($arrondissements) {
-      const last = $arrondissements.dataset.last
-      //FIXME: mieux gerer les fontions asyncronne
-      if(last !== '') {
-        Array.from($arrondissements.children).forEach(arr => {
-          console.log('in', arr)
-          if(arr.value === last) {
-          }
+    /**
+     * @param {HTMLCollection} children
+     * @param {HTMLInputElement} input
+    */
+    function dataList(input, children) {  
+      Array.from(children).forEach(li => {
+        li.addEventListener('click', () => {
+          if(input.value === li.innerText) return
+          const type = input.dataset.type
+          console.log(li)
+          input.value = li.innerText
+          // updateQuery(type, li.dataset.id)
         })
-        // pickOptions($arrondissements, 'quaters', last, '/api/arrondissement/value/quaters')
-      }
-      
-      $arrondissements.addEventListener('change', e => {
-        pickOptions($arrondissements, 'quaters', e.target.value, '/api/arrondissement/value/quaters')
       })
     }
 
-    // updateQuery('job', undefined)
+    function dinamiseInput(input, children) {
+    }
+
+    async function updateQuery(query, value) {
+      url.searchParams.set(query, value)
+      url.searchParams.set($csrf.name, $csrf.value)
+      const method = 'GET'
+      const headers = {'X-Requested-With': 'xmlHttpRequest'}
+      const data = await fetch(url.href, {method, headers}).then(r => r.json())
+      if(data.html) {
+        console.log(data.html)
+        document.getElementById('results')
+          .innerHTML = data.html
+      }
+    }
+
+    /**
+     * 
+     * @param {HTMLSelectElement} el element qui apporte les nouvelles options de champ
+     * @param {string} selectId champs qui va recevoir les nouvelles options de champ
+     * @param {string} value la valeur selectionner
+     * @param {string} endpoint le lien de recuperation des champs manquant
+     * 
+     **/
+    async function pickOptions(el, selectId, value, endpoint, autherSelectResetId = []) {
+      const select = document.getElementById(selectId)
+      
+        select.innerHTML = `<option value="">Tout</option>`
+        if(autherSelectResetId.length > 0) {
+            autherSelectResetId.forEach(id => {
+              document.getElementById(id).innerHTML = `<option value="">Tout</option>`
+            })
+          }
+        if(!value) {
+          
+          return
+        }
+
+        const datas = await fetch(endpoint.replace('value', value)).then(r => r.json())
+        let options = ''
+        for (const data of datas) {
+          options += `<option value=${data.name}>${data.name}</option>`
+        }
+        select.innerHTML += options
+        select.focus()
+    }
+
+    const $form = document.getElementById('js-search')
+    const $jobs = $form.querySelector('#jobs')
+    const $cities = $form.querySelector('#cities')
+    const $arrondissements = $form.querySelector('#arrondissements')
+    const $quater = $form.querySelector('#js-quater')
+    
+    const lastJobPick = sessionStorage.getItem('last_job_pick')
+    const lastCityPick = sessionStorage.getItem('last_city_pick')
+    const lastArrondissementPick = sessionStorage.getItem('last_arrondissement_pick')
+    const lastQuaterPick = sessionStorage.getItem('last_quater_pick')
+
+      lastPick(
+        lastJobPick, lastCityPick, lastArrondissementPick, lastQuaterPick
+      )
 
 
-  </script>
+      if($jobs) {
+        const ul = $jobs.nextElementSibling
+        const jobs = JSON.parse($jobs.dataset.jobs)
+
+        dataList($jobs, ul.children)
+        dinamiseInput($jobs, ul.children)
+
+      }
+
+      if($cities) {
+        const ul = $cities.nextElementSibling
+        // const cities = JSON.parse($cities.dataset.cities)
+
+        // dataList($cities, ul.children)
+        // dinamiseInput($cities, ul.children)
+        const option = Array.from($cities.children).filter(c => c.selected)[0]
+
+        if(option) {
+          pickOptions($cities, 'arrondissements', option.value, `/api/city/value/arrs/`, ['quaters'])
+        }
+        
+        $cities.addEventListener('change', e => {
+          pickOptions($cities, 'arrondissements',e.target.value, '/api/city/value/arrs/', ['quaters'])      
+        })
+      }
+
+      if($arrondissements) {
+        const last = $arrondissements.dataset.last
+        //FIXME: mieux gerer les fontions asyncronne
+        if(last !== '') {
+          Array.from($arrondissements.children).forEach(arr => {
+            console.log('in', arr)
+            if(arr.value === last) {
+            }
+          })
+          // pickOptions($arrondissements, 'quaters', last, '/api/arrondissement/value/quaters')
+        }
+        
+        $arrondissements.addEventListener('change', e => {
+          pickOptions($arrondissements, 'quaters', e.target.value, '/api/arrondissement/value/quaters')
+        })
+      }
+
+      // updateQuery('job', undefined)
+
+
+  </script>  --}}
 @endsection

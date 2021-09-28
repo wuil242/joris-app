@@ -5,6 +5,7 @@ import Job from 'App/Models/Job'
 import Arrondissement from 'App/Models/Arrondissement'
 import Quater from 'App/Models/Quater'
 import ServiceProvider from 'App/Models/ServiceProvider'
+import Adress from 'App/Models/Adress'
 
 // interface searchQuery {
 //   job: string,
@@ -20,19 +21,75 @@ export default class SearchesController {
     const cityId = Number.parseInt(qs.city, 10)
     const jobId = Number.parseInt(qs.job, 10)
 
-    const arrondissId = Number.parseInt(qs.arrondissement, 10)
+    const arrondissementId = Number.parseInt(qs.arrondissement, 10)
     const quaterId = Number.parseInt(qs.quater, 10)
 
     let serviceProvidersData: ServiceProvider[] = []
 
-    const jobs = await Job.all()
-    const cities = await City.all()
+    const jobs = await Job.query().orderBy('name', 'asc')
+    const cities = await City.query().orderBy('name', 'asc').preload('arrondissents')
 
-    const serviceProviders = await ServiceProvider.query().orderBy(this.ORDER, 'desc').limit(this.LIMIT)
+    let arrondissements:Arrondissement[] = []
+    let quaters:Quater[] = []
+
+    if(cityId > 0) {
+      const relation = (await City.findOrFail(cityId)).related('arrondissents')
+      arrondissements = await relation.query().orderBy('name', 'asc')
+    }
 
 
+    if(arrondissementId > 0) {
+      const relation = (await Arrondissement.findOrFail(arrondissementId)).related('quaters')
+      quaters = await relation.query().orderBy('name', 'asc')
+    }
 
-    return view.render('search/index', {jobs, cities, qs, serviceProviders})
+    let serviceProviders
+
+    //TODO: Mettre en place recherche des prestataire 
+    try {
+        serviceProviders = await (await Job.findOrFail(jobId)).related('serviceProviders').query().preload('adress', (q) => {
+        if(cityId) {
+          q.select('*').where('city_id', cityId)
+        }
+        
+        if(arrondissementId) {
+          q.select('*').where('arrondissement_id', arrondissementId)
+        }
+  
+        if(quaterId) {
+          q.select('*').where('quater_id', quaterId)
+        }
+      }).orderBy(this.ORDER, 'desc').limit(this.LIMIT).preload('jobs')
+  
+    } catch (error) {
+      console.log('ALl')
+      const adress = 
+      serviceProviders = await ServiceProvider.query().where((providerQuery) => {
+        providerQuery.preload('adress', (adressQuery) => {
+          if(cityId) {
+            adressQuery.select('*').where('city_id', cityId)
+          }
+          
+          if(arrondissementId) {
+            adressQuery.select('*').where('arrondissement_id', arrondissementId)
+          }
+          
+          if(quaterId) {
+            adressQuery.select('*').where('quater_id', quaterId)
+          }
+          adressQuery.preload('city').preload('arrondissement').preload('quater')
+      }).orderBy(this.ORDER, 'desc').limit(this.LIMIT).preload('jobs')
+    }
+
+
+    return view.render('search/index', {
+      jobs, 
+      cities, 
+      arrondissements,
+      quaters,
+      qs, 
+      serviceProviders
+    })
 
 
    /*

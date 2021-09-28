@@ -40,12 +40,12 @@ export default class Adress extends BaseModel {
   public city: BelongsTo<typeof City>
 
   @belongsTo(() => Arrondissement)
-  public arrondissent: BelongsTo<typeof Arrondissement>
+  public arrondissement: BelongsTo<typeof Arrondissement>
 
   @belongsTo(() => Quater)
   public quater: BelongsTo<typeof Quater>
 
   public get full(): string {
-    return `${this?.numberAdress} rue ${this?.street}, ${this?.arrondissent.name} ${this?.quater?.name}`
+    return `${this?.numberAdress} rue ${this?.street}, ${this?.arrondissement.name} ${this?.quater?.name}`
   }
 }
