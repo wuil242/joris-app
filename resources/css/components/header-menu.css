@@ -133,6 +133,10 @@
   .header-menu {
     display: none;
   }
+
+  .header-menu.show {
+    display: none;
+  }
 }
 
 /* Animations */
