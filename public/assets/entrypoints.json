@@ -15,6 +15,11 @@
       "js": [
         "http://localhost:8080/assets/home.js"
       ]
+    },
+    "search": {
+      "js": [
+        "http://localhost:8080/assets/search.js"
+      ]
     }
   }
 }

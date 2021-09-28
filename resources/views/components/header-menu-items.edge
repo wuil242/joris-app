@@ -3,12 +3,12 @@
     <a href="/">Acceuil</a>
   </li>
 
-  <li class="header-menu-item {{ request.url() === route('serviceProvider.search') ? 'active' : '' }}">
-    <a href="{{route('serviceProvider.search')}}">Trouver Un Prestataire</a>
+  <li class="header-menu-item {{ request.url() === route('serviceProvider.find') ? 'active' : '' }}">
+    <a href="{{route('serviceProvider.find')}}">Trouver Un Prestataire</a>
   </li>
 
-  <li class="header-menu-item {{ request.url() === route('serviceProvider.search') ? 'active' : '' }}">
-    <a href="{{route('serviceProvider.search')}}">Entreprise</a>
+  <li class="header-menu-item {{ request.url() === '/entreprise' ? 'active' : '' }}">
+    <a href="/entreprise">Entreprise</a>
   </li>
 
   <nav class="header-submenu">

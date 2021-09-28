@@ -26,7 +26,7 @@ Route.group(() => {
   Route.get('/recherche', 'SearchesController.index').as('serviceProvider.find')
 
   // Route.get('/recherche/q', 'SearchesController.getSearch').as('serviceProvider.search')
-  Route.get('/recherche/q', 'SearchesController.search').as('serviceProvider.search')
+  // Route.get('/recherche/q', 'SearchesController.search').as('serviceProvider.search')
 
   Route.group(() => {
     Route.get('/city/:name/arrs', 'ApisController.getAllArrs')

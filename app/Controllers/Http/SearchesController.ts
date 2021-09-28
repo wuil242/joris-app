@@ -12,23 +12,30 @@ import ServiceProvider from 'App/Models/ServiceProvider'
 // }
 
 export default class SearchesController {
-  private usersCount = 10
+  private LIMIT = 10
+  private ORDER = 'score'
 
-  public async index({ view }: HttpContextContract) {
-    const jobs = await Job.all()
-    const cities = await City.all()
-    return view.render('search/index', { jobs, cities })
-  }
-
-  public async search({ request, view, session }: HttpContextContract) {
+  public async index({ request, view, session }: HttpContextContract) {
     const qs = request.qs()
-    const cityName = qs.city //parseInt(qs.city, 10)
-    const jobName = qs.job //parseInt(qs.job, 10)
-    const arrondissementName = qs.arrondissement
-    const quaterName = qs.quater
+    const cityId = Number.parseInt(qs.city, 10)
+    const jobId = Number.parseInt(qs.job, 10)
+
+    const arrondissId = Number.parseInt(qs.arrondissement, 10)
+    const quaterId = Number.parseInt(qs.quater, 10)
 
     let serviceProvidersData: ServiceProvider[] = []
 
+    const jobs = await Job.all()
+    const cities = await City.all()
+
+    const serviceProviders = await ServiceProvider.query().orderBy(this.ORDER, 'desc').limit(this.LIMIT)
+
+
+
+    return view.render('search/index', {jobs, cities, qs, serviceProviders})
+
+
+   /*
     try {
       const job = await Job.findByOrFail('name', jobName)
       serviceProvidersData = await job
@@ -108,6 +115,7 @@ export default class SearchesController {
     const cities = await City.all()
 
     return view.render('search/index', { sericeProviders: normalisedData, jobs, cities, qs })
+    */
   }
 
   private async fecthData(

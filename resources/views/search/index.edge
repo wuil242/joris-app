@@ -2,6 +2,10 @@
 @set('title', 'Trouver un prestataire')
 @set('description', 'Trouver un prestataire')
 
+@section('head')
+   @entryPointScripts('search')
+@endsection
+
 
 @section('content')
   <style>
@@ -11,39 +15,31 @@
   {{inspect(qs)}}
 
   <h1>Trouver Un Prestaire</h1>
-  <form class="form" action="{{route('serviceProvider.search')}}" method="GET" id="js-search" >
-      <label for="job">
-        <h2>Jobs</h2>
-        <select name="job" id="job" value="Director">
-          <option value="">Tout</option>
-          @each(job in jobs)
-            <option value="{{job.name}}" {{qs?.job === job.name ? 'selected' : ''}}>{{job.name}}</option>
-          @endeach
-        </select>
-      </label>
-
-      <label for="cities">
-        <h2>Cities</h2>
-        <select name="city" id="cities">
-          <option value="">Tout</option>
-          @each(city in cities)
-            <option value="{{city.name}}" {{qs?.city === city.name ? 'selected' : ''}}>{{city.name}}</option>
-          @endeach
-        </select>
-      </label>
+  <form class="form" action="{{route('serviceProvider.find')}}" method="GET" id="js-search" >
+    @!component('search/parts/field', {
+      title: 'JObs',
+      items: jobs,
+      id: 'job'
+    })
+    
+    @!component('search/parts/field', {
+      title: 'Cities',
+      items: cities,
+      id: 'city'
+    })
 
       <label for="arrondissements">
         <h2>arrondissements</h2>
         <select name="arrondissement" id="arrondissements" data-last="{{qs?.arrondissement || ''}}">
-          <option value="">Tout</option>
+          <option value="0">Tout</option>
             
         </select>
       </label>
 
-      <label for="">
+      <label for="quaters">
         <h2>quaters</h2>
         <select name="quater" id="quaters" data-last="{{qs?.quater || ''}}">
-          <option value="">Tout</option>
+          <option value="0">Tout</option>
             
         </select>
       </label>
@@ -55,8 +51,8 @@
     <h1>Results</h1>
     <hr>
     <div id="results">
-      @if(sericeProviders)
-        @!component('search/card', {sericeProviders})        
+      @if(serviceProviders)
+        @!component('search/card', {serviceProviders})        
       @endif
     </div>
   </div>
