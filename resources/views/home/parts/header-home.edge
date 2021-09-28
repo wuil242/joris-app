@@ -8,13 +8,13 @@
           <a href="/">Joris-app</a>
         </h1>
     </div>
-    <div class="header-home-actions">
-      @if(!auth.isLoggedIn)
+    @if(!auth.isLoggedIn)
+      <div class="header-home-actions">
         <a class="home-login header-menu-item" href="{{ route('login')}}">Se connecter</a>
         <a class="home-sign_up button" href="{{ route('sign-up')}}">Créer un compte</a>
-      @endif
-        @include('components/header-menu')
-    </div>
+      </div>
+    @endif
+      @include('components/header-menu')
   </div>
   <div class="header-home-bottom">
     <p class="home-welcome">Bienvenue</p>
