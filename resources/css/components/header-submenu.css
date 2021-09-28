@@ -37,10 +37,12 @@
   border-bottom: var(--header-submenu-triangle-size) solid white;
   order: 2;
   display: none;
+  animation: .4s moveArrow linear reverse;
 }
 
 .header-submenu-label::after {
   border-top: var(--header-submenu-triangle-size) solid white;
+  animation: .4s moveArrow linear ;
 }
 
 
@@ -152,6 +154,21 @@
     width: 100%;
     height: 2px;
   }
-    
 
+}
+
+/* Animation */
+
+@keyframes moveArrow {
+  0%{
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
 }
