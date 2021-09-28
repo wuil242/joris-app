@@ -11,11 +11,11 @@ HeaderMenu.create({
   closeElementSelector: '.js-menu-hidden',
 })
 
-/*
-HeaderMenuButton.create({
-  buttonSelector: '#menu-button',
-})
+// HeaderMenuButton.create({
+//   buttonSelector: '#menu-button',
+// })
 
+/*
 Sticky.define({
   element: '.top-button',
   scrollValue: 350,

@@ -13,7 +13,7 @@ export default class HeaderMenu {
    * }} options options de configurations
    */
   constructor(options) {
-    this.$openBtn = document.querySelector(options.openBtnSelector)
+    this.$openBtn = document.querySelectorAll(options.openBtnSelector)
     this.$menu = document.querySelector(options.menuSelector)
     this.$closeBtn = this.$menu.querySelector(options?.closeBtnSelector || '#button-close')
     this.$closeElement = document.querySelector(options?.closeElementSelector)
@@ -62,7 +62,9 @@ export default class HeaderMenu {
 
   init() {
 
-    this.$openBtn.addEventListener('click', this.openMenu)
+    console.log(this.$openBtn)
+
+    this.$openBtn.forEach(btn => btn.addEventListener('click', this.openMenu))
 
     this.$closeBtn.addEventListener('click', this.closeMenu)
 
