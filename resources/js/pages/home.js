@@ -11,12 +11,12 @@ HeaderMenu.create({
 })
 
 Sticky.define({
-  element: '.top-button',
+  element: '.home-top-button',
   scrollValue: 350,
 })
 
 
 Carroussel.define({
   auto: true,
-  time: 3
+  time: 5
 })

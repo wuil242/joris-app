@@ -62,8 +62,6 @@ export default class HeaderMenu {
 
   init() {
 
-    console.log(this.$openBtn)
-
     this.$openBtn.forEach(btn => btn.addEventListener('click', this.openMenu))
 
     this.$closeBtn.addEventListener('click', this.closeMenu)
