@@ -1,0 +1,26 @@
+<div class="header-home-site-infos">
+  <a href="/">
+    <img src="{{asset('assets/images/header_bg.jpeg')}}" class="site-logo" alt="logo du site">
+  </a>
+  <h1 class="header-home-title site-name">
+    <a href="/">Joris-app</a>
+  </h1>
+</div>
+<div class="header-home-actions">
+@if(!auth.isLoggedIn)
+  <a class="home-login header-menu-item" href="{{ route('login')}}">Se connecter</a>
+  <a class="home-sign_up button" href="{{ route('sign-up')}}">Créer un compte</a>
+@endif
+<div class="js-close-menu header-menu hide scroll">
+  <div class="header-menu-hidden js-menu-hidden" title="cliquer pour fermer le menu"></div>
+  <nav class="header-menu-content">
+    <button class="header-menu-close" id="button-close">X</button>
+    @!component('components/header-menu-items', {prefix: stickyPrefix || 'home-sticky'})
+  </nav>
+</div>
+<nav class="header-menu-static">
+  @!component('components/header-menu-items', {prefix: staticPrefix || 'home-static'})
+</nav>
+@include('components/header-menu-button')
+
+</div>

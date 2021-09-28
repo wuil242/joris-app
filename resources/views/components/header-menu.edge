@@ -2,7 +2,7 @@
   <div class="header-menu-hidden js-menu-hidden" title="cliquer pour fermer le menu"></div>
   <nav class="header-menu-content">
     <button class="header-menu-close" id="button-close">X</button>
-    @include('components/header-menu-items')
+    @!component('components/header-menu-items', {prefix: 'sticky'})
   </nav>
 </div>
 @include('components/header-static')

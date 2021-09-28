@@ -1,11 +1,13 @@
 .header-menu-static {
   background: transparent;
   display: none;
+  position: sticky;
 }
 
 .header-menu-static .header-menu-items {
   flex-direction: row;
   justify-content: space-between;
+  overflow: visible;
 }
 
 @media only screen and (min-width: 1300px) {

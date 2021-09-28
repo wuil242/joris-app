@@ -37,19 +37,6 @@ export default class HeaderMenu {
   }
 
   createStickyMenu () {
-    const parent = this.$stickyMenu.parentElement
-    const className = this.$stickyMenu.classList.item(1)
-    this.$stickyMenu = this.$stickyMenu.cloneNode(true)
-    this.$stickyMenu.classList.add(className + '-fake')
-
-    const openMenuBtn = this.$stickyMenu.querySelector('.' + this.$openBtn.classList.item(0))
-    const closeMenuBtn = this.$stickyMenu.querySelector('.' + this.$closeBtn.classList.item(0))
-
-    openMenuBtn.addEventListener('click', this.openMenu)
-    closeMenuBtn.addEventListener('click', this.closeMenu)
-
-    parent.appendChild(this.$stickyMenu)
-    console.log(this.$stickyMenu)
     Sticky.define({
       element: this.$stickyMenu,
       scrollValue: 45,
