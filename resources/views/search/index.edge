@@ -14,13 +14,13 @@
 
   <h1>Trouver Un Prestaire</h1>
   <section class="service-provider-cards">
-    @include('service_provider/parts/service-provider-card-skeleton')
-    @include('service_provider/parts/service-provider-card-skeleton')
-    @include('service_provider/parts/service-provider-card-skeleton')
-    @include('service_provider/parts/service-provider-card-skeleton')
-    @include('service_provider/parts/service-provider-card-skeleton')
-    @include('service_provider/parts/service-provider-card-skeleton')
-    @include('service_provider/parts/service-provider-card-skeleton')
+    @include('service_provider/parts/service-provider-card')
+    @include('service_provider/parts/service-provider-card')
+    @include('service_provider/parts/service-provider-card')
+    @include('service_provider/parts/service-provider-card')
+    @include('service_provider/parts/service-provider-card')
+    @include('service_provider/parts/service-provider-card')
+    @include('service_provider/parts/service-provider-card')
   </section>
   <form class="form" action="{{route('serviceProvider.find')}}" method="GET" id="js-search" >
     @!component('search/parts/field', {
