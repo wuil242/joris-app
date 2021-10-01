@@ -1,5 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { LucidModel, RelationQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
+import { RelationQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
 import City from 'App/Models/City'
 import Job from 'App/Models/Job'
 import Arrondissement from 'App/Models/Arrondissement'

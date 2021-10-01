@@ -1,14 +1,5 @@
 <header class="header-home">
-  <div class="js-header-sticky header-home-top header-home-top-fake">
-   @!component('home/parts/header-home-top', {
-      stickyPrefix: 'home-fake-sticky',
-      staticPrefix: 'home-fake-static'
-   })
-  </div>
-  <div class="header-home-top" id="home-top">
-    @!component('home/parts/header-home-top', {openMenu: 'js-close-menu'})
-  </div>
-  </div>
+  @include('components/header-menu-topbar')
   <div class="header-home-bottom">
     <p class="home-welcome">Bienvenue</p>
     <h2 class="home-site-title">JORIS APP</h2>

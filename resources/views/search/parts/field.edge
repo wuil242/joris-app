@@ -1,10 +1,8 @@
 <label for="job">
   <h2>{{title}}</h2>
-  <div>  {{inspect(qs[id.toString()])}}  </div>
   <select name="{{id}}" id="{{id}}" value="Director">
     <option value="0" {{qs[id.toString()] === '0' ? 'selected' : ''}}>Tout</option>
     @each(item in items)
-    {{inspect(qs[item])}}
       <option value="{{item.id}}" {{qs ? (qs[id.toString()] === item.id.toString() ? 'selected' : '') : ''}}>{{item.name}}</option>
     @endeach
   </select>

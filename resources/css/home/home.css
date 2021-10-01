@@ -6,12 +6,6 @@
   font-size: 1.2rem;
 }
 
-.home-site-title {
-  font-size: 3rem!important;
-  color: var(--text-color);
-  /* font-family: "Montserrat-bold"; */
-}
-
 .home-site-explain {
   width: 90%;
   padding: 10px;

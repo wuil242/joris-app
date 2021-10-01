@@ -116,6 +116,29 @@
   width: 100%;
 }
 
+/* Topbar */
+.header-menu-site-infos {
+  /* background: yellow; */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: .7em 0.5em;
+}
+
+.header-menu-site-title {
+  font-size: 3rem!important;
+  color: var(--text-color);
+  /* font-family: "Montserrat-bold"; */
+}
+
+.header-menu-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+
 
 /* Responsive */
 

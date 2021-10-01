@@ -1,21 +1,5 @@
 .header-page {
-  min-height: 0;
-  background: linear-gradient(90deg, #000, #000a);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px;
-}
+  /* background: linear-gradient(90deg, #000, #000a); */
 
-.header-page-site-infos {
-  /* justify-content: space-between; */
-  align-items: center;
-  display: flex;
-  gap: 5px;
-}
-
-@media screen and (min-width: 1025px) {
-  .header-page-site-infos {
-    width: 25%;
-  }
+  box-shadow: 0 -0 .25em .25em var(--text-second-color);
 }

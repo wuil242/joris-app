@@ -1,12 +1,12 @@
-<div class="header-home-site-infos">
+<div class="header-menu-site-infos">
   <a href="/">
     <img src="{{asset('assets/images/header_bg.jpeg')}}" class="site-logo" alt="logo du site">
   </a>
-  <h1 class="header-home-title site-name">
+  <h1 class="header-menu-site-title site-name">
     <a href="/">Joris-app</a>
   </h1>
 </div>
-<div class="header-home-actions">
+<div class="header-menu-actions">
 @if(!auth.isLoggedIn)
   <a class="home-login header-menu-item" href="{{ route('login')}}">Se connecter</a>
   <a class="home-sign_up button" href="{{ route('sign-up')}}">Créer un compte</a>
@@ -24,5 +24,4 @@
   @!component('components/header-menu-items', {prefix: staticPrefix || 'home-static'})
 </nav>
 @include('components/header-menu-button')
-
 </div>
