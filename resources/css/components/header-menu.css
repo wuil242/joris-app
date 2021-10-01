@@ -125,7 +125,7 @@
 }
 
 .header-menu-site-title {
-  font-size: 3rem!important;
+  font-size: 3rem;
   color: var(--text-color);
   display: none;
   /* font-family: "Montserrat-bold"; */
