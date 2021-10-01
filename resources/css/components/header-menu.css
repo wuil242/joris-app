@@ -125,10 +125,7 @@
 }
 
 .header-menu-site-title {
-  font-size: 3rem;
-  color: var(--text-color);
   display: none;
-  /* font-family: "Montserrat-bold"; */
 }
 
 .header-menu-actions {
@@ -155,7 +152,7 @@
   }
 
   .header-menu-site-title {
-    display: block;
+    display: inline-block;
   }
 
   .header-menu-actions-login {
