@@ -9,7 +9,7 @@
     display: block;
     transform: translateX(-100%);
     background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .07), transparent);
-    animation: 2.5s waveMove 1s linear infinite;
+    animation: 1.5s waveMove 1s linear infinite;
   }
 
   .service-provider-card-skeleton .service-provider-card-image {

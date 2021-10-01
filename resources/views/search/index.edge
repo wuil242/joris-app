@@ -13,6 +13,7 @@
   {{inspect(qs)}}
 
   <h1>Trouver Un Prestaire</h1>
+  @include('search/parts/search-fields')
   <section class="service-provider-cards">
     @include('service_provider/parts/service-provider-card')
     @include('service_provider/parts/service-provider-card')
@@ -23,38 +24,7 @@
     @include('service_provider/parts/service-provider-card-skeleton')
     @include('service_provider/parts/service-provider-card-skeleton')
   </section>
-  <form class="form" action="{{route('serviceProvider.find')}}" method="GET" id="js-search" >
-    @!component('search/parts/field', {
-      title: 'Jobs',
-      items: jobs,
-      id: 'job',
-      qs
-    })
-    
-    @!component('search/parts/field', {
-      title: 'Cities',
-      items: cities,
-      id: 'city',
-      qs
-    })
-
-    @!component('search/parts/field', {
-      title: 'Arrondissements',
-      items: arrondissements,
-      id: 'arrondissement',
-      qs
-    })
-
-
-    @!component('search/parts/field', {
-      title: 'Quaters',
-      items: quaters,
-      id: 'quater',
-      qs
-    })
-    
-  </form>
-
+  
   <div>
     <h1>Results</h1>
     <hr>
