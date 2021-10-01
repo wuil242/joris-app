@@ -37,11 +37,19 @@
   border-bottom: var(--header-submenu-triangle-size) solid white;
   order: 2;
   display: none;
+}
+
+.header-submenu-label:hover:before,
+.header-submenu-label:active::before {
   animation: .4s moveArrow linear reverse;
 }
 
 .header-submenu-label::after {
   border-top: var(--header-submenu-triangle-size) solid white;
+}
+
+.header-submenu-label:hover::after,
+.header-submenu-label:active::after {
   animation: .4s moveArrow linear ;
 }
 
