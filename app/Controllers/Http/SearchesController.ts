@@ -18,29 +18,37 @@ export default class SearchesController {
 
   public async index({ request, view, session }: HttpContextContract) {
     const qs = request.qs()
-    const cityId = Number.parseInt(qs.city, 10) || 0
-    const jobId = Number.parseInt(qs.job, 10) || 0
-
-    const arrondissementId = Number.parseInt(qs.arrondissement, 10) || 0
-    const quaterId = Number.parseInt(qs.quater, 10) || 0
-
     const page = Number.parseInt(qs.page, 10) || 1
+    const jobId = Number.parseInt(qs.job, 10) || 0
+    
+    let cityId = Number.parseInt(qs.city, 10) || 0
+    let arrondissementId = Number.parseInt(qs.arrondissement, 10) || 0
+    let quaterId = Number.parseInt(qs.quater, 10) || 0
     
     const jobs = await Job.query().orderBy('name', 'asc')
-    const cities = await City.query().orderBy('name', 'asc')
-    
+    let cities = await City.query().orderBy('name', 'asc')
     let serviceProviders: ServiceProvider[] = []
     let arrondissements:Arrondissement[] = []
     let quaters:Quater[] = []
 
     if(cityId > 0) {
-      const relation = (await City.findOrFail(cityId)).related('arrondissents')
-      arrondissements = await relation.query().orderBy('name', 'asc')
-    }
+      try {
+        const relation = (await City.findOrFail(cityId)).related('arrondissents')
+        arrondissements = await relation.query().orderBy('name', 'asc')
 
-    if(arrondissementId > 0) {
-      const relation = (await Arrondissement.findOrFail(arrondissementId)).related('quaters')
-      quaters = await relation.query().orderBy('name', 'asc')
+        if(arrondissementId > 0) {
+          const relation = (await Arrondissement.findOrFail(arrondissementId)).related('quaters')
+          quaters = await relation.query().orderBy('name', 'asc')
+        }
+
+      } catch (error) {
+        arrondissements  = []
+        quaters = []
+
+        cityId = 0
+        arrondissementId = 0
+        quaterId = 0
+      }
     }
 
     try {
