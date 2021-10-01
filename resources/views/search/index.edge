@@ -3,6 +3,7 @@
 @set('description', 'Trouver un prestataire')
 
 @section('head')
+   @entryPointStyles('search')
    @entryPointScripts('search')
 @endsection
 
@@ -13,13 +14,13 @@
 
   <h1>Trouver Un Prestaire</h1>
   <section class="service-provider-cards">
-    @include('serviceProvider/parts/service-provider-card-skeleton')
-    @include('serviceProvider/parts/service-provider-card-skeleton')
-    @include('serviceProvider/parts/service-provider-card-skeleton')
-    @include('serviceProvider/parts/service-provider-card-skeleton')
-    @include('serviceProvider/parts/service-provider-card-skeleton')
-    @include('serviceProvider/parts/service-provider-card-skeleton')
-    @include('serviceProvider/parts/service-provider-card-skeleton')
+    @include('service_provider/parts/service-provider-card-skeleton')
+    @include('service_provider/parts/service-provider-card-skeleton')
+    @include('service_provider/parts/service-provider-card-skeleton')
+    @include('service_provider/parts/service-provider-card-skeleton')
+    @include('service_provider/parts/service-provider-card-skeleton')
+    @include('service_provider/parts/service-provider-card-skeleton')
+    @include('service_provider/parts/service-provider-card-skeleton')
   </section>
   <form class="form" action="{{route('serviceProvider.find')}}" method="GET" id="js-search" >
     @!component('search/parts/field', {

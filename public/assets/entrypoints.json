@@ -17,6 +17,9 @@
       ]
     },
     "search": {
+      "css": [
+        "http://localhost:8080/assets/search.css"
+      ],
       "js": [
         "http://localhost:8080/assets/search.js"
       ]
