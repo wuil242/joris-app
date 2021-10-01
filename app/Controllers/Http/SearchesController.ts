@@ -1,5 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { LucidModel, ModelObject } from '@ioc:Adonis/Lucid/Orm'
+import { LucidModel, RelationQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
 import City from 'App/Models/City'
 import Job from 'App/Models/Job'
 import Arrondissement from 'App/Models/Arrondissement'
@@ -18,17 +18,18 @@ export default class SearchesController {
 
   public async index({ request, view, session }: HttpContextContract) {
     const qs = request.qs()
-    const cityId = Number.parseInt(qs.city, 10)
-    const jobId = Number.parseInt(qs.job, 10)
+    const cityId = Number.parseInt(qs.city, 10) || 0
+    const jobId = Number.parseInt(qs.job, 10) || 0
 
-    const arrondissementId = Number.parseInt(qs.arrondissement, 10)
-    const quaterId = Number.parseInt(qs.quater, 10)
+    const arrondissementId = Number.parseInt(qs.arrondissement, 10) || 0
+    const quaterId = Number.parseInt(qs.quater, 10) || 0
 
-    let serviceProvidersData: ServiceProvider[] = []
-
+    const page = Number.parseInt(qs.page, 10) || 1
+    
     const jobs = await Job.query().orderBy('name', 'asc')
-    const cities = await City.query().orderBy('name', 'asc').preload('arrondissents')
-
+    const cities = await City.query().orderBy('name', 'asc')
+    
+    let serviceProviders: ServiceProvider[] = []
     let arrondissements:Arrondissement[] = []
     let quaters:Quater[] = []
 
@@ -37,50 +38,30 @@ export default class SearchesController {
       arrondissements = await relation.query().orderBy('name', 'asc')
     }
 
-
     if(arrondissementId > 0) {
       const relation = (await Arrondissement.findOrFail(arrondissementId)).related('quaters')
       quaters = await relation.query().orderBy('name', 'asc')
     }
 
-    let serviceProviders
-
-    //TODO: Mettre en place recherche des prestataire 
     try {
-        serviceProviders = await (await Job.findOrFail(jobId)).related('serviceProviders').query().preload('adress', (q) => {
-        if(cityId) {
-          q.select('*').where('city_id', cityId)
-        }
-        
-        if(arrondissementId) {
-          q.select('*').where('arrondissement_id', arrondissementId)
-        }
-  
-        if(quaterId) {
-          q.select('*').where('quater_id', quaterId)
-        }
-      }).orderBy(this.ORDER, 'desc').limit(this.LIMIT).preload('jobs')
-  
+      const job = await Job.findOrFail(jobId)
+      serviceProviders = await job.related('serviceProviders').query().preload('adress', this.adressQuery)
+        .preload('jobs').orderBy(this.ORDER, 'desc').paginate(page, this.LIMIT)
+
     } catch (error) {
-      console.log('ALl')
-      const adress = 
-      serviceProviders = await ServiceProvider.query().where((providerQuery) => {
-        providerQuery.preload('adress', (adressQuery) => {
-          if(cityId) {
-            adressQuery.select('*').where('city_id', cityId)
-          }
-          
-          if(arrondissementId) {
-            adressQuery.select('*').where('arrondissement_id', arrondissementId)
-          }
-          
-          if(quaterId) {
-            adressQuery.select('*').where('quater_id', quaterId)
-          }
-          adressQuery.preload('city').preload('arrondissement').preload('quater')
-      }).orderBy(this.ORDER, 'desc').limit(this.LIMIT).preload('jobs')
+      serviceProviders = await ServiceProvider.query().preload('adress', this.adressQuery)
+        .preload('jobs').orderBy(this.ORDER, 'desc').paginate(page, this.LIMIT)
     }
 
+    if(cityId > 0) {
+     serviceProviders = await this.filterServicePrividersData('cityId', cityId, serviceProviders)
+     if(arrondissementId > 0) {
+       serviceProviders = await this.filterServicePrividersData('arrondissementId', arrondissementId, serviceProviders)
+       if(quaterId > 0) {
+         serviceProviders = await this.filterServicePrividersData('quaterId', quaterId, serviceProviders)
+       }
+     }
+    }
 
     return view.render('search/index', {
       jobs, 
@@ -91,101 +72,18 @@ export default class SearchesController {
       serviceProviders
     })
 
-
-   /*
-    try {
-      const job = await Job.findByOrFail('name', jobName)
-      serviceProvidersData = await job
-        .related('serviceProviders')
-        .query()
-        .select('*')
-        .orderBy('score', 'desc')
-        .limit(this.usersCount)
-        .preload('adress')
-        .preload('jobs')
-    } catch (error) {
-      if (jobName === '') {
-        serviceProvidersData = await ServiceProvider.query()
-          .select('*')
-          .orderBy('score', 'desc')
-          .limit(this.usersCount)
-          .preload('adress')
-          .preload('jobs')
-      }
-    }
-
-    try {
-      if (cityName) {
-        serviceProvidersData = await this.fecthData(City, cityName, 'cityId', serviceProvidersData)
-        if (arrondissementName) {
-          serviceProvidersData = await this.fecthData(
-            Arrondissement,
-            arrondissementName,
-            'arrondissementId',
-            serviceProvidersData
-          )
-          if (quaterName) {
-            serviceProvidersData = await this.fecthData(
-              Quater,
-              quaterName,
-              'quaterId',
-              serviceProvidersData
-            )
-          }
-        }
-      }
-    } catch {}
-
-    const normalisedData: ModelObject[] = []
-
-    for (const sp of serviceProvidersData) {
-      const adress = await sp
-        .related('adress')
-        .query()
-        .preload('city')
-        .preload('arrondissent')
-        .preload('quater')
-        .first()
-
-      const serviceProviderFields = sp.serialize({
-        fields: ['id', 'firstname', 'lastname', 'photo', 'description', 'accroch_sentence'],
-      })
-
-      const jobs = sp.jobs.map((j) => j.serialize({ fields: ['name', 'color', 'bg_color'] }))
-
-      normalisedData.push({
-        ...serviceProviderFields,
-        jobs,
-        adress: adress?.full,
-        city: adress?.city.name,
-        arrondissement: adress?.arrondissent.name,
-        quater: adress?.quater?.name,
-      })
-    }
-
-    if (request.ajax()) {
-      const html = await view.render('search/card', { sericeProviders: normalisedData })
-      return { qs, method: 'POST', sp: normalisedData, html }
-    }
-
-    const jobs = await Job.all()
-    const cities = await City.all()
-
-    return view.render('search/index', { sericeProviders: normalisedData, jobs, cities, qs })
-    */
   }
 
-  private async fecthData(
-    model: LucidModel,
-    name: string,
-    modelId: string,
+  private adressQuery(query:RelationQueryBuilderContract<typeof Adress, any>):void {
+    query.preload('city').preload('arrondissement').preload('quater')
+  }
+
+  private async filterServicePrividersData(
+    modelName: 'cityId' | 'arrondissementId' | 'quaterId',
+    modelId: number,
     serviceProvidersData: ServiceProvider[]
   ): Promise<ServiceProvider[]> {
-    const value = (await model.findByOrFail('name', name)) as City | Arrondissement | Quater
-    const data = serviceProvidersData.filter((sp) => {
-      if (!sp.adress) return false
-      return sp.adress[modelId] === value.id
-    })
+    const data =  serviceProvidersData.filter(sp => sp.adress[modelName] === modelId)
     return Promise.resolve(data)
   }
 }
