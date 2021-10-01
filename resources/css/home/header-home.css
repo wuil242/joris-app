@@ -24,13 +24,9 @@
 
   color: var(--text-color);
 
-  animation: .6s arrowMove ease-in-out  5;
+  animation: .6s homeArrowMove ease-in-out  5;
 }
 
-
-.header-menu-title {
-  display: none;
-}
 
 /* bottom of the header */
 .header-home-bottom {
@@ -62,7 +58,7 @@
 }
 
 /* Annimations */
-@keyframes arrowMove {
+@keyframes homeArrowMove {
   0% {
     transform: translateY(0%);
   }
@@ -73,11 +69,6 @@
 }
 
 /* Responsive */
-@media screen and (min-width: 650px) {
-  .header-menu-title {
-    display: block;
-  }
-}
 
 @media screen and (min-width: 1300px) {
 

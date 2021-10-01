@@ -28,7 +28,6 @@
   width: 80%;
 }
 
-
 .header-menu-close {
   position: absolute;
   top: 10px;
@@ -128,6 +127,7 @@
 .header-menu-site-title {
   font-size: 3rem!important;
   color: var(--text-color);
+  display: none;
   /* font-family: "Montserrat-bold"; */
 }
 
@@ -139,9 +139,12 @@
 }
 
 
+.header-menu-actions-login {
+  display: none;
+}
+
 
 /* Responsive */
-
 @media only screen and (min-width:650px) {
   .header-menu-hidden {
     width: 50%;
@@ -150,15 +153,27 @@
   .header-menu-content {
     width: 50%;
   }
+
+  .header-menu-site-title {
+    display: block;
+  }
+
+  .header-menu-actions-login {
+    display: inline-block;
+  }
 }
 
 @media screen and (min-width: 1300px) {
-
   .header-menu {
     display: none;
   }
 
   .header-menu.show {
+    display: none;
+  }
+
+  .header-menu-actions-login,
+  .header-menu-actions-sign_up {
     display: none;
   }
 }
