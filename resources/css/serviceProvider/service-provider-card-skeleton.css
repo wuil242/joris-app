@@ -1,0 +1,63 @@
+
+  .service-provider-card-skeleton .wave::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .07), transparent);
+    animation: 2.5s waveMove 1s linear infinite;
+  }
+
+  .service-provider-card-skeleton .service-provider-card-image {
+    background-color: #0000001C;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .service-provider-card-skeleton .service-provider-card-job {
+    overflow: hidden;
+    background: #BBB;
+    width: 30%;
+    height: .6em;
+  }
+
+  .service-provider-card-skeleton .service-provider-card-job.wave::before {
+    animation-duration: 1s; 
+  }
+
+  .service-provider-card-skeleton .service-provider-card-actions {
+    overflow: hidden;
+    background: #BBB;
+    /* width: 50%; */
+    width: 50%;
+    margin: auto;
+    bottom: 14px;
+    height: 2px;
+  }
+
+  .service-provider-card-skeleton .service-provider-card-actions.wave::before {
+    animation-duration: 1s;
+  }
+  
+
+
+  @keyframes waveMove {
+    0% {
+      transform: translateX(-100%);
+    }
+
+    50% {
+      transform: translateX(100%);
+    }
+
+    100% {
+      transform: translateX(100%);
+    }
+  }

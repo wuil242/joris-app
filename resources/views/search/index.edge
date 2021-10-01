@@ -8,13 +8,19 @@
 
 
 @section('content')
-  <style>
-    label > ul {border: solid 2px #CCC;}
-  </style>
   
   {{inspect(qs)}}
 
   <h1>Trouver Un Prestaire</h1>
+  <section class="service-provider-cards">
+    @include('serviceProvider/parts/service-provider-card-skeleton')
+    @include('serviceProvider/parts/service-provider-card-skeleton')
+    @include('serviceProvider/parts/service-provider-card-skeleton')
+    @include('serviceProvider/parts/service-provider-card-skeleton')
+    @include('serviceProvider/parts/service-provider-card-skeleton')
+    @include('serviceProvider/parts/service-provider-card-skeleton')
+    @include('serviceProvider/parts/service-provider-card-skeleton')
+  </section>
   <form class="form" action="{{route('serviceProvider.find')}}" method="GET" id="js-search" >
     @!component('search/parts/field', {
       title: 'Jobs',

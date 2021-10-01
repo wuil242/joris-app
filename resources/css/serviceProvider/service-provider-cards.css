@@ -1,0 +1,24 @@
+.service-provider-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .5em;
+  /* padding: 5px; */
+}
+
+@media only screen and (min-width: 475px) {
+  .service-provider-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .service-provider-cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 950px) {
+  .service-provider-cards {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}

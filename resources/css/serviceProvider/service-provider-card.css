@@ -1,0 +1,45 @@
+.service-provider-card {
+  background-color: white;
+  width: 220px;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+  place-self: center;
+}
+
+
+.service-provider-card-header {
+  position: relative;
+  /* background-color: teal; */
+  height: 150px;
+}
+
+.service-provider-card-image {
+  /* background: #DDD; */
+  width: 100%;
+  height: 100%;
+}
+
+
+.service-provider-card-job {
+  position: absolute;
+  font-size: .9em;
+  top: 5px;
+  left: 5px;
+  padding: .25em .5em;
+  background-color: tomato;
+  text-align: center;
+  color: lightgoldenrodyellow;
+}
+
+.service-provider-card-actions{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding: .5em;
+  gap: .5em;
+  font-size: 1.2rem;
+}
