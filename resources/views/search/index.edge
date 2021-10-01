@@ -18,9 +18,10 @@
     @include('service_provider/parts/service-provider-card')
     @include('service_provider/parts/service-provider-card')
     @include('service_provider/parts/service-provider-card')
-    @include('service_provider/parts/service-provider-card')
-    @include('service_provider/parts/service-provider-card')
-    @include('service_provider/parts/service-provider-card')
+    @include('service_provider/parts/service-provider-card-skeleton')
+    @include('service_provider/parts/service-provider-card-skeleton')
+    @include('service_provider/parts/service-provider-card-skeleton')
+    @include('service_provider/parts/service-provider-card-skeleton')
   </section>
   <form class="form" action="{{route('serviceProvider.find')}}" method="GET" id="js-search" >
     @!component('search/parts/field', {

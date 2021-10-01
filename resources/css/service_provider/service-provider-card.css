@@ -1,5 +1,6 @@
 .service-provider-card {
-  border-radius: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   width: 220px;
   overflow: hidden;
   cursor: pointer;
