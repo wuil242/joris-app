@@ -12,10 +12,14 @@ import {
 import Adress from './Adress'
 import Job from './Job'
 import ServiceProviderRealisation from './ServiceProviderRealisation'
+import {attachment, AttachmentContract} from '@ioc:Adonis/Addons/AttachmentLite'
 
 export default class ServiceProvider extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+
+  @attachment()
+  public profilPhoto?:AttachmentContract|null
 
   @column()
   public lastname: string
