@@ -1,14 +1,14 @@
 {
-  "assets/app.css": "http://localhost:8080/assets/app.css",
-  "assets/app.js": "http://localhost:8080/assets/app.js",
-  "assets/home.css": "http://localhost:8080/assets/home.css",
-  "assets/home.js": "http://localhost:8080/assets/home.js",
-  "assets/search.css": "http://localhost:8080/assets/search.css",
-  "assets/search.js": "http://localhost:8080/assets/search.js",
-  "assets/fonts/Montserrat-Bold.ttf": "http://localhost:8080/assets/fonts/Montserrat-Bold.079ca05d.ttf",
-  "assets/fonts/Montserrat-SemiBold.ttf": "http://localhost:8080/assets/fonts/Montserrat-SemiBold.fa8441f3.ttf",
-  "assets/fonts/fa-solid-900.ttf": "http://localhost:8080/assets/fonts/fa-solid-900.be9ee23c.ttf",
-  "assets/fonts/fa-brands-400.ttf": "http://localhost:8080/assets/fonts/fa-brands-400.527940b1.ttf",
-  "assets/images/header_bg.jpeg": "http://localhost:8080/assets/images/header_bg.01ac1981.jpeg",
-  "assets/fonts/fa-regular-400.ttf": "http://localhost:8080/assets/fonts/fa-regular-400.491974d1.ttf"
+  "assets/app.css": "http://192.168.43.6:8080/assets/app.css",
+  "assets/app.js": "http://192.168.43.6:8080/assets/app.js",
+  "assets/home.css": "http://192.168.43.6:8080/assets/home.css",
+  "assets/home.js": "http://192.168.43.6:8080/assets/home.js",
+  "assets/search.css": "http://192.168.43.6:8080/assets/search.css",
+  "assets/search.js": "http://192.168.43.6:8080/assets/search.js",
+  "assets/fonts/Montserrat-Bold.ttf": "http://192.168.43.6:8080/assets/fonts/Montserrat-Bold.079ca05d.ttf",
+  "assets/fonts/Montserrat-SemiBold.ttf": "http://192.168.43.6:8080/assets/fonts/Montserrat-SemiBold.fa8441f3.ttf",
+  "assets/fonts/fa-solid-900.ttf": "http://192.168.43.6:8080/assets/fonts/fa-solid-900.be9ee23c.ttf",
+  "assets/fonts/fa-brands-400.ttf": "http://192.168.43.6:8080/assets/fonts/fa-brands-400.527940b1.ttf",
+  "assets/images/header_bg.jpeg": "http://192.168.43.6:8080/assets/images/header_bg.01ac1981.jpeg",
+  "assets/fonts/fa-regular-400.ttf": "http://192.168.43.6:8080/assets/fonts/fa-regular-400.491974d1.ttf"
 }

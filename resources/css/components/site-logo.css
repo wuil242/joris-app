@@ -1,10 +1,9 @@
 .site-logo {
-  width: 3rem;
+  width: auto;
   height: 3rem;
   background: #ccc;
-  border-radius: 50%;
-  
-  object-fit: cover;
+  border-radius: 2px;
+  object-fit: contain;
 }
 
 /* Events */
