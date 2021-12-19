@@ -11,6 +11,18 @@
 @section('content')
   
   {{inspect(qs)}}
+  <div>
+    <h1>Results</h1>
+    <hr>
+    <div id="results">
+      <pre>
+        {{inspect(data)}}
+      </pre>
+      {{--  @if(serviceProviders)
+        @!component('search/parts/card', {serviceProviders})        
+      @endif  --}}
+    </div>
+  </div>
 
   <h1>Trouver Un Prestaire</h1>
   @include('search/parts/search-fields')
@@ -29,9 +41,12 @@
     <h1>Results</h1>
     <hr>
     <div id="results">
-      @if(serviceProviders)
+      <pre>
+        {{inspect(data)}}
+      </pre>
+      {{--  @if(serviceProviders)
         @!component('search/parts/card', {serviceProviders})        
-      @endif
+      @endif  --}}
     </div>
   </div>
 

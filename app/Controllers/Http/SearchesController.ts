@@ -1,5 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { RelationQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
+import { ModelPaginatorContract, ModelQueryBuilderContract, RelationQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
 import City from 'App/Models/City'
 import Job from 'App/Models/Job'
 import Arrondissement from 'App/Models/Arrondissement'
@@ -27,71 +27,45 @@ export default class SearchesController {
     
     const jobs = await Job.query().orderBy('name', 'asc')
     let cities = await City.query().orderBy('name', 'asc')
-    let serviceProviders: ServiceProvider[] = []
     let arrondissements:Arrondissement[] = []
     let quaters:Quater[] = []
+    let serviceProviders: ModelPaginatorContract<ServiceProvider>|null = null 
 
-    if(cityId > 0) {
-      try {
-        const relation = (await City.findOrFail(cityId)).related('arrondissents')
-        arrondissements = await relation.query().orderBy('name', 'asc')
+    const city = await City.find(cityId) || {id: 0}
 
-        if(arrondissementId > 0) {
-          const relation = (await Arrondissement.findOrFail(arrondissementId)).related('quaters')
-          quaters = await relation.query().orderBy('name', 'asc')
-        }
+    const arr = await Arrondissement.query().where('city_id', city.id)
+      .where('id', arrondissementId).first()|| {id: 0}
 
-      } catch (error) {
-        arrondissements  = []
-        quaters = []
+    const quater = await Quater.query().where('city_id', city.id)
+      .where('arrondissement_id', arr.id).where('id', quaterId).first()
 
-        cityId = 0
-        arrondissementId = 0
-        quaterId = 0
-      }
+    if(city) {
+      arrondissements = await Arrondissement.query().where('city_id', city.id)
     }
 
-    try {
-      const job = await Job.findOrFail(jobId)
-      serviceProviders = await job.related('serviceProviders').query().preload('adress', this.adressQuery)
-        .preload('jobs').orderBy(this.ORDER, 'desc').paginate(page, this.LIMIT)
-
-    } catch (error) {
-      serviceProviders = await ServiceProvider.query().preload('adress', this.adressQuery)
-        .preload('jobs').orderBy(this.ORDER, 'desc').paginate(page, this.LIMIT)
+    if(arr) {
+      const id = city ? city.id : 0 
+      quaters = await Quater.query().where('city_id', id).where('arrondissement_id', arr.id)
     }
 
-    if(cityId > 0) {
-     serviceProviders = await this.filterServicePrividersData('cityId', cityId, serviceProviders)
-     if(arrondissementId > 0) {
-       serviceProviders = await this.filterServicePrividersData('arrondissementId', arrondissementId, serviceProviders)
-       if(quaterId > 0) {
-         serviceProviders = await this.filterServicePrividersData('quaterId', quaterId, serviceProviders)
-       }
-     }
+    let query:ModelQueryBuilderContract<typeof ServiceProvider>|null = null
+
+    const job = await Job.find(jobId)
+
+    if(job) {
+      query = ServiceProvider.query().where('jobs_id', job.id)
     }
+    else {
+      query = ServiceProvider.query()
+    }
+
+
+
+    const data = await query.paginate(page, this.LIMIT)
 
     return view.render('search/index', {
-      jobs, 
-      cities, 
-      arrondissements,
-      quaters,
-      qs, 
-      serviceProviders
+      qs, jobs, cities, arrondissements, quaters
     })
-
   }
 
-  private adressQuery(query:RelationQueryBuilderContract<typeof Adress, any>):void {
-    query.preload('city').preload('arrondissement').preload('quater')
-  }
-
-  private async filterServicePrividersData(
-    modelName: 'cityId' | 'arrondissementId' | 'quaterId',
-    modelId: number,
-    serviceProvidersData: ServiceProvider[]
-  ): Promise<ServiceProvider[]> {
-    const data =  serviceProvidersData.filter(sp => sp.adress[modelName] === modelId)
-    return Promise.resolve(data)
-  }
 }
