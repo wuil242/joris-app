@@ -17,6 +17,7 @@ function handleFormChange(e) {
   e.preventDefault()
   const id = e.target.id 
   if( id === 'job' || id === 'quater' ) {
+    LAST_QUERY[id] = e.target.value
     console.log('find sp')
     return
   }
