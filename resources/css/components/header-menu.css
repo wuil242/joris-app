@@ -144,6 +144,7 @@
 
 /* Responsive */
 @media only screen and (min-width:650px) {
+  
   .header-menu-hidden {
     width: 50%;
   }
@@ -162,6 +163,10 @@
 }
 
 @media screen and (min-width: 1300px) {
+  .header-menu-items {
+    font-size: 1rem;
+  }
+  
   .header-menu {
     display: none;
   }

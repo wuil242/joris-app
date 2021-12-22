@@ -1,9 +1,9 @@
 <label for="job" class="search-field">
   <h2>{{title}}</h2>
   <select name="{{id}}" id="{{id}}" value="Director">
-    <option value="0" {{qs[id.toString()] === '0' ? 'selected' : ''}}>Tout</option>
+    <option value="0" selected>Tout</option>
     @each(item in items)
-      <option value="{{item.id}}" {{qs ? (qs[id.toString()] === item.id.toString() ? 'selected' : '') : ''}}>{{item.name}}</option>
+      <option value="{{item.id}}">{{item.name}}</option>
     @endeach
   </select>
 </label>

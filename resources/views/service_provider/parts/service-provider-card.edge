@@ -1,7 +1,7 @@
 <article class="service-provider-card">
   <header class="service-provider-card-header">
-    <img src="{{asset('assets/images/header_bg.jpeg')}}" class="service-provider-card-image" />
-    <span class="service-provider-card-job">Plombier</span>
+    <img src="{{ sp?.photo ? `http:\/\/0.0.0.0:8000\/assets\/${sp.photo}` : asset('assets/images/header_bg.jpeg')}}" class="service-provider-card-image" />
+    <span class="service-provider-card-job">{{sp.firstname}}</span>
     <div class="service-provider-card-actions">
       <a href="#" class="service-provider-card-actions-icon" title="ajout au pagnier">
         <i class="fa fa-cart-plus"></i>

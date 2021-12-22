@@ -2,26 +2,26 @@
   "entrypoints": {
     "app": {
       "css": [
-        "http://192.168.43.6:8080/assets/app.css"
+        "http://localhost:8080/assets/app.css"
       ],
       "js": [
-        "http://192.168.43.6:8080/assets/app.js"
+        "http://localhost:8080/assets/app.js"
       ]
     },
     "home": {
       "css": [
-        "http://192.168.43.6:8080/assets/home.css"
+        "http://localhost:8080/assets/home.css"
       ],
       "js": [
-        "http://192.168.43.6:8080/assets/home.js"
+        "http://localhost:8080/assets/home.js"
       ]
     },
     "search": {
       "css": [
-        "http://192.168.43.6:8080/assets/search.css"
+        "http://localhost:8080/assets/search.css"
       ],
       "js": [
-        "http://192.168.43.6:8080/assets/search.js"
+        "http://localhost:8080/assets/search.js"
       ]
     }
   }
