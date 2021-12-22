@@ -29,9 +29,9 @@ Route.group(() => {
   // Route.get('/recherche/q', 'SearchesController.search').as('serviceProvider.search')
 
   Route.group(() => {
-    Route.get('/city/:name/arrs', 'ApisController.getAllArrs')
-    Route.get('/arrondissement/:name/quaters', 'ApisController.getAllQuaters')
+    Route.get('/form', 'SearchesController.form')
   }).prefix('api')
+
 }).middleware('silentAuth')
 
 Route.group(() => {
