@@ -2,12 +2,22 @@ import '../../css/search/all.css'
 import FetchApi from '../class/FetchApi'
 
 const $form = document.forms[0]
+const $service_provider_card_template = document.querySelector('#service-provider-card')
+const $service_provider_skeleton_template = document.querySelector('#service-provider-card-skeleton') 
+const $service_provider_results = document.querySelector('#services-provider-results')
+
 const fields = Array.from($form.querySelectorAll('.search-field > select'))
 const LAST_QUERY = {}
-
-console.log(fields)
+const ASSETS_URL = 'http://localhost:8000/assets/'
 
 $form.addEventListener('change', handleFormChange)
+
+for (const field of fields) {
+  LAST_QUERY[field.id] = field.value
+}
+
+console.log(LAST_QUERY)
+getServiceProviders(LAST_QUERY)
 
 /**
  * 
@@ -16,32 +26,35 @@ $form.addEventListener('change', handleFormChange)
 function handleFormChange(e) {
   e.preventDefault()
   const id = e.target.id 
+  LAST_QUERY[id] = e.target.value
   if( id === 'job' || id === 'quater' ) {
-    LAST_QUERY[id] = e.target.value
     console.log('find sp')
+    getServiceProviders(LAST_QUERY)
     return
   }
-  const query = getFieldValue(fields, e.target)
-  console.log(query)
-  FetchApi.getForm(query).then(data => {
+
+  FetchApi.getForm(LAST_QUERY).then(data => {
     $form.innerHTML = data
   })
+  .then(() => getServiceProviders(LAST_QUERY))
+
 }
 
-/**
- * 
- * @returns {{
-   *  job:number, 
- *  arrondissement:number, 
- *  quater:number
- * }}
- */
-function getFieldValue($fields, $curentFiled) {
-  for (const field of $fields) {
-    if(field.id === $curentFiled.id) {
-      LAST_QUERY[$curentFiled.id] = $curentFiled.value
-    }
-  }
-  
-  return LAST_QUERY
+function getServiceProviders(query) {
+  console.log(query)
+  FetchApi.getServiceProviders(query).then(data => addServiceProviders(data))
+}
+
+function addServiceProviders(data) {
+  const content = $service_provider_card_template.content.firstElementChild
+  let res = ''
+  data.forEach(d => {
+    const clone = content.cloneNode(true)
+    const photo_url = d.photo ? ASSETS_URL + d.photo : '/favicon.jpg'
+    clone.querySelector('#photo').setAttribute('src', photo_url) 
+    clone.querySelector('#job').innerHTML = d.lastname
+    res += clone.innerHTML
+  })
+
+  $service_provider_results.innerHTML = res
 }

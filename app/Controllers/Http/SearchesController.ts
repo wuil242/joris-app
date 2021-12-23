@@ -46,8 +46,6 @@ export default class SearchesController {
     const quaters = await Database.from('quaters').where('city_id', cityId)
       .where('arrondissement_id', arrondissementId)
 
-    console.log(arrondissements)
-
     return view.render('search/parts/search-fields-selection', {
       jobs, cities, arrondissements, quaters, qs
     })

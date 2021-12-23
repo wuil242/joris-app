@@ -1,3 +1,12 @@
+const QUERY = new URLSearchParams()
+
+
+QUERY.append('fields', `
+  lastname,
+  photo
+`)
+
+
 export default class FetchApi {
   static URL = 'http://localhost:8000'
 
@@ -25,10 +34,25 @@ export default class FetchApi {
     })
   }
 
-  static getServiceProviders() {
+  static getServiceProviders(filters = {}) {
+    const filterQuery = {
+      filter: '',
+      value: ''
+    }
+    
+    if(filters.city && filters.city > 0) {
+      filterQuery.filter = `filter[address_id][city_id][id][_eq]`
+      filterQuery.value = filters.city
+      
+      QUERY.set(filterQuery.filter, '' + filterQuery.value)
+    }
+
+    const query = '?' + QUERY.toString()
+    console.log('DFF', query)
     return new Promise((res, rej) => {
-      fetch(FetchApi.itemsUrl('service_providers')).then(r => {
-        r.json().then(data => res(data))
+      fetch(FetchApi.itemsUrl('service_providers' + query)).then(r => {
+        r.json().then(sp => res(sp.data))
+        QUERY.delete(filterQuery.filter)
       })
     })
   }
