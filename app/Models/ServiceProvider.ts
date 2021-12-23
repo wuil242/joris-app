@@ -11,7 +11,7 @@ import {
   ManyToMany,
   manyToMany,
 } from '@ioc:Adonis/Lucid/Orm'
-import Adress from './Adress'
+import Address from './Address'
 import Job from './Job'
 import ServiceProviderRealisation from './ServiceProviderRealisation'
 import {attachment, AttachmentContract} from '@ioc:Adonis/Addons/AttachmentLite'
@@ -51,7 +51,7 @@ export default class ServiceProvider extends BaseModel {
   public gender: string
 
   @column()
-  public address_id: number
+  public addressId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -59,11 +59,10 @@ export default class ServiceProvider extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => Adress, {
-    foreignKey: 'address_id',
+  @belongsTo(() => Address, {
     onQuery: query => query.preload('city').preload('arrondissement').preload('quater'),
   })
-  public address: BelongsTo<typeof Adress>
+  public address: BelongsTo<typeof Address>
 
   @manyToMany(() => Job, {
     pivotTable: 'service_providers_jobs',

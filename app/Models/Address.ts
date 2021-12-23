@@ -5,7 +5,7 @@ import Arrondissement from './Arrondissement'
 import ServiceProvider from './ServiceProvider'
 import Quater from './Quater'
 
-export default class Adress extends BaseModel {
+export default class Address extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 

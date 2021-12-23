@@ -7,11 +7,11 @@ import ServiceProvider from 'App/Models/ServiceProvider'
 
 export default class ApisController {
   public async clientDevisIndex({ params, view }: HttpContextContract) {
-    const serviceProviders = await ServiceProvider.query().where('id', params.id)
+    const serviceProvider = await ServiceProvider.query().where('id', params.id)
       .preload('address').preload('jobs').first()
 
 
-    return await view.render('devis/client/index', {serviceProviders})
+    return await view.render('devis/client/index', {serviceProvider})
   }
 
   public async entrepriseDevisIndex({ params, view }: HttpContextContract) {

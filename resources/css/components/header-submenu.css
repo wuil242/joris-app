@@ -141,7 +141,7 @@
     z-index: var(--layer-top);
     width: 30vw;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 
   .header-submenu-item::after {
