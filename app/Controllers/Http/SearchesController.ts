@@ -27,7 +27,7 @@ export default class SearchesController {
     //   quater: 0
     // }
 
-    return view.render('search/index', {
+    return await view.render('search/index', {
       jobs, cities, arrondissements: [], quaters: [], qs: {}
     })
   }
@@ -46,7 +46,7 @@ export default class SearchesController {
     const quaters = await Database.from('quaters').where('city_id', cityId)
       .where('arrondissement_id', arrondissementId)
 
-    return view.render('search/parts/search-fields-selection', {
+    return await view.render('search/parts/search-fields-selection', {
       jobs, cities, arrondissements, quaters, qs
     })
   }

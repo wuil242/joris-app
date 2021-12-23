@@ -11,12 +11,12 @@ export default class ApisController {
       .preload('address').preload('jobs').first()
 
 
-    return view.render('devis/client/index', {serviceProviders})
+    return await view.render('devis/client/index', {serviceProviders})
   }
 
   public async entrepriseDevisIndex({ params, view }: HttpContextContract) {
     const jobs = await Job.all()
 
-    return view.render('devis/entreprise/index', {jobs})
+    return await view.render('devis/entreprise/index', {jobs})
   }
 }

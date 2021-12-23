@@ -28,6 +28,13 @@ Route.group(() => {
   Route.get('/devis/client/:id', 'DevisController.clientDevisIndex').as('devis.client')
   Route.get('/devis/entreprise', 'DevisController.entrepriseDevisIndex').as('devis.entreprise')
 
+  Route.get('/prestataire/enrolement', 'ServiceProvidersController.enrole').as('serviceProvider.enrole')
+  Route.get('/prestataire/plotique-de-confidentialite', 'ServiceProvidersController.policy').as('serviceProvider.policy')
+
+  Route.get('/contact-us', 'InfosController.contact').as('infos.contact-us')
+  Route.get('/a-propos', 'InfosController.about').as('infos.about')
+  Route.get('/politique-de-confidentialite', 'InfosController.policy').as('infos.policy')
+
   Route.group(() => {
     Route.get('/form', 'SearchesController.form')
   }).prefix('api')

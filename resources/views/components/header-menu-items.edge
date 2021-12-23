@@ -8,7 +8,7 @@
   </li>
 
   <li class="header-menu-item {{ request.url() === '/entreprise' ? 'active' : '' }}">
-    <a href="/entreprise">Entreprise</a>
+    <a href="{{route('devis.entreprise')}}">Entreprise</a>
   </li>
 
   <nav class="header-submenu">
@@ -16,13 +16,10 @@
     <label class="header-submenu-label" for="submenu-provider-{{prefix}}">Espace Prestataire</label>
     <ul class="header-submenu-items">
       <li class="header-submenu-item">
-        <a href="">S'enrôler</a>
+        <a href="{{route('serviceProvider.enrole')}}">S'enrôler</a>
       </li>
       <li class="header-submenu-item">
-        <a href="">Mes statistique</a>
-      </li>
-      <li class="header-submenu-item">
-        <a href="">Politique</a>
+        <a href="{{route('serviceProvider.policy')}}">Politiques de confidentialitées</a>
       </li>
     </ul>
   </nav>
@@ -32,13 +29,13 @@
     <label class="header-submenu-label" for="submenu-infos-{{prefix}}">Infos</label>
     <ul class="header-submenu-items">
       <li class="header-submenu-item">
-        <a href="">Nous-Contcter</a>
+        <a href="{{route('infos.contact-us')}}">Nous-Contcter</a>
       </li>
       <li class="header-submenu-item">
-        <a href="">A-props</a>
+        <a href="{{route('infos.about')}}">A-props</a>
       </li>
       <li class="header-submenu-item">
-        <a href="">Politique des doneés</a>
+        <a href="{{route('infos.policy')}}">Politiques des donées</a>
       </li>
     </ul>
   </nav>

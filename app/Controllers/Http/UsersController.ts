@@ -18,7 +18,7 @@ export default class UsersController {
     //TODO: ajouter la confirmation par mail
     const user = await User.create(payload)
 
-    return view.render('user/confirmation', { user })
+    return await view.render('user/confirmation', { user })
   }
 
   public async login({ request, auth, response, session }: HttpContextContract) {
