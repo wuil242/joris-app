@@ -25,8 +25,8 @@ Route.group(() => {
 
   Route.get('/recherche', 'SearchesController.index').as('serviceProvider.find')
 
-  // Route.get('/recherche/q', 'SearchesController.getSearch').as('serviceProvider.search')
-  // Route.get('/recherche/q', 'SearchesController.search').as('serviceProvider.search')
+  Route.get('/devis/client/:id', 'DevisController.clientDevisIndex').as('devis.client')
+  Route.get('/devis/entreprise', 'DevisController.entrepriseDevisIndex').as('devis.entreprise')
 
   Route.group(() => {
     Route.get('/form', 'SearchesController.form')

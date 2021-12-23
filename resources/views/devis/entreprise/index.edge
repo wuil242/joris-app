@@ -1,0 +1,13 @@
+<div>
+  Entreprise devis
+</div>
+
+<form action="/test">
+
+  @each(job in jobs)
+    <label for="{{job.name}}-{{job.id}}">{{job.name}}</label>
+    <input type="checkbox" name="job" id="{{job.name}}-{{job.id}}" value="{{job.id}}">
+    <br>
+  @endeach
+  <button type="submit">send</button>
+</form>

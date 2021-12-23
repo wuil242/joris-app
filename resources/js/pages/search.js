@@ -53,6 +53,7 @@ function addServiceProviders(data) {
     const photo_url = d.photo ? ASSETS_URL + d.photo : '/favicon.jpg'
     clone.querySelector('#photo').setAttribute('src', photo_url) 
     clone.querySelector('#job').innerHTML = d.lastname
+    clone.querySelector('#devis').setAttribute('href', '/devis/client/'+ d.id)
     res += clone.innerHTML
   })
 

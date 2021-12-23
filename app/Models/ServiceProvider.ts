@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
 import {
   BaseModel,
+  BelongsTo,
+  belongsTo,
   column,
   HasMany,
   hasMany,
@@ -17,9 +19,6 @@ import {attachment, AttachmentContract} from '@ioc:Adonis/Addons/AttachmentLite'
 export default class ServiceProvider extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-
-  @attachment()
-  public profilPhoto?:AttachmentContract|null
 
   @column()
   public lastname: string
@@ -49,10 +48,10 @@ export default class ServiceProvider extends BaseModel {
   public accrochSentence?: string
 
   @column()
-  public introduceVideo?: string
+  public gender: string
 
   @column()
-  public sexe: SEXE
+  public address_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -60,11 +59,16 @@ export default class ServiceProvider extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasOne(() => Adress)
-  public adress: HasOne<typeof Adress>
+  @belongsTo(() => Adress, {
+    foreignKey: 'address_id',
+    onQuery: query => query.preload('city').preload('arrondissement').preload('quater'),
+  })
+  public address: BelongsTo<typeof Adress>
 
   @manyToMany(() => Job, {
-    pivotTable: 'service_provider_jobs',
+    pivotTable: 'service_providers_jobs',
+    pivotRelatedForeignKey: 'jobs_id',
+    pivotForeignKey: 'service_providers_id'
   })
   public jobs: ManyToMany<typeof Job>
 
