@@ -1,7 +1,7 @@
 .service-provider-card {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  width: 220px;
+  width: 264px;
   overflow: hidden;
   cursor: pointer;
   place-self: center;
@@ -18,7 +18,6 @@
   /* background: #DDD; */
   width: 100%;
   height: auto;
-  /* object-fit: cover; */
 }
 
 

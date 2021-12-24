@@ -2,5 +2,5 @@
   @!component('service_provider/parts/service-provider-card', {sp})
   @endeach
 @if(serviceProviders.hasMorePages)
-  <button class="service-provider-more" type="submit" id="more-button" data-page="{{serviceProviders.currentPage + 1}}">More</button>
+  <button class="button service-provider-more" type="submit" id="more-button" data-page="{{serviceProviders.currentPage + 1}}">More</button>
 @endif

@@ -1,14 +1,17 @@
 .service-provider-cards {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: 1fr;
   gap: .5em;
+  grid-auto-columns: max-content;
+
   /* padding: 5px; */
 }
 
 @media only screen and (min-width: 475px) {
   .service-provider-cards {
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr;
   }
 }
 
