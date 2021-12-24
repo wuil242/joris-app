@@ -16,11 +16,8 @@
   <h1>Results</h1>
 </div>
 
-<section class="service-provider-cards">
-  @each(sp in serviceProviders)
-    @!component('service_provider/parts/service-provider-card', {sp})
-  @endeach
-</section>
+@!component('search/service-providers', {serviceProviders})
+
 <template id="service-provider-card-skeleton">
   @include('service_provider/parts/service-provider-card-skeleton')
 </template>

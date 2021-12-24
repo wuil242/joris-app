@@ -8,6 +8,9 @@ import Database from '@ioc:Adonis/Lucid/Database'
 import Address from 'App/Models/Address'
 import { HasMany, HasManyQueryBuilderContract, RelationQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
 
+//TODO: gererer le fitrage par nobre de sp a afficher (limit)
+//TODO: slider et un champ de type nbre pour selectionner du nombre de sp a afficher
+
 interface FilterLoactionOptions {
   cityId: number,
   arrondissementId: number,
@@ -15,7 +18,11 @@ interface FilterLoactionOptions {
 }
 
 export default class SearchesController {
-  private LIMIT = 10
+  private LIMIT = {
+    MAX: 50,
+    MIN: 1
+  }
+
   private ORDER = 'score'
 
   public async index({ request, view, session }: HttpContextContract) {
@@ -25,6 +32,10 @@ export default class SearchesController {
     const cityId = Number.parseInt(qs.city, 10) || 0
     const arrondissementId = Number.parseInt(qs.arrondissement, 10) || 0
     const quaterId = Number.parseInt(qs.quater, 10) || 0
+    const page =  Number.parseInt(qs.page, 10) || 1
+    const limit =  Number.parseInt(qs.limit, 10)
+    const perPage = this.limitation(limit) 
+
     const filterLocation:FilterLoactionOptions = {cityId, arrondissementId, quaterId}
 
     const jobs = await Job.query().orderBy('name', 'asc')
@@ -51,15 +62,35 @@ export default class SearchesController {
     if (job) {
       serviceProviders = await job.related('serviceProviders').query()
         .preload('address', query => this.filterAddressQuery(query, filterLocation))
-        .orderBy(this.ORDER).limit(this.LIMIT)
+        .preload('jobs').orderBy(this.ORDER).paginate(page, perPage)
     }
     else {
       serviceProviders = await ServiceProvider.query()
         .preload('address', query => this.filterAddressQuery(query, filterLocation))
-        .orderBy(this.ORDER).paginate(1, this.LIMIT)
+        .preload('jobs').orderBy(this.ORDER).paginate(page, perPage)
     }
 
     serviceProviders = await this.filterServiceProvider(serviceProviders, filterLocation)
+
+    if(request.ajax()) {
+
+      const filter =  await view.render('search/parts/search-fields', {
+        qs, 
+        LIMIT: {...this.LIMIT, VALUE: perPage}
+      })
+
+      const data = await view.render('search/service-providers', {
+        serviceProviders
+      })
+
+      return {
+        html: {
+          filter,
+          serviceProviders: data,
+        },
+        serviceProviders
+      }
+    }
 
     return view.render('search/index', {
       jobs,
@@ -67,10 +98,52 @@ export default class SearchesController {
       arrondissements,
       quaters,
       qs,
+      LIMIT: {...this.LIMIT, VALUE: perPage},
       serviceProviders
     })
 
   }
+
+
+  public async getPerPage({ request, view }: HttpContextContract) {
+    const qs = request.qs()
+    const jobId = Number.parseInt(qs.job, 10) || 0
+    const cityId = Number.parseInt(qs.city, 10) || 0
+    const arrondissementId = Number.parseInt(qs.arrondissement, 10) || 0
+    const quaterId = Number.parseInt(qs.quater, 10) || 0
+    const filterLocation:FilterLoactionOptions = {cityId, arrondissementId, quaterId}
+    const page =  Number.parseInt(qs.page, 10) || 2
+    const limit =  Number.parseInt(qs.limit, 10)
+    const perPage = this.limitation(limit)
+
+    let serviceProviders: ServiceProvider[] = []
+    let job: Job | null = null
+
+    if (jobId > 0) {
+      job = await Job.find(jobId)
+    }
+
+    if (job) {
+      serviceProviders = await job.related('serviceProviders').query()
+        .preload('address', query => this.filterAddressQuery(query, filterLocation))
+        .preload('jobs').orderBy(this.ORDER).paginate(page, perPage)
+    }
+    else {
+      serviceProviders = await ServiceProvider.query()
+        .preload('address', query => this.filterAddressQuery(query, filterLocation))
+        .preload('jobs').orderBy(this.ORDER).paginate(page, perPage)                                                                                                                                                                                                    
+    }
+
+    serviceProviders = await this.filterServiceProvider(serviceProviders, filterLocation)
+
+    return view.render('search/service-providers', {
+      serviceProviders
+    })
+  }
+
+  private limitation(limit: number): number {
+    return limit || (limit < this.LIMIT.MAX && limit > this.LIMIT.MIN) ? limit : this.LIMIT.MIN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+  } 
 
   private async filterServiceProvider
   (serviceProviders:ServiceProvider[], 
@@ -115,25 +188,6 @@ export default class SearchesController {
     if (quaterId > 0) {
       query.where('quater_id', quaterId)
     }
-  }
-
-  public async form({ request, view }: HttpContextContract) {
-    const jobs = await Job.query().orderBy('name', 'asc')
-    let cities = await City.query().orderBy('name', 'asc')
-
-    const qs = request.qs()
-    console.log(qs)
-    const cityId = Number.parseInt(qs.city, 10) || 0
-    const arrondissementId = Number.parseInt(qs.arrondissement, 10) || 0
-
-    const arrondissements = await Database.from('arrondissements').where('city_id', cityId)
-
-    const quaters = await Database.from('quaters').where('city_id', cityId)
-      .where('arrondissement_id', arrondissementId)
-
-    return await view.render('search/parts/search-fields-selection', {
-      jobs, cities, arrondissements, quaters, qs
-    })
   }
 
 }
