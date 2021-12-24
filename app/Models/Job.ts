@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasManyThrough, hasManyThrough, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import ServiceProvider from './ServiceProvider'
+import Address from './Address'
 
 export default class Job extends BaseModel {
   @column({ isPrimary: true })
@@ -28,4 +29,5 @@ export default class Job extends BaseModel {
     pivotForeignKey: 'jobs_id'
   })
   public serviceProviders: ManyToMany<typeof ServiceProvider>
+
 }

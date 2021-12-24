@@ -35,10 +35,6 @@ Route.group(() => {
   Route.get('/a-propos', 'InfosController.about').as('infos.about')
   Route.get('/politique-de-confidentialite', 'InfosController.policy').as('infos.policy')
 
-  Route.group(() => {
-    Route.get('/service-providers', 'SearchesController.getPerPage')
-  }).prefix('api')
-
 }).middleware('silentAuth')
 
 Route.group(() => {

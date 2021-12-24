@@ -16,6 +16,7 @@ const ASSETS_URL = 'http://localhost:8000/assets/'
 
 $form.addEventListener('change', (e) => {
   const id = e.target.id
+  updateLimitValue({target: $limitInput})
   if(id === 'city') {
     fields.filter(field => field.id === 'arrondissement' || field.id === 'quater')
       .forEach(field => {
@@ -35,6 +36,7 @@ $form.addEventListener('change', (e) => {
   }
 })
 
+$range.addEventListener('pointerup', updateLimitValue)
 $range.addEventListener('pointerdown', e => {
   updateLimitValue(e)
   $range.addEventListener('pointermove', () => updateLimitValue(e))

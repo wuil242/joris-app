@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import City from './City'
 import Arrondissement from './Arrondissement'
 import ServiceProvider from './ServiceProvider'
@@ -16,9 +16,6 @@ export default class Address extends BaseModel {
   public street: string
 
   @column()
-  public serviceProviderId: number
-
-  @column()
   public cityId: number
 
   @column()
@@ -33,8 +30,8 @@ export default class Address extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => ServiceProvider)
-  public serviceProvider: BelongsTo<typeof ServiceProvider>
+  @hasOne(() => ServiceProvider)
+  public serviceProvider: HasOne<typeof ServiceProvider>
 
   @belongsTo(() => City)
   public city: BelongsTo<typeof City>
