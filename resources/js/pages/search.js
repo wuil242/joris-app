@@ -5,12 +5,20 @@ import { debounce } from '../helpers'
 const $form = document.forms[0]
 const $service_provider_card_template = document.querySelector('#service-provider-card')
 const $service_provider_skeleton_template = document.querySelector('#service-provider-card-skeleton') 
-const $service_provider_results = document.querySelector('#services-provider-results')
 const $range = document.querySelector('#limit-slider')
 const $limitInput = document.querySelector('#limit-input')
 const $limit = document.querySelector("#search-limit")
 
 const fields = Array.from($form.querySelectorAll('.search-field > select'))
+
+const $firstProviderCard = document.querySelector('.service-provider-card')
+
+if($firstProviderCard) {
+  window.scroll({
+    behavior: 'smooth',
+    top: $firstProviderCard.offsetTop
+  })
+}
 
 $form.addEventListener('change', (e) => {
   const id = e.target.id
@@ -33,9 +41,9 @@ $form.addEventListener('change', (e) => {
   else {
     $form.submit()
   }
-})
 
-$form.addEventListener('submit', startFormLoader)
+  startFormLoading()
+})
 
 $range.addEventListener('pointerup', updateLimitValue)
 $range.addEventListener('pointerdown', e => {
@@ -45,20 +53,23 @@ $range.addEventListener('pointerdown', e => {
   $range.addEventListener('pointerup', () => {
     $range.removeEventListener('pointermove', updateLimitValue)
     $form.submit()
+    startFormLoading()
   }, {once: true})
 })
 
 $limitInput.addEventListener('change', updateLimitSlider)
 $limitInput.addEventListener('change', debounce(function() {
   $form.submit()
+  startFormLoading()
 }, 300))
 
 $limitInput.addEventListener('keyup', updateLimitSlider)
 $limitInput.addEventListener('keyup', debounce(function() {
   $form.submit()
-}, 500))
+  startFormLoading()
+}, 800))
 
-
+// startFormLoader()
 more()
 
 function more() {
@@ -66,6 +77,7 @@ function more() {
   if(!$moreButton) return
 
   $moreButton.addEventListener('click', e => {
+    startFormLoading()
     e.preventDefault()
     const url = new URL(document.URL)
     url.searchParams.set('page', $moreButton.dataset.page)
@@ -81,6 +93,12 @@ function more() {
       $cards.replaceChild($sp, $moreButton)
       $cards.appendChild($more)
 
+      window.scroll({
+        behavior: 'smooth',
+        top: $sp.offsetTop
+      })
+      
+      stopFormLoading()
       more()
     })
   })
@@ -88,11 +106,30 @@ function more() {
 
 /**
  * 
- * @param {SubmitEvent} e 
  */
-function startFormLoader(e) {
-  $form.classList.add('loading')
+function startFormLoading() {
+  document.querySelectorAll('.search-fields')
+    .forEach($fields => {
+      $fields.classList.add('loading')
+      $fields.querySelectorAll('input').forEach(input => {
+        input.setAttribute('disabled', 'true')
+      })
+    })
 }
+
+/**
+ * 
+ */
+ function stopFormLoading() {
+  document.querySelectorAll('.search-fields')
+    .forEach($fields => {
+      $fields.classList.remove('loading')
+      $fields.querySelectorAll('input').forEach(input => {
+        input.removeAttribute('disabled')
+      })
+    })
+}
+
 
 /**
  * 
