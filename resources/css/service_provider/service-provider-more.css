@@ -1,0 +1,5 @@
+.service-provider-more {
+  color: rgb(184, 20, 20);
+  grid-column: span 4;
+  grid-row: 2;
+}

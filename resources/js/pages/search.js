@@ -8,7 +8,7 @@ const $service_provider_skeleton_template = document.querySelector('#service-pro
 const $service_provider_results = document.querySelector('#services-provider-results')
 const $range = document.querySelector('#limit-slider')
 const $limitInput = document.querySelector('#limit-input')
-const $limit = document.querySelector("#limit")
+const $limit = document.querySelector("#search-limit")
 
 const fields = Array.from($form.querySelectorAll('.search-field > select'))
 const LAST_QUERY = {}
@@ -56,6 +56,34 @@ $limitInput.addEventListener('keyup', updateLimitSlider)
 $limitInput.addEventListener('keyup', debounce(function() {
   $form.submit()
 }, 500))
+
+
+more()
+
+function more() {
+  const $moreButton = document.querySelector("#more-button")
+  if(!$moreButton) return
+
+  $moreButton.addEventListener('click', e => {
+    e.preventDefault()
+    const url = new URL(document.URL)
+    url.searchParams.set('page', $moreButton.dataset.page)
+    fetch(url.href, {
+      headers: {'X-Requested-With': 'XMLHttpRequest'}
+    }).then(r => r.json()).then(res => {
+      const $el = document.createElement('div')
+      $el.innerHTML = res.html
+      const $sp =  $el.firstElementChild
+      const $more =  $el.lastElementChild
+      const $cards = $moreButton.parentElement
+
+      $cards.replaceChild($sp, $moreButton)
+      $cards.appendChild($more)
+
+      more()
+    })
+  })
+}
 
 /**
  * 

@@ -1,5 +1,6 @@
-<section class="service-provider-cards">
-  @each(sp in serviceProviders)
-    @!component('service_provider/parts/service-provider-card', {sp})
+@each(sp in serviceProviders)
+  @!component('service_provider/parts/service-provider-card', {sp})
   @endeach
-</section>
+@if(serviceProviders.hasMorePages)
+  <button class="service-provider-more" type="submit" id="more-button" data-page="{{serviceProviders.currentPage + 1}}">More</button>
+@endif

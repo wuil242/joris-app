@@ -78,22 +78,11 @@ export default class SearchesController {
     }
 
     if(request.ajax()) {
-      const filter =  await view.render('search/parts/search-fields', {
-        qs, 
-        LIMIT: {...this.LIMIT, VALUE: perPage}
-      })
-
-      const data = await view.render('search/service-providers', {
+      const html = await view.render('search/service-providers', {
         serviceProviders
       })
 
-      return {
-        html: {
-          filter,
-          serviceProviders: data,
-        },
-        serviceProviders
-      }
+      return { html }
     }
 
     return view.render('search/index', {
