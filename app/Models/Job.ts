@@ -22,7 +22,10 @@ export default class Job extends BaseModel {
   public updatedAt: DateTime
 
   @manyToMany(() => ServiceProvider, {
-    pivotTable: 'service_provider_jobs',
+    
+    pivotTable: 'service_providers_jobs',
+    pivotRelatedForeignKey: 'service_providers_id',
+    pivotForeignKey: 'jobs_id'
   })
   public serviceProviders: ManyToMany<typeof ServiceProvider>
 }

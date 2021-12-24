@@ -10,15 +10,27 @@ const fields = Array.from($form.querySelectorAll('.search-field > select'))
 const LAST_QUERY = {}
 const ASSETS_URL = 'http://localhost:8000/assets/'
 
-$form.addEventListener('change', handleFormChange)
+$form.addEventListener('change', (e) => {
+  const id = e.target.id
+  if(id === 'city') {
+    fields.filter(field => field.id === 'arrondissement' || field.id === 'quater')
+      .forEach(field => {
+        field.value = 0
+        $form.submit(), 1000
+      })
+  }
+  else if(id === 'arrondissement') {
+    fields.filter(field => field.id === 'quater')
+      .forEach(field => {
+        field.value = 0
+        $form.submit(), 1000
+      })
+  }
+  else {
+    $form.submit()
+  }
 
-for (const field of fields) {
-  LAST_QUERY[field.id] = field.value
-}
-
-console.log(LAST_QUERY)
-getServiceProviders(LAST_QUERY)
-
+})
 /**
  * 
  * @param {SubmitEvent} e 
