@@ -3,7 +3,7 @@
   src: url("../../fonts/montserrat/Montserrat-SemiBold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: fallback;
+  font-display: auto;
 
 }
 
@@ -12,7 +12,7 @@
   src: url("../../fonts/montserrat/Montserrat-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
-  font-display: fallback;
+  font-display: auto;
 
 }
 

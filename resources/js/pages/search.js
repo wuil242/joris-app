@@ -14,10 +14,7 @@ const fields = Array.from($form.querySelectorAll('.search-field > select'))
 const $firstProviderCard = document.querySelector('.service-provider-card')
 
 if($firstProviderCard) {
-  window.scroll({
-    behavior: 'smooth',
-    top: $firstProviderCard.offsetTop
-  })
+  scrollToElement($firstProviderCard)
 }
 
 $form.addEventListener('change', (e) => {
@@ -93,14 +90,23 @@ function more() {
       $cards.replaceChild($sp, $moreButton)
       $cards.appendChild($more)
 
-      window.scroll({
-        behavior: 'smooth',
-        top: $sp.offsetTop
-      })
+     scrollToElement($sp)
       
       stopFormLoading()
       more()
     })
+  })
+}
+
+
+/**
+ * 
+ * @param {HTMLElement} $el 
+ */
+function scrollToElement($el) {
+  window.scroll({
+    behavior: 'smooth',
+    top: $el.offsetTop
   })
 }
 
@@ -110,8 +116,8 @@ function more() {
 function startFormLoading() {
   document.querySelectorAll('.search-fields')
     .forEach($fields => {
-      $fields.classList.add('loading')
-      $fields.querySelectorAll('input').forEach(input => {
+      // $fields.classList.add('loading')
+      $fields.querySelectorAll('input, select').forEach(input => {
         input.setAttribute('disabled', 'true')
       })
     })
@@ -124,7 +130,7 @@ function startFormLoading() {
   document.querySelectorAll('.search-fields')
     .forEach($fields => {
       $fields.classList.remove('loading')
-      $fields.querySelectorAll('input').forEach(input => {
+      $fields.querySelectorAll('input, select').forEach(input => {
         input.removeAttribute('disabled')
       })
     })

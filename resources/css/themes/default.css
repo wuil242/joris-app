@@ -13,12 +13,15 @@
 
   /* Colors */
   --primary-color: #8D5CF6;
-  --dark-background-color: #2e3192;
+  --dark-background-color: #26335D;
   /* #26335D; */
   --secondary-color: #E5E5E5;
   --danger-color: #E74040;
   --grey-color: #737373;
 
+  /* Logo Colors */
+  --logo-blue-color: #2e3192;
+  --logo-red-color: #ed1e24;
 
 
 

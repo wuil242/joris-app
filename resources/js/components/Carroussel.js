@@ -209,6 +209,8 @@ export default class Carroussel {
    * auto:boolean?,
    * time:number?
    * }?} options option pour le carroussel
+   * 
+   * @returns {Carroussel[]}
    */
   static define(options = {auto: false, time: 1}) {
     const carrouselList = []

@@ -9,19 +9,13 @@
 
 @section('content')
 
-<h1>Trouver Un Prestaire</h1>
-@include('search/parts/search-fields')
+<h1 class="search-title">Trouver Un Prestaire</h1>
 
-<div>
-  <h1>Results</h1>
+<div class="search-content">
+    @include('search/parts/search-fields')
+  <section class="service-provider-cards">
+    @!component('search/service-providers', {serviceProviders})
+  </section>
 </div>
-
-<section class="service-provider-cards">
-@!component('search/service-providers', {serviceProviders})
-</section>
-
-<template id="service-provider-card-skeleton">
-  @include('service_provider/parts/service-provider-card-skeleton')
-</template>
 
 @endsection
