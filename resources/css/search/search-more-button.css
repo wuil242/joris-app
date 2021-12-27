@@ -1,23 +1,23 @@
-.service-provider-more {
+.search-more-button {
   justify-self: center;
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
 @media only screen and (min-width: 475px) {
-  .service-provider-more  {
+  .search-more-button  {
     grid-column: span 2;
   }
 }
 
 @media only screen and (min-width: 750px) {
-  .service-provider-more  {
-    grid-column: span 3;
+  .search-more-button  {
+    grid-row: span 1;
   }
 }
 
 @media only screen and (min-width: 950px) {
-  .service-provider-more  {
-    grid-column: span 4;
+  .search-more-button  {
+    grid-column: span 3;
   }
 }

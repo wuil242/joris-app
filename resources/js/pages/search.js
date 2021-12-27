@@ -1,6 +1,7 @@
 import '../../css/search/all.css'
 import FetchApi from '../class/FetchApi'
 import { debounce } from '../helpers'
+import Sticky from '../components/Sticky'
 
 const $form = document.forms[0]
 const $service_provider_card_template = document.querySelector('#service-provider-card')
@@ -12,6 +13,11 @@ const $limit = document.querySelector("#search-limit")
 const fields = Array.from($form.querySelectorAll('.search-field > select'))
 
 const $firstProviderCard = document.querySelector('.service-provider-card')
+
+Sticky.define({
+  element: '.top-button',
+  scrollValue: 150,
+})
 
 if($firstProviderCard) {
   scrollToElement($firstProviderCard)

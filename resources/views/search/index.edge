@@ -9,13 +9,17 @@
 
 @section('content')
 
+@include('components/top-button')
+
 <h1 class="search-title">Trouver Un Prestaire</h1>
 
-<div class="search-content">
+<section class="search-content">
+  <aside class="search-content-sidebar">
     @include('search/parts/search-fields')
+  </aside>
   <section class="service-provider-cards">
     @!component('search/service-providers', {serviceProviders})
   </section>
-</div>
+</section>
 
 @endsection

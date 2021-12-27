@@ -1,4 +1,38 @@
 @import '../service_provider/service-provider-cards';
 @import '../service_provider/service-provider-card';
 @import '../service_provider/service-provider-card-skeleton';
-@import '../service_provider/service-provider-more';
+
+.search-title {
+  text-align: center;
+  margin: 10px 0 30px 0;
+  color: var(--text-color);
+  position: relative;
+}
+
+.search-title:after {
+  content: '';
+  background: var(--logo-red-color);
+  height: 3px;
+  position: absolute;
+  bottom: -3px;
+  left: 25%;
+  right: 25%;
+  text-align: center;
+
+}
+
+/* Responsive */
+
+@media screen and (min-width: 650px) {
+  .search-content {
+    position: relative;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+  }
+  .search-content-sidebar * {
+    position: sticky;
+    top: 0;
+    left: 0;
+  }
+}

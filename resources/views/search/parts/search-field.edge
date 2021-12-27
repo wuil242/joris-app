@@ -1,11 +1,11 @@
-<label for="{{id}}" class="search-field">
-  <h2>{{title}}</h2>
-  <select name="{{id}}" id="{{id}}">
+<div class="search-field">
+  <label for="{{id}}"  class="search-field-title">{{title}}</label>
+  <select class="search-field-select" name="{{id}}" id="{{id}}">
     @debugger
     
-    <option value="0" {{qs[id.toString()] === '0' ? 'selected' : ''}}>Tout</option>
+    <option value="0" {{qs[id.toString()] === '0' ? 'selected' : ''}}>{{gender && gender === 'f' ? 'Toute' : 'Tout'}}</option>
     @each(item in items)
       <option value="{{item.id}}" {{qs ? (qs[id.toString()] === item.id.toString() ? 'selected' : '') : ''}}>{{item.name}}</option>
     @endeach
   </select>
-</label>
+</div>

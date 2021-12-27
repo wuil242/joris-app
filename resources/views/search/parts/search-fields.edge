@@ -1,12 +1,8 @@
-<style>
-
-</style>
-
 <form class="search-fields" action="{{route('serviceProvider.find')}}" method="GET" id="js-search" >  
   @include('search/parts/search-fields-selection')
   <input type="number" name="limit" id="search-limit" hidden>
   <input type="number" name="page" id="search-page" hidden value="0">
 </form>
-<form  class="search-fields" action="{{route('serviceProvider.find')}}">
+<form  class="search-fields-page" action="{{route('serviceProvider.find')}}">
   @include('search/parts/search-slider')
 </form>

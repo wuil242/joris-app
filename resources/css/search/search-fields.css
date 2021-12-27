@@ -5,6 +5,7 @@
   align-items: center;
   text-align: center;
   position: relative;
+  gap: 10px;
 }
 
 .search-fields.loading {
@@ -19,6 +20,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #0003;
+  background-color: transparent;
   z-index: var(--layer-top);
+}
+
+.search-fields.loading .search-field {
+  background: var(--grey-color);
+  border-color: var(--grey-color);
 }

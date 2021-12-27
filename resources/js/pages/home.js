@@ -5,7 +5,7 @@ import Carroussel from '../components/Carroussel'
 
 
 Sticky.define({
-  element: '.home-top-button',
+  element: '.top-button',
   scrollValue: 350,
 })
 

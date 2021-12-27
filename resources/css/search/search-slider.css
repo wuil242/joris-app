@@ -1,0 +1,27 @@
+.search-slider {
+  flex-direction: column;
+  gap: 5px;
+  color: var(--text-color);
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 1.3rem;
+}
+
+.search-slider input[type=range] {
+  width: 100%;
+}
+
+.search-slider input[type=number] {
+  font-size: 1.2rem;
+  padding: .2em .1em;
+}
+
+/* Responsive */
+
+@media screen and (min-width: 650px) {
+  .search-slider {
+    /* flex-direction: row;
+    justify-content: stretch;
+    align-items: center; */
+  }
+}

@@ -1,4 +1,4 @@
-.home-top-button {
+.top-button {
   position: fixed;
   top: 50%;
   bottom: 50%;
@@ -13,7 +13,7 @@
   z-index: var(--layer-middle);
 }
 
-.home-top-button i {
+.top-button i {
   background-color: var(--primary-color);
   font-size: 2rem;
   padding: .5em;
@@ -22,7 +22,7 @@
 
 /* Events */
 
-.home-top-button.active {
+.top-button.active {
   transform: scale(1);
 }
 

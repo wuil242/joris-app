@@ -1,2 +1,25 @@
 .search-field {
+  display: flex;
+  gap: 10px;
+  border: solid 2px #FFF;
+  padding: .3rem;
+}
+
+.search-field-title, .search-field-select {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.search-field-select {
+  border-style: none;
+  background: transparent;
+}
+
+.search-field-select:focus   {
+  background-color: var(--grey-color);
+}
+
+.search-field-select  option{
+  font-size: 1.3rem;
 }
