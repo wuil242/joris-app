@@ -1,14 +1,12 @@
 .service-provider-cards {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  gap: 30px 0;
+  gap: 30px;
   width: 100%;
   grid-auto-flow: row;
-  grid-template-rows: 2fr;
   padding-bottom: 30px;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 @media only screen and (min-width: 475px) {
@@ -31,6 +29,12 @@
 }
 
 @media only screen and (min-width: 950px) {
+  .service-provider-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
   .service-provider-cards {
     grid-template-columns: 1fr 1fr 1fr;
   }

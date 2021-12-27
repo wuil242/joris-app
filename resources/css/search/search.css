@@ -29,6 +29,7 @@
     display: grid;
     grid-template-columns: 300px 1fr;
     gap: 20px;
+    align-items: flex-start;
   }
   .search-content-sidebar * {
     position: sticky;
