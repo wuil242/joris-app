@@ -24,9 +24,7 @@ export default class UsersController {
   public async login({ request, auth, response, session }: HttpContextContract) {
     const rememberMe = !!request.input('remember_me', false)
     const payload = await request.validate(UserLoginValidator)
-    const user = await auth.attempt(payload.userId, payload.password)
-
-    await auth.logout()
+    const user = await auth.verifyCredentials(payload.userId, payload.password)
 
     if (!user.confirmed) {
       session.flash('errors.accout', 'not confirm')
@@ -39,6 +37,6 @@ export default class UsersController {
 
   public async logout({ auth, response }: HttpContextContract) {
     await auth.logout()
-    return response.redirect('/prestaire/search')
+    return response.redirect('/')
   }
 }

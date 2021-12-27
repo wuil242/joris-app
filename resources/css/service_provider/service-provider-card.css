@@ -33,6 +33,7 @@
   gap: 10px;
   padding: 10px;
   flex-wrap: wrap;
+  z-index: var(--layer-bottom);
 }
 
 

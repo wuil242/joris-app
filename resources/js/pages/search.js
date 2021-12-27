@@ -3,7 +3,7 @@ import FetchApi from '../class/FetchApi'
 import { debounce } from '../helpers'
 import Sticky from '../components/Sticky'
 
-const $form = document.forms[0]
+const $form = document.querySelector('#form-search-provider')
 const $service_provider_card_template = document.querySelector('#service-provider-card')
 const $service_provider_skeleton_template = document.querySelector('#service-provider-card-skeleton') 
 const $range = document.querySelector('#limit-slider')

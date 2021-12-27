@@ -49,7 +49,7 @@
     <div class="header-profil-options">
     </div>      
     <p>{{auth.user.lastname}}</p>
-    <form style="width: 100%; height: 100%;" action="{{route('logout')}}" method="POST">
+    <form style="width: 100%; height: 100%; background: red;" action="{{route('logout')}}" method="POST">
       {{ csrfField() }}
       <input class="button" style="background: #F226;" type="submit" value="log-out">
     </form> 
