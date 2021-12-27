@@ -3,7 +3,7 @@
   border-top-right-radius: 3px;
   width: 264px;
   overflow: hidden;
-  cursor: pointer;
+  /* cursor: pointer; */
   place-self: center;
 }
 
@@ -20,17 +20,42 @@
   height: auto;
 }
 
+.service-provider-card-jobs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  z-index: 99;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
 
 .service-provider-card-job {
-  position: absolute;
-  font-size: .9em;
-  top: 5px;
-  left: 5px;
   padding: .25em .5em;
+  font-size: .9em;
   background-color: tomato;
   text-align: center;
   color: lightgoldenrodyellow;
+  cursor: pointer;
 }
+
+.service-provider-card-jobs:hover .service-provider-card-job.is-many {
+  display: none;
+}
+
+.service-provider-card-job.is-more {
+  display: none;
+}
+
+.service-provider-card-jobs:hover .is-more {
+  display: initial;
+}
+
 
 .service-provider-card-actions{
   position: absolute;

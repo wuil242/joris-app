@@ -1,26 +1,21 @@
 <article class="service-provider-card">
   <header class="service-provider-card-header">
-    <img src="{{ sp?.photo ? `${env('DIRECTUS_ASSETS_URL') + sp.photo}` : '/favicon.jpg'}}" class="service-provider-card-image" />
-    <div>
-    @if(sp.jobs.length > 1)
-      <span class="service-provider-card-job">{{sp.jobs[0].name}}(+{{sp.jobs.length - 1}})</span>
-      @each(job in sp.jobs)
-      <!--TODO: les autres jobs a afficher -->
-      @endeach
-    @else
-    <span class="service-provider-card-job">{{sp.jobs[0].name}}</span>
-    @endif
-    </div>
-    <div class="service-provider-card-actions">
-      <a href="#" class="service-provider-card-actions-icon" title="ajout au pagnier">
-        <i class="fa fa-cart-plus"></i>
-      </a>
-      <a href="#" class="service-provider-card-actions-icon" title="ajout au favoris">
-        <i class="far fa-heart"></i>
-      </a>
-      <a href="#" class="service-provider-card-actions-icon" title="voir plus">
-        <i class="fa fa-plus"></i>
-      </a>
+    <img src="{{ sp?.photo ? `${env('DIRECTUS_ASSETS_URL') + sp.photo}` : '/favicon.jpg'}}" 
+         class="service-provider-card-image" 
+         alt="{{sp.jobs.join(' ou ')}}" 
+    />
+    <div class="service-provider-card-jobs">
+      @if(sp.jobs.length > 1)
+        @!component('service_provider/parts/service-provider-job', {
+          job: sp.jobs[0],
+          jobsLength: sp.jobs.length,
+        })
+        @each(job in sp.jobs)
+          @!component('service_provider/parts/service-provider-job', {job, isMore: true})
+        @endeach
+        @else
+          @!component('service_provider/parts/service-provider-job', {job: sp.jobs[0]})
+        @endif
     </div>
   </header>
 </article>
