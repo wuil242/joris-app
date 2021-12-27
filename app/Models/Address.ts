@@ -42,7 +42,7 @@ export default class Address extends BaseModel {
   @belongsTo(() => Quater)
   public quater: BelongsTo<typeof Quater>
 
-  public get full(): string {
+  public get human(): string {
     return `${this?.numberAdress} rue ${this?.street}, ${this?.arrondissement.name} ${this?.quater?.name}`
   }
 }

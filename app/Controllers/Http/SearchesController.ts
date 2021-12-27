@@ -66,6 +66,7 @@ export default class SearchesController {
         })
         .whereHas('jobs', jobsQuery => jobsQuery.where('jobs_id', jobId))
         .preload('jobs').preload('address')
+        .orderBy(this.ORDER, 'asc')
         .paginate(page, perPage)
     }
     else {
@@ -74,12 +75,13 @@ export default class SearchesController {
         this.filterAddressQuery(addressQuery, filterLocation)
       })
       .preload('jobs').preload('address')
+      .orderBy(this.ORDER, 'asc')
       .paginate(page, perPage)
     }
 
     if(request.ajax()) {
       const html = await view.render('search/service-providers', {
-        serviceProviders
+        serviceProviders, qs
       })
 
       return { html }

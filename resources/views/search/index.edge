@@ -19,7 +19,7 @@
   </aside>
   @if(serviceProviders.length > 0)
     <section class="service-provider-cards">
-      @!component('search/service-providers', {serviceProviders})
+      @!component('search/service-providers', {serviceProviders, qs})
     </section>
   @else
   <span class="search-empty">Aucun Prestaire Trouver</span>

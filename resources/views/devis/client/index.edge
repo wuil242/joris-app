@@ -1,5 +1,29 @@
-{{inspect(serviceProvider)}}
+@layout('layouts/page')
+@set('title', 'Trouver un prestataire')
+@set('description', 'Trouver un prestataire')
 
-client devis
+@section('head')
+@endsection
 
-{{inspect(jobs)}}
+@section('content')
+<br>
+</p>
+<a href="{{lastSearchUrl}}" class="button">Trouver un autre prestaire</a>
+<p>
+<br>
+<h1>Envoyer Votre devis</h1>
+<p>
+  Devis pour {{serviceProvider.gender === 'Homme' ? 'Mr' : 'Mme'}} {{serviceProvider.lastname.toUpperCase()}}
+  {{serviceProvider.firstname}}
+  <p>
+    Metiers: {{serviceProvider.jobs.map(job => job.name).join('|')}}
+  </p>
+  <p>
+    Address: {{serviceProvider.address.human}}
+  </p>
+</p>
+<form action="{{route('devis.client.submit')}}" class="form">
+
+</form>
+
+@endsection
