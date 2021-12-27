@@ -25,7 +25,7 @@ Route.group(() => {
 
   Route.get('/recherche', 'SearchesController.index').as('serviceProvider.find')
 
-  Route.get('/devis/client/:id', 'DevisController.clientDevisIndex').as('devis.client')
+  Route.get('/devis/client', 'DevisController.clientDevisIndex').as('devis.client')
   Route.get('/devis/entreprise', 'DevisController.entrepriseDevisIndex').as('devis.entreprise')
 
   Route.get('/prestataire/enrolement', 'ServiceProvidersController.enrole').as('serviceProvider.enrole')

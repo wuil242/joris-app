@@ -2,7 +2,7 @@
   <header class="service-provider-card-header">
     <img src="{{ sp?.photo ? `${env('DIRECTUS_ASSETS_URL') + sp.photo}` : '/favicon.jpg'}}" 
          class="service-provider-card-image" 
-         alt="{{sp.jobs.join(' ou ')}}" 
+         alt="prestaire ayant pour metier {{sp.jobs.map(job => job.name).join(' ou ')}}" 
     />
     <div class="service-provider-card-jobs">
       @if(sp.jobs.length > 1)
@@ -18,4 +18,7 @@
         @endif
     </div>
   </header>
+  <div class="service-provider-card-content">
+    <a href="{{route('devis.client')}}?sp={{sp.id}}" class="button">Demender un devis</a>
+  </div>
 </article>

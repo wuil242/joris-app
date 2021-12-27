@@ -6,10 +6,10 @@ import Job from 'App/Models/Job'
 import ServiceProvider from 'App/Models/ServiceProvider'
 
 export default class ApisController {
-  public async clientDevisIndex({ params, view }: HttpContextContract) {
-    const serviceProvider = await ServiceProvider.query().where('id', params.id)
+  public async clientDevisIndex({ request, view }: HttpContextContract) {
+    const serviceProviderId = +request.qs().sp || 0
+    const serviceProvider = await ServiceProvider.query().where('id', serviceProviderId)
       .preload('address').preload('jobs').first()
-
 
     return await view.render('devis/client/index', {serviceProvider})
   }

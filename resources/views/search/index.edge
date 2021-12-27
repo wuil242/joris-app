@@ -17,9 +17,13 @@
   <aside class="search-content-sidebar">
     @include('search/parts/search-fields')
   </aside>
-  <section class="service-provider-cards">
-    @!component('search/service-providers', {serviceProviders})
-  </section>
+  @if(serviceProviders.length > 0)
+    <section class="service-provider-cards">
+      @!component('search/service-providers', {serviceProviders})
+    </section>
+  @else
+  <span class="search-empty">Aucun Prestaire Trouver</span>
+  @endif
 </section>
 
 @endsection
