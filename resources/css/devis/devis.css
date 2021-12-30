@@ -1,0 +1,20 @@
+.devis {
+
+}
+
+.devis-content {
+
+}
+
+.devis-form {
+  background-color: red;
+}
+
+/* Responsive */
+@media only screen and (min-width: 650px) {
+  .devis-content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    align-items: flex-start;
+  }
+}
