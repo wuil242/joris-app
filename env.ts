@@ -26,5 +26,10 @@ export default Env.rules({
   DB_CONNECTION: Env.schema.string(),
 
   //nom de domain et port sur le quelle est servie le backoffice
-  DIRECTUS_ASSETS_URL: Env.schema.string({format: 'url'})
+  DIRECTUS_ASSETS_URL: Env.schema.string({format: 'url'}),
+
+  //twilio
+  TWILIO_ACCOUNT_ID: Env.schema.string(),
+  TWILIO_AUTH_TOKEN: Env.schema.string(),
+  TWILIO_MESSAGING_SERVICE_SID: Env.schema.string(),
 })

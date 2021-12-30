@@ -3,38 +3,52 @@
 @set('description', 'Trouver un prestataire')
 
 @section('head')
+  @entryPointStyles('devis')
 @endsection
 
 @section('content')
 <br>
 </p>
-<a href="{{lastSearchUrl}}" class="button">Trouver un autre prestaire</a>
+<a href="{{route('serviceProvider.find')}}" class="button">Trouver un autre prestaire</a>
 <p>
 <br>
 <h1>Envoyer Votre devis</h1>
-<p>
-  Devis pour {{serviceProvider.gender === 'Homme' ? 'Mr' : 'Mme'}} {{serviceProvider.lastname.toUpperCase()}}
-  {{serviceProvider.firstname}}
-  <p>
-    Metiers: {{serviceProvider.jobs.map(job => job.name).join('|')}}
-  </p>
-  <p>
-    Ville: {{serviceProvider.address.city.name}}
-  </p>
-  <p>
-    Address: {{serviceProvider.address.human}}
-  </p>
-</p>
-<form action="{{route('devis.client.submit')}}" class="form">
+
+<section class="devis-content">
+  <aside class="devis-service-provider">
+    <p>
+      Devis pour {{serviceProvider.gender === 'Homme' ? 'Mr' : 'Mme'}} {{serviceProvider.lastname.toUpperCase()}}
+      {{serviceProvider.firstname}}
+      <p>
+        Metiers: {{serviceProvider.jobs.map(job => job.name).join('|')}}
+      </p>
+      <p>
+        Ville: {{serviceProvider.address.city.name}}
+      </p>
+      <p>
+        Address: {{serviceProvider.address.human}}
+      </p>
+      <p>
+        Tel: {{serviceProvider.tel}}
+      </p>
+    </p>
+    {{inspect(flashMessages.get('errors'))}}
+  </aside>
+<form action="{{route('devis.client.submit')}}" class="form devis-form" method="POST">
+  {{ csrfField() }}
+  <input type="number" name="serviceProviderId" value="{{serviceProvider.id}}" hidden>
   <label for="lastname" class="form-label">Nom</label>
-  <input type="text" name="lastname" class="form-input" value="{{auth?.user ? auth.user.firstname : ''}}" {{auth.user ? 'disabled' : ''}}>
+  <input type="text" name="lastname" class="form-input" value="{{auth?.user ? auth.user.firstname : ''}}{{flashMessages.has('lastname') ? flashMessages.get('lastname') : ''}}" {{auth.user ? 'readonly' : ''}}>
   <label for="firstname" class="form-label">Prenom</label>
-  <input type="text" name="firstname" class="form-input" value="{{auth?.user ? auth.user.lastname : ''}}" {{auth.user ? 'disabled' : ''}}>
+  <input type="text" name="firstname" class="form-input" value="{{auth?.user ? auth.user.lastname : ''}}{{flashMessages.has('firstname') ? flashMessages.get('firstname') : ''}}" {{auth.user ? 'readonly' : ''}}>
   <label for="tel" class="form-label">Numero</label>
-  <input type="tel" class="form-input" value="{{auth?.user ? auth.user.tel : ''}}" {{auth.user ? 'disabled' : ''}}>
+  <input type="tel" name="tel" class="form-input" value="{{auth?.user ? auth.user.tel : ''}} {{flashMessages.has('tel') ? flashMessages.get('tel') : ''}}" {{auth.user ? 'readonly' : ''}}>
+  <label for="address" class="form-label">Addresse</label>
+  <input type="text" name="address" class="form-input" placeholder="ex: 98 rue mbimi, miflou la base" value="{{flashMessages.has('address') ? flashMessages.get('address') : ''}}" {{auth.user ? 'readonly' : ''}}>
   <label for="message" class="form-label">Message</label>
-  <textarea name="message" class="form-input"></textarea>
+  <textarea name="message" class="form-input" placeholder="decrivez vos besions">{{flashMessages.has('message') ? flashMessages.get('message') : ''}}</textarea>
   <button class="button" type="submit">Envoyer</button>
 </form>
+</section>
 
 @endsection
