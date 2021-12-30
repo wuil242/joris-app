@@ -1,0 +1,76 @@
+<style>
+  .js-select {
+  }
+
+  .js-select-content {
+    display: none;
+  }
+
+  .js-select:hover .js-select-content {
+    display: initial;
+  }
+</style>
+@each(options in allOptions)
+<div class="js-select">
+  <button>Drop</button>
+  <div class="js-select-content">
+    <input type="search">
+    <ul class="js-slelect-option">
+      {{--  <li data-value="0">{{gender === 'm' ? 'Tout' : 'Toute'}}</li>  --}}
+      @each(option in options)
+        <li data-value="{{option[optionValue.toString()]}}">{{option[optionContent.toString()]}}</li>
+      @endeach
+    </ul>
+  </div>
+</div>
+@endeach
+
+
+
+<script>
+  $rootSelect = Array.from(document.querySelectorAll('.js-select'))
+  $selects = Array.from(document.querySelectorAll('.js-select-content'))
+
+  $rootSelect.forEach($s => {
+    $s.addEventListener('form-select', e => console.log('form-select', e))
+  })
+
+  $selects.forEach(defineSelect)
+
+  /**
+   * @param {HTMLElement} $select
+   */
+  function defineSelect($select) {
+    const $input = $select.querySelector('input')
+    const $options = $select.querySelector('.js-slelect-option')
+    const lis = Array.from($options.querySelectorAll('li'))
+    
+    lis.forEach(addClickEvent)
+
+    $input.addEventListener('input', e => {
+      const value = e.target.value.toUpperCase()
+      lis.forEach(li => filterSelect(li, value))
+    })
+    
+
+    function addClickEvent(li) {
+      li.addEventListener('click', emitSelection)
+    }
+
+    function filterSelect(li, value) {
+      const liValue = li.innerText.trim().toUpperCase()
+      if(liValue.indexOf(value) === -1) {
+        li.style.setProperty('display', 'none')
+      }
+      else {
+        li.style.removeProperty('display')
+      }
+    }
+
+    function emitSelection(e) {
+      $rootSelect.forEach($s => {
+          $s.dispatchEvent(new CustomEvent('form-select', {detail: e.target}))
+      })
+    }
+  }
+</script>

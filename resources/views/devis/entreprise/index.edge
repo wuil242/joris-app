@@ -9,5 +9,12 @@
     <input type="checkbox" name="job" id="{{job.name}}-{{job.id}}" value="{{job.id}}">
     <br>
   @endeach
+
+  <select name="city">
+    @each(city in cities)
+      <option value="{{city.id}}">{{city.name}}</option>
+    @endeach
+  </select>
+
   <button type="submit">send</button>
 </form>
