@@ -30,7 +30,7 @@ export default class ServiceProvider extends BaseModel {
   public age: number
 
   @column()
-  public tel: String
+  public tel: string
 
   @column()
   public secureTel: string

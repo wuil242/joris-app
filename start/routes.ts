@@ -25,9 +25,12 @@ Route.group(() => {
 
   Route.get('/recherche', 'SearchesController.index').as('serviceProvider.find')
 
-  Route.get('/devis/client', 'DevisController.clientDevisIndex').as('devis.client')
-  Route.post('/devis/client', 'DevisController.clientDevisSubmit').as('devis.client.submit')
-  Route.get('/devis/entreprise', 'DevisController.entrepriseDevisIndex').as('devis.entreprise')
+  Route.get('/devis/client', 'ClientDevisController.index').as('devis.client')
+  Route.post('/devis/client', 'ClientDevisController.store').as('devis.client.submit')
+  Route.get('/devis/client/success', 'ClientDevisController.success').as('devis.client.success')
+  Route.get('/devis/client/error', 'ClientDevisController.error').as('devis.client.error')
+
+  Route.get('/devis/entreprise', 'EntrepriseDevisController.index').as('devis.entreprise')
 
   Route.get('/prestataire/enrolement', 'ServiceProvidersController.enrole').as('serviceProvider.enrole')
   Route.get('/prestataire/plotique-de-confidentialite', 'ServiceProvidersController.policy').as('serviceProvider.policy')
@@ -44,10 +47,12 @@ Route.group(() => {
 
   Route.get('/connexion', 'AuthController.login').as('login')
   Route.post('/connexion', 'UsersController.login').as('login.submit')
+
 }).middleware('userGuard')
 
 Route.group(() => {
   Route.post('/logout', 'UsersController.logout').as('logout')
+  
 }).middleware('auth')
 
 //connexion de l'utilisateur

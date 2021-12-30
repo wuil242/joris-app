@@ -8,8 +8,7 @@ import Database from '@ioc:Adonis/Lucid/Database'
 import Address from 'App/Models/Address'
 import { HasMany, HasManyQueryBuilderContract, ModelQueryBuilderContract, RelationQueryBuilderContract, RelationSubQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
 
-//TODO: gererer le fitrage par nobre de sp a afficher (limit)
-//TODO: slider et un champ de type nbre pour selectionner du nombre de sp a afficher
+//TODO: rajouter une recherche dans les select des filtre
 
 interface FilterLoactionOptions {
   cityId: number,
