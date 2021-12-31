@@ -1,11 +1,11 @@
 .service-provider-card {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  width: 264px;
+  width: 200px;
   overflow: hidden;
-  border: solid 2px teal;
-  /* cursor: pointer; */
+  outline: solid 2px teal;
   place-self: center;
+  /* cursor: pointer; */
 }
 
 
@@ -18,12 +18,14 @@
 .service-provider-card-image {
   /* background: #DDD; */
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: scale-down;
+  background: white;
 }
 
 .service-provider-card-jobs {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   background: transparent;
   z-index: 99;

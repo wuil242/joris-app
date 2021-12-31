@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+{{inspect(flashMessages.get('alert'))}}
 <br>
 </p>
 <a href="{{route('serviceProvider.find')}}" class="button">Trouver un autre prestaire</a>

@@ -24,18 +24,18 @@
 
 @media only screen and (min-width: 750px) {
   .service-provider-cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media only screen and (min-width: 950px) {
   .service-provider-cards {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 @media only screen and (min-width: 1200px) {
   .service-provider-cards {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }

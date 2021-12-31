@@ -1,6 +1,6 @@
 <article class="service-provider-card">
   <header class="service-provider-card-header">
-    <img src="{{ sp?.photo ? `${env('DIRECTUS_ASSETS_URL') + sp.photo}` : '/favicon.jpg'}}" 
+    <img src="{{ sp?.photo ? `${env('DIRECTUS_ASSETS_URL') + sp.photo + '?key=service-provider-card'}` : '/favicon.jpg'}}" 
          class="service-provider-card-image" 
          alt="prestaire ayant pour metier {{sp.jobs.map(job => job.name).join(' ou ')}}" 
     />
