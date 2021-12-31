@@ -1,9 +1,10 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Arrondissement from 'App/Models/Arrondissement'
 import ServiceProvider from 'App/Models/ServiceProvider'
 import twilio from 'twilio'
 import Env from '@ioc:Adonis/Core/Env'
 import ClientDeviValidator from 'App/Validators/ClientDeviValidator'
+import Database from '@ioc:Adonis/Lucid/Database'
+import { COUNTRY_CODE } from 'Config/config'
 
 export default class ClientDevisController {
 
@@ -17,11 +18,24 @@ export default class ClientDevisController {
   }
 
   
-  public async store({request, view, response}:HttpContextContract) {
+  public async store({request, view, response, session}:HttpContextContract) {
 
     const payload = await request.validate(ClientDeviValidator)
     
     try {
+      const tel = payload.tel.includes(COUNTRY_CODE) ? payload.tel : COUNTRY_CODE + payload.tel
+
+      const denyTel = await Database.from('blacklist_tel').where('tel', tel)
+
+      if(denyTel) {
+        const alert = 'ce numero est bloquer, si vous voulez le debloquer cliquer ici'
+        payload.tel = ''
+        session.flash({...payload, alert})
+        return response.redirect().toRoute('devis.client', undefined, {
+          qs: {sp: payload.serviceProviderId}
+        })
+      }
+
       const date = new Date().toLocaleDateString('fr-FR', {
         month: 'long', day: 'numeric', year: 'numeric', 'formatMatcher': 'best fit'
       })
