@@ -25,6 +25,12 @@ export default Env.rules({
   NODE_ENV: Env.schema.enum(['development', 'production', 'testing'] as const),
   DB_CONNECTION: Env.schema.string(),
 
+  //smtp
+  SMTP_HOST: Env.schema.string({ format: 'host' }),
+  SMTP_PORT: Env.schema.number(),
+  SMTP_USERNAME: Env.schema.string() ,
+  SMTP_PASSWORD: Env.schema.string() ,
+
   //nom de domain et port sur le quelle est servie le backoffice
   DIRECTUS_ASSETS_URL: Env.schema.string({format: 'url'}),
 
