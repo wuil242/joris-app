@@ -5,9 +5,6 @@ import HeaderMenuButton from './components/HeaderMenuButton'
 import Sticky from './components/Sticky'
 
 
-// openBtnSelector: '.js-open-menu',
-// 
-// 
 HeaderMenuButton.create({
   openButtonSelector: '.header-menu-button',
   menuSelector: '.js-close-menu',

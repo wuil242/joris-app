@@ -19,9 +19,13 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 Route.group(() => {
-  Route.on('/').render('home/index')
+  Route.get('/', async ({view}) => {
+    const testimonies = await Database.from('testimonies').select('*').orderBy('id', 'desc').limit(4)
+    return await view.render('home/index', {testimonies})
+  })
 
   Route.get('/recherche', 'SearchesController.index').as('serviceProvider.find')
 

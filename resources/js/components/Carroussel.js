@@ -186,7 +186,7 @@ export default class Carroussel {
    * demarre un timer 
    */
   lunchTimer() {
-    this.timer = this.timer = window.setInterval(this.changeItem, this.options.time * 1000)
+    this.timer = window.setInterval(this.changeItem, this.options.time * 1000)
   }
 
   init() {
@@ -199,7 +199,9 @@ export default class Carroussel {
     this.addStyle()
 
     //lancement du defilement automatique
-    this.lunchTimer()
+    if(this.items.length >= 2) {
+      this.lunchTimer()
+    }
   }
 
    /**

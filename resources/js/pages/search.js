@@ -72,9 +72,11 @@ $limitInput.addEventListener('keyup', debounce(function() {
   startFormLoading()
 }, 800))
 
-// startFormLoader()
 more()
 
+/**
+ * remplace le boutton voir plus par le nouveau contentu
+ */
 function more() {
   const $moreButton = document.querySelector("#more-button")
   if(!$moreButton) return
