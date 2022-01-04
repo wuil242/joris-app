@@ -11,7 +11,10 @@
 
 @include('components/top-button')
 
-<h1 class="search-title">Trouver Un Prestaire <i class="fa fa-sm fa-map-marked-alt"></i></h1>
+@!component('components/title', {
+  text: 'Trouver Un Prestaire',
+  icon: 'map-marked-alt'
+})
 
 <section class="search-content">
   <aside class="search-content-sidebar">
