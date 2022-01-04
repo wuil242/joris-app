@@ -1,20 +1,37 @@
-<div>
-  Entreprise devis
-</div>
+@layout('layouts/page')
+@set('title', 'entreprise')
+@set('description', 'Decrivez vore besion et nous la traiterons')
 
-<form action="/test">
+@section('head')
+   @entryPointStyles('devis')
+@endsection
 
-  @each(job in jobs)
-    <label for="{{job.name}}-{{job.id}}">{{job.name}}</label>
-    <input type="checkbox" name="job" id="{{job.name}}-{{job.id}}" value="{{job.id}}">
-    <br>
-  @endeach
+@section('content')
 
-  <select name="city">
+@!component('components/title', {
+  text: 'Entreprise devis',
+  icon: 'letter'
+})
+
+<p>
+  Envoyer votre message
+</p>
+
+<form class="form" action="{{ route('devis.entreprise.submit') }}" method="POST">
+  <label for="city" class="form-label">Ville</label>
+  <select name="city" class="form-input">
     @each(city in cities)
-      <option value="{{city.id}}">{{city.name}}</option>
+      <option value="{{city.id}}" id="city">{{city.name}}</option>
     @endeach
   </select>
+  <label for="email" class="form-label" >Email<sup color="red">*</sup></label>
+  <input type="email" class="form-input" name="email">
+  <label for="tel" class="form-label">Numero</label>
+  <input type="tel" class="form-input" name="tel">
+  <label for="message">Message</label>
+  <textarea name="message" id="message"></textarea>
 
   <button type="submit">send</button>
 </form>
+
+@endsection
