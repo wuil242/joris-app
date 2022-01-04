@@ -1,5 +1,8 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Database from '@ioc:Adonis/Lucid/Database'
 import City from 'App/Models/City'
+import { sendMessage } from 'App/Services/twilio'
+import EntrepriseDeviValidator from 'App/Validators/EntrepriseDeviValidator'
 
 export default class EntrepriseDevisController {
 
@@ -8,7 +11,25 @@ export default class EntrepriseDevisController {
     return await view.render('devis/entreprise/index', {cities})
   }
 
-  public async store({response}: HttpContextContract) {
+  public async store({request, view, response}: HttpContextContract) {
+    const payload = await request.validate(EntrepriseDeviValidator)
+
+    const city = await City.findOrFail(payload.cityId)
+
+    const contact = await Database.from('entreprise_devis_contact').select('tel')
+      .where('city_id', city.id).firstOrFail()
+
+    const date = new Date().toLocaleDateString('fr-FR', {
+      month: 'long', day: 'numeric', year: 'numeric', 'formatMatcher': 'best fit'
+    })
+    const body = await view.render('sms/entreprise_devis', {date, city, ...payload})
+
+    try {
+      await sendMessage({to: contact.tel as string, body})
+      return response.redirect().toRoute('devis.entreprise.success')
+    } catch (error) {
+      return response.redirect().toRoute('devis.entreprise.error')
+    }
 
   }
 

@@ -18,8 +18,10 @@
 </p>
 
 <form class="form" action="{{ route('devis.entreprise.submit') }}" method="POST">
+  {{ csrfField() }}
+  {{inspect(flashMessages.get('errors'))}}
   <label for="city" class="form-label">Ville</label>
-  <select name="city" class="form-input">
+  <select name="cityId" class="form-input">
     @each(city in cities)
       <option value="{{city.id}}" id="city">{{city.name}}</option>
     @endeach

@@ -3,16 +3,16 @@ import Env from '@ioc:Adonis/Core/Env'
 import twilio from 'twilio';
 const accountSid = Env.get('TWILIO_ACCOUNT_ID'); 
 const authToken = Env.get('TWILIO_AUTH_TOKEN');
-const messagingServiceSid = Env.get('TWILIO_MESSAGING_SERVICE_SID'),
+const messagingServiceSid = Env.get('TWILIO_MESSAGING_SERVICE_SID')
 const client = twilio(accountSid, authToken);
       
 interface TwilioMessage {
   to:string,
   body: string,
-  error:any
+  errors?:any
 }
 
-export default async function sendMessage({to, body}: TwilioMessage) {
+export async function sendMessage({to, body, errors}: TwilioMessage) {
   const message = {to, body, messagingServiceSid}
 
   try {
@@ -22,7 +22,7 @@ export default async function sendMessage({to, body}: TwilioMessage) {
     if(error.code === 30001 || error.code === 'EAI_AGAIN') {
       //TODO:envoyer un email a l'administrateur
       Mail.sendLater(async message => {
-        const res = {message: error.message, error}
+        const res = {message: error.message, errors}
         message.from('log@iprovider.cg')
           .to('dev@iprovider.cg')
           .subject('email log')
