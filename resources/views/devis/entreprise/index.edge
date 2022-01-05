@@ -27,11 +27,20 @@
     @endeach
   </select>
   <label for="email" class="form-label" >Email<sup color="red">*</sup></label>
-  <input type="email" class="form-input" name="email">
+  <input type="email" class="form-input" name="email" value="{{flashMessages.has('email') ? flashMessages.get('email') : ''}}">
+  <span style="color:red;">
+    {{flashMessages.has('errors.email') ? flashMessages.get('errors.email') : ''}}
+  </span>
   <label for="tel" class="form-label">Numero</label>
-  <input type="tel" class="form-input" name="tel">
+  <input type="tel" class="form-input" name="tel" value="{{flashMessages.has('tel') ? flashMessages.get('tel') : ''}}">
+  <span style="color:red;">
+      {{flashMessages.has('errors.tel') ? flashMessages.get('errors.tel') : ''}}
+    </span>
   <label for="message">Message</label>
-  <textarea name="message" id="message"></textarea>
+  <textarea name="message" id="message">{{flashMessages.has('message') ? flashMessages.get('message') : ''}}</textarea>
+  <span style="color:red;">
+{{flashMessages.has('errors.message') ? flashMessages.get('errors.message') : ''}}
+    </span>
 
   <button type="submit">send</button>
 </form>

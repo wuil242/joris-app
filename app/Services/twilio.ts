@@ -9,27 +9,25 @@ const client = twilio(accountSid, authToken);
 interface TwilioMessage {
   to:string,
   body: string,
-  errors?:any
 }
 
-export async function sendMessage({to, body, errors}: TwilioMessage) {
+export async function sendMessage({to, body}: TwilioMessage) {
   const message = {to, body, messagingServiceSid}
 
   try {
-    return client.messages.create(message)
+    const result = await client.messages.create(message)
+    return Promise.resolve(result)
   } catch (error) {
-    //FIXME: verifier que le code 30001 est bien un entier dans la documentation
-    if(error.code === 30001 || error.code === 'EAI_AGAIN') {
-      //TODO:envoyer un email a l'administrateur
-      Mail.sendLater(async message => {
-        const res = {message: error.message, errors}
-        message.from('log@iprovider.cg')
-          .to('dev@iprovider.cg')
-          .subject('email log')
-          .htmlView('email/error', {error: res})
-      })
-    }
 
+    Mail.sendLater(async message => {
+      const res = {message: error.toSource(), to, body}
+      message.from('log@iprovider.cg')
+        .to('dev@iprovider.cg')
+        .subject('email log')
+        .htmlView('email/error', {error: res})
+    })
+
+    console.error(error)
     throw error
   }
 }
