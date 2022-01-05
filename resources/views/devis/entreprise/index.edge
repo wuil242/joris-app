@@ -8,6 +8,12 @@
 
 @section('content')
 
+@if(flashMessages.has('alert'))
+@!component('components/alert', {
+  ...flashMessages.get('alert')
+})  
+@endif
+
 @!component('components/title', {
   text: 'Entreprise devis',
   icon: 'letter'
@@ -19,7 +25,7 @@
 
 <form class="form" action="{{ route('devis.entreprise.submit') }}" method="POST">
   {{ csrfField() }}
-  {{inspect(flashMessages.get('errors'))}}
+  {{inspect(flashMessages.get('message'))}}
   <label for="city" class="form-label">Ville</label>
   <select name="cityId" class="form-input">
     @each(city in cities)

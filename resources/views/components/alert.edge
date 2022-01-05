@@ -1,0 +1,109 @@
+<style>
+  .alert {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    /* transform: translateX(-50%) translateY(-200%); */
+    transform: translateX(200%);
+    padding: 1rem;
+    font-size: .9rem;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+
+    z-index: var(--layer-middle);
+  }
+
+  .alert a {
+    text-decoration: underline;
+  }
+
+  .alert-close-button {
+    cursor: pointer;
+  }
+
+  .alert-error {
+    background: red;
+  }
+
+  .alert-success {
+    background: limegreen;
+  }
+
+  .alert-info {
+    background: royalblue;
+  }
+
+  .alert-appear {
+    animation: appear .5s ease-in .5s forwards;
+  }
+
+  .alert-close {
+    animation: close .5s ease-out;
+  }
+
+  /* @keyframes appear {
+    0% {
+      transform: translateX(-50%) translateY(-200%);
+    }
+
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+
+  @keyframes close {
+    0% {
+      transform: translateX(-50%) translateY(0);
+    }
+    
+    100% {
+      transform: translateX(-50%) translateY(-200%);
+    }
+  } */
+
+  @keyframes appear {
+    0% {
+      transform: translateX(-200%);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+
+  @keyframes close {
+    0% {
+      transform: translateX(-50%);
+    }
+    
+    100% {
+      transform: translateX(200%);
+    }
+  }
+</style>
+<div class="alert alert-appear alert-{{type}} js-alert">
+  {{{message}}}
+  <i class="alert-close-button fa fa-lg fa-window-close"></i>
+</div>
+
+<script>
+  setTimeout(() => {
+    const alert = document.querySelector('.js-alert')
+    if(alert) {
+      const alertButton = alert.querySelector('.alert-close-button')
+      if(alertButton) {
+        alertButton.addEventListener('click', () => {
+          alert.classList.toggle('alert-close', 'alert-appear')
+          setTimeout(() => alert.remove(), 600)
+        })
+      }
+    }
+  }, 3500)
+</script>

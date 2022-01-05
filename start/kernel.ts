@@ -45,4 +45,5 @@ Server.middleware.registerNamed({
   auth: () => import('App/Middleware/Auth'),
   silentAuth: () => import('App/Middleware/SilentAuth'),
   userGuard: () => import('App/Middleware/UserGuard'),
+  BanCheck: () => import('App/Middleware/BanCheck'),
 })
