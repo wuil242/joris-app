@@ -3,7 +3,8 @@
 @set('description', 'Decrivez vore besion et nous la traiterons')
 
 @section('head')
-   @entryPointStyles('devis')
+  @entryPointScripts('devis')
+  @entryPointStyles('devis')
 @endsection
 
 @section('content')
@@ -25,25 +26,38 @@
 
 <form class="form" action="{{ route('devis.entreprise.submit') }}" method="POST">
   {{ csrfField() }}
-  {{inspect(flashMessages.get('message'))}}
+  {{inspect(flashMessages)}}
   <label for="city" class="form-label">Ville</label>
-  <select name="cityId" class="form-input">
-    @each(city in cities)
-      <option value="{{city.id}}" id="city">{{city.name}}</option>
-    @endeach
-  </select>
-  <label for="email" class="form-label" >Email<sup color="red">*</sup></label>
-  <input type="email" class="form-input" name="email" value="{{flashMessages.has('email') ? flashMessages.get('email') : ''}}">
+  @!component('form/form_select', {
+    options: cities,
+    optionValue: 'id',
+    optionContent: 'name',
+    name: 'cityId',
+    value: flashMessages.get('cityId') ? cities.find(city => city.id == flashMessages.get('cityId')).name  : null 
+  })
+  <label for="email" class="form-label required">Email</label>
+  <input 
+    required  
+    type="email" class="form-input" name="email" value="{{flashMessages.has('email') ? flashMessages.get('email') : ''}}" 
+  />
   <span style="color:red;">
     {{flashMessages.has('errors.email') ? flashMessages.get('errors.email') : ''}}
   </span>
-  <label for="tel" class="form-label">Numero</label>
-  <input type="tel" class="form-input" name="tel" value="{{flashMessages.has('tel') ? flashMessages.get('tel') : ''}}">
+  <label for="tel" class="form-label required">Numero</label>
+  <input 
+    required 
+    type="tel" class="form-input" name="tel" value="{{flashMessages.has('tel') ? flashMessages.get('tel') : ''}}"
+  />
   <span style="color:red;">
       {{flashMessages.has('errors.tel') ? flashMessages.get('errors.tel') : ''}}
-    </span>
-  <label for="message">Message</label>
-  <textarea name="message" id="message">{{flashMessages.has('message') ? flashMessages.get('message') : ''}}</textarea>
+  </span>
+  <label class="form-label required" for="message">Message</label>
+  <textarea
+    minlength="15"
+    maxlength="255" 
+    required  
+    name="message" id="message">{{flashMessages.has('message') ? flashMessages.get('message') : ''}}
+</textarea>
   <span style="color:red;">
 {{flashMessages.has('errors.message') ? flashMessages.get('errors.message') : ''}}
     </span>

@@ -29,7 +29,7 @@ export default class EntrepriseDeviValidator {
 		cityId: schema.number([rules.unsigned()]),
 		email: schema.string({trim: true}, [rules.email()]),
 		tel: schema.string({trim: true}, [rules.regex(PHONE_NUMBER_REGEX)]),
-		message: schema.string({trim: true}, [rules.minLength(20), rules.maxLength(255)])
+		message: schema.string({trim: true}, [rules.minLength(15), rules.maxLength(255)])
   })
 
 	/**

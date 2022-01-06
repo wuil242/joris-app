@@ -20,11 +20,11 @@ export async function sendMessage({to, body}: TwilioMessage) {
   } catch (error) {
 
     Mail.sendLater(async message => {
-      const res = {message: error.toSource, to, body}
+      const res = {message: error.message, stack: error.stack, to}
       message.from('log@iprovider.cg')
         .to('dev@iprovider.cg')
         .subject('email log')
-        .htmlView('email/error', {error: res})
+        .htmlView('email/twillio_error', {error: res, body})
     })
 
     console.error(error)

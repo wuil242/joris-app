@@ -14,8 +14,6 @@ export default class HeaderMenuButton {
     this.$closeBtn = this.$menu.querySelector(options?.closeBtnSelector || '#button-close')
     this.$closeElement = document.querySelector(options?.closeElementSelector)
 
-    console.log(this.$closeBtn)
-
     if (!this.$openBtn) throw new Error('selecteur du boutton de menu non defini')
     if (!this.$menu) throw new Error('element reprseting menu not dinfined, please set correct selector to "menuSelector" option')
     if (!this.$closeBtn) throw new Error('button element use to close menu not define, please set correct selector "closeBtnSelector" option')

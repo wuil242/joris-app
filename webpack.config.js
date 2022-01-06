@@ -48,8 +48,7 @@ Encore.setPublicPath('/assets')
 Encore.addEntry('app', './resources/js/app.js')
 Encore.addEntry('home', './resources/js/pages/home.js')
 Encore.addEntry('search', './resources/js/pages/search.js')
-
-Encore.addStyleEntry('devis', './resources/css/devis/all.css')
+Encore.addEntry('devis', './resources/js/pages/devis.js')
 
 /*
 |--------------------------------------------------------------------------

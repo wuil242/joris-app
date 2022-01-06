@@ -12,7 +12,7 @@ export default class EntrepriseDevisController {
     return await view.render('devis/entreprise/index', {cities})
   }
 
-  public async store({request, view, response}: HttpContextContract) {
+  public async store({session, request, view, response}: HttpContextContract) {
     const payload = await request.validate(EntrepriseDeviValidator)
 
     payload.tel = payload.tel.includes(COUNTRY_CODE) ? payload.tel : COUNTRY_CODE + payload.tel
@@ -20,12 +20,20 @@ export default class EntrepriseDevisController {
     const city = await City.findOrFail(payload.cityId)
 
     const contact = await Database.from('entreprise_devis_contact').select('tel')
-      .where('city_id', city.id).firstOrFail()
+      .where('city_id', city.id).first()
+
+    if(!contact) {
+      session.flash('alert', {type: 'info', message: 'ville non pris en charge'})
+      session.flashAll()
+      return response.redirect().back()
+    }
 
     const date = new Date().toLocaleDateString('fr-FR', {
-      month: 'long', day: 'numeric', year: 'numeric', 'formatMatcher': 'best fit'
+      month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric'
     })
     const body = await view.render('sms/entreprise_devis', {date, city, ...payload})
+
+    
 
     try {
       await sendMessage({to: contact.tel as string, body})
@@ -42,7 +50,6 @@ export default class EntrepriseDevisController {
 
       return response.redirect().toRoute('devis.entreprise.error')
     }
-
   }
 
   public async success({view}:HttpContextContract) {
