@@ -1,5 +1,5 @@
 import '../../css/search/all.css'
-import FetchApi from '../class/FetchApi'
+import FormSelect from '../components/FormSelect'
 import { debounce } from '../helpers'
 import Sticky from '../components/Sticky'
 
@@ -10,7 +10,7 @@ const $range = document.querySelector('#limit-slider')
 const $limitInput = document.querySelector('#limit-input')
 const $limit = document.querySelector("#search-limit")
 
-const fields = Array.from($form.querySelectorAll('.search-field > select'))
+const $search_fields = Array.from($form.querySelectorAll('.search-field .js-select'))
 
 const $firstProviderCard = document.querySelector('.service-provider-card')
 
@@ -23,30 +23,9 @@ if($firstProviderCard) {
   scrollToElement($firstProviderCard)
 }
 
-$form.addEventListener('change', (e) => {
-  const id = e.target.id
+$form.addEventListener('change', handleFormChange)
 
-  updateLimitValue({target: $limitInput})
-  if(id === 'city') {
-    fields.filter(field => field.id === 'arrondissement' || field.id === 'quater')
-      .forEach(field => {
-        field.value = 0
-        $form.submit()
-      })
-  }
-  else if(id === 'arrondissement') {
-    fields.filter(field => field.id === 'quater')
-      .forEach(field => {
-        field.value = 0
-        $form.submit()
-      })
-  }
-  else {
-    $form.submit()
-  }
-
-  startFormLoading()
-})
+$search_fields.forEach(field => field.addEventListener('form-select', handleFormChange))
 
 $range.addEventListener('pointerup', updateLimitValue)
 $range.addEventListener('pointerdown', e => {
@@ -72,7 +51,47 @@ $limitInput.addEventListener('keyup', debounce(function() {
   startFormLoading()
 }, 800))
 
+FormSelect.init()
+
 more()
+
+/**
+ * @param {Event} e
+ */
+function handleFormChange(e) {
+  const name = e.target.getAttribute('name')
+  
+  $search_fields.forEach($field => $field.dispatchEvent(new Event('disable')))
+
+  const $serch_fields_inputs = Array.from($search_fields.querySelectorAll('select'))
+  
+  updateLimitValue({target: $limitInput})
+  if(name === 'city') {
+    const $search_fieleds_filtered =  $serch_fields_inputs.filter(field => {
+      const field_name = field.getAttribute('name')
+      return field_name === 'arrondissement' || field_name === 'quater'
+    })
+    
+    $search_fieleds_filtered.forEach((field, index) => {
+      field.value = '0'
+      if(index === $search_fieleds_filtered.length - 1) {
+        $form.submit()
+      }
+    })
+  }
+  else if(name === 'arrondissement') {
+    $serch_fields_inputs.filter(field => field.name === 'quater')
+      .forEach(field => {
+        field.value = '0'
+        $form.submit()
+      })
+  }
+  else {
+    $form.submit()
+  }
+
+  startFormLoading()
+}
 
 /**
  * remplace le boutton voir plus par le nouveau contentu

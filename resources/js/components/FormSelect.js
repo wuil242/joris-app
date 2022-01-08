@@ -17,6 +17,7 @@ export default class FormSelect {
     this.$lis = Array.from(this.$options.querySelectorAll('.js-slelect-option'))
     this.$button = this.$root.querySelector('.js-select-button')
     this.$select_hidden = this.$root.querySelector('select')
+    this.disabled = false
 
     this.defineSelect()
   }
@@ -24,15 +25,12 @@ export default class FormSelect {
   defineSelect() {
     this.$lis.forEach(this.addClickEvent.bind(this))
 
-    this.$root.addEventListener('form-select', e => {
-      this.$select_hidden.value = e.detail.dataset.value
-      this.$button.firstElementChild.innerText = e.detail.innerText
-      this.$input.value = ''
-      this.showAllOption(this.$lis)
-      this.$select.classList.remove('active')
-    })
+    this.$root.addEventListener('disable', () => this.disabled = true)
+    this.$root.addEventListener('enable', () => this.disabled = false)
 
     this.$button.addEventListener('click', (e) => {
+      if(this.disabled) return
+
       e.stopPropagation()
       e.stopImmediatePropagation()
 
@@ -90,7 +88,17 @@ export default class FormSelect {
    * @param {InputEvent} e 
    */
   emitSelection(e) {
-    this.$root.dispatchEvent(new   CustomEvent('form-select', {detail: e.target}))
+    this.$select_hidden.value = e.target.dataset.value
+    this.$button.firstElementChild.innerText = e.target.innerText
+    this.$select.classList.remove('active')
+
+    this.$root.dispatchEvent(new Event('form-select'))
+    
+    this.$input.value = ''
+    this.showAllOption(this.$lis)
+    
+    // this.$select_hidden.dispatchEvent(new CustomEvent('form-select', {detail: e.target}))
+    // this.$root.dispatchEvent(new CustomEvent('form-select', {detail: e.target}))
   }
 
   /**

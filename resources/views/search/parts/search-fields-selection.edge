@@ -2,8 +2,8 @@
   title: 'Metiers',
   items: jobs,
   id: 'job',
-  qs,
-  icon: 'briefcase'
+  value: qs['job'] || 0,
+  icon: 'briefcase',
 })
 
 @!component('search/parts/search-field', {
@@ -11,7 +11,7 @@
   items: cities,
   id: 'city',
   gender: 'f',
-  qs,
+  value: qs['city'] || 0,
   icon: 'city'
 })
 
@@ -19,7 +19,7 @@
 title: 'Arrondissements',
 items: arrondissements,
 id: 'arrondissement',
-qs,
+value: qs['arrondissement'] || 0,
 icon: 'map-marker-alt'
 })
 
@@ -27,6 +27,6 @@ icon: 'map-marker-alt'
   title: 'Quartiers',
   items: quaters,
   id: 'quater',
-  qs,
+  value: qs['quater'] || 0,
   icon: 'map-marker-alt'
 })

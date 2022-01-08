@@ -1,13 +1,19 @@
 <div class="form-select js-select">
-  <select name="{{name}}" hidden>
+  <select name="{{name}}" hidden value="{{value}}">
     @each(option in options)
-      <option value="{{option[optionValue.toString()]}}">
+    {{--   {{value.toString() == option[optionValue.toString()] ? 'selected' : ''}}  --}}
+      <option  value="{{option[optionValue.toString()]}}">
         {{option[optionContent.toString()]}}
       </option>
     @endeach
   </select>
-  <button type="button" class="form-select-button js-select-button">
-    <span>{{ value || options[0][optionContent.toString()]}}</span>
+  <button type="button" class="form-select-button js-select-button">    
+    <span>
+      {{
+        options.find(option => option[optionValue.toString()].toString() === value.toString())?.name ||
+        options[options.length - 1].name
+      }}
+    </span>
     <i class="fa fa-arrow-down"></i>
   </button>
   <div class="form-select-content js-select-content">

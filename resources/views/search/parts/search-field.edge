@@ -1,4 +1,21 @@
+{{items.push({
+  id: 0,
+  name: gender && gender === 'f' ? 'Toute' : 'Tout'
+}) ? '' : ''}}
 <div class="search-field">
+  <label for="{{id}}"  class="search-field-title">
+    <i class="fa fa-{{icon}}"></i> {{title}}
+  </label>
+  @!component('form/form_select', {
+    options: items,
+    optionValue: 'id',
+    optionContent: 'name',
+    name: id,
+    value
+  })
+</div>
+
+{{--  <div class="search-field">
   <label for="{{id}}"  class="search-field-title">
     <i class="fa fa-{{icon}}"></i> {{title}}
   </label>
@@ -10,4 +27,4 @@
       <option value="{{item.id}}" {{qs ? (qs[id.toString()] === item.id.toString() ? 'selected' : '') : ''}}>{{item.name}}</option>
     @endeach
   </select>
-</div>
+</div>  --}}
