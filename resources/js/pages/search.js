@@ -9,15 +9,13 @@ const $service_provider_skeleton_template = document.querySelector('#service-pro
 const $range = document.querySelector('#limit-slider')
 const $limitInput = document.querySelector('#limit-input')
 const $limit = document.querySelector("#search-limit")
-
 const $search_fields = Array.from($form.querySelectorAll('.search-field .js-select'))
-
 const $firstProviderCard = document.querySelector('.service-provider-card')
+const $search_empty_message = document.getElementById('search-empty-message')
 
-Sticky.define({
-  element: '.top-button',
-  scrollValue: 150,
-})
+if($search_empty_message) {
+  scrollToElement($search_empty_message)
+}
 
 if($firstProviderCard) {
   scrollToElement($firstProviderCard)
@@ -51,6 +49,13 @@ $limitInput.addEventListener('keyup', debounce(function() {
   startFormLoading()
 }, 800))
 
+
+Sticky.define({
+  element: '.top-button',
+  scrollValue: 150,
+})
+
+
 FormSelect.init()
 
 more()
@@ -59,12 +64,10 @@ more()
  * @param {Event} e
  */
 function handleFormChange(e) {
-  const name = e.target.getAttribute('name')
-  
-  $search_fields.forEach($field => $field.dispatchEvent(new Event('disable')))
+  const name = e.target.querySelector('select').getAttribute('name')
 
-  const $serch_fields_inputs = Array.from($search_fields.querySelectorAll('select'))
-  
+  const $serch_fields_inputs = $search_fields.map($search_field => $search_field.querySelector('select'))
+
   updateLimitValue({target: $limitInput})
   if(name === 'city') {
     const $search_fieleds_filtered =  $serch_fields_inputs.filter(field => {
@@ -75,6 +78,7 @@ function handleFormChange(e) {
     $search_fieleds_filtered.forEach((field, index) => {
       field.value = '0'
       if(index === $search_fieleds_filtered.length - 1) {
+        startFormLoading()
         $form.submit()
       }
     })
@@ -83,14 +87,15 @@ function handleFormChange(e) {
     $serch_fields_inputs.filter(field => field.name === 'quater')
       .forEach(field => {
         field.value = '0'
+
         $form.submit()
+        startFormLoading()
       })
   }
   else {
+    startFormLoading()
     $form.submit()
   }
-
-  startFormLoading()
 }
 
 /**
@@ -141,10 +146,12 @@ function scrollToElement($el) {
  * 
  */
 function startFormLoading() {
+ $search_fields.forEach($field => $field.dispatchEvent(new Event('disable')))
+
   document.querySelectorAll('.search-fields')
     .forEach($fields => {
       // $fields.classList.add('loading')
-      $fields.querySelectorAll('input, select').forEach(input => {
+      $fields.querySelectorAll('input').forEach(input => {
         input.setAttribute('disabled', 'true')
       })
     })
@@ -154,6 +161,8 @@ function startFormLoading() {
  * 
  */
  function stopFormLoading() {
+  $search_fields.forEach($field => $field.dispatchEvent(new Event('enable')))
+
   document.querySelectorAll('.search-fields')
     .forEach($fields => {
       $fields.classList.remove('loading')

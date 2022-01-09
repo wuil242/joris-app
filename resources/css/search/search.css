@@ -11,7 +11,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  margin-top: 10%;
+  padding: 10% 0;
 }
 
 /* Responsive */
@@ -27,7 +27,7 @@
 
   .search-empty {
     flex-direction: column;
-    margin-top: 0;
+    padding: 0;
   }
   
   .search-content-sidebar {

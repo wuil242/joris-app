@@ -2,6 +2,7 @@
   id: 0,
   name: gender && gender === 'f' ? 'Toute' : 'Tout'
 }) ? '' : ''}}
+
 <div class="search-field">
   <label for="{{id}}"  class="search-field-title">
     <i class="fa fa-{{icon}}"></i> {{title}}
@@ -11,7 +12,7 @@
     optionValue: 'id',
     optionContent: 'name',
     name: id,
-    value
+    value: items.find(item => item.id.toString() === value) || items[items.length - 1]
   })
 </div>
 

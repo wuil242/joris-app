@@ -33,7 +33,7 @@ export default class SearchesController {
     const quaterId = Number.parseInt(qs.quater, 10) || 0
     const page =  Number.parseInt(qs.page, 10) || 1
     const limit =  Number.parseInt(qs.limit, 10)
-    const perPage = this.limitation(limit) 
+    const perPage = qs.limit = this.limitation(limit) 
 
     const filterLocation:FilterLoactionOptions = {cityId, arrondissementId, quaterId}
 
@@ -99,7 +99,7 @@ export default class SearchesController {
   }
 
   private limitation(limit: number): number {
-    return limit || (limit < this.LIMIT.MAX && limit > this.LIMIT.MIN) ? limit : this.LIMIT.MIN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    return limit && (limit < this.LIMIT.MAX && limit > this.LIMIT.MIN) ? limit : this.LIMIT.MIN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
   } 
 
   private filterAddressQuery
