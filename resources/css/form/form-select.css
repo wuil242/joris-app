@@ -51,3 +51,21 @@
 .form-select-content.active {
   display: initial;
 }
+
+.form-select-search {
+  display: flex;
+  align-items: center;
+  padding: .3em .5em;
+  font-size: .9rem;
+  border-bottom: inset 2px var(--secondary-color);
+}
+
+.form-select-input {
+  border: none;
+  outline: none;
+}
+
+.form-select-search-icon {
+  color: var(--grey-color);
+  font-size: 1.2em;
+}

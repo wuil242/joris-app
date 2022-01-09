@@ -14,7 +14,10 @@
     <i class="fa fa-arrow-down"></i>
   </button>
   <div class="form-select-content js-select-content">
-    <input class="form-select-input js-form-select-input" type="search">
+    <div class="form-select-search">
+      <input class="form-select-input js-form-select-input" type="search">
+      <i class="form-select-search-icon js-form-select-search-icon fa fa-search"></i>
+    </div>
     <ul class="form-select-options js-slelect-options">
       @each(option in options)
         <li class="form-select-option js-slelect-option" data-value="{{option[optionValue.toString()]}}">

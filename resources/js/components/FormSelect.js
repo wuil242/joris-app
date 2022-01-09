@@ -16,6 +16,7 @@ export default class FormSelect {
     this.$options = this.$root.querySelector('.js-slelect-options')
     this.$lis = Array.from(this.$options.querySelectorAll('.js-slelect-option'))
     this.$button = this.$root.querySelector('.js-select-button')
+    this.$icon = this.$root.querySelector('.js-form-select-search-icon')
     this.$select_hidden = this.$root.querySelector('select')
     this.disabled = false
 
@@ -23,7 +24,7 @@ export default class FormSelect {
   }
 
   defineSelect() {
-    this.$lis.forEach(this.addClickEvent.bind(this))
+
 
     this.$root.addEventListener('disable', () => this.disabled = true)
     this.$root.addEventListener('enable', () => this.disabled = false)
@@ -35,7 +36,6 @@ export default class FormSelect {
       e.stopImmediatePropagation()
 
       this.$select.classList.toggle('active')
-      e.stopPropagation()
       this.$input.value = ''
       this.showAllOption(this.$lis)
 
@@ -44,15 +44,23 @@ export default class FormSelect {
       }, {once: true})
     })
 
-    this.$input.addEventListener('click', e => {
-      e.stopPropagation()
-      e.stopImmediatePropagation()
-    })
+    this.$lis.forEach(this.addClickEvent.bind(this))
 
+    this.$input.addEventListener('click', this.stopPropagation)
     this.$input.addEventListener('input', e => {
       const value = e.target.value.toUpperCase()
       this.$lis.forEach(li => this.filterSelect(li, value))
     })
+
+    this.$icon.addEventListener('click', this.stopPropagation)
+  }
+
+  /**
+   * @param {Event} e
+   */
+  stopPropagation(e) {
+    e.stopPropagation()
+    e.stopImmediatePropagation()
   }
 
   addClickEvent(li) {

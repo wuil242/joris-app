@@ -53,9 +53,6 @@ export default class ServiceProvider extends BaseModel {
   @column()
   public addressId: number
 
-  @column()
-  public score: number
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

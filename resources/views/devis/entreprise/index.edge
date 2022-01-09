@@ -25,15 +25,13 @@
 </p>
 
 <form class="form" action="{{ route('devis.entreprise.submit') }}" method="POST">
-  {{ csrfField() }}
-  {{inspect(flashMessages)}}
   <label for="city" class="form-label">Ville</label>
   @!component('form/form_select', {
     options: cities,
     optionValue: 'id',
     optionContent: 'name',
     name: 'cityId',
-    value: flashMessages.get('cityId') ? cities.find(city => city.id == flashMessages.get('cityId')).name  : null 
+    value: flashMessages.get('cityId') ? cities.find(city => city.id == flashMessages.get('cityId'))  : cities[0] 
   })
   <label for="email" class="form-label required">Email</label>
   <input 
