@@ -4,9 +4,9 @@ import Job from 'App/Models/Job'
 import Arrondissement from 'App/Models/Arrondissement'
 import Quater from 'App/Models/Quater'
 import ServiceProvider from 'App/Models/ServiceProvider'
-import Database from '@ioc:Adonis/Lucid/Database'
 import Address from 'App/Models/Address'
-import { HasMany, HasManyQueryBuilderContract, ModelQueryBuilderContract, RelationQueryBuilderContract, RelationSubQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
+import { RelationSubQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
+import {DateTime} from 'luxon'
 
 //TODO: rajouter une recherche dans les select des filtre
 
@@ -60,6 +60,7 @@ export default class SearchesController {
 
     if (job) {
       serviceProviders = await  ServiceProvider.query()
+        .whereNotNull('subscription')
         .whereHas('address', addressQuery => {
           this.filterAddressQuery(addressQuery, filterLocation)
         })
@@ -70,12 +71,13 @@ export default class SearchesController {
     }
     else {
       serviceProviders = await  ServiceProvider.query()
-      .whereHas('address', addressQuery => {
-        this.filterAddressQuery(addressQuery, filterLocation)
-      })
-      .preload('jobs').preload('address')
-      .orderBy(this.ORDER, 'asc')
-      .paginate(page, perPage)
+        .whereNotNull('subscription')
+        .whereHas('address', addressQuery => {
+          this.filterAddressQuery(addressQuery, filterLocation)
+        })
+        .preload('jobs').preload('address')
+        .orderBy(this.ORDER, 'asc')
+        .paginate(page, perPage)
     }
 
     if(request.ajax()) {
