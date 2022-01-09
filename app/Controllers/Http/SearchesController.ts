@@ -66,7 +66,7 @@ export default class SearchesController {
         })
         .whereHas('jobs', jobsQuery => jobsQuery.where('jobs_id', jobId))
         .preload('jobs').preload('address')
-        .orderBy(this.ORDER, 'asc')
+        .orderBy(this.ORDER, 'desc')
         .paginate(page, perPage)
     }
     else {
@@ -76,7 +76,7 @@ export default class SearchesController {
           this.filterAddressQuery(addressQuery, filterLocation)
         })
         .preload('jobs').preload('address')
-        .orderBy(this.ORDER, 'asc')
+        .orderBy(this.ORDER, 'desc')
         .paginate(page, perPage)
     }
 

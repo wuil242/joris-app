@@ -53,10 +53,10 @@ export default class EntrepriseDevisController {
   }
 
   public async success({view}:HttpContextContract) {
-    return await view.render('devis/entreprise/success')
+    return await view.render('devis/message', { type: 'success' })
   }
   
   public async error({view}:HttpContextContract) {
-    return await view.render('devis/entreprise/error')
+    return await view.render('devis/message', { type: 'error' })
   }
 }

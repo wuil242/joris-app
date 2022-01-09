@@ -89,9 +89,8 @@ export default class ClientDevisController {
         lastname: payload.lastname,
         tel: payload.tel,
         'user_id':  auth.user?.id
-      }).returning('id').then(() => {
-        sp.score += 1
-        sp.save()
+      }).returning('id').then(async () => {
+        await ServiceProvider.query().increment('score', 1).where('id', sp.id)
       })
   
       return response.redirect().toRoute('devis.client.success')
@@ -105,10 +104,10 @@ export default class ClientDevisController {
   }
 
   public async success({view}:HttpContextContract) {
-    return await view.render('devis/client/success')
+    return await view.render('devis/message', { type: 'success' })
   }
-
+  
   public async error({view}:HttpContextContract) {
-    return await view.render('devis/client/error')
+    return await view.render('devis/message', { type: 'error' })
   }
 }

@@ -25,6 +25,7 @@
 </p>
 
 <form class="form" action="{{ route('devis.entreprise.submit') }}" method="POST">
+  {{ csrfField() }}
   <label for="city" class="form-label">Ville</label>
   @!component('form/form_select', {
     options: cities,
