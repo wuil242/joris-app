@@ -83,6 +83,8 @@ export default class Carroussel {
   goTo(index) {
     const left = index * this.items[index].scrollWidth
     this.buttons.style.setProperty('transform', `translateX(${left}px)`)
+    
+    
     this.el.scroll({
       behavior: 'smooth',
       left

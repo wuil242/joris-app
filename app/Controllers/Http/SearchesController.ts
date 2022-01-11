@@ -6,7 +6,6 @@ import Quater from 'App/Models/Quater'
 import ServiceProvider from 'App/Models/ServiceProvider'
 import Address from 'App/Models/Address'
 import { RelationSubQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
-import {DateTime} from 'luxon'
 
 //TODO: rajouter une recherche dans les select des filtre
 
@@ -18,13 +17,13 @@ interface FilterLoactionOptions {
 
 export default class SearchesController {
   private LIMIT = {
-    MAX: 50,
+    MAX: 15,
     MIN: 1
   }
 
   private ORDER = 'score'
 
-  public async index({ request, view, session }: HttpContextContract) {
+  public async index({ request, view }: HttpContextContract) {
     const qs = request.qs()
 
     const jobId = Number.parseInt(qs.job, 10) || 0
@@ -81,11 +80,25 @@ export default class SearchesController {
     }
 
     if(request.ajax()) {
-      const html = await view.render('search/service-providers', {
+      const count = qs?.count === ''
+      if(count) {
+        return {count: serviceProviders.length}
+      }
+
+      const html = await view.render('service_provider/service_providers', {
         serviceProviders, qs
       })
 
-      return { html }
+      const filter = await view.render('search/parts/search-fields', {
+        jobs,
+        cities,
+        arrondissements,
+        quaters,
+        qs,
+        LIMIT: {...this.LIMIT, VALUE: perPage},
+      })
+
+      return {html, filter}
     }
 
     return view.render('search/index', {
@@ -101,7 +114,9 @@ export default class SearchesController {
   }
 
   private limitation(limit: number): number {
-    return limit && (limit < this.LIMIT.MAX && limit > this.LIMIT.MIN) ? limit : this.LIMIT.MIN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    return limit ?  
+    (limit < this.LIMIT.MIN ? this.LIMIT.MIN : limit > this.LIMIT.MAX ? this.LIMIT.MAX : limit) 
+    : this.LIMIT.MIN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
   } 
 
   private filterAddressQuery

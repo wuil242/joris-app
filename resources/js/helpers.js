@@ -42,3 +42,12 @@ export function throttle(callback, delay) {
       }
   };
 }
+
+/**
+ * 
+ * @param {string} str 
+ * @returns 
+ */
+export function str2Dom(str) {
+  return document.createRange().createContextualFragment(str).firstElementChild
+}

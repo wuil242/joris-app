@@ -1,0 +1,10 @@
+@if(serviceProviders.length > 0)
+  @each(sp in serviceProviders)
+  @!component('service_provider/parts/service-provider-card', {sp, qs})
+  @endeach
+  @if(serviceProviders.hasMorePages)
+    <button class="button search-more-button" type="submit" id="more-button" data-page="{{serviceProviders.currentPage + 1}}">Plus de Resultat</button>
+  @endif
+@else
+  <span class="search-empty search-card-empty" id="search-empty-message">Aucun Prestaire Trouver</span>
+@endif

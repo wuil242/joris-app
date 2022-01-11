@@ -8,6 +8,14 @@
   width: 90%;
 }
 
+.search-field.disabled {
+  border-color: var(--grey-color);
+}
+
+.search-field.disabled  * {
+  color: var(--grey-color);
+}
+
 .search-field-title, .search-field-select {
   font-size: 1.2rem;
   color: var(--text-color);

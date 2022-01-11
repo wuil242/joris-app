@@ -1,6 +1,10 @@
 <div class="search-field search-slider">
   <label for="limit-input">Nombre d'element affichable</label>
-  <input  type="range" id="limit-slider" min="{{LIMIT.MIN}}" max="{{LIMIT.MAX}}" value="{{LIMIT.VALUE}}">
-  <br>
+  <div class="search-slider-range">
+    <span>{{LIMIT.MIN}}</span>
+    <input  type="range" id="limit-slider" min="{{LIMIT.MIN}}" max="{{LIMIT.MAX}}" value="{{LIMIT.VALUE}}">
+    <span>{{LIMIT.MAX}}</span>
+   </div>
+  {{--  <br>  --}}
   <input type="number" id="limit-input" min="{{LIMIT.MIN}}" max="{{LIMIT.MAX}}" value="{{LIMIT.VALUE}}">
 </div>

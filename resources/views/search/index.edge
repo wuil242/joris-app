@@ -9,6 +9,10 @@
 
 @section('content')
 
+<template id="service-provider-card-skeleton">
+  @include('service_provider/parts/service_provider_card_skeleton')
+</template>
+
 @include('components/top-button')
 
 @!component('components/title', {
@@ -17,15 +21,15 @@
 })
 
 <section class="search-content">
-  <aside class="search-content-sidebar">
+  <aside class="search-content-sidebar" id="search-filter">
     @include('search/parts/search-fields')
   </aside>
   @if(serviceProviders.length > 0)
-    <section class="service-provider-cards">
-      @!component('search/service-providers', {serviceProviders, qs})
+    <section class="service-provider-cards" id="search-result">
+      @!component('service_provider/service_providers', {serviceProviders, qs})
     </section>
   @else
-  <span class="search-empty" id="search-empty-message">Aucun Prestaire Trouver</span>
+  <span id="search-result" class="search-empty" id="search-empty-message">Aucun Prestaire Trouver</span>
   @endif
 </section>
 

@@ -154,7 +154,7 @@
 
     background-color: var(--text-color);
 
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 
   .header-submenu-item:hover::after,

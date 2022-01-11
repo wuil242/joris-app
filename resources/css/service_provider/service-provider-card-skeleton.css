@@ -7,7 +7,7 @@
     left: 0;
     right: 0;
     display: block;
-    transform: translateX(-100%);
+    transform: translate3d(-100%, 0, 0);
     background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .07), transparent);
     animation: 1.5s waveMove 1s linear infinite;
   }
@@ -50,14 +50,14 @@
 
   @keyframes waveMove {
     0% {
-      transform: translateX(-100%);
+      transform: translate3d(-100%, 0, 0);
     }
 
     50% {
-      transform: translateX(100%);
+      transform: translate3d(100%, 0, 0);
     }
 
     100% {
-      transform: translateX(100%);
+      transform: translate3d(100%, 0, 0);
     }
   }
