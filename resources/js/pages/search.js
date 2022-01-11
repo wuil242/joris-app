@@ -1,6 +1,6 @@
 import '../../css/search/all.css'
 import FormSelect from '../components/FormSelect'
-import { debounce, scrollToElement, addLoader } from '../helpers'
+import { debounce, scrollToElement, addLoader, addButtonLoader } from '../helpers'
 import Sticky from '../components/Sticky'
 
 
@@ -71,7 +71,7 @@ function initSearchFilter(withMore = false) {
 
   $search_form_submit.addEventListener('click', e => {
     e.preventDefault()
-    addLoader($search_form_submit)
+    addButtonLoader($search_form_submit)
     submitForm($form, $search_fields)
   })
 

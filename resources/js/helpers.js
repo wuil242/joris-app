@@ -70,5 +70,9 @@ export function scrollToElement($el) {
  * @param {HTMLElement} $el 
  */
 export function addLoader($el) {
-  $el.innerHTML = 'Loading...'
+  $el.innerHTML = 'loading...'
+}
+
+export function addButtonLoader($el) {
+  $el.innerHTML += '<div class="loader-button"></div>'
 }
