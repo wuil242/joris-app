@@ -1,26 +1,19 @@
 import '../../css/search/all.css'
 import FormSelect from '../components/FormSelect'
-import { debounce, str2Dom } from '../helpers'
+import { debounce, scrollToElement, addLoader } from '../helpers'
 import Sticky from '../components/Sticky'
 
-// const $form = document.querySelector('#form-search-provider')
-// const $service_provider_skeleton_template = document.querySelector('#service-provider-card-skeleton') 
-// const $range = document.querySelector('#limit-slider')
-// const $limitInput = document.querySelector('#limit-input')
-// const $limit = document.querySelector("#search-limit")
-// const $search_fields = Array.from($form.querySelectorAll('.search-field .js-select'))
-// const $firstProviderCard = document.querySelector('.service-provider-card')
-// const $search_empty_message = document.getElementById('search-empty-message')
-// const $search_result = document.getElementById('search-result')
-// const $search_filter = document.getElementById('search-filter')
 
-// if($search_empty_message) {
-//   scrollToElement($search_empty_message)
-// }
+const $firstProviderCard = document.querySelector('.service-provider-card')
+let FETCH_STATUS = {
+  IDLE: 0,
+  WORKING: 1,
+  DONE: 2
+}
 
-// if($firstProviderCard) {
-//   scrollToElement($firstProviderCard)
-// }
+let FETCH_STATE = FETCH_STATUS.IDLE
+
+scrollToElement($firstProviderCard)
 
 Sticky.define({
   element: '.top-button',
@@ -29,16 +22,17 @@ Sticky.define({
 
 initSearchFilter(true)
 
+
 function initSearchFilter(withMore = false) {
   const $form = document.querySelector('#form-search-provider')
   const $range = document.querySelector('#limit-slider')
   const $limitInput = document.querySelector('#limit-input')
   const $limit = document.querySelector("#search-limit")
   const $search_fields = Array.from($form.querySelectorAll('.search-field .js-select'))
-// const $firstProviderCard = document.querySelector('.service-provider-card')
 // const $search_empty_message = document.getElementById('search-empty-message')
   const $search_result = document.getElementById('search-result')
   const $search_filter = document.getElementById('search-filter')
+  const $search_form_submit = document.getElementById('search-submit')
 
   $form.addEventListener('submit', () => handleFormSubmit({
     $form, $search_result, $search_filter, $search_fields
@@ -57,7 +51,7 @@ function initSearchFilter(withMore = false) {
 
     $range.addEventListener('pointerup', () => {
       $range.removeEventListener('pointermove', e => updateLimitValue(e, $form, $limitInput))
-      submit($form, $search_fields)
+      // submitForm($form, $search_fields)
     }, {once: true})
   })
 
@@ -65,15 +59,21 @@ function initSearchFilter(withMore = false) {
     e, $range, $limitInput, $limit
   }))
   $limitInput.addEventListener('change', debounce(function() {
-    submit($form, $search_fields)
+    // submitForm($form, $search_fields)
   }, 300))
 
   $limitInput.addEventListener('keyup', e => updateLimitSlider({
     e, $range, $limitInput, $limit
   }))
   $limitInput.addEventListener('keyup', debounce(function() {
-    submit($form, $search_fields)
+    // submitForm($form, $search_fields)
   }, 800))
+
+  $search_form_submit.addEventListener('click', e => {
+    e.preventDefault()
+    addLoader($search_form_submit)
+    submitForm($form, $search_fields)
+  })
 
 
   FormSelect.init()
@@ -97,13 +97,7 @@ function initSearchFilter(withMore = false) {
  * }} options
  */
 function handleFormSubmit({$form, $search_result, $search_filter, $search_fields}) {
-  const url = new URL(document.URL)
-  const queries = new FormData($form)
-    
-  for (const query of queries.keys()) {
-    url.searchParams.set(query, queries.get(query))
-  }
-  
+  const url = getFullUrl($form)
 
   fecthServiceProviders({url, $root: $search_result, before: false, $search_result})
     .then(({html, filter}) => {
@@ -117,6 +111,22 @@ function handleFormSubmit({$form, $search_result, $search_filter, $search_fields
 }
 
 /**
+ * url complet avec les query parameters du formulaire
+ * 
+ * @returns {URL}
+ */
+function getFullUrl($form) {
+  const url = new URL(document.URL)
+  const queries = new FormData($form)
+    
+  for (const query of queries.keys()) {
+    url.searchParams.set(query, queries.get(query))
+  }
+  return url
+}
+
+/**
+ * recuperation des perstataires et du formulaire de recherce au format html
  * 
  * @param {{
  * url:URL, 
@@ -162,14 +172,7 @@ function fecthServiceProviders({url, $root, before, $search_result, middleware =
   })
 }
 
-/**
- * ajout un loader en position absolue a l'element
- * 
- * @param {HTMLElement} $el 
- */
-function addLoader($el) {
-  $el.innerHTML = 'Loading...'
-}
+
 
 /**
  * 
@@ -214,7 +217,7 @@ function handleFormChange(e, $form, $search_fields) {
     $search_fieleds_filtered.forEach((field, index) => {
       field.value = '0'
       if(index === $search_fieleds_filtered.length - 1) {
-        submit($form, $search_fields)
+        // submitForm($form, $search_fields)
       }
     })
   }
@@ -223,20 +226,19 @@ function handleFormChange(e, $form, $search_fields) {
       .forEach(field => {
         field.value = '0'
 
-        submit($form, $search_fields)
+        // submitForm($form, $search_fields)
       })
   }
   else {
-    submit($form, $search_fields)
+    // submitForm($form, $search_fields)
   }
 }
-
 
 /**
  * @param {HTMLElement} $search_fields 
  * @param {HTMLElement} $form 
  */
-function submit($form, $search_fields) {
+function submitForm($form, $search_fields) {
   startFormLoading($search_fields)
   $form.dispatchEvent(new Event('submit'))
 }
@@ -290,18 +292,6 @@ function more($search_fields, $search_result, $search_filter) {
         }
       })
     })
-  })
-}
-
-
-/**
- * 
- * @param {HTMLElement} $el 
- */
-function scrollToElement($el) {
-  window.scroll({
-    behavior: 'smooth',
-    top: $el.offsetTop
   })
 }
 

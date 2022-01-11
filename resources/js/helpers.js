@@ -51,3 +51,24 @@ export function throttle(callback, delay) {
 export function str2Dom(str) {
   return document.createRange().createContextualFragment(str).firstElementChild
 }
+
+/**
+ * scroll vers un l'element
+ *  
+ * @param {HTMLElement} $el 
+ */
+export function scrollToElement($el) {
+ window.scroll({
+   behavior: 'smooth',
+   top: $el.offsetTop
+ })
+}
+
+/**
+ * ajout un loader en position absolue a l'element
+ * 
+ * @param {HTMLElement} $el 
+ */
+export function addLoader($el) {
+  $el.innerHTML = 'Loading...'
+}
