@@ -24,13 +24,9 @@
   <aside class="search-content-sidebar" id="search-filter">
     @include('search/parts/search-fields')
   </aside>
-  @if(serviceProviders.length > 0)
-    <section class="service-provider-cards" id="search-result">
-      @!component('service_provider/service_providers', {serviceProviders, qs})
-    </section>
-  @else
-  <span id="search-result" class="search-empty" id="search-empty-message">Aucun Prestaire Trouver</span>
-  @endif
+  <section class="service-provider-cards" id="search-result">
+    @!component('service_provider/service_providers', {serviceProviders, qs})
+  </section>
 </section>
 
 @endsection
