@@ -7,7 +7,7 @@
     <div class="service-provider-card-jobs">
       @if(sp.jobs.length > 1)
         @!component('service_provider/parts/service-provider-job', {
-          job: sp.jobs[0],
+          job: sp.jobs.filter(job => job.id.toString() === qs['job'])[0] || sp.jobs[0],
           jobsLength: sp.jobs.length,
         })
         @each(job in sp.jobs)
