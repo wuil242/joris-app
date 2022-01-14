@@ -104,9 +104,6 @@ export default class FormSelect {
     
     this.$input.value = ''
     this.showAllOption(this.$lis)
-    
-    // this.$select_hidden.dispatchEvent(new CustomEvent('form-select', {detail: e.target}))
-    // this.$root.dispatchEvent(new CustomEvent('form-select', {detail: e.target}))
   }
 
   /**
