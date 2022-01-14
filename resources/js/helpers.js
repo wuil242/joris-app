@@ -73,6 +73,27 @@ export function addLoader($el) {
   $el.innerHTML = 'loading...'
 }
 
+/**
+ * ajout un loader en position absolue a l'element represantant un boutton
+ * 
+ * @param {HTMLElement} $el 
+ */
 export function addButtonLoader($el) {
+  $el.setAttribute('disabled', '')
   $el.innerHTML += '<div class="loader-button"></div>'
+}
+
+/**
+ * url complet avec les query parameters du formulaire
+ * 
+ * @returns {URL}
+ */
+export function getFullUrl($form) {
+  const url = new URL(document.URL)
+  const queries = new FormData($form)
+    
+  for (const query of queries.keys()) {
+    url.searchParams.set(query, queries.get(query))
+  }
+  return url
 }

@@ -16,6 +16,11 @@
   cursor: pointer;
 }
 
+.button:disabled {
+  background-color: var(--secondary-color);
+  color: grey;
+}
+
 .button:hover,
 .button:active {
   --button-color: var(--button-hover-color);

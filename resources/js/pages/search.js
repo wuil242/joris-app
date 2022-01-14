@@ -1,7 +1,8 @@
 import '../../css/search/all.css'
 import FormSelect from '../components/FormSelect'
-import { debounce, scrollToElement, addLoader, addButtonLoader } from '../helpers'
+import { debounce, scrollToElement, addLoader, addButtonLoader, getFullUrl } from '../helpers'
 import Sticky from '../components/Sticky'
+import FetchApi from '../class/FetchApi'
 
 
 const $firstProviderCard = document.querySelector('.service-provider-card')
@@ -13,7 +14,9 @@ let FETCH_STATUS = {
 
 let FETCH_STATE = FETCH_STATUS.IDLE
 
-scrollToElement($firstProviderCard)
+if($firstProviderCard) {
+  scrollToElement($firstProviderCard)
+}
 
 Sticky.define({
   element: '.top-button',
@@ -38,10 +41,10 @@ function initSearchFilter(withMore = false) {
     $form, $search_result, $search_filter, $search_fields
   }))
 
-  $form.addEventListener('change', e => handleFormChange(e, $form, $search_fields))
+  $form.addEventListener('change', e => handleFormChange({e, $form, $search_fields, $search_filter}))
 
   $search_fields.forEach(field => {
-    field.addEventListener('form-select', e => handleFormChange(e, $form, $search_fields))
+    field.addEventListener('form-select', e => handleFormChange({e, $form, $search_fields, $search_filter}))
   })
 
   $range.addEventListener('pointerup', e => updateLimitValue(e, $limit, $limitInput))
@@ -51,23 +54,16 @@ function initSearchFilter(withMore = false) {
 
     $range.addEventListener('pointerup', () => {
       $range.removeEventListener('pointermove', e => updateLimitValue(e, $form, $limitInput))
-      // submitForm($form, $search_fields)
     }, {once: true})
   })
 
   $limitInput.addEventListener('change', e => updateLimitSlider({
     e, $range, $limitInput, $limit
   }))
-  $limitInput.addEventListener('change', debounce(function() {
-    // submitForm($form, $search_fields)
-  }, 300))
 
   $limitInput.addEventListener('keyup', e => updateLimitSlider({
     e, $range, $limitInput, $limit
   }))
-  $limitInput.addEventListener('keyup', debounce(function() {
-    // submitForm($form, $search_fields)
-  }, 800))
 
   $search_form_submit.addEventListener('click', e => {
     e.preventDefault()
@@ -81,7 +77,7 @@ function initSearchFilter(withMore = false) {
   if(withMore) {
     more($search_fields, $search_result, $search_filter)
   }
-  // return {$search_fields, $search_result, $search_filter}
+
 }
 
 
@@ -103,27 +99,12 @@ function handleFormSubmit({$form, $search_result, $search_filter, $search_fields
     .then(({html, filter}) => {
       $search_result.innerHTML = html
       $search_filter.innerHTML = filter
-      //TODO: update filter
       initSearchFilter()
       more($search_fields, $search_result, $search_filter)
-      // stopFormLoading($search_fields)
     })
 }
 
-/**
- * url complet avec les query parameters du formulaire
- * 
- * @returns {URL}
- */
-function getFullUrl($form) {
-  const url = new URL(document.URL)
-  const queries = new FormData($form)
-    
-  for (const query of queries.keys()) {
-    url.searchParams.set(query, queries.get(query))
-  }
-  return url
-}
+
 
 /**
  * recuperation des perstataires et du formulaire de recherce au format html
@@ -172,8 +153,6 @@ function fecthServiceProviders({url, $root, before, $search_result, middleware =
   })
 }
 
-
-
 /**
  * 
  * @param {HTMLElement} $root 
@@ -199,14 +178,19 @@ function addSkeletonCard($root, limit, before = false) {
 }
 
 /**
- * @param {Event} e
- * @param {HTMLFormElement} $form
- * @param {HTMLElement} $search_fields
+ * @param {{
+ * e: Event,
+ * $form: HTMLFormElement 
+ * $search_fields: HTMLElement 
+ * $search_filter: HTMLElement
+ * }} options 
  */
-function handleFormChange(e, $form, $search_fields) {
+function handleFormChange({e, $form, $search_fields, $search_filter}) {
   const name = e.target.querySelector('select')?.getAttribute('name')
 
   const $serch_fields_inputs = $search_fields.map($search_field => $search_field.querySelector('select'))
+
+  if(name === 'job') return
 
   if(name === 'city') {
     const $search_fieleds_filtered =  $serch_fields_inputs.filter(field => {
@@ -217,7 +201,7 @@ function handleFormChange(e, $form, $search_fields) {
     $search_fieleds_filtered.forEach((field, index) => {
       field.value = '0'
       if(index === $search_fieleds_filtered.length - 1) {
-        // submitForm($form, $search_fields)
+        updateForm($form, $search_filter, $search_fields)
       }
     })
   }
@@ -225,13 +209,27 @@ function handleFormChange(e, $form, $search_fields) {
     $serch_fields_inputs.filter(field => field.name === 'quater')
       .forEach(field => {
         field.value = '0'
-
-        // submitForm($form, $search_fields)
+        updateForm($form, $search_filter, $search_fields)
       })
   }
   else {
-    // submitForm($form, $search_fields)
+    updateForm($form, $search_filter, $search_fields)
   }
+}
+
+/**
+ * 
+ * @param {HTMLFormElement} $form 
+ * @param {HTMLFormElement} $search_filter 
+ * @param {HTMLFormElement} $search_fields 
+ */
+function updateForm($form, $search_filter, $search_fields) {
+  startFormLoading($search_fields)
+  FetchApi.getForm($form)
+    .then(({filter}) => {
+      $search_filter.innerHTML = filter
+      initSearchFilter()
+    })
 }
 
 /**
@@ -284,11 +282,9 @@ function more($search_fields, $search_result, $search_filter) {
         }
 
         if(index === last_index - 1) {
-          //TODO: update filter
           $search_filter.innerHTML = filter
           initSearchFilter(false)
           more($search_fields, $search_result, $search_filter)
-          // stopFormLoading()
         }
       })
     })
@@ -319,7 +315,7 @@ function modifySearchFields(eventName, $search_fields) {
   const isEnable = eventName === 'disable'
   $search_fields.forEach($field => $field.dispatchEvent(new Event(eventName)))
 
-  document.querySelectorAll('.search-fields-page input')
+  document.querySelectorAll('.search-fields-page input, #search-submit')
     .forEach($input => {
         if($input.getAttribute('name') !== 'limit') {
           if(isEnable) {

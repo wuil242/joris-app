@@ -81,14 +81,6 @@ export default class SearchesController {
 
     if(request.ajax()) {
       const count = qs?.count === ''
-      if(count) {
-        return {count: serviceProviders.length}
-      }
-
-      const html = await view.render('service_provider/service_providers', {
-        serviceProviders, qs
-      })
-
       const filter = await view.render('search/parts/search-fields', {
         jobs,
         cities,
@@ -97,6 +89,16 @@ export default class SearchesController {
         qs,
         LIMIT: {...this.LIMIT, VALUE: perPage},
       })
+
+      if(count) {
+        return {count: serviceProviders.length, filter}
+      }
+
+      const html = await view.render('service_provider/service_providers', {
+        serviceProviders, qs
+      })
+
+      
 
       return {html, filter}
     }
