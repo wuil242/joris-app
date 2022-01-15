@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
 import City from 'App/Models/City'
-import { sendMessage } from 'App/Services/twilio'
+import { sendMessage } from 'App/Services/Twilio'
 import EntrepriseDeviValidator from 'App/Validators/EntrepriseDeviValidator'
 import { COUNTRY_CODE } from 'Config/config'
 

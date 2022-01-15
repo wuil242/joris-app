@@ -29,9 +29,12 @@ export default class ClientDevisController {
       const denyTel = await Database.from('blacklist_tel').where('tel', tel).first()
 
       if(denyTel) {
-        const alert = 'ce numero est bloquer, si vous voulez le debloquer cliquer ici'
-        payload.tel = ''
-        session.flash({...payload, alert})
+        const data = {
+          value: payload.tel,
+          message: 'Le numero'
+        }
+        session.flash('alert', {type: 'error', message: await view.render('alert/ban', {...data})})
+        session.flashAll()
         return response.redirect().toRoute('devis.client', undefined, {
           qs: {sp: payload.serviceProviderId}
         })

@@ -1,8 +1,7 @@
 .site-name {
   font-size: 1.8rem;
   color: white;
-
-  font-family: "Montserrat-bold";
+  font-weight: bold;
 }
 
 /* .site-name:hover {

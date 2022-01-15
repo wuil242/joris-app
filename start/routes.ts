@@ -30,6 +30,7 @@ Route.group(() => {
   Route.get('/recherche', 'SearchesController.index').as('serviceProvider.find')
 
   Route.get('/devis/client', 'ClientDevisController.index').as('devis.client')
+  Route.post('/devis/client', 'ClientDevisController.store').as('devis.client.submit')
   Route.get('/devis/client/success', 'ClientDevisController.success').as('devis.client.success')
   Route.get('/devis/client/error', 'ClientDevisController.error').as('devis.client.error')
   
@@ -37,8 +38,8 @@ Route.group(() => {
   Route.get('/devis/client/envoi-reussi', 'EntrepriseDevisController.success').as('devis.entreprise.success')
   Route.get('/devis/entreprise/envoi-echec', 'EntrepriseDevisController.error').as('devis.entreprise.error')
   
+
   Route.group(() => {
-    Route.post('/devis/client', 'ClientDevisController.store').as('devis.client.submit')
     Route.post('/devis/entreprise', 'EntrepriseDevisController.store').as('devis.entreprise.submit')
   }).middleware('BanCheck')
 
@@ -59,13 +60,8 @@ Route.group(() => {
   Route.get('/connexion', 'AuthController.login').as('login')
   Route.post('/connexion', 'UsersController.login').as('login.submit')
 
-}).middleware('userGuard')
+}).middleware(['userGuard', 'BanCheck'])
 
 Route.group(() => {
   Route.post('/logout', 'UsersController.logout').as('logout')
-  
 }).middleware('auth')
-
-//connexion de l'utilisateur
-
-//TODO: mettre en place l'inscription des utilisateurs

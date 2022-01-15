@@ -2,16 +2,6 @@
 @import 'utils/reset';
 @import 'themes/all';
 @import 'components/all';
-/* @import 'home/all'; */
-
-/* limite de media query |  */
-/* 
- * media-small: 640px;
- * media-medium: 768px;
- * media-lg: 1024px;
- * media-xl: 1280px;
- * media-xxl: 1536px;
-*/
 
 html,
 body {
@@ -26,6 +16,14 @@ body {
 
 /* Responsive */
 
+/* limite de media query |  */
+/* 
+ * media-small: 640px;
+ * media-medium: 768px;
+ * media-lg: 1024px;
+ * media-xl: 1280px;
+ * media-xxl: 1536px;
+*/
 @media screen and (min-width: 650px) {
   :root {
     /* --page-font-size: 120%; */
