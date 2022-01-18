@@ -1,0 +1,15 @@
+@if(label)
+<label for="{{name}}" class="form-label {{required ? 'required' : ''}}">{{label}}</label>
+@endif
+@!component('components/form_rule', {rule})
+<input 
+  {{--  {{required ? 'required' : ''}}    --}}
+  type="{{type || 'text'}}" 
+  class="form-input" name="{{name}}"
+  placeholder="{{placeholder ? placeholder : ''}}"
+  value="{{flashMessages.has(name) ? flashMessages.get(name) : ''}}" 
+/>
+<span class="form-error">
+  {{flashMessages.has('errors.'+ name) ? flashMessages.get('errors.' + name) : ''}}
+</span>
+  

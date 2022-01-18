@@ -1,3 +1,5 @@
+import '../../css/components/carroussel.css'
+
 //TODO: ajout du defilement par toucher
 export default class Carroussel {
   static selector = '.js-carroussel'

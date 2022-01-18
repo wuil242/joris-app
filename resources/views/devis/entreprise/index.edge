@@ -17,16 +17,17 @@
 
 @!component('components/title', {
   text: 'Entreprise devis',
-  icon: 'letter'
+  icon: 'paper-plane',
+  iconStyle: 'far'
 })
 
-<p>
-  Envoyer votre message
+<p class="">
+  Envoyer votre demande; elle sera traiter en moins de 12H
 </p>
 
 <form class="form" action="{{ route('devis.entreprise.submit') }}" method="POST">
   {{ csrfField() }}
-  <label for="city" class="form-label">Ville</label>
+  <label for="city" class="form-label required">Ville</label>
   @!component('form/form_select', {
     options: cities,
     optionValue: 'id',
@@ -34,34 +35,29 @@
     name: 'cityId',
     value: flashMessages.get('cityId') ? cities.find(city => city.id == flashMessages.get('cityId'))  : cities[0] 
   })
-  <label for="email" class="form-label required">Email</label>
-  <input 
-    required  
-    type="email" class="form-input" name="email" value="{{flashMessages.has('email') ? flashMessages.get('email') : ''}}" 
-  />
-  <span style="color:red;">
-    {{flashMessages.has('errors.email') ? flashMessages.get('errors.email') : ''}}
-  </span>
-  <label for="tel" class="form-label required">Numero</label>
-  <input 
-    required 
-    type="tel" class="form-input" name="tel" value="{{flashMessages.has('tel') ? flashMessages.get('tel') : ''}}"
-  />
-  <span style="color:red;">
-      {{flashMessages.has('errors.tel') ? flashMessages.get('errors.tel') : ''}}
-  </span>
-  <label class="form-label required" for="message">Message</label>
-  <textarea
-    minlength="15"
-    maxlength="255" 
-    required  
-    name="message" id="message">{{flashMessages.has('message') ? flashMessages.get('message') : ''}}
-</textarea>
-  <span style="color:red;">
-{{flashMessages.has('errors.message') ? flashMessages.get('errors.message') : ''}}
-    </span>
 
-  <button type="submit">send</button>
+  @!component('components/form_input', {
+    label: 'Email',
+    required: true,
+    name: 'email',
+    type: 'email'
+  })
+
+@!component('components/form_input', {
+  label: 'Tel',
+  name: 'tel',
+  type: 'tel'
+})
+
+
+@!component('components/form_textarea', {
+  label: 'Message',
+  name: 'message',
+  required: true,
+  rule: 'this is the rule this is the rulethis is the rulethis is the rulethis is the rulethis is the rule '
+})
+
+<button type="submit">send</button> 
 </form>
 
 @endsection

@@ -4,7 +4,7 @@ import twilio from 'twilio'
 import Env from '@ioc:Adonis/Core/Env'
 import ClientDeviValidator from 'App/Validators/ClientDeviValidator'
 import Database from '@ioc:Adonis/Lucid/Database'
-import { COUNTRY_CODE } from 'Config/config'
+import { COUNTRY_CODE } from 'App/Configs/constants'
 import Mail from '@ioc:Adonis/Addons/Mail'
 
 export default class ClientDevisController {

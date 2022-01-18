@@ -1,11 +1,11 @@
 .header-page {
-  background: linear-gradient(90deg, #fff 25%, transparent);
+  background: #303991;
 
-  box-shadow: 0 0 1px 2px #0005;
+  /* box-shadow: 0 0 1px 2px #0005; */
 }
 
 @media screen and (min-width: 650px) {
   .header-page {
-    background: transparent;
+    background: #303991;
   }
 }

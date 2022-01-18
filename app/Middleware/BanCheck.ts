@@ -1,17 +1,26 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
-import {schema, rules} from '@ioc:Adonis/Core/Validator'
-import { COUNTRY_CODE, PHONE_NUMBER_REGEX } from 'Config/config'
+import {schema} from '@ioc:Adonis/Core/Validator'
+import { COUNTRY_CODE, VALIDATION_MESSAGE, VALIDATION_SCHEMA } from 'App/Configs/constants'
 
 export default class BanCheck {
   public async handle ({request, session, response, view}: HttpContextContract, next: () => Promise<void>) {
     // code for middleware goes here. ABOVE THE NEXT CALL
-    const payload = await request.validate({
-      schema: schema.create({
-        tel: schema.string.optional({trim: true}, [rules.regex(PHONE_NUMBER_REGEX)]),
-        email: schema.string.optional({trim: true}, [rules.email()])
-      })
-    })
+    // const payload = await request.validate({
+    //   schema: schema.create({
+    //     ...VALIDATION_SCHEMA.EMAIL,
+    //     ...VALIDATION_SCHEMA.TEL
+    //   }),
+    //   messages: {
+    //     ...VALIDATION_MESSAGE.DEFAULT,
+    //     ...VALIDATION_MESSAGE.TEL
+    //   }
+    // })
+
+    const payload = {
+      tel: request.input('tel'),
+      email: request.input('email')
+    }
 
     if(payload.tel) {
       payload.tel = payload.tel.includes(COUNTRY_CODE) ? payload.tel : COUNTRY_CODE + payload.tel

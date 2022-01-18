@@ -5,15 +5,39 @@
   gap: 10px;
 }
 
+.form-label {
+  font-size: 1.2rem;
+  font-weight: lighter;
+  color: white;
+}
+
 .form-label.required::after {
   content: '*';
-  color: red;
+  color: #ee4430;
   font-size: 1.1em;
   padding: 0 .2em;
 }
 
 .form-input {
-  font-size: 1.1rem;
   display: block;
   padding: 5px;
+}
+
+.form-error {
+  font-size: .9rem;
+  font-weight: lighter;
+  color: #ee4430;
+}
+
+.form-rule {
+  font-weight: lighter;
+  color: darkgrey;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.form-rule i {
+  /* font-size: 1.2em; */
 }
