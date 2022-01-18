@@ -6,26 +6,40 @@
 html,
 body {
   width: 100%;
+  background-color: var(--page-bg-color);
   overflow-x: hidden;
+
   /* background: var(--page-color); */
   font-size: var(--page-font-size);
   font-family: var(--page-font-family);
-  background-color: var(--dark-background-color);
+  color: var(--page-color);
+
   scroll-behavior: smooth;
 }
 
-/* Responsive */
-
-/* limite de media query |  */
-/* 
- * media-small: 640px;
- * media-medium: 768px;
- * media-lg: 1024px;
- * media-xl: 1280px;
- * media-xxl: 1536px;
-*/
-@media screen and (min-width: 650px) {
-  :root {
-    /* --page-font-size: 120%; */
-  }
+/* Comportement lors du focus */
+* {
+  transition-duration: .3s;
+  transition-property: outline, box-shadow;
 }
+
+button:focus, input:focus, textarea:focus, 
+.top-button:focus i, .button:focus, .is-focus {
+  outline: solid 1px var(--focus-outline-color);
+  box-shadow: 0 0 2px 3px var(--focus-shadow-color);
+}
+
+.top-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* 
+limite de media query
+ * media-xsm: 475px;
+ * media-sm: 650px;
+ * media-md: 750px;
+ * media-lg: 950px;
+ * media-xl: 1200px;
+ * media-xxl: 1300px;
+*/

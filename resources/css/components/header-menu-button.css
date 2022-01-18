@@ -8,16 +8,25 @@
   align-items: center;
   border: none;
   border-radius: 4px;
-  background-color: black;
+  background-color: var(--header-menu-button-bg-color);
 
   cursor: pointer;
 }
 
 .header-menu-button .line {
   width: 90%;
-  height: 1px;
-  padding: 0.05em;
-  background-color: whitesmoke;
+  height: 2px;
+  background-color: var(--header-menu-button-line-color);
+}
+
+.header-menu-button:hover,
+.header-menu-button:active {
+  background-color: var(--header-menu-button-hover-bg-color);
+}
+
+.header-menu-button:hover .line,
+.header-menu-button:active .line {
+  background-color: var(--header-menu-button-hover-line-color);
 }
 
 /* Events */

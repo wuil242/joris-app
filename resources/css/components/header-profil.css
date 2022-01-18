@@ -1,13 +1,3 @@
-/* Header Auth buttons */
-.header-auth-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Header Profil */
 .header-profil {
   width: 2.5rem;
   height: 2.5rem;

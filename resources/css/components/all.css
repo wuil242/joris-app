@@ -1,5 +1,5 @@
-@import 'auth-buttons';
 @import 'button';
+@import 'header-auth-buttons';
 @import 'form';
 @import 'header-menu';
 @import 'header-page';
@@ -18,3 +18,5 @@
 @import 'loader';
 @import 'link';
 /* @import 'alert'; */
+@import 'header-profil';
+

@@ -1,6 +1,6 @@
 .button {
   position: relative;
-  border: none;
+  border: solid 2px var(--button-border-color);
   padding: 0.7em 0.9em;
   border-radius: 4px;
 
@@ -8,23 +8,25 @@
   text-align: center;
   text-decoration: none;
 
-  background-color: var(--button-color);
+  background-color: var(--button-bg-color);
   color: var(--button-text-color);
-
-  transition: letter-spacing 0.3s linear;
 
   cursor: pointer;
 }
 
 .button:disabled {
-  background-color: var(--secondary-color);
-  color: grey;
+  background-color: var(--button-disabled-bg-color);
+  color: var(--button-disabled-color);
 }
 
 .button:hover,
 .button:active {
-  --button-color: var(--button-hover-color);
+  --button-bg-color: var(--button-hover-bg-color);
   --button-text-color: var(--button-hover-text-color);
-  word-spacing: .03em;
-  letter-spacing: .05em;
+}
+
+.button.outline {
+  --button-border-color: var(--button-text-color); 
+  --button-bg-color: var(--button-hover-bg-color);
+  --button-text-color: var(--button-hover-text-color);
 }

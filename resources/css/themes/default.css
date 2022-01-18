@@ -1,38 +1,67 @@
 :root {
-
-  /* Page */
-  --page-color: red;
-  --page-font-size: 14px;
-  --page-font-family: "Montserrat";
-
-  /* Text */
-  --text-color: #FFFFFF;
-  --text-second-color: #252B42;
-  --primary-text-color: rgba(141, 92, 246, 1);
-  --secondary-text-color: rgba(231, 231, 231, 0.89);
-
-  /* Colors */
-  --primary-color: #8D5CF6;
-  --dark-background-color: #26335D;
-  /* #26335D; */
-  --secondary-color: #E5E5E5;
-  --danger-color: #E74040;
-  --grey-color: #737373;
-
-  /* Logo Colors */
-  --logo-blue-color: #2e3192;
-  --logo-red-color: #ed1e24;
-
-
-
-  /* Button */
-  --button-color: var(--primary-color);
-  --button-text-color: var(--text-color);
-  --button-hover-color: var(--button-text-color);
-  --button-hover-text-color: var(--button-color);
-
   /* Layer | niveaux de chaque calque */
   --layer-top: 75;
   --layer-middle: 50;
   --layer-bottom: 25;
+
+  /* Logo Colors */
+  --logo-primary-color: #ffffff;
+  --logo-tertiary-color: #2e3192;
+  --logo-secondary-color: #ed1e24;
+  --logo-border-color: #b9bcda;
+  
+  /* Default colors */
+  --color-primary: var(--logo-tertiary-color);
+  --color-secondary: #26335D;
+  --color-danger: #E74040;
+  --color-info: #2483ff;
+  --color-warning: #f8f544f1;
+  --color-grey: #737373;
+  --color-whitesmoke: #E5E5E5;
+  --color-white: #ffffff;
+
+  /* Text */
+  --text-primary: var(--logo-tertiary-color);
+  --text-secondary: var(--color-white);
+
+  /* Focus */
+  --focus-oultine-color: var(--color-info);
+  --focus-shadow-color: var(--color-info);
+
+  /* Page */
+  --page-bg-color: var(--logo-primary-color);
+  --page-font-size: 14px;
+  --page-font-family: "Montserrat";
+  --page-color: var(--text-primary);
+
+  /* Button */
+  --button-bg-color: var(--color-primary);
+  --button-text-color: var(--color-white);
+  --button-hover-bg-color: var(--button-text-color);
+  --button-hover-text-color: var(--button-bg-color);
+  --button-disabled-bg-color: var(--color-whitesmoke);
+  --button-disabled-text-color: var(--color-grey);
+  --button-border-color: transparent;
+
+  /* Header menu */
+  --header-menu-button-bg-color: var(--button-bg-color);
+  --header-menu-button-line-color: var(--button-text-color);
+  --header-menu-button-hover-bg-color: var(--button-hover-bg-color);
+  --header-menu-button-hover-line-color: var(--button-hover-text-color);
+  --header-menu-content-bg-color: var(--header-menu-button-bg-color);
+  --header-menu-content-text-color: var(--color-white);
+  --header-menu-bg-color: rgba(0, 0, 0, 0.548);
+  --header-menu-item-underline: var(--text-primary);
+
+  /* Header submenu */
+  --header-submenu-triangle-size: 0.5em;
+  --header-submenu-triangle-color: var(--text-primary);
+  --header-submenu-items-bg-color: var(--color-secondary);
+  --header-submenu-item-underline: var(--header-menu-item-underline); 
+
+  /* Auth buttons */
+  --header-auth-button-bg-color: var(--button-hover-bg-color);
+  --header-auth-button-text-color: var(--button-hover-text-color);
+  /* --header-auth-button-bg-color: var(--button-bg-color);
+  --header-auth-button-text-color: var(--button-text-color); */
 }

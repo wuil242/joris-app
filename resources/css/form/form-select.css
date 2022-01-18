@@ -54,6 +54,7 @@
 
 .form-select-search {
   display: flex;
+  gap: 5px;
   align-items: center;
   padding: .3em .5em;
   font-size: .9rem;
@@ -63,6 +64,11 @@
 .form-select-input {
   border: none;
   outline: none;
+}
+
+.form-select-input:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .form-select-search-icon {

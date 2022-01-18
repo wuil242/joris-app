@@ -1,0 +1,5 @@
+@if(flashMessages.has('errors.'+ name))
+<span class="form-error">
+  {{flashMessages.has('errors.'+ name) ? flashMessages.get('errors.' + name) : ''}}
+</span>
+@endif

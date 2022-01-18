@@ -17,8 +17,6 @@
 
 @!component('components/title', {
   text: 'Entreprise devis',
-  icon: 'paper-plane',
-  iconStyle: 'far'
 })
 
 <p class="">
@@ -36,28 +34,28 @@
     value: flashMessages.get('cityId') ? cities.find(city => city.id == flashMessages.get('cityId'))  : cities[0] 
   })
 
-  @!component('components/form_input', {
+  @!component('form/form_input', {
     label: 'Email',
     required: true,
     name: 'email',
     type: 'email'
   })
 
-@!component('components/form_input', {
-  label: 'Tel',
+@!component('form/form_input', {
+  label: 'Numéro de télephone',
   name: 'tel',
   type: 'tel'
 })
 
 
-@!component('components/form_textarea', {
+@!component('form/form_textarea', {
   label: 'Message',
   name: 'message',
   required: true,
-  rule: 'this is the rule this is the rulethis is the rulethis is the rulethis is the rulethis is the rule '
+  rule: 'this is the rule this is the rulethis is '
 })
 
-<button type="submit">send</button> 
+<button class="form-submit" type="submit">Demander un devis <i class="fa fa-paper-plane"></i></button> 
 </form>
 
 @endsection

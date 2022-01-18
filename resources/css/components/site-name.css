@@ -1,6 +1,6 @@
 .site-name {
   font-size: 1.8rem;
-  color: white;
+  color: var(--text-primary);
   font-weight: bold;
 }
 

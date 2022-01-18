@@ -1,8 +1,11 @@
 .form {
-  padding: 25px;
+  padding: 5px 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
+  width: 90%;
+  margin: auto;
+  justify-content: center;
 }
 
 .form-label {
@@ -18,15 +21,25 @@
   padding: 0 .2em;
 }
 
-.form-input {
+.form-input, .form-textarea {
   display: block;
-  padding: 5px;
+  padding: .5em .3em;
+  font-size: 1.3rem;
+  border-radius: 4px;
+  border: none;
+}
+
+.form-textarea {
+  height: 100px;
 }
 
 .form-error {
   font-size: .9rem;
   font-weight: lighter;
   color: #ee4430;
+  background: white;
+  padding: .3em .5em;
+  border-radius: 4px;
 }
 
 .form-rule {
@@ -38,6 +51,21 @@
   gap: 10px;
 }
 
-.form-rule i {
-  /* font-size: 1.2em; */
+.form-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: .5em .7em;
+  place-self: start;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  background: var(--button-color);
+  color: var(--button-text-color);
+  border-radius: 4px;
+}
+
+.form-submit:hover, .form-submit:active {
+
 }

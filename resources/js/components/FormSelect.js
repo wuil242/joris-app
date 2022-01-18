@@ -52,7 +52,15 @@ export default class FormSelect {
       this.$lis.forEach(li => this.filterSelect(li, value))
     })
 
-    this.$icon.addEventListener('click', this.stopPropagation)
+    this.$input.addEventListener('focus', () => this.$input.parentElement.classList.add('is-focus'))
+    this.$input.addEventListener('blur', () => this.$input.parentElement.classList.remove('is-focus'))
+
+    this.$icon.addEventListener('click', e => {
+      this.stopPropagation(e)
+      this.$input.focus()
+    })
+
+
   }
 
   /**
