@@ -17,11 +17,8 @@
   --button-text-color: var(--button-hover-text-color);
 }
 
-
 .header-auth-button:hover,
 .header-auth-button:active {
   --button-bg-color: var(--button-hover-text-color);
   --button-text-color: var(--button-hover-bg-color);
 }
-
-

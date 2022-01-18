@@ -8,17 +8,20 @@
   --logo-primary-color: #ffffff;
   --logo-tertiary-color: #2e3192;
   --logo-secondary-color: #ed1e24;
-  --logo-border-color: #b9bcda;
   
   /* Default colors */
   --color-primary: var(--logo-tertiary-color);
-  --color-secondary: #26335D;
+  --color-secondary: #686aae;
   --color-danger: #E74040;
   --color-info: #2483ff;
   --color-warning: #f8f544f1;
   --color-grey: #737373;
   --color-whitesmoke: #E5E5E5;
   --color-white: #ffffff;
+  --color-red: #ee4949;
+
+  /* Default ligth clors */
+  --color-light-primary: #b9bcda;
 
   /* Text */
   --text-primary: var(--logo-tertiary-color);
@@ -62,6 +65,31 @@
   /* Auth buttons */
   --header-auth-button-bg-color: var(--button-hover-bg-color);
   --header-auth-button-text-color: var(--button-hover-text-color);
-  /* --header-auth-button-bg-color: var(--button-bg-color);
-  --header-auth-button-text-color: var(--button-text-color); */
+
+  /* Form select */
+  --form-select-search-bg-color: var(--button-hover-text-color);
+  --form-select-button-border-color: var(--button-hover-text-color);
+  --form-select-content-bg-color: var(--button-hover-bg-color);
+  --form-select-content-shadow-color: var(--button-hover-text-color);
+  --form-select-input-color: var(--text-primary);
+  --form-select-option-hover-bg-color: var(--color-light-primary);
+
+  /* Form label */
+  --form-label-required-symbol: var(--color-red); 
+  
+  /* Form input */
+  --form-input-border-color: var(--text-primary);
+
+  /* Form error */
+  --form-error-text-color: var(--color-danger);
+
+  /* Form rule */
+  --form-rule-text-color: var(--color-light-primary);
+
+  /* Form submit buttom */
+  --form-submit-bg-color: var(--button-bg-color);
+  --form-submit-text-color: var(--button-text-color);
+  --form-submit-hover-bg-color: var(--form-submit-text-color);
+  --form-submit-hover-text-color: var(--form-submit-bg-color);
+  --form-submit-border-color: var(--form-submit-bg-color);
 }

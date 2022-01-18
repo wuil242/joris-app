@@ -86,7 +86,7 @@
 .header-submenu-item::after {
   content: '';
   position: absolute;
-  width: 2px;
+  width: 3px;
   top:  50%;
   bottom: 50%;
   left: 0;

@@ -4,6 +4,7 @@ import '../../css/form/form-select.css'
  * 
  */
 export default class FormSelect {
+  static ID = 0
 
   /**
    * 
@@ -24,20 +25,19 @@ export default class FormSelect {
   }
 
   defineSelect() {
-
-
+    this.$select.dataset.id = 'form-slelect-' + FormSelect.ID++
     this.$root.addEventListener('disable', () => this.disabled = true)
     this.$root.addEventListener('enable', () => this.disabled = false)
 
     this.$button.addEventListener('click', (e) => {
-      if(this.disabled) return
+      this.openOrClose(e)
 
-      e.stopPropagation()
-      e.stopImmediatePropagation()
-
-      this.$select.classList.toggle('active')
-      this.$input.value = ''
-      this.showAllOption(this.$lis)
+      document.querySelectorAll('.js-select-content')
+        ?.forEach($box => {
+          if($box.dataset.id !== this.$select.dataset.id) {
+            $box.classList.remove('active')
+          }
+        })
 
       window.addEventListener('click', () => {
         this.$select.classList.remove('active')
@@ -59,8 +59,22 @@ export default class FormSelect {
       this.stopPropagation(e)
       this.$input.focus()
     })
+  }
 
+  /**
+   * 
+   * @param {Event} e 
+   * @returns 
+   */
+  openOrClose(e) {
+    if(this.disabled) return
 
+    e.stopPropagation()
+    e.stopImmediatePropagation()
+
+    this.$select.classList.toggle('active')
+    this.$input.value = ''
+    this.showAllOption(this.$lis)
   }
 
   /**
@@ -135,5 +149,4 @@ export default class FormSelect {
       }
     })
   }
-
 }

@@ -11,13 +11,12 @@
 .form-label {
   font-size: 1.2rem;
   font-weight: lighter;
-  color: white;
 }
 
 .form-label.required::after {
   content: '*';
-  color: #ee4430;
-  font-size: 1.1em;
+  color: var(--form-label-required-symbol);
+  font-size: .9em;
   padding: 0 .2em;
 }
 
@@ -27,6 +26,8 @@
   font-size: 1.3rem;
   border-radius: 4px;
   border: none;
+  color: var(--text-primary);
+  border: solid 2px var(--form-input-border-color);
 }
 
 .form-textarea {
@@ -36,15 +37,14 @@
 .form-error {
   font-size: .9rem;
   font-weight: lighter;
-  color: #ee4430;
-  background: white;
+  color: var(--form-error-text-color);
   padding: .3em .5em;
   border-radius: 4px;
 }
 
 .form-rule {
   font-weight: lighter;
-  color: darkgrey;
+  color: var(--form-rule-text-color);
   display: flex;
   align-items: baseline;
   flex-wrap: nowrap;
@@ -59,13 +59,13 @@
   padding: .5em .7em;
   place-self: start;
   font-size: 1.2rem;
-  cursor: pointer;
-  border: none;
-  background: var(--button-color);
-  color: var(--button-text-color);
-  border-radius: 4px;
+  background-color: var(--form-submit-bg-color);
+  color: var(--form-submit-text-color);
+
 }
 
 .form-submit:hover, .form-submit:active {
-
+  --form-submit-bg-color: var(--form-submit-hover-bg-color);
+  --form-submit-text-color: var(--form-submit-hover-text-color);
+  border-color: var(--form-submit-border-color);
 }

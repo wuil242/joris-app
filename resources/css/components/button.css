@@ -30,3 +30,7 @@
   --button-bg-color: var(--button-hover-bg-color);
   --button-text-color: var(--button-hover-text-color);
 }
+
+.button.rounded {
+  border-radius: 50%;
+}

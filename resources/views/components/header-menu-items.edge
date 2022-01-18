@@ -15,12 +15,16 @@
     <input type="checkbox" id="submenu-provider-{{prefix}}">
     <label class="header-submenu-label" for="submenu-provider-{{prefix}}">Espace Prestataire</label>
     <ul class="header-submenu-items">
-      <li class="header-submenu-item">
-        <a href="{{route('serviceProvider.enrole')}}">S'enrôler</a>
-      </li>
-      <li class="header-submenu-item">
-        <a href="{{route('serviceProvider.policy')}}">Politiques de confidentialitées</a>
-      </li>
+      @!component('components/header_submenu_item', {
+        route: route('serviceProvider.enrole'),
+        text: 'S\'enrôler'
+      })
+
+      @!component('components/header_submenu_item', {
+        route: route('serviceProvider.policy'),
+        text: 'Politiques de confidentialitées'
+      })
+
     </ul>
   </nav>
 
@@ -28,15 +32,20 @@
     <input type="checkbox" id="submenu-infos-{{prefix}}">
     <label class="header-submenu-label" for="submenu-infos-{{prefix}}">Infos</label>
     <ul class="header-submenu-items">
-      <li class="header-submenu-item">
-        <a href="{{route('infos.contact-us')}}">Nous-Contcter</a>
-      </li>
-      <li class="header-submenu-item">
-        <a href="{{route('infos.about')}}">A-props</a>
-      </li>
-      <li class="header-submenu-item">
-        <a href="{{route('infos.policy')}}">Politiques des donées</a>
-      </li>
+      @!component('components/header_submenu_item', {
+        route: route('infos.contact-us'),
+        text: 'Nous-Contcter'
+      })
+
+      @!component('components/header_submenu_item', {
+        route: route('infos.about'),
+        text: 'A-props'
+      })
+
+      @!component('components/header_submenu_item', {
+        route: route('infos.policy'),
+        text: 'Politiques des donées'
+      })
     </ul>
   </nav>
   @if(!auth?.isLoggedIn)

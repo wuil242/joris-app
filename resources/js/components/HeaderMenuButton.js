@@ -16,7 +16,7 @@ export default class HeaderMenuButton {
 
     if (!this.$openBtn) throw new Error('selecteur du boutton de menu non defini')
     if (!this.$menu) throw new Error('element reprseting menu not dinfined, please set correct selector to "menuSelector" option')
-    if (!this.$closeBtn) throw new Error('button element use to close menu not define, please set correct selector "closeBtnSelector" option')
+    
     if (!this.$closeElement) throw new Error('background element use to close menu not define, please set correct selector "closeElementSelector" option')
 
     this.init()
@@ -25,7 +25,9 @@ export default class HeaderMenuButton {
   init() {
     this.$openBtn.addEventListener('click', this.openMenu.bind(this))
 
-    this.$closeBtn.addEventListener('click', this.closeMenu.bind(this))
+    if(this.$closeBtn) {
+      this.$closeBtn.addEventListener('click', this.closeMenu.bind(this))
+    }
 
     Sticky.define({
       element: this.$openBtn,

@@ -23,6 +23,8 @@ body {
   transition-property: outline, box-shadow;
 }
 
+/* input, */
+
 button:focus, input:focus, textarea:focus, 
 .top-button:focus i, .button:focus, .is-focus {
   outline: solid 1px var(--focus-outline-color);
