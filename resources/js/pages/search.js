@@ -1,6 +1,6 @@
 import '../../css/search/all.css'
 import FormSelect from '../components/FormSelect'
-import { debounce, scrollToElement, addLoader, addButtonLoader, getFullUrl } from '../helpers'
+import { debounce, scrollToElement, addLoaderToElement, addLoaderToButton, getFullUrl } from '../helpers'
 import Sticky from '../components/Sticky'
 import FetchApi from '../class/FetchApi'
 
@@ -67,7 +67,7 @@ function initSearchFilter(withMore = false) {
 
   $search_form_submit.addEventListener('click', e => {
     e.preventDefault()
-    addButtonLoader($search_form_submit)
+    addLoaderToButton($search_form_submit)
     submitForm($form, $search_fields)
   })
 
@@ -119,7 +119,7 @@ function handleFormSubmit({$form, $search_result, $search_filter, $search_fields
  * @returns 
  */
 function fecthServiceProviders({url, $root, before, $search_result, middleware = null}) {
-  addLoader($root)
+  addLoaderToElement($root)
   return new Promise((resolve, reject) => {
     const headers = {'X-Requested-With': 'XMLHttpRequest'}
     url.searchParams.set('count', '')
@@ -135,7 +135,7 @@ function fecthServiceProviders({url, $root, before, $search_result, middleware =
           scrollToElement($search_result.firstElementChild)
         }
         else {
-          addLoader($root)
+          addLoaderToElement($root)
         }
 
         url.searchParams.delete('count')

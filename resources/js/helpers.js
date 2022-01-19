@@ -69,7 +69,7 @@ export function scrollToElement($el) {
  * 
  * @param {HTMLElement} $el 
  */
-export function addLoader($el) {
+export function addLoaderToElement($el) {
   $el.innerHTML = 'loading...'
 }
 
@@ -78,9 +78,9 @@ export function addLoader($el) {
  * 
  * @param {HTMLElement} $el 
  */
-export function addButtonLoader($el) {
-  $el.setAttribute('disabled', '')
-  $el.innerHTML += '<div class="loader-button"></div>'
+export function addLoaderToButton($el) {
+    $el.setAttribute('disabled', '')
+    $el.innerHTML += '<div class="loader-button"></div>'
 }
 
 /**

@@ -4,8 +4,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-
-  background: var(--button-text-color);
+  border-radius: var(--loader-button-radius);
+  background-color: var(--loader-button-bg-color);
 
   font-size: .5em;
 
@@ -14,7 +14,7 @@
 
 .loader-button:hover::before, 
 .loader-button:hover::after {
-  border-top-color: var(--button-text-color);
+  border-top-color: var(--loader-button-color);
 }
 
 .loader-button::before, .loader-button::after {
@@ -28,10 +28,10 @@
   width: 1.5em;
 
   
-  border-top: solid .45em var(--button-color);
+  border-top: solid .45em var(--loader-button-color);
   border-right: solid .45em transparent;
   border-bottom: solid .45em transparent;
-  border-left: solid .45em white;
+  border-left: solid .45em var(--loader-button-color);
 
 
   border-radius: 50%;

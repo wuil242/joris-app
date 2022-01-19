@@ -21,7 +21,7 @@
   --color-red: #ee4949;
 
   /* Default ligth clors */
-  --color-light-primary: #b9bcda;
+  --color-light-primary: #7879b5;
 
   /* Text */
   --text-primary: var(--logo-tertiary-color);
@@ -45,6 +45,7 @@
   --button-disabled-bg-color: var(--color-whitesmoke);
   --button-disabled-text-color: var(--color-grey);
   --button-border-color: transparent;
+  --button-radius: 4px;
 
   /* Header menu */
   --header-menu-button-bg-color: var(--button-bg-color);
@@ -97,5 +98,10 @@
   /* Title */
   --title-text-color: var(--text-primary);
   --title-underline-color: var(--color-red);
+
+  /* Loader | button */
+  --loader-button-bg-color: var(--button-bg-color);
+  --loader-button-color: var(--button-text-color);
+  --loader-button-radius: var(--button-radius);
   
 }
