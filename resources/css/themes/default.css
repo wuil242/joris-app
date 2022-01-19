@@ -93,4 +93,9 @@
   --form-submit-hover-bg-color: var(--form-submit-text-color);
   --form-submit-hover-text-color: var(--form-submit-bg-color);
   --form-submit-border-color: var(--form-submit-bg-color);
+
+  /* Title */
+  --title-text-color: var(--text-primary);
+  --title-underline-color: var(--color-red);
+  
 }

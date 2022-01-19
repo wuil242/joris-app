@@ -19,43 +19,45 @@
   text: 'Entreprise devis',
 })
 
-<p class="">
-  Envoyer votre demande; elle sera traiter en moins de 12H
-</p>
-
-<form class="form" action="{{ route('devis.entreprise.submit') }}" method="POST">
-  {{ csrfField() }}
-  <label for="city" class="form-label required">Ville</label>
-  @!component('form/form_select', {
-    options: cities,
-    optionValue: 'id',
-    optionContent: 'name',
-    name: 'cityId',
-    value: flashMessages.get('cityId') ? cities.find(city => city.id == flashMessages.get('cityId'))  : cities[0] 
-  })
-
+<div class="devis-content">
+  <p class="">
+    Envoyer votre demande; elle sera traiter en moins de 12H
+  </p>
+  
+  <form class="form" action="{{ route('devis.entreprise.submit') }}" method="POST">
+    {{ csrfField() }}
+    <label for="city" class="form-label required">Ville</label>
+    @!component('form/form_select', {
+      options: cities,
+      optionValue: 'id',
+      optionContent: 'name',
+      name: 'cityId',
+      value: flashMessages.get('cityId') ? cities.find(city => city.id == flashMessages.get('cityId'))  : cities[0] 
+    })
+  
+    @!component('form/form_input', {
+      label: 'Email',
+      required: true,
+      name: 'email',
+      type: 'email'
+    })
+  
   @!component('form/form_input', {
-    label: 'Email',
-    required: true,
-    name: 'email',
-    type: 'email'
+    label: 'Numéro de télephone',
+    name: 'tel',
+    type: 'tel'
   })
-
-@!component('form/form_input', {
-  label: 'Numéro de télephone',
-  name: 'tel',
-  type: 'tel'
-})
-
-
-@!component('form/form_textarea', {
-  label: 'Message',
-  name: 'message',
-  required: true,
-  rule: 'this is the rule this is the rulethis is '
-})
-
-<button class="button form-submit" type="submit">Demander un devis <i class="fa fa-paper-plane"></i></button> 
-</form>
+  
+  
+  @!component('form/form_textarea', {
+    label: 'Message',
+    name: 'message',
+    required: true,
+    rule: 'this is the rule this is the rulethis is '
+  })
+  
+  <button class="button form-submit" type="submit">Demander un devis <i class="fa fa-paper-plane"></i></button> 
+  </form>
+</div>
 
 @endsection
