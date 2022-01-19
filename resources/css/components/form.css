@@ -23,11 +23,15 @@
 .form-input, .form-textarea {
   display: block;
   padding: .5em .3em;
-  font-size: 1.3rem;
   border-radius: 4px;
-  border: none;
-  color: var(--text-primary);
   border: solid 2px var(--form-input-border-color);
+
+  font-size: 1.3rem;
+  color: var(--text-primary);
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: transparent;
 }
 
 .form-textarea {
@@ -68,4 +72,24 @@
   --form-submit-bg-color: var(--form-submit-hover-bg-color);
   --form-submit-text-color: var(--form-submit-hover-text-color);
   border-color: var(--form-submit-border-color);
+}
+
+/* Responsive */
+
+@media only screen and (min-width: 650px) {
+  .form {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .form {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 950px) {
+  .form {
+    width: 50%;
+  }
 }

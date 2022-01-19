@@ -1,3 +1,4 @@
+/* TODO: Stylisation menu ecran xxl et focus des submenu */
 .header-submenu {
   position: relative;
   display: flex;
@@ -69,9 +70,12 @@
 }
 
 .header-submenu-items {
-  background-color: var(--header-submenu-items-bg-color);
   display: none;
   gap: 5px;
+
+  
+  color: var(--header-submenu-items-text-color);
+  background-color: var(--header-submenu-items-bg-color);
 }
 
 .header-submenu-item {
@@ -134,6 +138,9 @@
     width: 30vw;
     align-items: center;
     justify-content: space-around;
+
+    --header-submenu-items-bg-color: var(--text-primary);
+    --header-submenu-item-underline: var(--text-secondary);
   }
 
   .header-submenu-item::after {

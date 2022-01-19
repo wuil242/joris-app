@@ -60,7 +60,8 @@
   --header-submenu-triangle-size: 0.5em;
   --header-submenu-triangle-color: var(--text-primary);
   --header-submenu-items-bg-color: var(--color-secondary);
-  --header-submenu-item-underline: var(--header-menu-item-underline); 
+  --header-submenu-items-text-color: var(--text-secondary);
+  --header-submenu-item-underline: var(--header-menu-item-underline);
 
   /* Auth buttons */
   --header-auth-button-bg-color: var(--button-hover-bg-color);

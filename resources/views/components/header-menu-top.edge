@@ -10,7 +10,7 @@
 </div>
 <div class="header-menu-actions">
 @if(!auth.isLoggedIn)
-  <a class="header-menu-actions-login header-menu-item" href="{{ route('login')}}">Se connecter</a>
+  <a class="header-menu-actions-login header-menu-item {{ request.url() ===  route('login') ? 'active' : '' }}" href="{{ route('login')}}">Se connecter</a>
   <a class="header-menu-actions-sign_up button" href="{{ route('sign-up')}}">Créer un compte</a>
 @endif
 <div class="{{openMenu || '' }} header-menu hide scroll">
