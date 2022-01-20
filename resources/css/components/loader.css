@@ -42,7 +42,7 @@
 
 .loader-button:before {
   /* border-top: solid .4em transparent; */
-  animation: rotate 1s 1s infinite;
+  animation: rotate 1s  infinite;
 }
 
 .loader-button::after {

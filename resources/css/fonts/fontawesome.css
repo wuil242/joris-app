@@ -10,7 +10,7 @@
 .fab {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  display: inline-block;
+  display: inline-swap;
   font-style: normal;
   font-variant: normal;
   text-rendering: auto;
@@ -164,7 +164,7 @@
           filter: none; }
 
 .fa-stack {
-  display: inline-block;
+  display: inline-swap;
   height: 2em;
   line-height: 2em;
   position: relative;
@@ -4584,7 +4584,7 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Brands';
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   src: url("../../fonts/fontawesome/fa-brands-400.ttf") format("truetype");
 }
 
@@ -4595,7 +4595,7 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   src: url("../../fonts/fontawesome/fa-regular-400.ttf") format("truetype");
   }
 
@@ -4606,7 +4606,7 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 900;
-  font-display: block;
+  font-display: swap;
   src: url("../../fonts/fontawesome/fa-solid-900.ttf") format("truetype");
    }
 

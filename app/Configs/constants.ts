@@ -16,10 +16,14 @@ export const VALIDATION_SCHEMA = {
   ])}
 }
 
+export const VALIDATION_OPTIONAL_SCHEMA = {
+  TEL: {tel: schema.string.optional({trim: true}, [rules.regex(PHONE_NUMBER_REGEX)])}
+}
+
 export const VALIDATION_MESSAGE  = {
   DEFAULT: {
-    required: 'ce champ ne peut pas être vide!',
-    email: 'cet email n\'est pas valide'
+    required: 'ce champ est requis!',
+    email: 'cet email n\'est pas valide!'
   },
   TEL: {
     'tel.regex': `ce numero n'est pas valide, exemple: (${COUNTRY_CODE})XXXXXXXXX`

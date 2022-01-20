@@ -3,7 +3,7 @@ import Database from '@ioc:Adonis/Lucid/Database'
 import City from 'App/Models/City'
 import { sendMessage } from 'App/Services/Twilio'
 import EntrepriseDeviValidator from 'App/Validators/EntrepriseDeviValidator'
-import { COUNTRY_CODE } from 'App/Configs/constants'
+import { formatNumberPhone, getFormatedDateTime } from 'App/Helpers/helpers'
 
 export default class EntrepriseDevisController {
 
@@ -15,7 +15,9 @@ export default class EntrepriseDevisController {
   public async store({session, request, view, response}: HttpContextContract) {
     const payload = await request.validate(EntrepriseDeviValidator)
 
-    payload.tel = payload.tel.includes(COUNTRY_CODE) ? payload.tel : COUNTRY_CODE + payload.tel
+    if(payload.tel) {
+      payload.tel = formatNumberPhone(payload.tel)
+    }
 
     const city = await City.findOrFail(payload.cityId)
 
@@ -28,12 +30,8 @@ export default class EntrepriseDevisController {
       return response.redirect().back()
     }
 
-    const date = new Date().toLocaleDateString('fr-FR', {
-      month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric'
-    })
+    const date = getFormatedDateTime()
     const body = await view.render('sms/entreprise_devis', {date, city, ...payload})
-
-    
 
     try {
       await sendMessage({to: contact.tel as string, body})
@@ -46,8 +44,6 @@ export default class EntrepriseDevisController {
       
       return response.redirect().toRoute('devis.entreprise.success')
     } catch (error) {
-     
-
       return response.redirect().toRoute('devis.entreprise.error')
     }
   }

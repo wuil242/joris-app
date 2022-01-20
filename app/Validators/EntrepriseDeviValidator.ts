@@ -1,6 +1,6 @@
 import { schema, rules} from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import {VALIDATION_MESSAGE, VALIDATION_SCHEMA} from 'App/Configs/constants'
+import {VALIDATION_MESSAGE, VALIDATION_OPTIONAL_SCHEMA, VALIDATION_SCHEMA} from 'App/Configs/constants'
 
 export default class EntrepriseDeviValidator {
   constructor (protected ctx: HttpContextContract) {
@@ -28,7 +28,7 @@ export default class EntrepriseDeviValidator {
   public schema = schema.create({
 		cityId: schema.number([rules.unsigned()]),
 		...VALIDATION_SCHEMA.EMAIL,
-		...VALIDATION_SCHEMA.TEL,
+		...VALIDATION_OPTIONAL_SCHEMA.TEL,
 		...VALIDATION_SCHEMA.MESSAGE
   })
 
