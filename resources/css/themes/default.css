@@ -12,7 +12,8 @@
   /* Default colors */
   --color-primary: var(--logo-tertiary-color);
   --color-secondary: #686aae;
-  --color-danger: #E74040;
+  --color-success: #4eaf88;
+  --color-danger: #e04f5f;
   --color-info: #2483ff;
   --color-warning: #f8f544f1;
   --color-grey: #737373;
@@ -104,4 +105,7 @@
   --loader-button-color: var(--button-text-color);
   --loader-button-radius: var(--button-radius);
   
+  /* Devis | message */
+  --devis-message-bg-color: var(--color-success);
+  --devis-message-text-color: var(--color-success);
 }

@@ -31,11 +31,11 @@ Route.group(() => {
 
   Route.get('/devis/client', 'ClientDevisController.index').as('devis.client')
   Route.post('/devis/client', 'ClientDevisController.store').as('devis.client.submit')
-  Route.get('/devis/client/success', 'ClientDevisController.success').as('devis.client.success')
-  Route.get('/devis/client/error', 'ClientDevisController.error').as('devis.client.error')
+  Route.get('/devis/client/envoi-reussi', 'ClientDevisController.success').as('devis.client.success')
+  Route.get('/devis/client/envoi-echec', 'ClientDevisController.error').as('devis.client.error')
   
   Route.get('/devis/entreprise', 'EntrepriseDevisController.index').as('devis.entreprise')
-  Route.get('/devis/client/envoi-reussi', 'EntrepriseDevisController.success').as('devis.entreprise.success')
+  Route.get('/devis/entreprise/envoi-reussi', 'EntrepriseDevisController.success').as('devis.entreprise.success')
   Route.get('/devis/entreprise/envoi-echec', 'EntrepriseDevisController.error').as('devis.entreprise.error')
   
 

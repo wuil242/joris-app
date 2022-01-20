@@ -5,36 +5,27 @@
 @section('head')
 {{--  @entryPointScripts('devis')  --}}
 @entryPointStyles('devis')
-  <style>
-    .devis-message {
-      display: grid;
-      grid-template-columns: 64px 1fr;
-      justify-content: start;
-      align-items: center;
-      gap: 10px;
-      color: var(--text-color);
-    }
-  
-    .devis-icon {
-      width: 64px;
-      height: 64px;
-    }
-  </style>
 @endsection
 
 @section('content')
-<div class="devis-message {{type === 'success' ? 'devis-success' : 'devis-error'}}">
-  <img class="devis-icon" src="{{type === 'success' ? '/succes.png' : '/annuler.png'}}">
-  @if(message)
-    <p class="devis-message-content">{{message}}</p>
-  @else
-    <p class="devis-message-content">
-      {{
-        type === 'success' ? 
-        'Demande de devis envoyer avec success' : 
-        'Impossible d\'envoyer le devis'
-      }}
-    </p>
-  @endif
+<div class="devis-message {{type === 'success' ? 'is-success' : 'is-error'}}">
+  <div class="devis-message-content">
+    <img class="devis-message-icon" src="{{type === 'success' ? '/succes.png' : '/annuler.png'}}">
+    @if(message)
+      <p class="devis-message-text">{{message}}</p>
+    @else
+      <p class="devis-message-text">
+        {{
+          type === 'success' ? 
+          'Demande de devis envoyer avec success' : 
+          'Impossible d\'envoyer le devis'
+        }}
+      </p>
+    @endif
+  </div>
+</div>
+<div class="devis-message-links">
+  <a href="{{route('serviceProvider.find')}}" title="trouver un prestataire"  class="link">trouver un prestataire</a>
+  <a href="{{route('devis.entreprise')}}"  title="demende devis pour entreprise" class="link">demender un devis pour les entreprises</a>
 </div>
 @endsection
