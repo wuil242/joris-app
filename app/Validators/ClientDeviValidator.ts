@@ -1,6 +1,6 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { PHONE_NUMBER_REGEX } from 'App/Configs/constants'
+import { PHONE_NUMBER_REGEX, VALIDATION_MESSAGE, VALIDATION_SCHEMA } from 'App/Configs/constants'
 
 export default class ClientDeviValidator {
   constructor (protected ctx: HttpContextContract) {
@@ -27,11 +27,11 @@ export default class ClientDeviValidator {
 	 */
   public schema = schema.create({
 		serviceProviderId: schema.number([rules.unsigned()]),
-		lastname: schema.string({trim: true}, [rules.maxLength(20)]),
-		firstname: schema.string({trim: true}, [rules.maxLength(30)]),
-		tel: schema.string({trim: true}, [rules.regex(PHONE_NUMBER_REGEX)]),
-		message: schema.string({trim: true}, [rules.maxLength(230)]),
-		address: schema.string({trim: true}, [rules.maxLength(35)])
+		...VALIDATION_SCHEMA.LASTNAME,
+		...VALIDATION_SCHEMA.FIRSTNAME,
+		...VALIDATION_SCHEMA.TEL,
+		...VALIDATION_SCHEMA.MESSAGE,
+		
   })
 
 	/**
@@ -45,5 +45,11 @@ export default class ClientDeviValidator {
 	 * }
 	 *
 	 */
-  public messages = {}
+  public messages = {
+		...VALIDATION_MESSAGE.DEFAULT,
+		...VALIDATION_MESSAGE.FIRSTNAME,
+		...VALIDATION_MESSAGE.LASTNAME,
+		...VALIDATION_MESSAGE.TEL,
+		...VALIDATION_MESSAGE.MESSAGE,
+	}
 }

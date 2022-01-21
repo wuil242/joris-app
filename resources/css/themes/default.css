@@ -17,12 +17,12 @@
   --color-info: #2483ff;
   --color-warning: #f8f544f1;
   --color-grey: #737373;
-  --color-whitesmoke: #E5E5E5;
   --color-white: #ffffff;
   --color-red: #ee4949;
 
   /* Default ligth clors */
   --color-light-primary: #7879b5;
+  --color-light-white: #E5E5E5;
 
   /* Text */
   --text-primary: var(--logo-tertiary-color);
@@ -43,7 +43,7 @@
   --button-text-color: var(--color-white);
   --button-hover-bg-color: var(--button-text-color);
   --button-hover-text-color: var(--button-bg-color);
-  --button-disabled-bg-color: var(--color-whitesmoke);
+  --button-disabled-bg-color: var(--color-light-white);
   --button-disabled-text-color: var(--color-grey);
   --button-border-color: transparent;
   --button-radius: 4px;
@@ -87,7 +87,8 @@
   --form-error-text-color: var(--color-danger);
 
   /* Form rule */
-  --form-rule-text-color: var(--color-light-primary);
+  --form-rule-bg-color: var(--color-light-primary);
+  --form-rule-text-color: var(--color-light-white);
 
   /* Form submit buttom */
   --form-submit-bg-color: var(--button-bg-color);

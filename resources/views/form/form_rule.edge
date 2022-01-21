@@ -1,3 +1,15 @@
 @if(rule)
-<span class="form-rule"><i class="fa fa-info-circle"></i> {{rule}}</span>
+<div class="form-rule">
+  <i class="form-rule-icon fa fa-info-circle"></i></a>
+  <span class="form-rule-text">{{rule}}</span>
+</div>
+@elseif(rules)
+<div class="form-rule">
+  <i class="form-rule-icon fa fa-info-circle"></i>
+  <ul class="form-rule-text">
+    @each(rule in rules)
+      <li>{{rule}}</li>
+    @endeach
+  </ul>
+</div>
 @endif

@@ -6,12 +6,13 @@ import ClientDeviValidator from 'App/Validators/ClientDeviValidator'
 import Database from '@ioc:Adonis/Lucid/Database'
 import { COUNTRY_CODE } from 'App/Configs/constants'
 import Mail from '@ioc:Adonis/Addons/Mail'
+import { formatNumberPhone, getFormatedDateTime } from 'App/Helpers/helpers'
+import { string } from '@ioc:Adonis/Core/Helpers'
 
 export default class ClientDevisController {
 
   public async index({ request, view }: HttpContextContract) {
-    const qs = request.qs()
-    const serviceProviderId = +qs.sp || 0
+    const serviceProviderId = +request.qs().sp || 0
     const serviceProvider = await ServiceProvider.query().where('id', serviceProviderId)
       .preload('address').preload('jobs').first()
 
@@ -24,9 +25,9 @@ export default class ClientDevisController {
     const payload = await request.validate(ClientDeviValidator)
     
     try {
-      const tel = payload.tel.includes(COUNTRY_CODE) ? payload.tel : COUNTRY_CODE + payload.tel
+      payload.tel = formatNumberPhone(payload.tel)
 
-      const denyTel = await Database.from('blacklist_tel').where('tel', tel).first()
+      const denyTel = await Database.from('blacklist_tel').where('tel', payload.tel).first()
 
       if(denyTel) {
         const data = {
@@ -47,13 +48,12 @@ export default class ClientDevisController {
         throw `Aucun prestaire trouver avec l'id[${payload.serviceProviderId}]`
       }
       
-      const date = new Date().toLocaleDateString('fr-FR', {
-        month: 'long', day: 'numeric', year: 'numeric', 'formatMatcher': 'best fit'
-      })
+      payload.message = string.condenseWhitespace(payload.message)
+
       const body = await view.render('sms/client_devis', {
         ...payload, 
         city: sp.address.city, 
-        date
+        date: getFormatedDateTime()
       })
 
       const message = {

@@ -1,5 +1,10 @@
 @if(flashMessages.has('errors.'+ name))
-<span class="form-error">
-  {{flashMessages.has('errors.'+ name) ? flashMessages.get('errors.' + name) : ''}}
-</span>
+
+<ul class="form-errors">
+  @each(error in flashMessages.get('errors.' + name))
+    <li>
+      <span class="form-error">{{error}}</span>
+    </li>
+  @endeach
+</ul>
 @endif

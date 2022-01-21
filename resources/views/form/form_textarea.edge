@@ -1,9 +1,11 @@
 @if(label)
-<label for="{{name}}" class="form-label {{required ? 'required' : ''}}">{{label}}</label>
+<div>
+  @!component('form/form_rule', {rule, rules})
+  <label for="{{name}}" class="form-label {{required ? 'required' : ''}}">{{label}}</label>
+</div>
 @endif
-@!component('form/form_rule', {rule})
 <textarea
-  class="form-textarea"
+  class="form-textarea {{flashMessages.has('errors.'+ name) ? 'is-error' : ''}}"
   minlength="{{minlength ? minlength : ''}}"
   maxlength="{{maxlength ? maxlength : ''}}" 
   {{--  {{required ? 'required' : ''}}    --}}

@@ -19,15 +19,19 @@ export async function sendMessage({to, body}: TwilioMessage) {
     return Promise.resolve(result)
   } catch (error) {
 
-    Mail.sendLater(async message => {
-      const res = {message: error.message, stack: error.stack, to}
-      message.from('log@iprovider.cg')
-        .to('dev@iprovider.cg')
-        .subject('email log')
-        .htmlView('email/twillio_error', {error: res, body})
-    })
+    try {
+      Mail.sendLater(async message => {
+        const res = {message: error.message, stack: error.stack, to}
+        message.from('log@iprovider.cg')
+          .to('dev@iprovider.cg')
+          .subject('email log')
+          .htmlView('email/twillio_error', {error: res, body})
+      })
+    } catch (error) {
+      console.error(error)
+      throw error      
+    }
 
-    console.error(error)
     throw error
   }
 }

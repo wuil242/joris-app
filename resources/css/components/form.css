@@ -30,6 +30,10 @@
   color: var(--text-primary);
 }
 
+.form-input.is-error, .form-textarea.is-error {
+  --form-input-border-color: var(--color-danger);
+}
+
 .form-input:focus, .form-textarea:focus {
   border-color: transparent;
 }
@@ -38,21 +42,51 @@
   height: 100px;
 }
 
-.form-error {
-  font-size: .9rem;
-  font-weight: lighter;
-  color: var(--form-error-text-color);
-  padding: 0 .5em .5em .5em;
-  border-radius: 4px;
-}
-
 .form-rule {
   font-weight: lighter;
+  display: inline;
+  position: relative;
+  width: 100%;
+}
+
+.form-rule-icon {
+  cursor: pointer;
+  color: var(--form-rule-bg-color);
+}
+
+.form-rule-text {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 90vw;
+  padding: .4em;
+  border-radius: 4px;
+  background-color: var(--form-rule-bg-color);
+
   color: var(--form-rule-text-color);
-  display: flex;
-  align-items: baseline;
-  flex-wrap: nowrap;
-  gap: 10px;
+  font-size: .8em;
+  
+  list-style-type: '- ';
+  list-style-position: inside;
+}
+
+.form-rule:hover > .form-rule-text {
+  display: initial;
+}
+
+.form-errors {
+  padding: 0 .5em .5em .5em;
+  
+  color: var(--form-error-text-color);
+  font-size: .9rem;
+  
+  list-style-type: '- ';
+  list-style-position: inside;
+}
+
+.form-error {
+  font-weight: lighter;
 }
 
 .form-submit {
@@ -65,7 +99,6 @@
   font-size: 1.2rem;
   background-color: var(--form-submit-bg-color);
   color: var(--form-submit-text-color);
-
 }
 
 .form-submit:hover, .form-submit:active {
@@ -79,6 +112,16 @@
 @media only screen and (min-width: 650px) {
   .form {
     width: 60%;
+  }
+
+  .form-rule-text {
+    width: 70vw;
+  }
+}
+
+@media only screen and (min-width: 950px) {
+  .form-rule-text {
+    width: 50vw;
   }
 }
 

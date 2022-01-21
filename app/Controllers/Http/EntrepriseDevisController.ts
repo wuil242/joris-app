@@ -30,8 +30,9 @@ export default class EntrepriseDevisController {
       return response.redirect().back()
     }
 
-    const date = getFormatedDateTime()
-    const body = await view.render('sms/entreprise_devis', {date, city, ...payload})
+    const body = await view.render('sms/entreprise_devis', {
+      ...payload, city, date: getFormatedDateTime()
+    })
 
     try {
       await sendMessage({to: contact.tel as string, body})
