@@ -4,6 +4,7 @@ import { debounce, scrollToElement, addLoaderToElement, addLoaderToButton, getFu
 import Sticky from '../components/Sticky'
 import FetchApi from '../class/FetchApi'
 
+// TODO: ajout d'un panier permettant d'accumuler les prestataire
 
 const $firstProviderCard = document.querySelector('.service-provider-card')
 let FETCH_STATUS = {

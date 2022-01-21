@@ -1,0 +1,62 @@
+<style>
+.service-provider-box {
+  padding: 10px;
+}
+
+.service-provider-box-button {
+}
+
+.service-provider-box-button:hover + .service-provider-box-items {
+}
+
+.service-provider-box-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+
+.service-provider-box-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  box-shadow: 0 0 2px 2px red;
+  border-radius: 4px;
+}
+
+.service-provider-box-image {
+  width: 48px;
+  height: 48px;
+  /* border: solid 2px red; */
+  border-radius: 50%;
+  object-fit: scale-down;
+}
+
+.service-provider-box-close {
+  color: red;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  cursor: pointer;
+}
+
+/* Responsive */
+/* @media only screen and (min-width: 950px) {
+  .service-provider-box-items {
+    justify-content: stretch;
+  }
+} */
+
+</style>
+<div class="service-provider-box">
+  {{--  <button class="button service-provider-box-button" type="button">show</button>  --}}
+  <div class="service-provider-box-items">
+    @each(serviceProvider in serviceProviders)
+      @!component('components/service_provider_box_item', {serviceProvider})
+    @endeach
+  </div>
+</div>

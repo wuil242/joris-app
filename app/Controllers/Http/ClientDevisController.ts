@@ -4,19 +4,26 @@ import twilio from 'twilio'
 import Env from '@ioc:Adonis/Core/Env'
 import ClientDeviValidator from 'App/Validators/ClientDeviValidator'
 import Database from '@ioc:Adonis/Lucid/Database'
-import { COUNTRY_CODE } from 'App/Configs/constants'
 import Mail from '@ioc:Adonis/Addons/Mail'
 import { formatNumberPhone, getFormatedDateTime } from 'App/Helpers/helpers'
 import { string } from '@ioc:Adonis/Core/Helpers'
 
 export default class ClientDevisController {
 
-  public async index({ request, view }: HttpContextContract) {
-    const serviceProviderId = +request.qs().sp || 0
-    const serviceProvider = await ServiceProvider.query().where('id', serviceProviderId)
-      .preload('address').preload('jobs').first()
+  public async index({ request, view}: HttpContextContract) {
+    const ids = request.qs().sp
+    let serviceProviderIds:number[] = []
+    if(Array.isArray(ids)) {
+      serviceProviderIds = ids.map(id => +id)
+      const allId = serviceProviderIds.every(id => !Number.isNaN(id))
+      if(!allId) {
+        throw 'id de prestaire non valide' 
+      }
+    }
+    const serviceProviders = await ServiceProvider.query().whereIn('id', serviceProviderIds)
+      .preload('address').preload('jobs')
 
-    return await view.render('devis/client/index', {serviceProvider})
+    return await view.render('devis/client/index', {serviceProviders})
   }
 
   

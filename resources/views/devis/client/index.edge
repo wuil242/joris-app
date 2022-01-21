@@ -18,28 +18,17 @@
   text: 'Soumettre un devis',
 })
 
+@if(serviceProviders)
+{{inspect(serviceProviders.map(sp => sp.id))}}
+@endif
+
 <section class="devis-content">
   <aside class="devis-service-provider">
-    <p>
-      Devis pour {{serviceProvider.gender === 'Homme' ? 'Mr' : 'Mme'}} {{serviceProvider.lastname.toUpperCase()}}
-      {{serviceProvider.firstname}}
-      <p>
-        Metiers: {{serviceProvider.jobs.map(job => job.name).join('|')}}
-      </p>
-      <p>
-        Ville: {{serviceProvider.address.city.name}}
-      </p>
-      <p>
-        Address: {{serviceProvider.address.human}}
-      </p>
-      <p>
-        Tel: {{serviceProvider.tel}}
-      </p>
-    </p>
+    @!component('components/service_provider_box', {serviceProviders})
   </aside>
 <form action="{{route('devis.client.submit')}}" class="form devis-form" method="POST">
   {{ csrfField() }}
-  <input type="number" name="serviceProviderId" value="{{serviceProvider.id}}" hidden>
+  {{--  <input type="number" name="serviceProviderId" value="{{serviceProvider.id}}" hidden>  --}}
   @!component('form/form_input', {
     label: 'Nom(s)',
     required: true,

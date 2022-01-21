@@ -14,3 +14,5 @@ Carroussel.define({
   auto: true,
   time: 5
 })
+
+// TODO: styliser la homepage

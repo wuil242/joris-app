@@ -7,3 +7,6 @@ Alert.init()
 try {
   FormSelect.init()
 }catch{}
+
+// TODO: creer une carte speciale pour l'affichage du prestataire ou des prestataire
+// qui vont recevoir le devis [dans la page d'envoi de devis client /devis/client]

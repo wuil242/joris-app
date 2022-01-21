@@ -1,0 +1,16 @@
+<div class="service-provider-box-item">
+  <i class="service-provider-box-close fa fa-window-close"></i>
+  @!component('components/directus_image', {
+    className: 'service-provider-box-image',
+    src: serviceProvider.photo
+  })
+  <ul class="service-provider-box-content">
+    <li>
+      {{serviceProvider.gender === 'Homme' ? 'Mr' : 'Mme'}} 
+      {{serviceProvider.lastname.toUpperCase()}} {{serviceProvider.firstname}}
+    </li>
+    <li>
+      Metiers: {{serviceProvider.jobs.map(job => job.name).join('|')}}
+    </li>
+  </ul>
+</div>

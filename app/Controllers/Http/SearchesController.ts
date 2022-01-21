@@ -7,7 +7,7 @@ import ServiceProvider from 'App/Models/ServiceProvider'
 import Address from 'App/Models/Address'
 import { RelationSubQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
 
-//TODO: rajouter une recherche dans les select des filtre
+//TODO: mettre les limitte d'affichage exacte pour les prestataires 5 - 15
 
 interface FilterLoactionOptions {
   cityId: number,
