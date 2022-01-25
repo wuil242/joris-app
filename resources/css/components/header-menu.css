@@ -30,6 +30,7 @@
   --header-submenu-triangle-color: var(--text-secondary);
   --header-menu-item-underline: var(--text-secondary);
   --header-submenu-item-underline: var(--text-secondary);
+  --header-menu-text-color: var(--header-menu-content-text-color);
 }
 
 .header-menu-close {
@@ -59,6 +60,8 @@
   padding: 25px;
   overflow-x: hidden;
   font-size: 1.3rem;
+
+  color: var(--header-menu-text-color);
 }
 
 .header-menu-item {
@@ -141,6 +144,7 @@
 
 .header-menu-actions-login {
   display: none;
+  color: var(--header-menu-text-color);
 }
 
 

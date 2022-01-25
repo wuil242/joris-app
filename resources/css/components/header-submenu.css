@@ -138,8 +138,8 @@
     align-items: center;
     justify-content: space-around;
 
-    --header-submenu-items-bg-color: var(--text-primary);
-    --header-submenu-item-underline: var(--text-secondary);
+    --header-submenu-items-bg-color: var(--color-primary);
+    --header-submenu-item-underline: var(--color-white);
   }
 
   .header-submenu-item::after {

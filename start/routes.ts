@@ -47,9 +47,9 @@ Route.group(() => {
   Route.get('/prestataire/enrolement', 'ServiceProvidersController.enrole').as('serviceProvider.enrole')
   Route.get('/prestataire/plotique-de-confidentialite', 'ServiceProvidersController.policy').as('serviceProvider.policy')
 
-  Route.get('/contact-us', 'InfosController.contact').as('infos.contact-us')
-  Route.get('/a-propos', 'InfosController.about').as('infos.about')
-  Route.get('/politique-de-confidentialite', 'InfosController.policy').as('infos.policy')
+  Route.get('/nous-contacté', 'InfosController.contact').as('infos.contact-us')
+  Route.get('/à-propos', 'InfosController.about').as('infos.about')
+  Route.get('/politique-de-confidentialitée', 'InfosController.policy').as('infos.policy')
 
 }).middleware('silentAuth')
 

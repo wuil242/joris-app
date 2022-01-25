@@ -25,8 +25,9 @@
   --color-light-white: #E5E5E5;
 
   /* Text */
-  --text-primary: var(--logo-tertiary-color);
+  --text-primary: #1b1a1a;
   --text-secondary: var(--color-white);
+  --text-tertiary: var(--color-grey);
 
   /* Focus */
   --focus-oultine-color: var(--color-info);
@@ -54,15 +55,16 @@
   --header-menu-button-hover-bg-color: var(--button-hover-bg-color);
   --header-menu-button-hover-line-color: var(--button-hover-text-color);
   --header-menu-content-bg-color: var(--header-menu-button-bg-color);
+  --header-menu-text-color: var(--color-primary);
   --header-menu-content-text-color: var(--color-white);
   --header-menu-bg-color: rgba(0, 0, 0, 0.548);
-  --header-menu-item-underline: var(--text-primary);
+  --header-menu-item-underline: var(--color-primary);
 
   /* Header submenu */
   --header-submenu-triangle-size: 0.5em;
-  --header-submenu-triangle-color: var(--text-primary);
+  --header-submenu-triangle-color: var(--color-primary);
   --header-submenu-items-bg-color: var(--color-secondary);
-  --header-submenu-items-text-color: var(--text-secondary);
+  --header-submenu-items-text-color: var(--color-white);
   --header-submenu-item-underline: var(--header-menu-item-underline);
 
   /* Auth buttons */
