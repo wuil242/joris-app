@@ -1,8 +1,9 @@
-<div class="service-provider-box-item">
+<div class="service-provider-box-item" id="service-provider-box-{{serviceProvider.id}}">
   <i class="service-provider-box-close fa fa-window-close"></i>
   @!component('components/directus_image', {
     className: 'service-provider-box-image',
-    src: serviceProvider.photo
+    src: serviceProvider.photo,
+    alt: `prestaire ayant pour metier ${serviceProvider.jobs.map(job => job.name).join(' ou ')}`
   })
   <ul class="service-provider-box-content">
     <li>

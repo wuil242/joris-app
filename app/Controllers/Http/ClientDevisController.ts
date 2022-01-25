@@ -6,19 +6,23 @@ import ClientDeviValidator from 'App/Validators/ClientDeviValidator'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Mail from '@ioc:Adonis/Addons/Mail'
 import { formatNumberPhone, getFormatedDateTime } from 'App/Helpers/helpers'
-import { string } from '@ioc:Adonis/Core/Helpers'
+import { string, types } from '@ioc:Adonis/Core/Helpers'
+import { sendMessage } from 'App/Services/Twilio'
 
 export default class ClientDevisController {
 
   public async index({ request, view}: HttpContextContract) {
     const ids = request.qs().sp
     let serviceProviderIds:number[] = []
-    if(Array.isArray(ids)) {
+    if(types.isArray(ids)) {
       serviceProviderIds = ids.map(id => +id)
       const allId = serviceProviderIds.every(id => !Number.isNaN(id))
       if(!allId) {
         throw 'id de prestaire non valide' 
       }
+    }
+    else if(types.isString(ids)) {
+      serviceProviderIds.push(+ids)
     }
     const serviceProviders = await ServiceProvider.query().whereIn('id', serviceProviderIds)
       .preload('address').preload('jobs')
@@ -44,66 +48,43 @@ export default class ClientDevisController {
         session.flash('alert', {type: 'error', message: await view.render('alert/ban', {...data})})
         session.flashAll()
         return response.redirect().toRoute('devis.client', undefined, {
-          qs: {sp: payload.serviceProviderId}
+          qs: {sp: payload.serviceProviderIds}
         })
       }
 
-      const sp = await ServiceProvider.query().where('id', payload.serviceProviderId)
-        .preload('address').first()
+      const ServiceProviders = await ServiceProvider.query().where('id', payload.serviceProviderIds)
+        .preload('address')
       
-      if(!sp) {
-        throw `Aucun prestaire trouver avec l'id[${payload.serviceProviderId}]`
+      if(!ServiceProviders || ServiceProviders.length <= 0) {
+        throw `Aucun prestaire trouver avec les ids ${payload.serviceProviderIds.join(',')}`
       }
       
       payload.message = string.condenseWhitespace(payload.message)
 
-      const body = await view.render('sms/client_devis', {
-        ...payload, 
-        city: sp.address.city, 
-        date: getFormatedDateTime()
-      })
+      for await (const sp of ServiceProviders) {
+        const body = await view.render('sms/client_devis', {
+          ...payload, 
+          city: sp.address.city, 
+          date: getFormatedDateTime()
+        })
+        
+        sendMessage({
+          body,
+          to: sp.tel
+        })
 
-      const message = {
-        body,
-        messagingServiceSid: Env.get('TWILIO_MESSAGING_SERVICE_SID'),
-        to: sp.tel
+        Database.table('client_devis').insert({
+          firstname: payload.firstname,
+          lastname: payload.lastname,
+          tel: payload.tel,
+          'user_id':  auth.user?.id
+        }).returning('id').then(async () => {
+          await ServiceProvider.query().increment('score', 1).where('id', sp.id)
+        })
+
+        return response.redirect().toRoute('devis.client.success')
       }
 
-      const accountSid = Env.get('TWILIO_ACCOUNT_ID'); 
-      const authToken = Env.get('TWILIO_AUTH_TOKEN'); 
-      const client = twilio(accountSid, authToken);
-      
-      try {
-        await client.messages.create(message)
-       
-      } catch (error) {
-        //FIXME: verifier que le code 30001 est bien un entier dans la documentation
-        if(error.code === 30001 || error.code === 'EAI_AGAIN') {
-          //TODO:envoyer un email a l'administrateur
-          Mail.sendLater(async message => {
-            const res = {message: error.message, payload}
-            message.from('log@iprovider.cg')
-              .to('dev@iprovider.cg')
-              .subject('email log')
-              .htmlView('email/error', {error: res})
-          })
-
-        }
-
-        throw error
-      }
-
-      
-      Database.table('client_devis').insert({
-        firstname: payload.firstname,
-        lastname: payload.lastname,
-        tel: payload.tel,
-        'user_id':  auth.user?.id
-      }).returning('id').then(async () => {
-        await ServiceProvider.query().increment('score', 1).where('id', sp.id)
-      })
-  
-      return response.redirect().toRoute('devis.client.success')
     }
     catch(err) {
       console.error(err)

@@ -79,7 +79,7 @@ export default class SearchesController {
         .paginate(page, perPage)
     }
 
-    if(request.ajax()) {
+    if(request.ajax() && qs?.ajax === '') {
       const count = qs?.count === ''
       const filter = await view.render('search/parts/search-fields', {
         jobs,

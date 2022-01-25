@@ -28,7 +28,10 @@
   </aside>
 <form action="{{route('devis.client.submit')}}" class="form devis-form" method="POST">
   {{ csrfField() }}
-  {{--  <input type="number" name="serviceProviderId" value="{{serviceProvider.id}}" hidden>  --}}
+  @each(serviceProvider in serviceProviders)
+  <input type="number" name="serviceProviderIds[]" value="{{serviceProvider.id}}" hidden>  
+  @endeach
+
   @!component('form/form_input', {
     label: 'Nom(s)',
     required: true,

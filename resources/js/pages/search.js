@@ -123,6 +123,8 @@ function fecthServiceProviders({url, $root, before, $search_result, middleware =
   addLoaderToElement($root)
   return new Promise((resolve, reject) => {
     const headers = {'X-Requested-With': 'XMLHttpRequest'}
+    url.searchParams.set('ajax', '')
+
     url.searchParams.set('count', '')
     fetch(url.href, {headers})
       .then(r => r.json())
@@ -147,7 +149,8 @@ function fecthServiceProviders({url, $root, before, $search_result, middleware =
         .then(r => r.json())
         .then((response) => {
           url.searchParams.delete('page')
-          window.history.replaceState(undefined, '', url)
+          url.searchParams.delete('ajax')
+          window.history.replaceState(undefined, document.title, url)
           resolve({...response, skeleton_cards})
         })
       })

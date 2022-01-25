@@ -13,12 +13,15 @@ export default class FetchApi {
     return new Promise((res, rej) => {
       const url = getFullUrl($form)
       url.searchParams.set('count', '')
+      url.searchParams.set('ajax', '')
+
       
       fetch(url, {headers})
         .then(r => r.json())
         .then(data => {
           url.searchParams.delete('count')
-          window.history.replaceState(null, undefined, url)
+          url.searchParams.delete('ajax')
+          window.history.replaceState(null, document.title, url)
           res(data)
         })
     })

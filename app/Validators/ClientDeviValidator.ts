@@ -26,7 +26,7 @@ export default class ClientDeviValidator {
 	 *    ```
 	 */
   public schema = schema.create({
-		serviceProviderId: schema.number([rules.unsigned()]),
+		serviceProviderIds: schema.array().members(schema.number([rules.unsigned()])),
 		...VALIDATION_SCHEMA.LASTNAME,
 		...VALIDATION_SCHEMA.FIRSTNAME,
 		...VALIDATION_SCHEMA.TEL,
