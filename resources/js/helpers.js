@@ -97,3 +97,18 @@ export function getFullUrl($form) {
   }
   return url
 }
+
+/**
+ * 
+ * @param {string} inputSelector 
+ * @param {string} errorsSelector 
+ */
+export function removeInputErrorsAfterFocus(
+  inputSelector = '.form-input, .form-textarea', 
+  errorsSelector = '.form-errors'
+  ) {
+  document.querySelectorAll(inputSelector)
+    .forEach($input => {
+      $input.addEventListener('focus', () => $input.classList.remove('is-error'))
+    })
+}

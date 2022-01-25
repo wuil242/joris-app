@@ -1,8 +1,11 @@
 import '../../css/devis/all.css'
 import Alert from '../components/Alert'
 import FormSelect from '../components/FormSelect'
+import {removeInputErrorsAfterFocus} from '../helpers'
 
 Alert.init()
+
+removeInputErrorsAfterFocus()
 
 try {
   FormSelect.init()

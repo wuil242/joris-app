@@ -79,6 +79,7 @@
 }
 
 .form-select-search-icon {
-  color: var(--grey-color);
   font-size: 1.2em;
+
+  color: var(--form-select-icon-color);
 }

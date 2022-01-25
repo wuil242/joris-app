@@ -77,7 +77,8 @@
   --form-select-content-bg-color: var(--button-hover-bg-color);
   --form-select-content-shadow-color: var(--button-hover-text-color);
   --form-select-input-color: var(--text-primary);
-  --form-select-option-hover-bg-color: var(--color-light-primary);
+  --form-select-option-hover-bg-color: var(--color-light-white);
+  --form-select-icon-color: var(--color-primary);
 
   /* Form label */
   --form-label-required-symbol: var(--color-red); 
