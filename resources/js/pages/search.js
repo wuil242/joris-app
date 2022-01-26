@@ -48,7 +48,7 @@ function initSearchFilter(withMore = false) {
     }
 
     if(window.scrollY >= $search_filter.parentElement.offsetTop) {
-      const top = window.scrollY - $search_filter.parentElement.offsetTop
+      const top = window.scrollY - $search_filter.parentElement.offsetTop + 5
       $search_filter.style.setProperty('transform', `translate3d(0, ${top}px, 0)`)
     }
     else {
@@ -155,11 +155,9 @@ function fecthServiceProviders({url, $root, before, $search_result, middleware =
         fetch(url.href, {headers})
         .then(r => r.json())
         .then((response) => {
-          console.log(url.href)
           url.searchParams.delete('page')
           url.searchParams.delete('ajax')
           url.hash = ''
-          console.log(url.href)
           window.history.replaceState(undefined, document.title, url)
           resolve({...response, skeleton_cards})
         })
