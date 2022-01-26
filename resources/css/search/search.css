@@ -13,14 +13,11 @@
   height: 100%;
   padding-top: 30px;
 }
-
   
 .search-content-sidebar {
-  position: sticky;
-  top: 0;
-  left: 0;
-  /* height: max-content; */
   background: red;
+  transition: transform .3s ease-out;
+  padding: 5px 0;
 }
 
 /* Responsive */
@@ -34,7 +31,6 @@
 
 @media screen and (min-width: 750px) {
   .search-content {
-    position: relative;
     display: grid;
     grid-template-columns: 1fr 2.5fr;
     gap: 20px;

@@ -1,6 +1,6 @@
 import '../../css/search/all.css'
 import FormSelect from '../components/FormSelect'
-import { debounce, scrollToElement, addLoaderToElement, addLoaderToButton, getFullUrl } from '../helpers'
+import { debounce, scrollToElement, addLoaderToElement, addLoaderToButton, getFullUrl, throttle } from '../helpers'
 import Sticky from '../components/Sticky'
 import FetchApi from '../class/FetchApi'
 
@@ -37,6 +37,18 @@ function initSearchFilter(withMore = false) {
   const $search_result = document.getElementById('search-result')
   const $search_filter = document.getElementById('search-filter')
   const $search_form_submit = document.getElementById('search-submit')
+
+
+  // suivi du scroll par la sidebar
+  document.addEventListener('scroll', throttle(() => {
+    if(window.scrollY >= $search_filter.parentElement.offsetTop) {
+      const top = window.scrollY - $search_filter.parentElement.offsetTop
+      $search_filter.style.setProperty('transform', `translate3d(0, ${top}px, 0)`)
+    }
+    else {
+      $search_filter.style.removeProperty('transform')
+    }
+  }, 150))
 
   $form.addEventListener('submit', () => handleFormSubmit({
     $form, $search_result, $search_filter, $search_fields
@@ -131,8 +143,11 @@ function fecthServiceProviders({url, $root, before, $search_result, middleware =
         fetch(url.href, {headers})
         .then(r => r.json())
         .then((response) => {
+          console.log(url.href)
           url.searchParams.delete('page')
           url.searchParams.delete('ajax')
+          url.hash = ''
+          console.log(url.href)
           window.history.replaceState(undefined, document.title, url)
           resolve({...response, skeleton_cards})
         })

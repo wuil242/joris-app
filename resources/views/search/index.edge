@@ -13,8 +13,6 @@
   @include('service_provider/parts/service_provider_card_skeleton')
 </template>
 
-@include('components/top-button')
-
 @!component('components/title', {
   text: 'Trouver Un Prestaire',
   icon: 'map-marked-alt'
@@ -28,5 +26,7 @@
     @!component('service_provider/service_providers', {serviceProviders, qs})
   </section>
 </section>
+
+@include('components/top-button')
 
 @endsection

@@ -45,6 +45,7 @@ export default class FormSelect {
     })
 
     this.$lis.forEach(this.addClickEvent.bind(this))
+    this.$lis.forEach(this.addLinkClickEvent.bind(this))
 
     this.$input.addEventListener('click', this.stopPropagation)
     this.$input.addEventListener('input', e => {
@@ -89,6 +90,12 @@ export default class FormSelect {
     li.addEventListener('click', this.emitSelection.bind(this))
   }
 
+  addLinkClickEvent(li) {
+    li.parentElement.addEventListener('click', () => {
+      this.emitSelection({target: li})
+    })
+  }
+
   /**
     * @param {HTMLElement[]} this.$options
     */
@@ -115,7 +122,7 @@ export default class FormSelect {
 
   /**
    * 
-   * @param {InputEvent} e 
+   * @param {PointerEvent} e 
    */
   emitSelection(e) {
     this.$select_hidden.value = e.target.dataset.value
