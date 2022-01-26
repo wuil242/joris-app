@@ -91,8 +91,10 @@ export default class FormSelect {
   }
 
   addLinkClickEvent(li) {
-    li.parentElement.addEventListener('click', () => {
-      this.emitSelection({target: li})
+    li.parentElement.addEventListener('click', e => {
+      if(e.pointerId === -1) {
+        this.emitSelection({target: li})
+      }
     })
   }
 
