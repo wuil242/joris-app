@@ -15,9 +15,11 @@
 }
   
 .search-content-sidebar {
+  position: relative;
   background: red;
   transition: transform .3s ease-out;
   padding: 5px 0;
+  z-index: var(--layer-middle);
 }
 
 /* Responsive */

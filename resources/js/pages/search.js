@@ -37,10 +37,16 @@ function initSearchFilter(withMore = false) {
   const $search_result = document.getElementById('search-result')
   const $search_filter = document.getElementById('search-filter')
   const $search_form_submit = document.getElementById('search-submit')
+  let lastWidth = window.innerWidth
 
 
   // suivi du scroll par la sidebar
   document.addEventListener('scroll', throttle(() => {
+    if(window.innerWidth <= 750) {
+      $search_filter.style.removeProperty('transform')
+      return
+    }
+
     if(window.scrollY >= $search_filter.parentElement.offsetTop) {
       const top = window.scrollY - $search_filter.parentElement.offsetTop
       $search_filter.style.setProperty('transform', `translate3d(0, ${top}px, 0)`)
@@ -49,6 +55,12 @@ function initSearchFilter(withMore = false) {
       $search_filter.style.removeProperty('transform')
     }
   }, 150))
+
+  window.addEventListener('resize', debounce(() => {
+    window.scrollTo({
+      top: 0
+    })
+  }, 400))
 
   $form.addEventListener('submit', () => handleFormSubmit({
     $form, $search_result, $search_filter, $search_fields
