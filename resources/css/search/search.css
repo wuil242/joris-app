@@ -14,6 +14,15 @@
   padding-top: 30px;
 }
 
+  
+.search-content-sidebar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  /* height: max-content; */
+  background: red;
+}
+
 /* Responsive */
 
 @media screen and (min-width: 450px) {
@@ -27,7 +36,7 @@
   .search-content {
     position: relative;
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 1fr 2.5fr;
     gap: 20px;
     align-items: flex-start;
   }
@@ -35,12 +44,6 @@
   .search-empty {
     align-items: center;
     justify-content: center;
-  }
-  
-  .search-content-sidebar {
-    position: sticky;
-    top: 0;
-    left: 0;
   }
 }
 

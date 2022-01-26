@@ -1,4 +1,4 @@
-<div class="form-select js-select" id="form-select">
+<div class="form-select js-select" id="form-select-{{name}}">
   <select name="{{name}}" hidden value="{{value[optionValue.toString()]}}">
     @each(option in options)
       <option 
@@ -20,9 +20,11 @@
     </div>
     <ul class="form-select-options js-slelect-options">
       @each(option in options)
+      <a href="#form-select-{{name}}">
         <li class="form-select-option js-slelect-option" data-value="{{option[optionValue.toString()]}}">
-          <a href="#form-select">{{option[optionContent.toString()]}}</a>
+          {{option[optionContent.toString()]}}
         </li>
+      </a>
       @endeach
     </ul>
   </div>

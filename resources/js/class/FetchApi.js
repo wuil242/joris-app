@@ -14,11 +14,10 @@ export default class FetchApi {
       const url = getFullUrl($form)
       url.searchParams.set('count', '')
       url.searchParams.set('ajax', '')
-
       
       fetch(url, {headers})
-        .then(r => r.json())
-        .then(data => {
+      .then(r => r.json())
+      .then(data => {
           url.searchParams.delete('count')
           url.searchParams.delete('ajax')
           window.history.replaceState(null, document.title, url)

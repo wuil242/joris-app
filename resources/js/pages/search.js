@@ -42,27 +42,13 @@ function initSearchFilter(withMore = false) {
     $form, $search_result, $search_filter, $search_fields
   }))
 
-  $form.addEventListener('change', e => handleFormChange({e, $form, $search_fields, $search_filter}))
-
   $search_fields.forEach(field => {
     field.addEventListener('form-select', e => handleFormChange({e, $form, $search_fields, $search_filter}))
   })
 
-  $range.addEventListener('pointerup', e => updateLimitValue(e, $limit, $limitInput))
-  $range.addEventListener('pointerdown', e => {
-    updateLimitValue(e, $form, $limitInput)
-    $range.addEventListener('pointermove', () => updateLimitValue(e, $form, $limitInput))
+  $range.addEventListener('input', e => updateLimitValue(e, $limit, $limitInput))
 
-    $range.addEventListener('pointerup', () => {
-      $range.removeEventListener('pointermove', e => updateLimitValue(e, $form, $limitInput))
-    }, {once: true})
-  })
-
-  $limitInput.addEventListener('change', e => updateLimitSlider({
-    e, $range, $limitInput, $limit
-  }))
-
-  $limitInput.addEventListener('keyup', e => updateLimitSlider({
+  $limitInput.addEventListener('input', e => updateLimitSlider({
     e, $range, $limitInput, $limit
   }))
 
@@ -72,7 +58,6 @@ function initSearchFilter(withMore = false) {
     submitForm($form, $search_fields)
   })
 
-
   FormSelect.init()
 
   if(withMore) {
@@ -80,8 +65,6 @@ function initSearchFilter(withMore = false) {
   }
 
 }
-
-
 
 /**
  * 
