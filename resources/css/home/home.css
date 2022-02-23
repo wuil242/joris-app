@@ -2,7 +2,7 @@
 
 .home-welcome {
   padding: 0 0 20px 0;
-  color: var(--primary-text-color);
+  color: var(--home-welcome);
   font-size: 1.2rem;
 }
 
@@ -10,18 +10,18 @@
   width: 90%;
   padding: 10px;
   font-size: 1.3rem!important;
-  color: var(--secondary-text-color);
+  color: var(--home-site-explain);
 }
 
 .home-provider-button {
-  border: solid 1px var(--secondary-color) ;
-  background-color: transparent;
+  border-color: var(--home-provider-button-border);
+  color: var(--home-provider-button);
+  background-color: var(--home-provider-button-bg);
 }
 
 .home-provider-button:hover {
-  border-color: var(--primary-color);
-  color: var(--text-color);
-  background-color: var(--primary-color);
+  --home-provider-button: var(--home-provider-button-hover);
+  --home-provider-button-bg: var(--home-provider-button-hover-bg);
 }
 
 /* Responsive */

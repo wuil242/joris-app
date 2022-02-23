@@ -116,4 +116,29 @@
 
   /* Search */
   --search-content-sidebar-shadow: var(--color-dark);
+
+  /* Site name */
+  --site-name: var(--color-primary);
+
+  /* Homepage variant  */
+  --home-welcome: var(--color-primary);
+  --home-header-bottom: var(--text-secondary);
+
+  --home-site-explain: var(--text-tertiary);
+
+  --home-arrow: var(--text-secondary);
+
+  --home-provider-button: var(--text-secondary);
+  --home-provider-button-border: var(--text-secondary);
+  --home-provider-button-bg: transparent;  
+  --home-provider-button-hover: var(--color-primary);
+  --home-provider-button-hover-bg: var(--text-secondary);
+
+  --home-menu-text: var(--text-secondary);
+  --home-menu-item-underline: var(--text-secondary);
+  --home-submenu-triangle: var(--text-secondary);
+
+  --home-site-name: var(--text-secondary);
+  --home-action-login: var(--text-secondary);
+  --home-action-login-underline: var(--text-secondary);
 }
