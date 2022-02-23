@@ -1,7 +1,7 @@
 /* entête de la page d'acceuil */
 
 .header-home {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.9) 15%, rgba(0, 0, 0, .89) 25%, transparent),
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.9) 10vw, rgba(0, 0, 0, .89) 35vw, transparent),
   url('../../images/header_bg.jpeg') no-repeat;
   background-size: cover;
   background-position: 25% 0;

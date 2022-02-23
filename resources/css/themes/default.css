@@ -141,4 +141,8 @@
   --home-site-name: var(--text-secondary);
   --home-action-login: var(--text-secondary);
   --home-action-login-underline: var(--text-secondary);
+
+  /* Top button */
+  --top-button: var(--text-secondary);
+  --top-button-bg: var(--color-primary);
 }

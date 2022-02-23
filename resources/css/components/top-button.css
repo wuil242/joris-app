@@ -6,7 +6,7 @@
   /* width: 2rem;
   height: 2rem; */
   /* border-radius: 50%; */
-  color: var(--text-color);
+  color: var(--top-button);
   transform: translate3d(100%, 0, 0);
   transition: .3s;
 
@@ -14,7 +14,7 @@
 }
 
 .top-button i {
-  background-color: var(--primary-color);
+  background-color: var(--top-button-bg);
   padding: .4em .8em;
   /* border-radius: 50%; */
   border-radius:  3px 0 0 3px;
