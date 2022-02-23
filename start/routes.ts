@@ -18,6 +18,8 @@
 |
 */
 
+import './routes/cart'
+
 import Route from '@ioc:Adonis/Core/Route'
 import Database from '@ioc:Adonis/Lucid/Database'
 

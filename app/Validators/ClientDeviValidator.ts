@@ -1,6 +1,6 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { PHONE_NUMBER_REGEX, VALIDATION_MESSAGE, VALIDATION_SCHEMA } from 'App/Configs/constants'
+import { VALIDATION_MESSAGE, VALIDATION_SCHEMA } from 'App/Configs/constants'
 
 export default class ClientDeviValidator {
   constructor (protected ctx: HttpContextContract) {

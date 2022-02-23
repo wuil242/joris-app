@@ -1,10 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import ServiceProvider from 'App/Models/ServiceProvider'
-import twilio from 'twilio'
-import Env from '@ioc:Adonis/Core/Env'
 import ClientDeviValidator from 'App/Validators/ClientDeviValidator'
 import Database from '@ioc:Adonis/Lucid/Database'
-import Mail from '@ioc:Adonis/Addons/Mail'
 import { formatNumberPhone, getFormatedDateTime } from 'App/Helpers/helpers'
 import { string, types } from '@ioc:Adonis/Core/Helpers'
 import { sendMessage } from 'App/Services/Twilio'
@@ -24,6 +21,7 @@ export default class ClientDevisController {
     else if(types.isString(ids)) {
       serviceProviderIds.push(+ids)
     }
+    
     const serviceProviders = await ServiceProvider.query().whereIn('id', serviceProviderIds)
       .preload('address').preload('jobs')
 

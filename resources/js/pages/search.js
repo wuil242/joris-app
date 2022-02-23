@@ -3,6 +3,7 @@ import FormSelect from '../components/FormSelect'
 import { debounce, scrollToElement, addLoaderToElement, addLoaderToButton, getFullUrl, throttle } from '../helpers'
 import Sticky from '../components/Sticky'
 import FetchApi from '../class/FetchApi'
+import Chart from '../components/SerciceProviderCart'
 
 // TODO: ajout d'un panier permettant d'accumuler les prestataire
 
@@ -39,6 +40,14 @@ function initSearchFilter(withMore = false) {
   const $search_form_submit = document.getElementById('search-submit')
   let lastWidth = window.innerWidth
 
+  
+  const cards = document.querySelectorAll('.service-provider-card')
+  
+  const cart = Chart.create(document.querySelector('main'), Array.from(cards))
+
+  console.log('CART', cart)
+  cart.closePanel()
+  
 
   // suivi du scroll par la sidebar
   document.addEventListener('scroll', throttle(() => {
