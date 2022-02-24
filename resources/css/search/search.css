@@ -19,7 +19,7 @@
   border-radius: 4px;
   transition: transform .3s ease-out;
   padding: 5px 0;
-  z-index: var(--layer-middle);
+  z-index: var(--layer-bottom);
 }
 
 /* Responsive */

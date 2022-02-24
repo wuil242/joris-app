@@ -21,6 +21,16 @@
 import Route from '@ioc:Adonis/Core/Route'
 import Database from '@ioc:Adonis/Lucid/Database'
 
+Route.get('/envoi-reussi', ({request, view }) => {
+  const {title, desctiption, message} = request.qs()
+  return view.render('message', {title, desctiption, type: 'success', message})
+}).as('message.success')
+
+Route.get('/envoi-echouer', ({request, view }) => {
+  const {title, desctiption, message} = request.qs()
+  return view.render('message', {title, desctiption, type: 'error', message})
+}).as('message.error')
+
 Route.group(() => {
   Route.get('/', async ({view}) => {
     const testimonies = await Database.from('testimonies').select('*').orderBy('id', 'desc').limit(4)
@@ -37,16 +47,16 @@ Route.group(() => {
   Route.get('/devis/entreprise', 'EntrepriseDevisController.index').as('devis.entreprise')
   Route.get('/devis/entreprise/envoi-reussi', 'EntrepriseDevisController.success').as('devis.entreprise.success')
   Route.get('/devis/entreprise/envoi-echec', 'EntrepriseDevisController.error').as('devis.entreprise.error')
-  
-
-  Route.group(() => {
-    Route.post('/devis/entreprise', 'EntrepriseDevisController.store').as('devis.entreprise.submit')
-  }).middleware('BanCheck')
+  Route.post('/devis/entreprise', 'EntrepriseDevisController.store')
+       .middleware('BanCheck')
+       .as('devis.entreprise.submit')
 
 
   Route.get('/prestataire/enrolement', 'ServiceProvidersController.index').as('serviceProvider.enrole')
-  Route.post('/prestataire/enrolement', 'ServiceProvidersController.store').as('serviceProvider.enrole.submit')
   Route.get('/prestataire/plotique-de-confidentialite', 'ServiceProvidersController.policy').as('serviceProvider.policy')
+  Route.post('/prestataire/enrolement', 'ServiceProvidersController.store')
+       .middleware('BanCheck')
+       .as('serviceProvider.enrole.submit')
 
   Route.get('/nous-contact%C3%A9', 'InfosController.contact').as('infos.contact-us')
   Route.get('/à-propos', 'InfosController.about').as('infos.about')

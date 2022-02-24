@@ -110,9 +110,9 @@
   --loader-button-color: var(--button-text-color);
   --loader-button-radius: var(--button-radius);
   
-  /* Devis | message */
-  --devis-message-bg-color: var(--color-success);
-  --devis-message-text-color: var(--color-success);
+  /* Message */
+  --message-bg-color: var(--color-success);
+  --message-text-color: var(--color-success);
 
   /* Search */
   --search-content-sidebar-shadow: var(--color-dark);

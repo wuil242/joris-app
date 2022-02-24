@@ -1,6 +1,7 @@
 import '../css/app.css'
 import HeaderMenuButton from './components/HeaderMenuButton'
 import {addLoaderToButton} from './helpers'
+import Alert from './components/Alert'
 
 HeaderMenuButton.create({
   openButtonSelector: '.header-menu-button',
@@ -16,3 +17,10 @@ document.querySelectorAll('.form-submit')
       $submit_button.parentElement.submit()
     })
   })
+
+try {
+  Alert.init()
+  
+} catch (error) {
+  
+}

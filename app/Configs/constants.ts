@@ -32,7 +32,10 @@ export const VALIDATION_SCHEMA = {
 }
 
 export const VALIDATION_OPTIONAL_SCHEMA = {
-  TEL: {tel: schema.string.optional({trim: true}, [rules.regex(PHONE_NUMBER_REGEX)])}
+  TEL: {tel: schema.string.optional({trim: true}, [rules.regex(PHONE_NUMBER_REGEX)])},
+  EMAIL: {
+    email: schema.string.optional({trim: true}, [rules.email()])
+  }
 }
 
 export const VALIDATION_MESSAGE  = {
