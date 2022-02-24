@@ -1,0 +1,71 @@
+@layout('layouts/page')
+@set('title', 'Devenir prestataire')
+@set('description', 'Demande d\'enrolement d\'un prestataire')
+
+
+
+@section('head')
+
+@endsection
+
+@section('content')
+
+@!component('components/title', {
+  text: 'Devenir Prestataire',
+})
+
+<section class="layout-two-block">
+  
+<p>
+  Soumettre une demande pour devenir prestataire
+</p>
+
+<form class="form" action="{{route('serviceProvider.enrole.submit')}}" method="post">
+  {{ csrfField() }}
+  @!component('form/form_input', {
+    label: 'Nom(s)',
+    name: 'lastname',
+    type: 'text',
+    required: true,
+    rules: [
+      'le(s) nom(s) doit contenir au moins 3 caratère', 
+      'le(s) nom(s) doit contenir au plus 20 caratère', 
+      'le(s) nom(s) ne peu contenir que des letters et des tirets(-), mais pas de tiret à la fin.'
+    ]
+  })
+
+  @!component('form/form_input', {
+    label: 'Prénom(s)',
+    name: 'firstname',
+    type: 'text',
+    required: true,
+    rules: [
+      'le(s) prénom(s) doit contenir au moins 3 caratère', 
+      'le(s) prénom(s) doit contenir au plus 20 caratère', 
+      'le(s) prénom(s) ne peu contenir que des letters et des tirets(-), mais pas de tiret à la fin.'
+    ]
+  })
+
+  @!component('form/form_input', {
+    label: 'Numéro de télephone',
+    required: true,
+    name: 'tel',
+    type: 'tel',
+    rules: [
+      'le numero doit etre sous la forme (06|05|04|22)XXX-XX-XX'
+    ]
+  })
+  
+  @!component('form/form_input', {
+    label: 'Email',
+    name: 'email',
+    type: 'email'
+  })
+
+  @!component('form/form_submit', {
+    text: 'Soumettre'
+  })
+</form>
+</section>
+
+@endsection

@@ -107,6 +107,10 @@
   border-color: var(--form-submit-border-color);
 }
 
+/* Modifiers */
+
+
+
 /* Responsive */
 
 @media only screen and (min-width: 650px) {
@@ -122,6 +126,18 @@
 @media only screen and (min-width: 950px) {
   .form-rule-text {
     width: 50vw;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .form__center {
+    /* border: solid 1px red; */
+  }
+
+  .form__center .form-textarea,
+  .form__center .form-input,
+  .form__center .form-label {
+      width: 80%;
   }
 }
 

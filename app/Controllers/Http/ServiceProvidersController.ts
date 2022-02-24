@@ -3,8 +3,8 @@ import City from 'App/Models/City'
 import Job from 'App/Models/Job'
 
 export default class ServiceProvidersController {
-  public async enrole({ view }: HttpContextContract) {
-    return await view.renderRaw('<p> Enrole Service Provider</p>')
+  public async index({ view }: HttpContextContract) {
+    return await view.render('service_provider/enrole/index')
   }
 
   public async policy({view}: HttpContextContract) {

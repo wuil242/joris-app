@@ -44,7 +44,8 @@ Route.group(() => {
   }).middleware('BanCheck')
 
 
-  Route.get('/prestataire/enrolement', 'ServiceProvidersController.enrole').as('serviceProvider.enrole')
+  Route.get('/prestataire/enrolement', 'ServiceProvidersController.index').as('serviceProvider.enrole')
+  Route.post('/prestataire/enrolement', 'ServiceProvidersController.store').as('serviceProvider.enrole.submit')
   Route.get('/prestataire/plotique-de-confidentialite', 'ServiceProvidersController.policy').as('serviceProvider.policy')
 
   Route.get('/nous-contact%C3%A9', 'InfosController.contact').as('infos.contact-us')
