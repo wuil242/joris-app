@@ -135,6 +135,8 @@
 .form-checkbox-box {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
   width: 2.5em;
   padding: .25em;
   height: 1em;
@@ -142,6 +144,7 @@
   background-color: var(--checkbox-bg);
   border-radius: 1em;
   box-shadow: 0 0 .2em .1em var(--checkbox-shadow);
+  cursor: pointer;
 }
 
 .form-checkbox-box::before {
@@ -163,6 +166,11 @@
   --checkbox-handle: var(--checkbox-handle-active);
 }
 
+.form-checkbox input:focus + .form-checkbox-box {
+  outline: solid 1px var(--focus-outline-color);
+  box-shadow: 0 0 2px 3px var(--focus-shadow-color);
+}
+
 /* Responsive */
 
 @media only screen and (min-width: 650px) {
@@ -182,9 +190,6 @@
 }
 
 @media only screen and (min-width: 1000px) {
-  .form__center {
-    /* border: solid 1px red; */
-  }
 
   .form__center .form-textarea,
   .form__center .form-input,
