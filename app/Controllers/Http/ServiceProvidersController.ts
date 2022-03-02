@@ -9,11 +9,11 @@ import {string} from '@ioc:Adonis/Core/Helpers'
 
 export default class ServiceProvidersController {
   public async index({ view }: HttpContextContract) {
-    return await view.render('service_provider/enrole/index')
+    return await view.render('service_provider/enroll')
   }
 
   public async policy({ view }: HttpContextContract) {
-    return await view.renderRaw('<p>Policy of ServiceProvider')
+    return await view.render('service_provider/policy')
   }
 
   public async store({ request, view, response }: HttpContextContract) {
@@ -40,7 +40,7 @@ export default class ServiceProvidersController {
       //FIXME: trouver le numero d'administrateur de facon plus correct
 
       const role = await Database.from('admin_roles').select('*')
-        .where('name', ROLES.SMS_RECEIVER_PROVIDER_ENROLE).firstOrFail()
+        .where('name', ROLES.SMS_RECEIVER_PROVIDER_ENROLL).firstOrFail()
 
       const admins = await Database.from('admin_roles_directus_users')
         .select('*')

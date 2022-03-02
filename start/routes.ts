@@ -40,23 +40,22 @@ Route.group(() => {
   Route.get('/recherche', 'SearchesController.index').as('serviceProvider.find')
 
   Route.get('/devis/client', 'ClientDevisController.index').as('devis.client')
-  Route.post('/devis/client', 'ClientDevisController.store').as('devis.client.submit')
-  Route.get('/devis/client/envoi-reussi', 'ClientDevisController.success').as('devis.client.success')
-  Route.get('/devis/client/envoi-echec', 'ClientDevisController.error').as('devis.client.error')
-  
+  Route.post('/devis/client', 'ClientDevisController.store')
+       .middleware('BanCheck')
+       .as('devis.client.submit')
+
+
   Route.get('/devis/entreprise', 'EntrepriseDevisController.index').as('devis.entreprise')
-  Route.get('/devis/entreprise/envoi-reussi', 'EntrepriseDevisController.success').as('devis.entreprise.success')
-  Route.get('/devis/entreprise/envoi-echec', 'EntrepriseDevisController.error').as('devis.entreprise.error')
   Route.post('/devis/entreprise', 'EntrepriseDevisController.store')
        .middleware('BanCheck')
        .as('devis.entreprise.submit')
 
 
-  Route.get('/prestataire/enrolement', 'ServiceProvidersController.index').as('serviceProvider.enrole')
+  Route.get('/prestataire/enrolement', 'ServiceProvidersController.index').as('serviceProvider.enroll')
   Route.get('/prestataire/plotique-de-confidentialite', 'ServiceProvidersController.policy').as('serviceProvider.policy')
   Route.post('/prestataire/enrolement', 'ServiceProvidersController.store')
        .middleware('BanCheck')
-       .as('serviceProvider.enrole.submit')
+       .as('serviceProvider.enroll.submit')
 
   Route.get('/nous-contact%C3%A9', 'InfosController.contact').as('infos.contact-us')
   Route.get('/à-propos', 'InfosController.about').as('infos.about')

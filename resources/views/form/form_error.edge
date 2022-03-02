@@ -3,7 +3,16 @@
 <ul class="form-errors">
   @each(error in flashMessages.get('errors.' + name))
     <li>
+    @if(typeof error === 'string')
       <span class="form-error">{{error}}</span>
+    @else
+    <span>
+      {{error.message}}
+      @if(error?.link)
+        <a href="{{route('infos.contact-us')}}" class="form-error-link">cliquez ici</a>
+      @endif
+    </span>
+    @endif
     </li>
   @endeach
 </ul>

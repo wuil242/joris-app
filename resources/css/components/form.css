@@ -89,6 +89,11 @@
   font-weight: lighter;
 }
 
+.form-error-link {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
 .form-submit {
   display: flex;
   align-items: center;

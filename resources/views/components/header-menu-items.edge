@@ -11,15 +11,15 @@
     <a href="{{route('devis.entreprise')}}">Entreprise</a>
   </li>
 
-  @set('isServiceProviderSubmenuRoute', request.url().startsWith(route('serviceProvider.enrole').split('/')[0]))
+  @set('isServiceProviderSubmenuRoute', request.url().startsWith(route('serviceProvider.enroll').split('/')[0]))
   <nav class="header-submenu {{ isServiceProviderSubmenuRoute  ? 'active' : '' }}">
     <input type="checkbox" id="submenu-provider-{{prefix}}">
     <label class="header-submenu-label" for="submenu-provider-{{prefix}}">Espace Prestataire</label>
     <ul class="header-submenu-items">
       @!component('components/header_submenu_item', {
-        route: route('serviceProvider.enrole'),
+        route: route('serviceProvider.enroll'),
         text: 'S\'enrôler',
-        active: request.url() === route('serviceProvider.enrole')
+        active: request.url() === route('serviceProvider.enroll')
       })
 
       @!component('components/header_submenu_item', {

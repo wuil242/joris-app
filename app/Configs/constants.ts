@@ -10,6 +10,9 @@ const NAME_REGEX = /^[a-zA-Z\-]+[a-zA-Z]$/
 export const PHONE_NUMBER_REGEX = /^(\+242)*(06|05|04|22)\d{7}$/
 export const COUNTRY_CODE = '+242'
 
+export const PHONE_NUMBER_BAN_MESSAGE = `ce numero est bloquer contactez nous pour le debloquer`
+export const EMAIL_BAN_MESSAGE = `cet adresse email est bloquer contactez nous pour le debloquer`
+
 export const VALIDATION_SCHEMA = {
   LASTNAME: {
     lastname: schema.string({trim: true}, [rules.minLength(3), rules.maxLength(20), rules.regex(NAME_REGEX)])

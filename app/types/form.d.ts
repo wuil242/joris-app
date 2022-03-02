@@ -1,0 +1,1 @@
+export declare type FormInputError = string | {message: string, link?: boolean}
