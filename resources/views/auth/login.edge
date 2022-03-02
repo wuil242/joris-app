@@ -17,14 +17,13 @@
   <p>
     Connecter vous a votre compte
   </p>
-  {{inspect(flashMessages)}}
+  {{--  {{inspect(flashMessages)}}  --}}
   <form class="form" action="{{route('login.submit')}}" method="post">
     {{ csrfField() }}
-    @include('form/form_fields_mandatory')
     @include('form/parts/lastname')
     @include('form/parts/firstname')
     @include('form/parts/tel')
-    @!component('form/parts/email', {required: true, optional: true})
+    @!component('form/parts/email', {optional: true})
     @include('form/parts/password')
     @!component('form/form_checkbox', {text: 'Se souvenir de moi', name: 'remember_me'})
   

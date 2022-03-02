@@ -193,8 +193,21 @@
 
 /* all fields mandatory */
 .form-fields-mandatory {
-
+  padding: .5em .25em;
+  margin: 5px 0;
+  text-align: center;
+  color: var(--form-fileds-mandatory);
+  box-shadow: 0 0 .25em 0 var(--form-fileds-mandatory-shadow);
+  border-radius: 4px;
 }
+
+.form-fields-mandatory.required::before {
+  content: '*';
+  color: var(--form-label-required-symbol);
+  font-size: .9em;
+  padding: 0 .2em;
+}
+
 
 /* Responsive */
 
