@@ -3,6 +3,7 @@ import User from 'App/Models/User'
 import UserLoginValidator from 'App/Validators/UserLoginValidator'
 import UserSignInValidator from 'App/Validators/UserSignInValidator'
 
+//TODO: ajouter une ref qui permet de savoir ou rediriger apres une connexion reussite
 export default class UsersController {
   public async store({ request, view, response, session }: HttpContextContract) {
     const payload = await request.validate(UserSignInValidator)

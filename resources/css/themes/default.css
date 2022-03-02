@@ -145,4 +145,12 @@
   /* Top button */
   --top-button: var(--text-secondary);
   --top-button-bg: var(--color-primary);
+
+  /* From Checkbox */
+  --checkbox-bg: var(--color-white);
+  --checkbox-shadow: var(--color-grey);
+  --checkbox-handle: var(--color-primary);
+
+  --checkbox-bg-active: var(--checkbox-handle);
+  --checkbox-handle-active: var(--checkbox-bg);
 }

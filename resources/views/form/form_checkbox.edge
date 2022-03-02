@@ -1,0 +1,5 @@
+<label class="form-checkbox" for="{{name}}">
+  {{text}}
+  <input class="form-input" type="checkbox" name="{{name}}" id="{{name}}" {{flashMessages.get(name) === 'on' ? 'checked' : ''}}>
+  <span class="form-checkbox-box"></span>
+</label>

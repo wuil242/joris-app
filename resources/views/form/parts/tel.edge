@@ -1,0 +1,9 @@
+@!component('form/form_input', {
+  label: 'Numéro de télephone',
+  required: required || true,
+  name: 'tel',
+  type: 'tel',
+  rules: [
+    'le numero doit etre sous la forme (06|05|04|22)XXX-XX-XX'
+  ]
+})

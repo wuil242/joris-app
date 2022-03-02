@@ -1,32 +1,37 @@
 @layout('layouts/page')
+@set('title', 'nous contactez')
+@set('description', 'contactez nous pour plus d\'information ou d\'autres besion specifique')
 
-@set('title', 'login')
-@set('description', 'the login page')
-
-@set('action', route('login.submit'))
-@set('fields', [
-  {
-    name: 'userId',
-    msg: 'email or phone number',
-    value: flashMessages.get('userId')
-  }, {
-    type: 'password',
-    name: 'password',
-    msg: 'passord',
-  },
-])
+@section('head')
+@endsection
 
 @section('content')
-  <h1>Login User</h1>
 
-  {{inspect(flashMessages)}}
+@!component('components/title', {
+  text: 'Connexion',
+})
+
+
+<section class="layout-two-block">
   
-  <form class="form" action="{{action}}" method="POST">
-    @!component('components/form', {action, fields})
-    <label class="form-input" for="remember-me">
-      Se souvenir de moi
-      <input class="form-input" type="checkbox" name="remember_me" id="remember_me">
-    </label>
-    <input class="form-input" type="submit" value="Log-In">
+  <p>
+    Connecter vous a votre compte
+  </p>
+  {{inspect(flashMessages)}}
+  <form class="form" action="{{route('login.submit')}}" method="post">
+    {{ csrfField() }}
+   
+    @include('form/parts/lastname')
+    @include('form/parts/firstname')
+    @include('form/parts/tel')
+    @include('form/parts/email')
+    @include('form/parts/password')
+    @!component('form/form_checkbox', {text: 'Se souvenir de moi', name: 'remember_me'})
+  
+    @!component('form/form_submit', {
+      text: 'Se connecter'
+    })
   </form>
+  </section>
+
 @endsection
