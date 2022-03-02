@@ -153,4 +153,7 @@
 
   --checkbox-bg-active: var(--checkbox-handle);
   --checkbox-handle-active: var(--checkbox-bg);
+
+  /* Form Optional Field */
+  --form-optional: var(--color-grey);
 }

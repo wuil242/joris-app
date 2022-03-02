@@ -1,7 +1,10 @@
 @if(label)
-<div>
-  @!component('form/form_rule', {rule, rules})
-  <label for="{{name}}" class="form-label {{required ? 'required' : ''}}">{{label}}</label>
+<div class="form-input-infos">
+  <div>
+    @!component('form/form_rule', {rule, rules})
+    <label for="{{name}}" class="form-label {{required ? 'required' : ''}}">{{label}}</label>
+  </div>
+  @includeIf(optional, 'form/form_optional')
 </div>
 @endif
 <input 
