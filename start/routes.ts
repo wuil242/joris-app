@@ -22,13 +22,13 @@ import Route from '@ioc:Adonis/Core/Route'
 import Database from '@ioc:Adonis/Lucid/Database'
 
 Route.get('/envoi-reussi', ({request, view }) => {
-  const {title, desctiption, message} = request.qs()
-  return view.render('message', {title, desctiption, type: 'success', message})
+  const {title, description, message} = request.qs()
+  return view.render('message', {title, description, type: 'success', message})
 }).as('message.success')
 
 Route.get('/envoi-echouer', ({request, view }) => {
-  const {title, desctiption, message} = request.qs()
-  return view.render('message', {title, desctiption, type: 'error', message})
+  const {title, description, message} = request.qs()
+  return view.render('message', {title, description, type: 'error', message})
 }).as('message.error')
 
 Route.group(() => {

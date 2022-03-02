@@ -42,22 +42,19 @@ export default class ServiceProvidersController {
       const role = await Database.from('admin_roles').select('*')
         .where('name', ROLES.SMS_RECEIVER_PROVIDER_ENROLE).firstOrFail()
 
-      const usersIds = await Database.from('admin_roles_directus_users')
+      const admins = await Database.from('admin_roles_directus_users')
         .select('*')
+        .join('directus_users', 'admin_roles_directus_users.directus_users_id', 'directus_users.id')
         .where('admin_roles_id', role.id)
 
-      if (usersIds.length <= 0) throw 'E_ROLE_NOT_EXIST'
+
+      if (admins.length <= 0) throw 'E_ROLE_NOT_EXIST'
       
       const enroll_code = string.generateRandom(7).replace('-', '')
       const date = getFormatedDateTime()
       const body = await view.render('sms/service_provider_enroll', {date, ...validation, enroll_code})
-      for await (const userId of usersIds) {
-        const { tel_1 } = await Database.from('directus_users')
-          .select('tel_1')
-          .where('id', userId.directus_users_id)
-          .firstOrFail() as { tel_1: string }
-
-        await sendMessage({ to: tel_1, body })
+      for await (const admin of admins) {
+        await sendMessage({ to: admin.tel_1, body })
       }
 
       await Database.table('service_provider_enrolments')
@@ -71,7 +68,7 @@ export default class ServiceProvidersController {
       })
 
     } catch (error) {
-      throw error
+      // throw error
       const message = 'Votre demande d\'enrolement n\'a pas pu etre envoyer'
       const description = 'enrolement echouer'
       return response.redirect().toRoute('message.error', {

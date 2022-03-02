@@ -11,40 +11,50 @@
     <a href="{{route('devis.entreprise')}}">Entreprise</a>
   </li>
 
-  <nav class="header-submenu">
+  @set('isServiceProviderSubmenuRoute', request.url().startsWith(route('serviceProvider.enrole').split('/')[0]))
+  <nav class="header-submenu {{ isServiceProviderSubmenuRoute  ? 'active' : '' }}"">
     <input type="checkbox" id="submenu-provider-{{prefix}}">
     <label class="header-submenu-label" for="submenu-provider-{{prefix}}">Espace Prestataire</label>
     <ul class="header-submenu-items">
       @!component('components/header_submenu_item', {
         route: route('serviceProvider.enrole'),
-        text: 'S\'enrôler'
+        text: 'S\'enrôler',
+        active: request.url() === route('serviceProvider.enrole')
       })
 
       @!component('components/header_submenu_item', {
         route: route('serviceProvider.policy'),
-        text: 'Politiques de confidentialitées'
+        text: 'Politiques de confidentialitées',
+        active: request.url() === route('serviceProvider.policy')
       })
 
     </ul>
   </nav>
 
-  <nav class="header-submenu">
+  @set('isContactRoute', request.url() === route('infos.contact-us'))
+  @set('isAboutRoue', request.url() === route('infos.about'))
+  @set('isPolicyRoute', request.url() === route('infos.policy'))
+
+  <nav class="header-submenu {{isContactRoute || isAboutRoute || isPolicyRoute ? 'active' : ''}}">
     <input type="checkbox" id="submenu-infos-{{prefix}}">
     <label class="header-submenu-label" for="submenu-infos-{{prefix}}">Infos</label>
     <ul class="header-submenu-items">
       @!component('components/header_submenu_item', {
         route: route('infos.contact-us'),
-        text: 'Nous-Contcter'
+        text: 'Nous-Contcter',
+        active: isContactRoute
       })
 
       @!component('components/header_submenu_item', {
         route: route('infos.about'),
-        text: 'A-props'
+        text: 'A-props',
+        active: isAboutRoue
       })
 
       @!component('components/header_submenu_item', {
         route: route('infos.policy'),
-        text: 'Politiques des donées'
+        text: 'Politiques des donées',
+        active: isPolicyRoute
       })
     </ul>
   </nav>

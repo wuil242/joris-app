@@ -108,7 +108,7 @@
 
 /* Events */
 .header-submenu.active {
-  border-top: 2px solid var(--header-submenu-triangle-color);
+  border-bottom: 2px solid var(--header-submenu-triangle-color);
 }
 
 .header-submenu-item.active::after {
