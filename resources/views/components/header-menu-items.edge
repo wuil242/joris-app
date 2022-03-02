@@ -11,28 +11,29 @@
     <a href="{{route('devis.entreprise')}}">Entreprise</a>
   </li>
 
-  @set('isServiceProviderSubmenuRoute', request.url().startsWith(route('serviceProvider.enroll').split('/')[0]))
-  <nav class="header-submenu {{ isServiceProviderSubmenuRoute  ? 'active' : '' }}">
+  @set('isEnrollRoute',  request.url() === route('serviceProvider.enroll'))
+  @set('isPolicyRoute', request.url() === route('serviceProvider.policy'))
+  <nav class="header-submenu {{ isEnrollRoute || isPolicyRoute ? 'active' : '' }}">
     <input type="checkbox" id="submenu-provider-{{prefix}}">
     <label class="header-submenu-label" for="submenu-provider-{{prefix}}">Espace Prestataire</label>
     <ul class="header-submenu-items">
       @!component('components/header_submenu_item', {
         route: route('serviceProvider.enroll'),
         text: 'S\'enrôler',
-        active: request.url() === route('serviceProvider.enroll')
+        active: isEnrollRoute
       })
 
       @!component('components/header_submenu_item', {
         route: route('serviceProvider.policy'),
         text: 'Politiques de confidentialitées',
-        active: request.url() === route('serviceProvider.policy')
+        active: isPolicyRoute
       })
 
     </ul>
   </nav>
 
   @set('isContactRoute', request.url() === route('infos.contact-us'))
-  @set('isAboutRoue', request.url() === route('infos.about'))
+  @set('isAboutRoute', request.url() === route('infos.about'))
   @set('isPolicyRoute', request.url() === route('infos.policy'))
 
   <nav class="header-submenu {{isContactRoute || isAboutRoute || isPolicyRoute ? 'active' : ''}}">
@@ -48,7 +49,7 @@
       @!component('components/header_submenu_item', {
         route: route('infos.about'),
         text: 'A-props',
-        active: isAboutRoue
+        active: isAboutRoute
       })
 
       @!component('components/header_submenu_item', {

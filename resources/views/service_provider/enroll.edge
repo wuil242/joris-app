@@ -22,8 +22,6 @@
   Soumettre une demande pour devenir prestataire
 </p>
 
-{{inspect(flashMessages)}}
-
 <form class="form" action="{{route('serviceProvider.enroll.submit')}}" method="post">
   {{ csrfField() }}
   @!component('form/form_input', {

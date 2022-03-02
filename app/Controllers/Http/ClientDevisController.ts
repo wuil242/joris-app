@@ -9,6 +9,8 @@ import { formatNumberPhone, getFormatedDateTime } from 'App/Helpers/helpers'
 import { string, types } from '@ioc:Adonis/Core/Helpers'
 import { sendMessage } from 'App/Services/Twilio'
 
+// FIXME: retrailler le processus de soumission des devis des clients et des entreprise
+
 export default class ClientDevisController {
 
   public async index({ request, view}: HttpContextContract) {

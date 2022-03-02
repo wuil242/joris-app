@@ -58,7 +58,7 @@ Route.group(() => {
        .as('serviceProvider.enroll.submit')
 
   Route.get('/nous-contact%C3%A9', 'InfosController.contact').as('infos.contact-us')
-  Route.get('/à-propos', 'InfosController.about').as('infos.about')
+  Route.get('/%C3%A0-propos', 'InfosController.about').as('infos.about')
   Route.get('/politique-de-confidentialit%C3%A9e', 'InfosController.policy').as('infos.policy')
 
 }).middleware('silentAuth')
