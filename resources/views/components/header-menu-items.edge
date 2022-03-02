@@ -12,7 +12,7 @@
   </li>
 
   @set('isServiceProviderSubmenuRoute', request.url().startsWith(route('serviceProvider.enrole').split('/')[0]))
-  <nav class="header-submenu {{ isServiceProviderSubmenuRoute  ? 'active' : '' }}"">
+  <nav class="header-submenu {{ isServiceProviderSubmenuRoute  ? 'active' : '' }}">
     <input type="checkbox" id="submenu-provider-{{prefix}}">
     <label class="header-submenu-label" for="submenu-provider-{{prefix}}">Espace Prestataire</label>
     <ul class="header-submenu-items">
