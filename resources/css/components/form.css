@@ -32,6 +32,10 @@
   color: var(--text-primary);
 }
 
+.form-input::placeholder, .form-textarea::placeholder {
+  font-size: .8em;
+}
+
 .form-input.is-error, .form-textarea.is-error {
   --form-input-border-color: var(--color-danger);
 }

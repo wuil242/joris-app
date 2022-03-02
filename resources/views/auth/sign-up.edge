@@ -1,68 +1,37 @@
 @layout('layouts/page')
+@set('title', 'creer un compte')
+@set('description', 'creer un compte et rejoingnez la famille')
 
-@set('title', 'sign-up')
-@set('description', 'the sign-up page')
-
-@set('action', route('sign-up.submit'))
-@set('fields', [
-  {
-    name: 'lastname',
-    msg: 'lastname',
-    value: flashMessages.get('lastname')
-  },
-  {
-    name: 'firstname',
-    msg: 'firstname',
-    value: flashMessages.get('firstname')
-  },
-  {
-    type: 'email',
-    name: 'email',
-    msg: 'email',
-    value: flashMessages.get('email')
-  },
-  {
-    type: 'tel',
-    name: 'tel',
-    msg: 'phone number',
-    value: flashMessages.get('tel')
-  },
-  {
-    type: 'password',
-    name: 'password',
-    msg: 'password',
-  },
-  {
-    type: 'password',
-    name: 'password_confirm',
-    msg: 'password confirm'
-  }
-])
+@section('head')
+@endsection
 
 @section('content')
-<h1>Sign Up</h1>
-{{--  {{inspect(flashMessages)}}    --}}
-{{inspect(flashMessages.get('errors'))}}
-<form class="form" action="{{action}}" method="post">
-  @!component('components/form', {action, fields})
-  <label class="form-label" for="policy">
-    Politique de confidentialiter <a href="/policy">en savoir plus</a>
-    <input class="form-input" type="checkbox" name="policy" id="policy" {{flashMessages.has('policy') ? 'checked' : ''}}>
-  </label>
-  <input class="form-input" type="submit" value="Sign-in">
-</form>
 
-  <script>
-    const policy = document.getElementById('policy')
-    const msg = document.createElement('div')
-    msg.style.setProperty('color', 'red')
-    msg.classList.add('error')
-    msg.innerText = 'acceptez les condition policy'
-    document.forms[0].addEventListener('submit', e => {
-      if(!policy.checked) {
-        e.preventDefault()
-        policy.parentElement.insertBefore(msg, policy.parentElement.firstChild)
-      }
+@!component('components/title', {
+  text: 'Creer un compte',
+})
+
+
+<section class="layout-two-block">
+  
+  <p>
+    Creer un compte
+  </p>
+  {{--  {{inspect(flashMessages)}}  --}}
+  <form class="form" action="{{route('login.submit')}}" method="post">
+    {{ csrfField() }}
+    @include('form/parts/lastname')
+    @include('form/parts/firstname')
+    @include('form/parts/tel')
+    @!component('form/parts/email', {optional: true})
+    @include('form/parts/password')
+    @include('form/parts/password_confirm')
+    @!component('form/form_checkbox', {text: 'Se souvenir de moi', name: 'remember_me'})
+  
+    @!component('form/form_submit', {
+      text: 'Se connecter'
     })
-  </script>
+  </form>
+  </section>
+
 @endsection

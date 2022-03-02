@@ -20,11 +20,18 @@
   {{--  {{inspect(flashMessages)}}  --}}
   <form class="form" action="{{route('login.submit')}}" method="post">
     {{ csrfField() }}
-    @include('form/parts/lastname')
-    @include('form/parts/firstname')
-    @include('form/parts/tel')
-    @!component('form/parts/email', {optional: true})
-    @include('form/parts/password')
+    @!component('form/form_input', {
+      name: 'email_or_tel',
+      label: 'Email ou Numero de Telephone',
+      // rule: 'renseignez un numero de telephone ou un email'
+    })
+    
+    @!component('form/form_input', {
+      label: 'Mot de passe',
+      name: 'password',
+      type: 'password'
+    })
+
     @!component('form/form_checkbox', {text: 'Se souvenir de moi', name: 'remember_me'})
   
     @!component('form/form_submit', {
