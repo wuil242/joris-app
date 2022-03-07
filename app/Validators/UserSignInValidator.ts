@@ -1,5 +1,6 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { PHONE_NUMBER_REGEX, VALIDATION_MESSAGE, VALIDATION_OPTIONAL_SCHEMA, VALIDATION_SCHEMA } from 'App/Configs/constants'
 
 export default class UserSignInValidator {
   constructor(protected ctx: HttpContextContract) {}
@@ -24,22 +25,13 @@ export default class UserSignInValidator {
    *    ```
    */
   public schema = schema.create({
-    lastname: schema.string({ trim: true }, [rules.minLength(4), rules.maxLength(60)]),
-    firstname: schema.string({ trim: true }, [rules.minLength(4), rules.maxLength(60)]),
-    email: schema.string({}, [rules.email(), rules.unique({ table: 'users', column: 'email' })]),
-    tel: schema.string.optional({}, [
-      rules.minLength(9),
-      rules.maxLength(9),
-      rules.unique({ table: 'users', column: 'tel' }),
-      //FIXME: verififier que le numero est bien un nombre a 9 chiffre
-      rules.regex(/^0(6|5|4)[0-9]+$/),
-    ]),
-    password: schema.string({}, [
-      rules.minLength(8),
-      rules.maxLength(60),
-      rules.confirmed('password_confirm'),
-    ]),
-    // policy: schema.string({}, [rules.equalTo('on')])
+    ...VALIDATION_SCHEMA.LASTNAME,
+    ...VALIDATION_SCHEMA.FIRSTNAME,
+    ...VALIDATION_SCHEMA.PASSWORD_WITH_CONFIRM,
+    ...VALIDATION_SCHEMA.POLICY,
+    ...VALIDATION_OPTIONAL_SCHEMA.REMEMBER_ME,
+    email: schema.string.optional({ trim: true }, [rules.email(), rules.unique({ table: 'users', column: 'email' })]),
+    tel: schema.string({trim: true}, [rules.regex(PHONE_NUMBER_REGEX)])
   })
 
   /**
@@ -53,5 +45,12 @@ export default class UserSignInValidator {
    * }
    *
    */
-  public messages = {}
+  public messages = {
+    ...VALIDATION_MESSAGE.DEFAULT,
+    ...VALIDATION_MESSAGE.FIRSTNAME,
+    ...VALIDATION_MESSAGE.EMAIL,
+    ...VALIDATION_MESSAGE.PASSWORD,
+    ...VALIDATION_MESSAGE.TEL,
+    ...VALIDATION_MESSAGE.POLICY
+  }
 }

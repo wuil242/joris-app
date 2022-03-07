@@ -1,50 +1,92 @@
 import { schema, rules} from '@ioc:Adonis/Core/Validator'
+import { rule } from 'postcss'
 
 const MESSAGE_LENGTH = {
   MIN: 15,
   MAX: 255
 }
 
-const NAME_REGEX = /^[a-zA-Z\-]+[a-zA-Z]$/
+export const NAME_REGEX = /^[a-zA-Z\-]+[a-zA-Z]$/
+export const NAME_MIN_LENGHTH = 3
+export const NAME_MAX_LENGTH = 30
 
-export const PHONE_NUMBER_REGEX = /^(\+242)*(06|05|04|22)\d{7}$/
+export const ADDRESS_MIN_LENGTH = 10
+export const ADDRESS_MAX_LENGTH = 30
+
+export const PHONE_NUMBER_REGEX = /^(\+242)?(06|05|04|22)\d{7}$/
 export const COUNTRY_CODE = '+242'
 
 export const PHONE_NUMBER_BAN_MESSAGE = `ce numero est bloquer contactez nous pour le debloquer`
 export const EMAIL_BAN_MESSAGE = `cet adresse email est bloquer contactez nous pour le debloquer`
 
+export const PASSWORD_MIN_LENGHT = 8
+export const PASSWORD_MAX_LENGHT = 24
+export const PASSWORD_REGEX = /^[a-zA-Z0-9\-]+$/ //FIXME: trouver une meilleur regex pour les password
+export const PASSWORD_CONFIRM_FILED_NAME = 'password_confirm'
+
 export const VALIDATION_SCHEMA = {
   LASTNAME: {
-    lastname: schema.string({trim: true}, [rules.minLength(3), rules.maxLength(20), rules.regex(NAME_REGEX)])
+    lastname: schema.string({ trim: true }, [
+      rules.minLength(NAME_MIN_LENGHTH), 
+      rules.maxLength(NAME_MAX_LENGTH), 
+      rules.regex(NAME_REGEX) 
+    ])
   },
   FIRSTNAME: {
-    firstname: schema.string({trim: true}, [rules.minLength(3), rules.maxLength(30), rules.regex(NAME_REGEX)])
+    firstname: schema.string({ trim: true }, [ 
+      rules.minLength(NAME_MIN_LENGHTH), 
+      rules.maxLength(NAME_MAX_LENGTH), 
+      rules.regex(NAME_REGEX) 
+    ])
   },
   ADDRESS: {
-    address: schema.string({trim: true}, [rules.minLength(10), rules.maxLength(35)])
+    address: schema.string({ trim: true }, [ 
+      rules.minLength(ADDRESS_MIN_LENGTH), 
+      rules.maxLength(ADDRESS_MAX_LENGTH) 
+    ])
   },
   EMAIL: {
-    email: schema.string({trim: true}, [rules.email()])
+    email: schema.string({ trim: true }, [ rules.email() ])
   },
   TEL: {
-    tel: schema.string({trim: true}, [rules.regex(PHONE_NUMBER_REGEX)])
+    tel: schema.string({ trim: true }, [ rules.regex(PHONE_NUMBER_REGEX) ])
   },
-  MESSAGE: {message: schema.string({trim: true}, [
-    rules.minLength(MESSAGE_LENGTH.MIN), rules.maxLength(MESSAGE_LENGTH.MAX)
-  ])}
+  MESSAGE: {
+    message: schema.string({ trim: true }, [ 
+      rules.minLength(MESSAGE_LENGTH.MIN),
+      rules.maxLength(MESSAGE_LENGTH.MAX) 
+    ])
+  },
+  PASSWORD: {
+    password: schema.string({ trim: true }, [
+      rules.minLength(PASSWORD_MIN_LENGHT),
+      rules.maxLength(PASSWORD_MAX_LENGHT),
+      rules.regex(PASSWORD_REGEX)
+    ])
+  },
+  PASSWORD_WITH_CONFIRM: {
+    password: schema.string({ trim: true }, [
+      rules.minLength(PASSWORD_MIN_LENGHT),
+      rules.maxLength(PASSWORD_MAX_LENGHT),
+      rules.regex(PASSWORD_REGEX),
+      rules.confirmed(PASSWORD_CONFIRM_FILED_NAME),
+    ])
+  },
+  POLICY: {
+    policy: schema.boolean()
+  }
 }
 
 export const VALIDATION_OPTIONAL_SCHEMA = {
-  TEL: {tel: schema.string.optional({trim: true}, [rules.regex(PHONE_NUMBER_REGEX)])},
-  EMAIL: {
-    email: schema.string.optional({trim: true}, [rules.email()])
-  }
+  TEL: { tel: schema.string.optional({ trim: true }, [ rules.regex(PHONE_NUMBER_REGEX) ]) },
+  EMAIL: { email: schema.string.optional({trim: true}, [rules.email()]) },
+  REMEMBER_ME: {remember_me: schema.boolean.optional() }
 }
 
 export const VALIDATION_MESSAGE  = {
   DEFAULT: {
     required: 'ce champ est requis!',
-    email: 'cet email n\'est pas valide!'
+    email: 'cet email n\'est pas valide!',
   },
   LASTNAME: {
     'lastname.minLength': `nom trop court, il doit contenir au moins ${MESSAGE_LENGTH.MIN} caratère`,
@@ -59,9 +101,21 @@ export const VALIDATION_MESSAGE  = {
   TEL: {
     'tel.regex': `ce numero n'est pas valide, exemple: (${COUNTRY_CODE})XXXXXXXXX`
   },
+  EMAIL: {
+    'email.unique': 'cet email est deja utilise, veuillez saisir un autre email valide'
+  },
   MESSAGE: {
     'message.minLength': `message trop court, il doit contenir au moins ${MESSAGE_LENGTH.MIN} caratère`,
     'message.maxLength': `message trop Long, il doit contenir au plus ${MESSAGE_LENGTH.MAX} caratère`
   },
-
+  PASSWORD: {
+    'password.minLength': `mot de passe trop court, il doit contenir au moisns ${PASSWORD_MIN_LENGHT} caractere`,
+    'password.maxLength': `mot de passe trop long, il doit contenir au plus ${PASSWORD_MAX_LENGHT} caractere`,
+    'password.regex': 'votre mot de passe non valide, doit contenir au moins des lettres et des chiffres',
+    // 'password.confirmed': ,
+    [PASSWORD_CONFIRM_FILED_NAME + '.confirmed']: 'mot de passe de confiramtion inccorect'
+  },
+  POLICY: {
+    'policy.required': 'acceptez les condition d\'utilisation'
+  }
 }

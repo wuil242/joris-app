@@ -8,6 +8,8 @@ export default class UsersController {
   public async store({ request, view, response, session }: HttpContextContract) {
     const payload = await request.validate(UserSignInValidator)
 
+    return { payload, session }
+
     const policy = request.input('policy') === 'on'
     if (!policy) {
       for (const item in payload) {

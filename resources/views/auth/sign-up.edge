@@ -18,7 +18,7 @@
     Creer un compte
   </p>
   {{--  {{inspect(flashMessages)}}  --}}
-  <form class="form" action="{{route('login.submit')}}" method="post">
+  <form class="form" action="{{route('sign-up.submit')}}" method="post">
     {{ csrfField() }}
     @include('form/parts/lastname')
     @include('form/parts/firstname')
