@@ -13,8 +13,7 @@
   class="form-input {{flashMessages.has('errors.'+ name) ? 'is-error' : ''}}" name="{{name}}"
   placeholder="{{placeholder ? placeholder : ''}}"
   value="{{value || flashMessages.has(name) ? flashMessages.get(name) : ''}}"
-  maxlength="{{maxLength || ''}}"
-  minlength="{{minlength || ''}}"
+  {{autocomplete ? 'autocomplete="new-password"' : ''}}
 />
 @!component('form/form_error', {name})
   

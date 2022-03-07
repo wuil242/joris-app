@@ -26,11 +26,14 @@
     @!component('form/parts/email', {optional: true})
     @include('form/parts/password')
     @include('form/parts/password_confirm')
+   
+    @include('form/form_policy')
     @!component('form/form_checkbox', {text: 'Se souvenir de moi', name: 'remember_me'})
   
     @!component('form/form_submit', {
       text: 'Se connecter'
     })
+
   </form>
   </section>
 
