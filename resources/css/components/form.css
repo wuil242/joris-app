@@ -8,6 +8,10 @@
   justify-content: center;
 }
 
+.form-field {
+  position: relative;
+}
+
 /* label */
 .form-label {
   font-size: 1.2rem;
@@ -30,6 +34,8 @@
 
   font-size: 1.3rem;
   color: var(--text-primary);
+  position: relative;
+  width: 100%;
 }
 
 .form-input::placeholder, .form-textarea::placeholder {
@@ -47,13 +53,25 @@
 .form-input-infos {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 .25em;
+  align-items: baseline;
+  padding: .25em;
 }
+
+/* password input */
+.is-password {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate3d(0, 25%, 0);
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
 
 .form-textarea {
   height: 100px;
 }
+
 
 /* rules */
 .form-rule {
@@ -190,7 +208,6 @@
 
 /* optional text field  */
 .form-optional {
-  margin-right: 1em;
   font-size: .90em;
   color: var(--form-optional);
 }
@@ -211,7 +228,6 @@
   font-size: .9em;
   padding: 0 .2em;
 }
-
 
 /* Responsive */
 

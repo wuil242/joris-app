@@ -1,4 +1,5 @@
-@if(label)
+<div class="form-field">
+  @if(label)
 <div class="form-input-infos">
   <div>
     @!component('form/form_rule', {rule, rules})
@@ -9,11 +10,17 @@
 @endif
 <input 
   {{--  {{required ? 'required' : ''}}    --}}
-  type="{{type || 'text'}}" 
-  class="form-input {{flashMessages.has('errors.'+ name) ? 'is-error' : ''}}" name="{{name}}"
+  type="{{type || 'text'}}"
+  class="form-input {{type === 'password' ? 'js-password-field' : ''}} {{flashMessages.has('errors.'+ name) ? 'is-error' : ''}}" 
+  name="{{name}}"
   placeholder="{{placeholder ? placeholder : ''}}"
   value="{{value || flashMessages.has(name) ? flashMessages.get(name) : ''}}"
   {{autocomplete ? 'autocomplete="new-password"' : ''}}
 />
+@if(type === 'password')
+<i class="is-password far fa-eye" data-name="{{name}}"></i>
+@endif
+
 @!component('form/form_error', {name})
+</div>
   
