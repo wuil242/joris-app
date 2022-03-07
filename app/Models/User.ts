@@ -4,10 +4,6 @@ import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
 import {attachment, AttachmentContract} from '@ioc:Adonis/Addons/AttachmentLite'
 
 export default class User extends BaseModel {
-
-  @attachment()
-  public profilPhoto?:AttachmentContract|null
-
   @column({ isPrimary: true })
   public id: number
 
@@ -18,10 +14,10 @@ export default class User extends BaseModel {
   public firstname: string
 
   @column()
-  public tel?: string
+  public tel: string
 
   @column()
-  public email: string
+  public email?: string
 
   @column({ serializeAs: null })
   public password: string

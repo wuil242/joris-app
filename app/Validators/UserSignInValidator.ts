@@ -30,8 +30,14 @@ export default class UserSignInValidator {
     ...VALIDATION_SCHEMA.PASSWORD_WITH_CONFIRM,
     ...VALIDATION_SCHEMA.POLICY,
     ...VALIDATION_OPTIONAL_SCHEMA.REMEMBER_ME,
-    email: schema.string.optional({ trim: true }, [rules.email(), rules.unique({ table: 'users', column: 'email' })]),
-    tel: schema.string({trim: true}, [rules.regex(PHONE_NUMBER_REGEX)])
+    email: schema.string.optional({ trim: true }, [ 
+      rules.email(), 
+      rules.unique({ table: 'users', column: 'email' }) 
+    ]),
+    tel: schema.string({ trim: true }, [ 
+      rules.regex(PHONE_NUMBER_REGEX), 
+      rules.unique({ table: 'users', column: 'tel' })
+    ])
   })
 
   /**

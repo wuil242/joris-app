@@ -5,23 +5,16 @@ import UserSignInValidator from 'App/Validators/UserSignInValidator'
 
 //TODO: ajouter une ref qui permet de savoir ou rediriger apres une connexion reussite
 export default class UsersController {
-  public async store({ request, view, response, session }: HttpContextContract) {
-    const payload = await request.validate(UserSignInValidator)
-
-    return { payload, session }
-
-    const policy = request.input('policy') === 'on'
-    if (!policy) {
-      for (const item in payload) {
-        session.flash(item, payload[item])
-      }
-      session.flash('errors.policy', 'accepter la policy')
-      return response.redirect().back()
-    }
+  public async store({ request, response, auth }: HttpContextContract) {
+    const {lastname, firstname, email, password, tel, remember_me} = await request.validate(UserSignInValidator)
+    const ref = request.qs().ref || '/'
     //TODO: ajouter la confirmation par mail
-    const user = await User.create(payload)
 
-    return await view.render('user/confirmation', { user })
+    const user = await User.create({lastname, firstname, email, password, tel})
+
+    await auth.login(user, remember_me)
+
+    return await response.redirect(ref)
   }
 
   public async login({ request, auth, response, session }: HttpContextContract) {

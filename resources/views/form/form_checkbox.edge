@@ -1,6 +1,8 @@
-<label class="form-checkbox" for="{{name}}">
-  {{text}}
-  <input class="form-input" type="checkbox" name="{{name}}" id="{{name}}" {{flashMessages.get(name) === 'on' ? 'checked' : ''}}>
-  <span class="form-checkbox-box"></span>
-</label>
-@!component('form/form_error', {name})
+<div class="form-field">
+  <label class="form-checkbox" for="{{name}}">
+    {{text}}
+    <input class="form-input" type="checkbox" name="{{name}}" id="{{name}}" {{flashMessages.get(name) === 'on' ? 'checked' : ''}}>
+    <span class="form-checkbox-box"></span>
+  </label>
+  @!component('form/form_error', {name})
+</div>

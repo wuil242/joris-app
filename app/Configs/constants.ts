@@ -1,5 +1,4 @@
 import { schema, rules} from '@ioc:Adonis/Core/Validator'
-import { rule } from 'postcss'
 
 const MESSAGE_LENGTH = {
   MIN: 15,
@@ -99,7 +98,8 @@ export const VALIDATION_MESSAGE  = {
     'firstname.regex': `le prénom ne peu contenir que des letters et des tirets(-), mais pas de tiret à la fin.`
   },
   TEL: {
-    'tel.regex': `ce numero n'est pas valide, exemple: (${COUNTRY_CODE})XXXXXXXXX`
+    'tel.regex': `ce numero n'est pas valide, exemple: (${COUNTRY_CODE})XXXXXXXXX`,
+    'tel.unique': `ce numero deja utiliser, saisissez un autre numero valide`
   },
   EMAIL: {
     'email.unique': 'cet email est deja utilise, veuillez saisir un autre email valide'
