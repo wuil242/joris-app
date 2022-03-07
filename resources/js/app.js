@@ -17,6 +17,17 @@ document.querySelectorAll('.form-submit')
     })
   })
 
+
+//retrait de la mise en evidence d'une erreur apers un focus sur une input
+document.querySelectorAll('.form-input')
+  ?.forEach($input => {
+    $input.addEventListener('focus', () => {
+      if(!$input.classList.contains('is-error')) return
+
+      $input.classList.remove('is-error')
+    })
+  })
+
 //ajout de la possibilter de voir ou masquer les mot de passe
 document.querySelectorAll('.js-password-field')
   ?.forEach($password_field => {

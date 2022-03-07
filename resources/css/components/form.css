@@ -60,9 +60,9 @@
 /* password input */
 .is-password {
   position: absolute;
-  top: 50%;
+  top: 0;
   right: 0;
-  transform: translate3d(0, 25%, 0);
+  transform: translate3d(0, 275%, 0);
   font-size: 1.1em;
   cursor: pointer;
 }
@@ -109,7 +109,7 @@
 
 /* errors */
 .form-errors {
-  padding: 0 .5em .5em .5em;
+  padding: .3em .5em;
   
   color: var(--form-error-text-color);
   font-size: .9rem;
