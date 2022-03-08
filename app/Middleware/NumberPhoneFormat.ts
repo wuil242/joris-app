@@ -6,7 +6,9 @@ export default class NumberPhoneFormat {
     // code for middleware goes here. ABOVE THE NEXT CALL
     const tel = request.input('tel')
     if(tel) {
-      request.updateBody({tel: formatNumberPhone(tel)})
+      const body = request.body()
+      body.tel = formatNumberPhone(tel)
+      request.updateBody(body)
     }
 
     await next()

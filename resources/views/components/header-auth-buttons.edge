@@ -1,4 +1,6 @@
+@set('ref', '?ref=test')
+
 <div class="header-auth-buttons">
-  <a href="{{ route('sign-up') }}" class="button header-auth-button">Créer un compte</a>
-  <a href="{{ route('login') }}" class="button header-auth-button">Se connecter</a>
+  <a href="{{ route('sign-up') + ref }}" class="button header-auth-button">Créer un compte</a>
+  <a href="{{ route('login') + ref }}" class="button header-auth-button">Se connecter</a>
 </div>

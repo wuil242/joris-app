@@ -1,5 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { LOGIN_ERROR_MESSAGE } from 'App/Configs/constants'
+import { LOGIN_ERROR_MESSAGE, PHONE_NUMBER_REGEX } from 'App/Configs/constants'
+import { formatNumberPhone } from 'App/Helpers/helpers'
 import User from 'App/Models/User'
 import UserLoginValidator from 'App/Validators/UserLoginValidator'
 import UserSignInValidator from 'App/Validators/UserSignInValidator'
@@ -24,6 +25,10 @@ export default class UsersController {
     const payload = await request.validate(UserLoginValidator)
     console.log(payload)
     let user: User | null = null
+
+    if(PHONE_NUMBER_REGEX.test(payload.userId)) {
+      payload.userId = formatNumberPhone(payload.userId)
+    }
 
     try {
       user = await auth.verifyCredentials(payload.userId, payload.password)
