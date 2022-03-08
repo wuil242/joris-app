@@ -7,7 +7,7 @@ import UserSignInValidator from 'App/Validators/UserSignInValidator'
 //TODO: ajouter une ref qui permet de savoir ou rediriger apres une connexion reussite
 export default class UsersController {
   public async store({ request, response, auth }: HttpContextContract) {
-    //FIXME: formatter correctement le numero de telephone pendant la verification
+    console.log('REQUEST', request.input('tel'))
     const {lastname, firstname, email, password, tel, remember_me} = await request.validate(UserSignInValidator)
     const ref = request.qs().ref || '/'
     //TODO: ajouter la confirmation par mail
@@ -21,7 +21,6 @@ export default class UsersController {
 
   public async login({ request, auth, response, session }: HttpContextContract) {
     const ref = request.qs().ref || '/'
-    //FIXME: formatter correctement le numero de telephone pendant la verification
     const payload = await request.validate(UserLoginValidator)
     console.log(payload)
     let user: User | null = null
