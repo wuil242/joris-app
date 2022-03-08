@@ -18,7 +18,8 @@
     Creer un compte
   </p>
   {{--  {{inspect(flashMessages)}}  --}}
-  <form class="form" action="{{route('sign-up.submit')}}" method="post">
+  @set('ref',  request.qs().ref ? '?ref=' + request.qs().ref : '')
+  <form class="form" action="{{ route('sign-up.submit') + ref }}" method="post">
     {{ csrfField() }}
     @include('form/parts/lastname')
     @include('form/parts/firstname')

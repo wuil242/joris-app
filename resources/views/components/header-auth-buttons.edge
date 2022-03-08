@@ -1,4 +1,5 @@
-@set('ref', '?ref=test')
+@set('isLoginOrSignRoute', request.url() === route('login') || request.url() === route('sign-up'))
+@set('ref', isLoginOrSignRoute ? '' : '?ref=' + request.url() || flashMessages.get('ref'))
 
 <div class="header-auth-buttons">
   <a href="{{ route('sign-up') + ref }}" class="button header-auth-button">Créer un compte</a>

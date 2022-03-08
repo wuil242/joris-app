@@ -17,8 +17,9 @@
   <p>
     Connecter vous a votre compte
   </p>
-  {{--  {{inspect(flashMessages)}}  --}}
-  <form class="form" action="{{route('login.submit')}}" method="post">
+  
+  @set('ref',  request.qs().ref ? '?ref=' + request.qs().ref : '')
+  <form class="form" action="{{ route('login.submit') + ref }}" method="post">
     {{ csrfField() }}
 
     @include('form/form_global_error')
