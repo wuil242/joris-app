@@ -20,8 +20,11 @@
   {{--  {{inspect(flashMessages)}}  --}}
   <form class="form" action="{{route('login.submit')}}" method="post">
     {{ csrfField() }}
+
+    @include('form/form_global_error')
+    
     @!component('form/form_input', {
-      name: 'email_or_tel',
+      name: 'userId',
       label: 'Email ou Numero de Telephone',
       // rule: 'renseignez un numero de telephone ou un email'
     })

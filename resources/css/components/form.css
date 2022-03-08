@@ -156,6 +156,7 @@
   position: relative;
   gap: .5em;
   place-self: flex-start;
+  width: max-content;
 }
 
 .form-checkbox input {

@@ -1,9 +1,11 @@
 import { schema, rules} from '@ioc:Adonis/Core/Validator'
 
-const MESSAGE_LENGTH = {
-  MIN: 15,
-  MAX: 255
-}
+
+export const COUNTRY_CODE = '+242'
+
+export const LOGIN_ERROR_MESSAGE = 'connexion impossible! l\'email, le numero de telephone ou le mot de passe est incorect, veuillez ressayer svp!'
+
+const MESSAGE_LENGTH = { MIN: 15, MAX: 255 }
 
 export const NAME_REGEX = /^[a-zA-Z\-]+[a-zA-Z]$/
 export const NAME_MIN_LENGHTH = 3
@@ -13,7 +15,6 @@ export const ADDRESS_MIN_LENGTH = 10
 export const ADDRESS_MAX_LENGTH = 30
 
 export const PHONE_NUMBER_REGEX = /^(\+242)?(06|05|04|22)\d{7}$/
-export const COUNTRY_CODE = '+242'
 
 export const PHONE_NUMBER_BAN_MESSAGE = `ce numero est bloquer contactez nous pour le debloquer`
 export const EMAIL_BAN_MESSAGE = `cet adresse email est bloquer contactez nous pour le debloquer`
