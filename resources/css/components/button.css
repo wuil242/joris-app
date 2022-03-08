@@ -34,3 +34,8 @@
 .button.rounded {
   border-radius: 50%;
 }
+
+.button.danger {
+  --button-bg-color: var(--button-danger-bg-color);
+  --button-hover-bg-color: var(--button-danger-hover-bg-color);
+}

@@ -62,16 +62,6 @@
   @if(!auth?.isLoggedIn)
    @include('components/header-auth-buttons')
   @else
-    {{--  User header-profil  --}}
-    <a href="#" class="header-profil">
-    </a>
-    <div class="header-profil-options">
-    </div>      
-    <p>{{auth.user.lastname}}</p>
-    @set('ref',  request.qs().ref ? '?ref=' + request.qs().ref : '')
-    <form style="width: 100%; height: 100%; background: red;" action="{{ route('logout') + ref }}" method="POST">
-      {{ csrfField() }}
-      <input class="button" style="background: #F226;" type="submit" value="log-out">
-    </form> 
+    @include('components/header_profil')
   @endif
 </ul>

@@ -146,6 +146,17 @@
   border-color: var(--form-submit-border-color);
 }
 
+.form-submit.danger {
+  --form-submit-bg-color: var(--button-danger-bg-color);
+}
+
+.form-submit.danger:hover,
+.form-submit.danger:active { 
+  --form-submit-bg-color: var(--form-submit-danger-hover-bg-color);
+  --form-submit-text-color: var(--form-submit-danger-hover-text-color);
+  --form-submit-border-color: var(--form-submit-danger-border-color);
+}
+
 /* checkbox */
 .form-checkbox {
   display: flex;

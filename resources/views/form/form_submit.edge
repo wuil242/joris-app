@@ -1,3 +1,11 @@
-<button class="button form-submit" type="submit">
-  {{text}} <i class="fa fa-{{icon ? icon : 'paper-plane'}}"></i>
+<button class="button form-submit {{className ? className : ''}}" type="submit">
+  @if(disableIcon)
+    {{text}}
+  @else
+    @if(iconToLeft)
+      <i class="fa fa-{{icon ? icon : 'paper-plane'}}"></i> {{text}}
+    @else
+      {{text}} <i class="fa fa-{{icon ? icon : 'paper-plane'}}"></i>
+    @endif
+  @endif
 </button>

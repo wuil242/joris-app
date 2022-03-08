@@ -1,0 +1,18 @@
+<section class="header-profil">
+      
+  <a href="#" class="header-profil-image">
+  </a>
+  <div class="header-profil-infos">
+    <p>{{auth.user.lastname}}</p>
+  </div>      
+  @set('ref',  request.qs().ref ? '?ref=' + request.qs().ref : '')
+  <form style="" action="{{ route('logout') + ref }}" method="POST">
+    {{ csrfField() }}
+    @!component('form/form_submit', {
+      // icon: 'arrow-alt-circle-left',
+      text: 'Se deconnecter',
+      disableIcon: true ,
+      className: 'danger'
+    })
+  </form> 
+</section>

@@ -1,15 +1,6 @@
 .header-profil {
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 2em;
-  background-color: #ccc;
-  border-radius: 50%;
+  background-color: lime;
 }
 
-.header-profil-options {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+.header-profil-infos {  
 }

@@ -50,6 +50,11 @@
   --button-border-color: transparent;
   --button-radius: 4px;
 
+  /* Button Danger */
+  --button-danger-bg-color: #e32020;
+  --button-danger-hover-bg-color: var(--button-text-color);
+
+
   /* Header menu */
   --header-menu-button-bg-color: var(--button-bg-color);
   --header-menu-button-line-color: var(--button-text-color);
@@ -94,12 +99,19 @@
   --form-rule-bg-color: var(--color-light-primary);
   --form-rule-text-color: var(--color-light-white);
 
-  /* Form submit buttom */
+  /* Form submit button */
   --form-submit-bg-color: var(--button-bg-color);
   --form-submit-text-color: var(--button-text-color);
   --form-submit-hover-bg-color: var(--form-submit-text-color);
   --form-submit-hover-text-color: var(--form-submit-bg-color);
   --form-submit-border-color: var(--form-submit-bg-color);
+
+  /* Form submit danger button */
+  --form-submit-danger-bg-color: var(--button-danger-bg-color);
+  --form-submit-danger-hover-text-color: var(--form-submit-danger-bg-color);
+  --form-submit-danger-hover-bg-color: var(--form-submit-text-color);
+  --form-submit-danger-border-color: var(--form-submit-danger-bg-color);
+
 
   /* Title */
   --title-text-color: var(--text-primary);
