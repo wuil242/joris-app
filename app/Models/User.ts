@@ -40,4 +40,6 @@ export default class User extends BaseModel {
       user.password = await Hash.make(user.password)
     }
   }
+
+  public get fullname() { return this.lastname + ' ' + this.firstname}
 }

@@ -76,4 +76,7 @@ Route.group(() => {
   Route.post('/logout', 'UsersController.logout').as('logout')
   
   Route.get('/profil', 'UsersController.profil').as('user.profil')
+  Route.get('/reset-password', 'UsersController.resetPassword').as('user.password')
+
+  Route.post('/profil', 'UsersController.update').as('user.update')
 }).middleware('auth')

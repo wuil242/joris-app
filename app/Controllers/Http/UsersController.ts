@@ -51,4 +51,12 @@ export default class UsersController {
   public async profil({view}: HttpContextContract) {
     return view.render('user/profil')
   }
+
+  public async resetPassword({view}: HttpContextContract) {
+    return view.render('user/reset_password')
+  }
+
+  public async update({view}: HttpContextContract) {
+    
+  }
 }

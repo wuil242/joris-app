@@ -1,10 +1,25 @@
 @layout('layouts/page')
-@set('title', 'user.fullname')
-@set('description', 'profil de user.fullname')
+@set('title', auth.user.fullname)
+@set('description', 'profil de ' + auth.user.fullname )
 
 @section('head')
 @endsection
 
 @section('content')
-{{inspect(auth.user.fullname)}}
+<a href="{{route('user.password')}}" class="button">Modifier le mode passe</a>
+<form class="form" action="{{ route('user.update') + ref }}" method="post">
+  {{ csrfField() }}
+  @!component('form/parts/lastname', {value: auth.user.lastname})
+  @!component('form/parts/firstname', {value: auth.user.firstname})
+
+  @!component('form/parts/tel', {value: auth.user.tel})
+  @!component('form/parts/email', {optional: true, value: auth.user.email})
+
+  @!component('form/form_submit', {
+    text: 'Modifier',
+    icon: 'edit',
+    iconToLeft: true
+  })
+
+</form>
 @endsection
