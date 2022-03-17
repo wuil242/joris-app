@@ -74,4 +74,6 @@ Route.group(() => {
 
 Route.group(() => {
   Route.post('/logout', 'UsersController.logout').as('logout')
+  
+  Route.get('/profil', 'UsersController.profil').as('user.profil')
 }).middleware('auth')

@@ -6,7 +6,7 @@ export default class UserGuard {
     const isLoggedIn = await auth.check()
 
     if (isLoggedIn) {
-      return response.redirect('/profil/dashboard')
+      return response.redirect().toRoute('user.profil')
     }
 
     await next()

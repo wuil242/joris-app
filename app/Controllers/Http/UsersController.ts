@@ -35,7 +35,7 @@ export default class UsersController {
       user = await auth.verifyCredentials(payload.userId, payload.password)
     } catch(err) {
       session.flash('form_global_error', LOGIN_ERROR_MESSAGE)
-      return response.redirect('/connexion?ref=' + ref)
+      return response.redirect().toRoute('login', {qs: {ref}})
     }
 
     await auth.login(user, payload.remember_me)
@@ -46,5 +46,9 @@ export default class UsersController {
     const ref = request.qs().ref || '/'
     await auth.logout()
     return response.redirect(ref)
+  }
+
+  public async profil({view}: HttpContextContract) {
+    return view.render('user/profil')
   }
 }

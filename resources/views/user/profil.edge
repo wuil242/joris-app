@@ -1,0 +1,10 @@
+@layout('layouts/page')
+@set('title', 'user.fullname')
+@set('description', 'profil de user.fullname')
+
+@section('head')
+@endsection
+
+@section('content')
+{{inspect(auth.user.fullname)}}
+@endsection
