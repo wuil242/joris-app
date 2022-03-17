@@ -31,11 +31,18 @@
   --button-text-color: var(--button-hover-text-color);
 }
 
+/* Modifiers */
 .button.rounded {
   border-radius: 50%;
 }
 
+.button.bordered {
+  --button-border-color: var(--button-text-color);
+}
+
+/* Variants */
 .button.danger {
   --button-bg-color: var(--button-danger-bg-color);
   --button-hover-bg-color: var(--button-danger-hover-bg-color);
 }
+

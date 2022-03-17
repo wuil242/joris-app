@@ -56,7 +56,7 @@ export default class UsersController {
     return view.render('user/reset_password')
   }
 
-  public async update({view}: HttpContextContract) {
-    
+  public async update({response}: HttpContextContract) {
+
   }
 }

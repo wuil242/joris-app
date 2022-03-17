@@ -6,8 +6,8 @@
 @endsection
 
 @section('content')
-<a href="{{route('user.password')}}" class="button">Modifier le mode passe</a>
-<form class="form" action="{{ route('user.update') + ref }}" method="post">
+<a href="{{route('user.password')}}" class="button bordered">Modifier le mode passe</a>
+<form class="form" action="{{ route('user.update') }}" method="post">
   {{ csrfField() }}
   @!component('form/parts/lastname', {value: auth.user.lastname})
   @!component('form/parts/firstname', {value: auth.user.firstname})
