@@ -5,13 +5,10 @@
 }
 
 .header-menu-static .header-menu-items {
-  padding: 10px;
-}
-
-.header-menu-static .header-menu-items {
   flex-direction: row;
   justify-content: space-between;
   overflow: visible;
+  padding: 10px;
 }
 
 .header-menu-static  .header-profil {
@@ -26,6 +23,10 @@
 .header-menu-static .header-profil-infos .user-profil-image {
   width: 48px;
   height: 48px;
+}
+
+.header-menu-static .header-menu-actions {
+  display: none;
 }
 
 @media only screen and (min-width: 1300px) {

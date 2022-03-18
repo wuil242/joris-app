@@ -12,7 +12,9 @@
   </a>
 </div>
 <div class="header-menu-actions">
-@if(!auth.isLoggedIn)
+@if(auth.isLoggedIn)
+  @include('components/header_profil')
+@else
   <a class="header-menu-actions-login header-menu-item {{ request.url() ===  route('login') ? 'active' : '' }}" href="{{ route('login')  + ref}}">Se connecter</a>
   <a class="header-menu-actions-sign_up button" href="{{ route('sign-up') + ref}}">Créer un compte</a>
 @endif

@@ -147,6 +147,20 @@
   color: var(--header-menu-text-color);
 }
 
+.header-menu-actions  .header-profil {
+  flex-direction: row;
+}
+
+.header-menu-actions .header-profil-name
+{
+  display: none;
+}
+
+.header-menu-actions .header-profil-infos .user-profil-image {
+  width: 48px;
+  height: 48px;
+}
+
 
 /* Responsive */
 @media only screen and (min-width:650px) {
@@ -183,6 +197,10 @@
 
   .header-menu-actions-login,
   .header-menu-actions-sign_up {
+    display: none;
+  }
+
+  .header-menu-actions  .header-profil:first-child {
     display: none;
   }
 }
