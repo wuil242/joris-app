@@ -37,6 +37,8 @@
     "@adonisjs/view": "^6.1.0",
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "autoprefixer": "^10.3.4",
+    "form-data": "^4.0.0",
+    "got": "^11.8.3",
     "luxon": "^2.0.2",
     "pg": "^8.7.1",
     "phc-argon2": "^1.1.2",

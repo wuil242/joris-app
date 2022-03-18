@@ -52,7 +52,9 @@
 
   /* Button Danger */
   --button-danger-bg-color: #e32020;
-  --button-danger-hover-bg-color: var(--button-text-color);
+  --button-danger-text-color: var(--color-white);
+  --button-danger-hover-bg-color: var(--button-danger-text-color);
+  --button-danger-hover-text-color: var(--button-danger-bg-color);
 
 
   /* Header menu */

@@ -25,6 +25,9 @@ export default class User extends BaseModel {
   @column()
   public rememberMeToken?: string
 
+  @column()
+  public profil_image: string | null
+
   @column.dateTime()
   public confirmed: DateTime
 

@@ -13,7 +13,12 @@ document.querySelectorAll('.form-submit')
 ?.forEach($submit_button => {
   $submit_button.addEventListener('click', () => {
       addLoaderToButton($submit_button)
-      $submit_button.parentElement.submit()
+      try {
+        $submit_button.parentElement.submit()
+      } catch (error) {
+        $submit_button.parentElement.parentElement.submit()
+      }
+      console.log($submit_button)
     })
   })
 

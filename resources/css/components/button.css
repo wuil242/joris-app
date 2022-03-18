@@ -38,11 +38,18 @@
 
 .button.bordered {
   --button-border-color: var(--button-text-color);
+  font-weight: bold;
 }
+
 
 /* Variants */
 .button.danger {
   --button-bg-color: var(--button-danger-bg-color);
-  --button-hover-bg-color: var(--button-danger-hover-bg-color);
+  --button-text-color: var(--button-danger-text-color);
+}
+
+.button:hover.danger {
+  --button-bg-color: var(--button-danger-hover-bg-color);
+  --button-text-color: var(--button-danger-hover-text-color); 
 }
 

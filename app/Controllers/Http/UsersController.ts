@@ -4,7 +4,11 @@ import { formatNumberPhone } from 'App/Helpers/helpers'
 import User from 'App/Models/User'
 import UserLoginValidator from 'App/Validators/UserLoginValidator'
 import UserSignInValidator from 'App/Validators/UserSignInValidator'
-import {schema} from '@ioc:Adonis/Core/Validator'
+import {schema, rules} from '@ioc:Adonis/Core/Validator'
+import Env from '@ioc:Adonis/Core/Env'
+import got, { Method } from 'got'
+import FormData from 'form-data'
+import Drive from '@ioc:Adonis/Core/Drive'
 
 //TODO: ajouter une ref qui permet de savoir ou rediriger apres une connexion reussite
 export default class UsersController {
@@ -61,9 +65,13 @@ export default class UsersController {
 
   }
 
-  public async imageUpdate({request, response}: HttpContextContract) {
+  //FIXME: upload correct des images
+  public async imageUpdate({request, response, session, auth}: HttpContextContract) {
+    //FIXME: Nullabe file
     const validation = schema.create({
-      profil_image: schema.file({size: '2mb', extnames: ['jpg', 'jpeg', 'png']})
+      profil_image: schema.file.optional(
+        { size: '2mb', extnames: ['jpg', 'jpeg', 'png'] }, 
+        )
     })
     
     const messages = {
@@ -72,8 +80,14 @@ export default class UsersController {
     }
 
     const payload = await request.validate({schema: validation, messages})
-
-    // TODO: mettre a jour la photo de profil de l'utilsateur
+   
+    if(!payload.profil_image) {
+      // TODO: remove image profil
+      session.flash('msg', 'TODO: Reset File')
+    }
+    else {
+      session.flash('msg', 'FIXME: upload correct des images')
+    }
 
     return response.redirect().back()
   }
