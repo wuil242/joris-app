@@ -61,6 +61,14 @@ Route.group(() => {
   Route.get('/%C3%A0-propos', 'InfosController.about').as('infos.about')
   Route.get('/politique-de-confidentialit%C3%A9e', 'InfosController.policy').as('infos.policy')
 
+
+  //TODO: mettre en place la renitilisation du mot de passe
+  Route.get('/reset-password', 'UsersController.resetPassword').as('user.password')
+  Route.post('/reset-password', 'UsersController.sendRestPasswordCode')
+       .middleware('BanCheck')
+       .as('user.password.reset')
+
+
 }).middleware('silentAuth')
 
 Route.group(() => {
@@ -76,8 +84,8 @@ Route.group(() => {
   Route.post('/logout', 'UsersController.logout').as('logout')
   
   Route.get('/profil', 'UsersController.profil').as('user.profil')
-  Route.get('/reset-password', 'UsersController.resetPassword').as('user.password')
-
+  
   Route.post('/profil', 'UsersController.update').as('user.update')
   Route.post('/profil/image', 'UsersController.imageUpdate').as('user.image.update')
+  
 }).middleware('auth')

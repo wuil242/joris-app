@@ -63,9 +63,19 @@ export default class UsersController {
     return view.render('user/reset_password')
   }
 
+  public async sendRestPasswordCode({}: HttpContextContract) {
+    //TODO: generer un nombre a 6 chiffre
+    const code = 1234
+    return 
+  }
+
+  public async updatePassword({}: HttpContextContract) {
+
+  }
+
   public async update({request, auth, session, response}: HttpContextContract) {
     const payload = await request.validate(UserUpdateValidator)
-    
+
     try {
       await auth.user?.merge(payload)
       await auth.user?.save()
