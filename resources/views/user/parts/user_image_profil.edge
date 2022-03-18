@@ -1,0 +1,22 @@
+<div class="user-profil-image-edit">
+  @if(!auth.user)
+    <img class="user-profil-image" src="{{env('DIRECTUS_ASSETS_URL') + 'user_image'}}" alt="{{auth.user.fullname}}" id="img">
+  @else
+    <i class="fa fa-user user-profil-icon"></i>
+  @endif
+
+  @set('image_upload_errors', flashMessages.has('errors.profil_image') ? flashMessages.get('errors.profil_image') : '')
+  @each(error in image_upload_errors)
+    <span class="user-profil-error">{{error}}</span>
+  @endeach
+  
+  <form action="{{route('user.image.update')}}" method="post" enctype="multipart/form-data">
+    {{ csrfField() }}
+    <input type="file" name="profil_image" id="profil-image-input" hidden>
+    {{--  <input type="submit" id="send-file-btn" hidden>  --}}
+  </form>
+  <button type="button" class="button bordered" id="image-profil-btn">
+    <i class="fa fa-image"></i>
+    Changer L'image
+  </button>
+</div>

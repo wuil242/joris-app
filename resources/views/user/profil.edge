@@ -3,23 +3,31 @@
 @set('description', 'profil de ' + auth.user.fullname )
 
 @section('head')
+  @entryPointScripts('user_profil')
+  @entryPointStyles('user_profil')
 @endsection
 
 @section('content')
-<a href="{{route('user.password')}}" class="button bordered">Modifier le mode passe</a>
-<form class="form" action="{{ route('user.update') }}" method="post">
-  {{ csrfField() }}
-  @!component('form/parts/lastname', {value: auth.user.lastname})
-  @!component('form/parts/firstname', {value: auth.user.firstname})
+  
+  @include('user/parts/user_image_profil')
+  
+  <form class="form" action="{{ route('user.update') }}" method="post">
+    {{ csrfField() }}
+    @!component('form/parts/lastname', {value: auth.user.lastname})
+    @!component('form/parts/firstname', {value: auth.user.firstname})
+    
+    @!component('form/parts/tel', {value: auth.user.tel})
+    @!component('form/parts/email', {optional: true, value: auth.user.email})
+    
+    <div class="user-profil-modify">
+      @!component('form/form_submit', {
+        text: 'Modifier',
+        icon: 'edit',
+        iconToLeft: true
+      })
 
-  @!component('form/parts/tel', {value: auth.user.tel})
-  @!component('form/parts/email', {optional: true, value: auth.user.email})
+      <a href="{{route('user.password')}}" class="link">Modifier le mode passe</a>
+    </div>
 
-  @!component('form/form_submit', {
-    text: 'Modifier',
-    icon: 'edit',
-    iconToLeft: true
-  })
-
-</form>
+  </form>
 @endsection

@@ -4,6 +4,7 @@ import { formatNumberPhone } from 'App/Helpers/helpers'
 import User from 'App/Models/User'
 import UserLoginValidator from 'App/Validators/UserLoginValidator'
 import UserSignInValidator from 'App/Validators/UserSignInValidator'
+import {schema} from '@ioc:Adonis/Core/Validator'
 
 //TODO: ajouter une ref qui permet de savoir ou rediriger apres une connexion reussite
 export default class UsersController {
@@ -58,5 +59,22 @@ export default class UsersController {
 
   public async update({response}: HttpContextContract) {
 
+  }
+
+  public async imageUpdate({request, response}: HttpContextContract) {
+    const validation = schema.create({
+      profil_image: schema.file({size: '2mb', extnames: ['jpg', 'jpeg', 'png']})
+    })
+    
+    const messages = {
+      'file.extname': 'Le fichier envoyer doit etre une image au format {{options.extnames}}',
+      'file.size': 'Le fichier envoyer est trop volumineux, l\'image doit avoir un poids d\'aumoins {{options.size}}'
+    }
+
+    const payload = await request.validate({schema: validation, messages})
+
+    // TODO: mettre a jour la photo de profil de l'utilsateur
+
+    return response.redirect().back()
   }
 }
