@@ -9,6 +9,8 @@ import Env from '@ioc:Adonis/Core/Env'
 import got, { Method } from 'got'
 import FormData from 'form-data'
 import Drive from '@ioc:Adonis/Core/Drive'
+import UserUpdateValidator from 'App/Validators/UserUpdateValidator'
+import { AlertMesage } from 'App/types/app'
 
 //TODO: ajouter une ref qui permet de savoir ou rediriger apres une connexion reussite
 export default class UsersController {
@@ -61,8 +63,21 @@ export default class UsersController {
     return view.render('user/reset_password')
   }
 
-  public async update({response}: HttpContextContract) {
-
+  public async update({request, auth, session, response}: HttpContextContract) {
+    const payload = await request.validate(UserUpdateValidator)
+    
+    try {
+      await auth.user?.merge(payload)
+      await auth.user?.save()
+      const message: AlertMesage = {message: 'Profil mise a jour', type: 'success'}
+      session.flash('alert', message)
+    } catch (error) {
+      //TODO: alerter l'admin lors de l'erreur
+      const message: AlertMesage = {message: 'Erreur inconnu', type: 'error'}
+      session.flash('alert', message)
+    }
+    
+    return response.redirect().back()
   }
 
   //FIXME: upload correct des images

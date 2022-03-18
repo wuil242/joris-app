@@ -14,6 +14,7 @@
     @include('user/parts/user_image_profil')
     
     <form class="form" action="{{ route('user.update') }}" method="post">
+      {{inspect( flashMessages.get('alert')) }}
       {{ csrfField() }}
       @!component('form/parts/lastname', {value: auth.user.lastname})
       @!component('form/parts/firstname', {value: auth.user.firstname})
