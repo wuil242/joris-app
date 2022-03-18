@@ -1,15 +1,11 @@
 <div class="user-profil-image-edit">
   {{inspect(  flashMessages.get('msg') )}}  
 
-  @if(auth.user.profil_image)
-    <img class="user-profil-image" src="{{env('DIRECTUS_ASSETS_URL') + auth.user.profil_image}}" alt="{{auth.user.fullname}}" id="img">
-  @else
-    <i class="fa fa-user user-profil-icon"></i>
-  @endif
+  @include('user/parts/user_image')
 
   @set('image_upload_errors', flashMessages.has('errors.profil_image') ? flashMessages.get('errors.profil_image') : '')
   @each(error in image_upload_errors)
-    <span class="user-profil-error">{{error}}</span>
+  <span class="user-profil-error">{{error}}</span>
   @endeach
   
   <form  action="{{route('user.image.update')}}" method="post" enctype="multipart/form-data">

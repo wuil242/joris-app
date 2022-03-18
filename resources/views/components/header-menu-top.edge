@@ -2,20 +2,9 @@
 @set('ref', isLoginOrSignRoute ? '' : '?ref=' + request.url() || flashMessages.get('ref'))
 
 <div class="header-menu-site-infos">
-  @if(auth.isLoggedIn)
-    <a href="/profil" class="header-menu-profil">
-      @if(auth.user?.photo)
-        <img class="header-menu-profil-image" src="{{auth.user?.photo}}" alt="{{auth.user.lastname}}">
-      @else
-      <i class="header-menu-profil-icon far fa-user"></i>
-      {{auth.user.lastname}}
-      @endif
-    </a>
-  @else
     <a href="/">
       <img src="/favicon.jpg" class="site-logo" alt="logo du site">
     </a>
-  @endif
   <a href="/">
     <h1 class="header-menu-site-title site-name">
       IProvider|Congo

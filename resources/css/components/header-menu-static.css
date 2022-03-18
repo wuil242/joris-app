@@ -5,9 +5,27 @@
 }
 
 .header-menu-static .header-menu-items {
+  padding: 10px;
+}
+
+.header-menu-static .header-menu-items {
   flex-direction: row;
   justify-content: space-between;
   overflow: visible;
+}
+
+.header-menu-static  .header-profil {
+  flex-direction: row;
+}
+
+.header-menu-static .header-profil-name
+{
+  display: none;
+}
+
+.header-menu-static .header-profil-infos .user-profil-image {
+  width: 48px;
+  height: 48px;
 }
 
 @media only screen and (min-width: 1300px) {

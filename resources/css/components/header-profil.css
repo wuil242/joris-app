@@ -1,6 +1,18 @@
 .header-profil {
-  background-color: lime;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-.header-profil-infos {  
+.header-profil-name {
+  text-align: center;  
+}
+
+.header-profil-infos .user-profil-image {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
 }
