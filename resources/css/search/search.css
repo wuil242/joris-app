@@ -20,6 +20,7 @@
   transition: transform .3s ease-out;
   padding: 5px 0;
   z-index: var(--layer-bottom);
+  margin-bottom: 10px;
 }
 
 /* Responsive */
@@ -46,7 +47,7 @@
 
   .search-content-sidebar {
     left: 10px;
-    box-shadow: 0px 0px 3px .5px var(--search-content-sidebar-shadow);
+    box-shadow: 0px 0px 3px 1px var(--search-content-sidebar-shadow);
   }
 }
 

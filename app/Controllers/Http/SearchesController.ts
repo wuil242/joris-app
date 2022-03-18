@@ -16,10 +16,7 @@ interface FilterLoactionOptions {
 }
 
 export default class SearchesController {
-  private LIMIT = {
-    MAX: 15,
-    MIN: 1
-  }
+  private LIMIT = 10
 
   private ORDER = 'score'
 
@@ -31,8 +28,6 @@ export default class SearchesController {
     const arrondissementId = Number.parseInt(qs.arrondissement, 10) || 0
     const quaterId = Number.parseInt(qs.quater, 10) || 0
     const page =  Number.parseInt(qs.page, 10) || 1
-    const limit =  Number.parseInt(qs.limit, 10)
-    const perPage = qs.limit = this.limitation(limit) 
 
     const filterLocation:FilterLoactionOptions = {cityId, arrondissementId, quaterId}
 
@@ -66,7 +61,7 @@ export default class SearchesController {
         .whereHas('jobs', jobsQuery => jobsQuery.where('jobs_id', jobId))
         .preload('jobs').preload('address')
         .orderBy(this.ORDER, 'desc')
-        .paginate(page, perPage)
+        .paginate(page, this.LIMIT)
     }
     else {
       serviceProviders = await  ServiceProvider.query()
@@ -76,7 +71,7 @@ export default class SearchesController {
         })
         .preload('jobs').preload('address')
         .orderBy(this.ORDER, 'desc')
-        .paginate(page, perPage)
+        .paginate(page, this.LIMIT)
     }
 
     if(request.ajax() && qs?.ajax === '') {
@@ -87,7 +82,7 @@ export default class SearchesController {
         arrondissements,
         quaters,
         qs,
-        LIMIT: {...this.LIMIT, VALUE: perPage},
+
       })
 
       if(count) {
@@ -109,17 +104,10 @@ export default class SearchesController {
       arrondissements,
       quaters,
       qs,
-      LIMIT: {...this.LIMIT, VALUE: perPage},
       serviceProviders
     })
 
   }
-
-  private limitation(limit: number): number {
-    return limit ?  
-    (limit < this.LIMIT.MIN ? this.LIMIT.MIN : limit > this.LIMIT.MAX ? this.LIMIT.MAX : limit) 
-    : this.LIMIT.MIN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-  } 
 
   private filterAddressQuery
   (

@@ -65,7 +65,7 @@ export default class ServiceProvider extends BaseModel {
   public address: BelongsTo<typeof Address>
 
   @manyToMany(() => Job, {
-    pivotTable: 'service_providers_jobs',
+    pivotTable: 'service_providers_jobs_1',
     pivotRelatedForeignKey: 'jobs_id',
     pivotForeignKey: 'service_providers_id'
   })

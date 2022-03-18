@@ -129,7 +129,7 @@
   --message-text-color: var(--color-success);
 
   /* Search */
-  --search-content-sidebar-shadow: var(--color-dark);
+  --search-content-sidebar-shadow: #CCC;
 
   /* Site name */
   --site-name: var(--color-primary);

@@ -24,7 +24,7 @@ export default class Job extends BaseModel {
 
   @manyToMany(() => ServiceProvider, {
     
-    pivotTable: 'service_providers_jobs',
+    pivotTable: 'service_providers_jobs_1',
     pivotRelatedForeignKey: 'service_providers_id',
     pivotForeignKey: 'jobs_id'
   })
