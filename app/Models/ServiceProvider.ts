@@ -73,4 +73,11 @@ export default class ServiceProvider extends BaseModel {
 
   @hasMany(() => ServiceProviderRealisation)
   public realisations: HasMany<typeof ServiceProviderRealisation>
+
+  public get fullname() { return this.lastname + ' ' + this.firstname }
+
+  public get full_address() { 
+      return this.address.numberAdress + ', rue ' +  this.address.street + ' ' + 
+             this.address.arrondissement.name + ' ' + this.address.quater.name
+    }
 }

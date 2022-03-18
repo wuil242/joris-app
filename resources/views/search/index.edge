@@ -25,6 +25,9 @@
   <section class="service-provider-cards" id="search-result">
     @!component('service_provider/service_providers', {serviceProviders, qs})
   </section>
+  @if(serviceProviders.hasMorePages)
+    <button class="button bordered search-more-button " style="grid-column: span 2;" type="submit" id="more-button" data-page="{{serviceProviders.currentPage + 1}}">Plus de Resultat</button>
+  @endif
 </section>
 
 @include('components/top-button')

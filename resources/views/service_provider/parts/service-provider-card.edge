@@ -1,7 +1,9 @@
 <article class="service-provider-card" data-id="{{sp.id}}">
   <header class="service-provider-card-header">
-    <img src="{{ sp?.photo ? `${env('DIRECTUS_ASSETS_URL') + sp.photo + '?key=service-provider-card'}` : '/favicon.jpg'}}" 
-         class="service-provider-card-image" 
+    @set('sp_photo', sp?.photo ? `${env('DIRECTUS_ASSETS_URL') + sp.photo + '?key=service-provider-card'}` : '/favicon.jpg')
+    <img src="{{ sp_photo }}" 
+         class="service-provider-card-image"
+         style="object-fit: {{sp_photo === '/favicon.jpg' ? 'contain' : ''}}"
          alt="prestaire ayant pour metier {{sp.jobs.map(job => job.name).join(' ou ')}}" 
     />
     <div class="service-provider-card-jobs">
@@ -18,8 +20,11 @@
         @endif
     </div>
   </header>
+  <a href="{{route('devis.client')}}?sp={{sp.id}}" class="service-provider-card-ask">Demender un devis</a>
   <div class="service-provider-card-content">
-    <a href="{{route('devis.client')}}?sp={{sp.id}}" class="button">Demender un devis</a>
-    <p style="margin-top: 15px;">Name: {{sp.lastname}}</p>
+    <p class="service-provider-card-name">{{sp.fullname}}</p>
+    <p class="service-provider-card-description">{{sp.description}}</p>
+    <p><i class="fa fa-map-marker-alt"></i> {{sp.address.city.name}}</p>
+    <p><i class="fa fa-home"></i> {{sp.full_address}}</p>
   </div>
 </article>
