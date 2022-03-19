@@ -53,6 +53,15 @@ export default class ServiceProvider extends BaseModel {
   @column()
   public addressId: number
 
+  @column()
+  public facebook_link: string | null
+
+
+  @column()
+  public instagram_link: string | null
+
+  
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

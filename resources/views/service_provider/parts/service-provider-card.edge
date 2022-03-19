@@ -22,8 +22,15 @@
   </header>
   <a href="{{route('devis.client')}}?sp={{sp.id}}" class="service-provider-card-ask">Demender un devis</a>
   <div class="service-provider-card-content">
-    <p class="service-provider-card-name">{{sp.fullname}}</p>
+    <div class="service-provider-card-top">
+     <p class="service-provider-card-name">{{sp.fullname}}</p>
+     @include('service_provider/parts/service_provider_card_social_media')
+    </div>
+
+    @include('components/divider')
     <p class="service-provider-card-description">{{sp.description}}</p>
+
+    @include('components/divider')
     <p><i class="fa fa-map-marker-alt"></i> {{sp.address.city.name}}</p>
     <p><i class="fa fa-home"></i> {{sp.full_address}}</p>
   </div>
