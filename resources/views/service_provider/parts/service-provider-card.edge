@@ -20,6 +20,7 @@
           @!component('service_provider/parts/service-provider-job', {job: sp.jobs[0]})
         @endif
     </div>
+    @include('service_provider/parts/sp_card_actions')
   </header>
   <a href="{{route('devis.client')}}?sp={{sp.id}}" class="service-provider-card-ask">Demender un devis</a>
   <div class="service-provider-card-content">
@@ -37,8 +38,11 @@
     <p class="service-provider-card-location"><i class="fa fa-map-marker-alt"></i> {{sp.address.city.name}}</p>
     <p class="service-provider-card-location"><i class="fa fa-home"></i> {{sp.full_address}}</p>
     
-   
-
+    @set('user_already_noted', sp.votes?.find(vote => vote.serviceProviderId === sp.id))
+    @if(auth.isLoggedIn && !user_already_noted)
+      <a href="#vote" class="button outline" id="sp-card-note">noter</a>
+    @endif
   </div>
 
+  
 </article>

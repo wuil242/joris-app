@@ -23,3 +23,5 @@ Sticky.define({
 })
 
 StarNotation.init('.js-star-notation', '.js-star')
+StarNotation.note('#sp-card-note', '.service-provider-card-notion')
+

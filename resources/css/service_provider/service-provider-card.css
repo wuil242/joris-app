@@ -67,14 +67,16 @@
 
 .service-provider-card-actions{
   position: absolute;
-  left: 0;
   right: 0;
   bottom: 0;
   display: flex;
   justify-content: center;
-  padding: .5em;
+  padding: .25em;
   gap: .5em;
   font-size: 1.2rem;
+  background-color: #ccc;
+  color: rgb(78, 75, 75);
+  border-top-left-radius: 4px;
 }
 
 .service-provider-card-content {
