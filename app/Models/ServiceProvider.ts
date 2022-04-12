@@ -1,20 +1,19 @@
 import { DateTime } from 'luxon'
 import {
+  beforeFind,
   BaseModel,
   BelongsTo,
   belongsTo,
   column,
   HasMany,
   hasMany,
-  HasOne,
-  hasOne,
   ManyToMany,
   manyToMany,
 } from '@ioc:Adonis/Lucid/Orm'
 import Address from './Address'
 import Job from './Job'
 import ServiceProviderRealisation from './ServiceProviderRealisation'
-import {attachment, AttachmentContract} from '@ioc:Adonis/Addons/AttachmentLite'
+import ServiceProviderVote from './ServiceProviderVote'
 
 export default class ServiceProvider extends BaseModel {
   @column({ isPrimary: true })
@@ -56,11 +55,8 @@ export default class ServiceProvider extends BaseModel {
   @column()
   public facebook_link: string | null
 
-
   @column()
   public instagram_link: string | null
-
-  
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -83,10 +79,17 @@ export default class ServiceProvider extends BaseModel {
   @hasMany(() => ServiceProviderRealisation)
   public realisations: HasMany<typeof ServiceProviderRealisation>
 
+  @hasMany(() => ServiceProviderVote)
+  public votes: HasMany<typeof ServiceProviderVote>
+
   public get fullname() { return this.lastname + ' ' + this.firstname }
 
   public get full_address() { 
       return this.address.numberAdress + ', rue ' +  this.address.street + ' ' + 
              this.address.arrondissement.name + ' ' + this.address.quater.name
-    }
+  }
+
+  public get note() {
+    return this.votes.length <= 0 ? 1 :  this.votes.map(v => v.note).reduce((a, b) => a + b) / this.votes.length
+  }
 }

@@ -1,4 +1,7 @@
 <article class="service-provider-card" data-id="{{sp.id}}">
+
+  @include('service_provider/parts/sp_card_note')
+
   <header class="service-provider-card-header">
     @set('sp_photo', sp?.photo ? `${env('DIRECTUS_ASSETS_URL') + sp.photo + '?key=service-provider-card'}` : '/favicon.jpg')
     <img src="{{ sp_photo }}" 
@@ -33,5 +36,10 @@
     @include('components/divider')
     <p><i class="fa fa-map-marker-alt"></i> {{sp.address.city.name}}</p>
     <p><i class="fa fa-home"></i> {{sp.full_address}}</p>
+    
+    @include('components/divider')
+    @include('service_provider/parts/sp_card_note')
+
   </div>
+
 </article>

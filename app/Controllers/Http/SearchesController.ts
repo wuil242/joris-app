@@ -59,6 +59,7 @@ export default class SearchesController {
           this.filterAddressQuery(addressQuery, filterLocation)
         })
         .whereHas('jobs', jobsQuery => jobsQuery.where('jobs_id', jobId))
+        .preload('votes')
         .preload('jobs').preload('address')
         .orderBy(this.ORDER, 'desc')
         .paginate(page, this.LIMIT)
@@ -69,6 +70,7 @@ export default class SearchesController {
         .whereHas('address', addressQuery => {
           this.filterAddressQuery(addressQuery, filterLocation)
         })
+        .preload('votes')
         .preload('jobs').preload('address')
         .orderBy(this.ORDER, 'desc')
         .paginate(page, this.LIMIT)
