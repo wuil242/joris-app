@@ -8,6 +8,7 @@
   place-self: center;
   /* cursor: pointer; */
   border-radius: 3px;
+  position: relative;
 }
 
 
@@ -173,6 +174,16 @@
   display: flex; 
   align-items: baseline; 
   gap: .25em;
+}
+
+.service-provider-card-notation {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 30%;
+  background-color: #AAA;
+  z-index: var(--layer-middle);
 }
 
 @keyframes straigthAhead {

@@ -1,11 +1,13 @@
 <div class="service-provider-card-actions">
-  <a href="#" class="service-provider-card-actions-icon" title="commentaires">
+  <a href="#" class="service-provider-card-actions-icon js-sp-card-comment" data-id="{{sp.id}}" title="commentaires">
     <i class="fa fa-comment-alt"></i>
   </a>
   {{--  <a href="#" class="service-provider-card-actions-icon" title="ajout au favoris">
     <i class="far fa-heart"></i>
   </a>  --}}
-  {{--  <a href="#" class="service-provider-card-actions-icon" title="voir plus">
-    <i class="fa fa-star"></i>
-  </a>  --}}
+  @if(auth.isLoggedIn && !user_already_noted)
+  <a href="#" class="service-provider-card-actions-icon js-sp-card-pencil" data-id="{{sp.id}}" title="voir plus">
+    <i class="fa fa-pencil-alt"></i>
+  </a>
+  @endif
 </div>

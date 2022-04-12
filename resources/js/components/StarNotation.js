@@ -49,7 +49,7 @@ class StarNotation {
     return items.map(item => new StarNotation(item, icon_selector))
   }
 
-  static note(btn_selector, notion_layout_selector) {
+  static note(btn_selector, notation_layout_selector) {
 
   }
 }

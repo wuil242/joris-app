@@ -1,5 +1,6 @@
-<article class="service-provider-card" data-id="{{sp.id}}">
+@set('user_already_noted', sp.votes?.find(vote => vote.serviceProviderId === sp.id))
 
+<article class="service-provider-card" data-id="{{sp.id}}">
   <header class="service-provider-card-header">
     @set('sp_photo', sp?.photo ? `${env('DIRECTUS_ASSETS_URL') + sp.photo + '?key=service-provider-card'}` : '/favicon.jpg')
     <img src="{{ sp_photo }}" 
@@ -38,11 +39,45 @@
     <p class="service-provider-card-location"><i class="fa fa-map-marker-alt"></i> {{sp.address.city.name}}</p>
     <p class="service-provider-card-location"><i class="fa fa-home"></i> {{sp.full_address}}</p>
     
-    @set('user_already_noted', sp.votes?.find(vote => vote.serviceProviderId === sp.id))
-    @if(auth.isLoggedIn && !user_already_noted)
-      <a href="#vote" class="button outline" id="sp-card-note">noter</a>
+    @if(auth.isLoggedIn && !user_already_noted)  
+    <div class="service-provider-card-notation js-sp-card-notation" data-id="{{sp.id}}">
+      <form action="{{ route('ServiceProvidersController.vote') }}" method="post">
+        <p>Noation</p>
+        <button type="submit" href="" class="button bordered" id="sp-card-note">noter</button>
+      </form>
+    </div>
     @endif
   </div>
 
   
 </article>
+
+<style>
+
+  .card-action-layout {
+    height: 50%;
+  }
+
+
+  .card-action-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .card-action-hide-enter {
+    display: none;
+  }
+
+  .card-action-hide {
+    transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: translate3d(150%, 0, 0);
+    /* opacity: 0; */
+  }
+
+  .card-action-show {
+    display: block;
+    transform: translate3d(0, 0, 0);
+  }
+
+</style>

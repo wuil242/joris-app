@@ -77,6 +77,10 @@ export default class ServiceProvidersController {
     }
   }
 
+  public async vote({response}: HttpContextContract) {
+    return response.redirect().back()
+  }
+
   public async show({ }: HttpContextContract) { }
 
   public async edit({ }: HttpContextContract) { }

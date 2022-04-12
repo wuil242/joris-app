@@ -20,11 +20,6 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 import Database from '@ioc:Adonis/Lucid/Database'
-import ServiceProviderVote from 'App/Models/ServiceProviderVote'
-
-Route.get('/test', async () => {
-  return await ServiceProviderVote.all()
-})
 
 Route.get('/envoi-reussi', ({request, view }) => {
   const {title, description, message} = request.qs()
@@ -92,5 +87,7 @@ Route.group(() => {
   
   Route.post('/profil', 'UsersController.update').as('user.update')
   Route.post('/profil/image', 'UsersController.imageUpdate').as('user.image.update')
+
+  Route.get('/notation', 'ServiceProvidersController.vote')
   
 }).middleware('auth')
