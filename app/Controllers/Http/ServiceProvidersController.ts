@@ -1,11 +1,12 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { schema } from '@ioc:Adonis/Core/Validator'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Database from '@ioc:Adonis/Lucid/Database'
 import { VALIDATION_SCHEMA, VALIDATION_OPTIONAL_SCHEMA, VALIDATION_MESSAGE } from 'App/Configs/constants'
 import ROLES from 'App/Configs/roles'
 import { formatNumberPhone, getFormatedDateTime } from 'App/Helpers/helpers'
 import { sendMessage } from 'App/Services/Twilio'
 import {string} from '@ioc:Adonis/Core/Helpers'
+import ServiceProviderVote from 'App/Models/ServiceProviderVote'
 
 export default class ServiceProvidersController {
   public async index({ view }: HttpContextContract) {
@@ -77,7 +78,22 @@ export default class ServiceProvidersController {
     }
   }
 
-  public async vote({response}: HttpContextContract) {
+  public async vote({request, response, auth}: HttpContextContract) {
+    const validation = schema.create({
+      note: schema.number([rules.unsigned()]),
+      serviceProviderId: schema.number([rules.unsigned()])
+    })
+
+    const payload = await request.validate({schema: validation})
+
+    if(payload.note < 1) {
+      payload.note = 1
+    } else if(payload.note > 5) {
+      payload.note = 5
+    }
+
+    await ServiceProviderVote.create({...payload, userId: auth.user?.id})
+
     return response.redirect().back()
   }
 

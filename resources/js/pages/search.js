@@ -23,7 +23,6 @@ Sticky.define({
 })
 
 StarNotation.init('.js-star-notation', '.js-star')
-StarNotation.note('#sp-card-note', '.service-provider-card-notion')
 
 class CardAction {
 
@@ -47,8 +46,8 @@ class CardAction {
     this.modal.classList.add('card-action-layout')
     this.modal.classList.add('card-action-hide')
     this.modal.classList.add('card-action-hide-enter')
-    this.modal.autofocus = false
     this.bindEvents()
+    this.openModal()
   }
 
   addHideButton() {
@@ -63,18 +62,19 @@ class CardAction {
   bindEvents() {
     this.opener.addEventListener('click', e => {
       e.preventDefault()
-      if(this.IsModalHide) {
+      if (this.IsModalHide) {
         this.openModal()
       }
       else {
         this.closeModal()
       }
     })
-    
+
     this.close_btn.addEventListener('click', this.closeModal.bind(this))
   }
 
   openModal() {
+    this.opener.classList.add('active')
     this.modal.classList.remove('card-action-hide-enter')
     this.modal.getBoundingClientRect()
     this.modal.classList.remove('card-action-hide')
@@ -85,17 +85,18 @@ class CardAction {
   }
 
   closeModal() {
+    this.opener.classList.remove('active')
     this.modal.classList.remove('card-action-show')
     this.modal.classList.add('card-action-hide')
 
     this.modal.addEventListener('transitionend', () => {
-      if(this.IsModalHide) {
+      if (this.IsModalHide) {
         this.modal.classList.add('card-action-hide-enter')
       }
-    }, {once: true})
+    }, { once: true })
   }
 
-  get IsModalHide() { return this.modal.classList.contains('card-action-hide')}
+  get IsModalHide() { return this.modal.classList.contains('card-action-hide') }
 
   /**
    * 
@@ -109,7 +110,7 @@ class CardAction {
     return elems.map(el => {
       const id = +el.dataset.id
       const modal = modals.find(elem => +elem.dataset.id === id)
-      if(modal) {
+      if (modal) {
         return new CardAction(el, modal)
       }
       console.log(el, modals)
@@ -119,5 +120,26 @@ class CardAction {
 
 }
 
-const pencil = CardAction.create('.js-sp-card-pencil', '.js-sp-card-notation')
+CardAction.create('.js-sp-card-pencil', '.js-sp-card-notation')
 
+const items = Array.from(document.querySelectorAll('.js-card-notation-star'))
+const el_note_input = document.getElementById('sp-card-note')
+
+items.forEach(el => {
+
+  el.addEventListener('pointerenter', () => {
+    const value = +el.dataset.value
+
+    items.forEach(elem => elem.classList.replace('fa', 'far'))
+    
+    el_note_input.value = value
+
+    for (let i = 0; i < value; i++) {
+      const index = i
+
+      items[index].classList.replace('far', 'fa')
+    }
+
+  })
+
+})

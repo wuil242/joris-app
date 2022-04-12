@@ -88,6 +88,6 @@ Route.group(() => {
   Route.post('/profil', 'UsersController.update').as('user.update')
   Route.post('/profil/image', 'UsersController.imageUpdate').as('user.image.update')
 
-  Route.get('/notation', 'ServiceProvidersController.vote')
+  Route.post('/prestataire/notation', 'ServiceProvidersController.vote')
   
 }).middleware('auth')

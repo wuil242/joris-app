@@ -41,10 +41,22 @@
 
     @if(auth.isLoggedIn && !user_already_noted)  
     <div class="service-provider-card-notation js-sp-card-notation" data-id="{{sp.id}}">
-      <form action="{{ route('ServiceProvidersController.vote') }}" method="post">
-        <p>Noation</p>
-        <button type="submit" href="" class="button bordered" id="sp-card-note">noter</button>
-      </form>
+      <div class="card-notation-content">
+        <h3>Notation</h3>
+        <form action="{{ route('ServiceProvidersController.vote') }}" method="post" class="card-notation-form">
+          {{ csrfField() }}
+          <input type="number" hidden value="1" id="sp-card-note" name="note">
+          <input type="number" hidden value="{{sp.id}}" id="sp-card-note" name="serviceProviderId">
+          <div>
+            <i class="fa fa-star card-notation-form-star js-card-notation-star" data-value="1"></i>
+            <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="2"></i>
+            <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="3"></i>
+            <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="4"></i>
+            <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="5"></i>
+          </div>
+          <button type="submit" href="" class="button">noter</button>
+        </form>
+      </div>
     </div>
     @endif
   </div>
