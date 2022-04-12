@@ -3,6 +3,7 @@ import FormSelect from '../components/FormSelect'
 import { debounce, scrollToElement, addLoaderToElement, addLoaderToButton, getFullUrl, throttle } from '../helpers'
 import Sticky from '../components/Sticky'
 import FetchApi from '../class/FetchApi'
+import {StarNotation} from '../components/StarNotation'
 
 // TODO: ajout d'un panier permettant d'accumuler les prestataire
 
@@ -21,3 +22,4 @@ Sticky.define({
   scrollValue: 150,
 })
 
+StarNotation.init('.js-star-notation', '.js-star')

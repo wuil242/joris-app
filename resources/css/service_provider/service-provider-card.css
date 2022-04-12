@@ -167,6 +167,11 @@
   animation: straigthAhead 2s 1.2s ease-out infinite;
 }
 
+.service-provider-card-location {
+  display: flex; 
+  align-items: baseline; 
+  gap: .25em;
+}
 
 @keyframes straigthAhead {
  100% {

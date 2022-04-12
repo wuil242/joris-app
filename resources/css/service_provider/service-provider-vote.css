@@ -1,0 +1,17 @@
+.service-provider-vote {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  /* padding: .5em; */
+}
+
+.service-provider-electors {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.service-provider-note {
+  color: rgba(224, 224, 54, 0.856);
+}

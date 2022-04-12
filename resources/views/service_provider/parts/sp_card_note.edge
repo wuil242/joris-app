@@ -1,11 +1,11 @@
-<style>
-  .star {
-    color: yellow;
-  }
-</style>
-
-{{inspect(sp.note)}}
-<p>
-  {{--  Note-Value: {{sp.note}}  --}}
-  Note: <i class="far fa-star star"></i>
-</p>
+<div class="service-provider-vote">
+  @set('electors', sp.votes.length > 0 ? sp.votes.length : 0)
+  <p class="service-provider-electors">votants: {{electors}}</p>
+  <div class="service-provider-note js-star-notation" data-note="{{sp.note}}">
+    <i class="far fa-star js-star" data-id="1"></i>
+    <i class="far fa-star js-star" data-id="2"></i>
+    <i class="far fa-star js-star" data-id="3"></i>
+    <i class="far fa-star js-star" data-id="4"></i>
+    <i class="far fa-star js-star" data-id="5"></i>
+  </div>
+</div>

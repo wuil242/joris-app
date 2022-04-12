@@ -1,6 +1,7 @@
 @import '../service_provider/service-provider-cards';
 @import '../service_provider/service-provider-card';
 @import '../service_provider/service-provider-card-skeleton';
+@import '../service_provider/service-provider-vote';
 
 .search-empty {
   font-size: 2rem;
