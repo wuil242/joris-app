@@ -75,12 +75,17 @@
   padding: .25em;
   gap: .5em;
   font-size: 1.2rem;
-  background-color: #ccc;
-  color: rgb(78, 75, 75);
+  background-color: #CCC;
+  color: rgba(78, 75, 75, 0.664);
   border-top-left-radius: 4px;
 }
 
+.service-provider-card-actions-icon:hover {
+  color: rgb(78, 75, 75);
+}
+
 .service-provider-card-content {
+  position: relative;
   padding: .6em .7em;
   display: flex;
   flex-direction: column;
@@ -178,12 +183,14 @@
 
 .service-provider-card-notation {
   position: absolute;
+  top: -30px;
   right: 0;
   left: 0;
   bottom: 0;
-  height: 30%;
+  height: 200%;
   background-color: #AAA;
   z-index: var(--layer-middle);
+  border-radius: 4px;
 }
 
 @keyframes straigthAhead {

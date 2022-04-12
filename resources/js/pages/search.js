@@ -63,12 +63,11 @@ class CardAction {
   bindEvents() {
     this.opener.addEventListener('click', e => {
       e.preventDefault()
-      const is_modal_open = this.modal.classList.contains('card-action-show')
-      if(is_modal_open) {
-        this.closeModal()
+      if(this.IsModalHide) {
+        this.openModal()
       }
       else {
-        this.openModal()
+        this.closeModal()
       }
     })
     
@@ -78,16 +77,25 @@ class CardAction {
   openModal() {
     this.modal.classList.remove('card-action-hide-enter')
     this.modal.getBoundingClientRect()
+    this.modal.classList.remove('card-action-hide')
     this.modal.classList.add('card-action-show')
+
+    this.modal.addEventListener('transitionend', () => {
+    })
   }
 
   closeModal() {
     this.modal.classList.remove('card-action-show')
+    this.modal.classList.add('card-action-hide')
 
     this.modal.addEventListener('transitionend', () => {
-      this.modal.classList.add('card-action-hide-enter')
+      if(this.IsModalHide) {
+        this.modal.classList.add('card-action-hide-enter')
+      }
     }, {once: true})
   }
+
+  get IsModalHide() { return this.modal.classList.contains('card-action-hide')}
 
   /**
    * 

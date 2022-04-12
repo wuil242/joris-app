@@ -38,7 +38,7 @@
     @include('components/divider')
     <p class="service-provider-card-location"><i class="fa fa-map-marker-alt"></i> {{sp.address.city.name}}</p>
     <p class="service-provider-card-location"><i class="fa fa-home"></i> {{sp.full_address}}</p>
-    
+
     @if(auth.isLoggedIn && !user_already_noted)  
     <div class="service-provider-card-notation js-sp-card-notation" data-id="{{sp.id}}">
       <form action="{{ route('ServiceProvidersController.vote') }}" method="post">
@@ -55,7 +55,6 @@
 <style>
 
   .card-action-layout {
-    height: 50%;
   }
 
 
@@ -77,6 +76,7 @@
 
   .card-action-show {
     display: block;
+    transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
     transform: translate3d(0, 0, 0);
   }
 
