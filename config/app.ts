@@ -14,6 +14,9 @@ import { ProfilerConfig } from '@ioc:Adonis/Core/Profiler'
 import { ValidatorConfig } from '@ioc:Adonis/Core/Validator'
 import { AssetsManagerConfig } from '@ioc:Adonis/Core/AssetsManager'
 
+//social networks links
+export const LINK_FACEBOOK = 'https://facebook.com'
+
 /*
 |--------------------------------------------------------------------------
 | Application secret key
