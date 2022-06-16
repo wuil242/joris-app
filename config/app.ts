@@ -17,6 +17,9 @@ import { AssetsManagerConfig } from '@ioc:Adonis/Core/AssetsManager'
 //social networks links
 export const LINK_FACEBOOK = 'https://facebook.com'
 
+//contact email
+export const EMAIL_CONTACT = 'contact@iprovider.com'
+
 /*
 |--------------------------------------------------------------------------
 | Application secret key
