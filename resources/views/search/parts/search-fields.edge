@@ -1,9 +1,13 @@
 <form class="search-fields" action="{{route('serviceProvider.find')}}" method="GET" id="form-search-provider" >  
   <input type="number" name="limit" id="search-limit" hidden value="{{qs['limit']}}">
   @include('search/parts/search-fields-selection')
-  @include('components/divider')
-  <div class="search-buttons" style="display: flex;">
-    <button class="button bordered" type="submit" id="search-submit"><i class="fa fa-search"></i> Rechercher </button>
-    <button type="button" id="search-hide-button" class="button danger">Close</button>
-  </div>
 </form>
+@include('components/divider')
+<div class="search-fields-buttons">
+  <button type="button" id="search-hide-button" class="button danger">
+    <i class="fa fa-door-closed"></i> Fermer
+  </button>
+  <button form="form-search-provider" class="button bordered" type="submit" id="search-submit">
+    <i class="fa fa-filter"></i> Filtrer 
+  </button>
+</div>

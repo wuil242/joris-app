@@ -49,6 +49,7 @@
   color: lightgoldenrodyellow;
   cursor: pointer;
   border-radius: 2px;
+  z-index: var(--layer-bottom);
 }
 
 .service-provider-card-jobs:hover .service-provider-card-job.is-many {

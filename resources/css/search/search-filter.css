@@ -1,5 +1,5 @@
 .search-filter {
-  background: var(--bg-search-filter);
+  background-color: var(--bg-search-filter);
   position: fixed;
   top: 0;
   left: 0;
@@ -16,6 +16,10 @@
   display: none;
 }
 
+.search-filter .divider {
+  display: none;
+}
+
 
 .search-filter-button {
   position: fixed;
@@ -25,4 +29,39 @@
   width: fit-content;
   height: fit-content;
   z-index: var(--layer-middle);
+}
+
+
+@media only screen and (min-width: 650px) {
+  .search-filter-button {
+    display: none;
+  }
+  
+  .search-filter {
+    position: static;
+    background-color: transparent;
+    padding-top: 20px;
+  } 
+
+  .search-filter.is-hide {
+    display: block;
+  }
+
+  .search-filter .divider {
+    display: block;
+  }
+}
+
+
+@media only screen and (min-width: 750px) {
+  .service-provider-cards {
+  }
+}
+
+@media only screen and (min-width: 950px) {
+  .service-provider-cards {
+  }
+}
+
+@media only screen and (min-width: 1200px) {
 }
