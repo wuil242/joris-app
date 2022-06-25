@@ -130,6 +130,7 @@
 
   /* Search */
   --bg-search-filter: hsla(240, 13%, 78%, 0.979);
+  --bg-search-filter-static: var(--page-bg-color);
 
   /* Site name */
   --site-name: var(--color-primary);
