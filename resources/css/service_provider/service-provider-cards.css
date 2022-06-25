@@ -1,13 +1,10 @@
 .service-provider-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
-  width: 100%;
-  grid-auto-flow: row;
-  padding-bottom: 30px;
-  padding-top: 5px;
+  display: flex;
+  justify-content: center;
   align-items: flex-start;
-  justify-content: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1.5rem;
 }
 
 @media only screen and (min-width: 475px) {
@@ -18,20 +15,19 @@
 
 @media only screen and (min-width: 650px) {
   .service-provider-cards {
-    grid-template-columns: 1fr 1fr;
+    justify-content: flex-start;
+    /* grid-template-columns: 1fr 1fr; */
   }
 }
 
 
 @media only screen and (min-width: 750px) {
   .service-provider-cards {
-    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media only screen and (min-width: 950px) {
   .service-provider-cards {
-    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
