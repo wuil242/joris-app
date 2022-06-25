@@ -176,6 +176,8 @@
   --form-fileds-mandatory-shadow: var(--form-fileds-mandatory);
 
   /* Divider */
+  --divider-height: 1px;
+  --divider-color: #ccc;
   --divider-height: 4px;
 
   /* Star */
