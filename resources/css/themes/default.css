@@ -179,6 +179,7 @@
   /* Divider */
   --divider-height: 1px;
   --divider-color: #ccc;
+  --divider-margin-top: 0px;
   --divider-height: 4px;
 
   /* Star */
