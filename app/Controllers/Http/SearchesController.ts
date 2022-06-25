@@ -16,7 +16,7 @@ interface FilterLoactionOptions {
 }
 
 export default class SearchesController {
-  private LIMIT = 10
+  private LIMIT = 1
 
   private ORDER = 'score'
 
@@ -76,6 +76,12 @@ export default class SearchesController {
         .paginate(page, this.LIMIT)
     }
 
+    let rand = Math.round(Math.random() * 3) * serviceProviders.length
+    rand = rand > this.LIMIT ? this.LIMIT : rand
+    for (let index = 0; index < rand; index++) {
+      serviceProviders.push(...serviceProviders)
+    }
+
     if(request.ajax() && qs?.ajax === '') {
       const count = qs?.count === ''
       const filter = await view.render('search/parts/search-fields', {
@@ -86,10 +92,6 @@ export default class SearchesController {
         qs,
 
       })
-
-      if(count) {
-        return {count: serviceProviders.length, filter}
-      }
 
       const html = await view.render('service_provider/service_providers', {
         serviceProviders, qs

@@ -1,5 +1,5 @@
 <form class="search-fields" action="{{route('serviceProvider.find')}}" method="GET" id="form-search-provider" >  
-  <input type="number" name="limit" id="search-limit" hidden value="{{qs['limit']}}">
+  {{--  <input type="number" name="limit" id="search-limit" hidden value="{{qs['limit']}}">  --}}
   @include('search/parts/search-fields-selection')
 </form>
 @!component('components/divider', { height: '4px', margin: {top: '4px'} })
