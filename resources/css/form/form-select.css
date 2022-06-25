@@ -13,18 +13,20 @@
   padding: 7px;
   font-size: 1.1rem;
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: center;
   align-items: center;
   border-color: var(--form-select-button-border-color);
   width: 100%;
 }
 
 .form-select-button .form-select-text {
+  width: 80%;
+  text-align: center;
 }
 
 .form-select-button .form-select-icon {
-  justify-self: right;
-  background-color: aqua;
+  width: 20%;
+  text-align: right;
 }
 
 .form-select-button i {
@@ -53,6 +55,8 @@
   margin-top: 5px;
   font-weight: 400;
   font-size: 1.1rem;
+  overflow-y: scroll;
+  max-height:  40vh;
 }
 
 .form-select-option {
