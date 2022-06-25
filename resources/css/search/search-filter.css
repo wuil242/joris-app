@@ -1,0 +1,28 @@
+.search-filter {
+  background: var(--bg-search-filter);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--layer-middle);
+}
+
+.search-filter.is-show {
+  display: block;
+}
+
+.search-filter.is-hide {
+  display: none;
+}
+
+
+.search-filter-button {
+  position: fixed;
+  left: 2%;
+  top: 30%;
+  bottom: 25%;
+  width: fit-content;
+  height: fit-content;
+  z-index: var(--layer-middle);
+}

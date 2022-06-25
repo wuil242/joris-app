@@ -129,7 +129,7 @@
   --message-text-color: var(--color-success);
 
   /* Search */
-  --search-content-sidebar-shadow: #CCC;
+  --bg-search-filter: hsla(239, 21%, 46%, 0.897);
 
   /* Site name */
   --site-name: var(--color-primary);

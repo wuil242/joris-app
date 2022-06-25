@@ -19,9 +19,11 @@
 })
 
 <section class="search-content">
-  <aside class="search-content-sidebar" id="search-filter">
+  @include('search/parts/search-filter-button')
+  <aside id="search-filter" class="search-filter is-hide">
     @include('search/parts/search-fields')
   </aside>
+
   <section class="service-provider-cards" id="search-result">
     @!component('service_provider/service_providers', {serviceProviders, qs})
   </section>

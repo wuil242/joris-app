@@ -10,14 +10,6 @@
   padding-top: 30px;
 }
   
-.search-content-sidebar {
-  position: relative;
-  border-radius: 4px;
-  transition: transform .3s ease-out;
-  padding: 5px 0;
-  z-index: var(--layer-bottom);
-  margin-bottom: 10px;
-}
 
 /* Responsive */
 
@@ -29,22 +21,12 @@
 }
 
 @media screen and (min-width: 750px) {
-  .search-content {
-    display: grid;
-    grid-template-columns: 1fr 2.5fr;
-    gap: 20px;
-    align-items: flex-start;
-  }
 
   .search-empty {
     align-items: center;
     justify-content: center;
   }
 
-  .search-content-sidebar {
-    left: 10px;
-    box-shadow: 0px 0px 3px 1px var(--search-content-sidebar-shadow);
-  }
 }
 
 
