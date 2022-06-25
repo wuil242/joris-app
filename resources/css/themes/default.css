@@ -56,6 +56,12 @@
   --button-danger-hover-bg-color: var(--button-danger-text-color);
   --button-danger-hover-text-color: var(--button-danger-bg-color);
 
+  /* Button success */
+  --button-success-bg-color: #1faf43;
+  --button-success-text-color: var(--color-white);
+  --button-success-hover-bg-color: var(--button-success-text-color);
+  --button-success-hover-text-color: var(--button-success-bg-color);
+
 
   /* Header menu */
   --header-menu-button-bg-color: var(--button-bg-color);
