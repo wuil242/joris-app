@@ -7,9 +7,9 @@ export default class FetchApi {
   /**
    * @param {HTMLElement} $form
    * 
-   * @returns 
+   * @returns {Promise<{filter: string, html: string, count: number}>}
    */
-  static getForm($form) {
+  static getCardWithFilter($form) {
     return new Promise((res, rej) => {
       const url = getFullUrl($form)
       url.searchParams.set('count', '')

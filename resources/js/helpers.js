@@ -112,3 +112,7 @@ export function removeInputErrorsAfterFocus(
       $input.addEventListener('focus', () => $input.classList.remove('is-error'))
     })
 }
+
+export function isLargeScreen() {
+  return window.innerWidth > 650
+}

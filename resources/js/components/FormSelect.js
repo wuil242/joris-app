@@ -1,10 +1,14 @@
 import '../../css/form/form-select.css'
 
 /**
+ * emet des custom event contenu dans EVENT
  * 
  */
 export default class FormSelect {
   static ID = 0
+  static EVENT = {
+    SELECTED: 'form-select'
+  }
 
   /**
    * 
@@ -20,6 +24,7 @@ export default class FormSelect {
     this.$icon = this.$root.querySelector('.js-form-select-search-icon')
     this.$select_hidden = this.$root.querySelector('select')
     this.disabled = false
+
 
     this.defineSelect()
   }
@@ -131,7 +136,7 @@ export default class FormSelect {
     this.$button.firstElementChild.innerText = e.target.innerText
     this.$select.classList.remove('active')
 
-    this.$root.dispatchEvent(new Event('form-select'))
+    this.$root.dispatchEvent(new CustomEvent(FormSelect.EVENT.SELECTED, {detail: e.target.innerText}))
     
     this.$input.value = ''
     this.showAllOption(this.$lis)
