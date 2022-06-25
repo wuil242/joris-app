@@ -1,6 +1,6 @@
 .search-field {
   display: flex;
-  gap: 10px;
+  gap: 5px;
   /* border: solid 2px #FFF; */
   padding: .3rem;
   align-items: baseline;

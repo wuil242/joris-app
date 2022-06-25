@@ -41,7 +41,7 @@
     position: static;
     background-color: var(--bg-search-filter-static);
     padding-top: 20px;
-    overflow-y: hidden;
+    overflow-y: visible;
   } 
 
   .search-filter.is-hide {
@@ -55,6 +55,16 @@
   .search-filter.active {
     position: fixed;
     padding: 5px 0;
+    height: max-content;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
+  }
+
+  .search-filter.active .divider {
+    display: none;
+  }
+
+  .search-filter.active + .service-provider-cards {
+    margin-top: 120px;
   }
 
 }
