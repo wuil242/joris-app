@@ -70,8 +70,7 @@ function auto_filter($form) {
       
       if($searchFilter.classList.contains(fixed)) {
         init_page_events_binding()
-        document.getElementById('search-show-button')
-                .click()
+        document.querySelector('#search-show-button').click()
         return
       }
 
