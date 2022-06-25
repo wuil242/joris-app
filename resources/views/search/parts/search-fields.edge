@@ -2,7 +2,7 @@
   <input type="number" name="limit" id="search-limit" hidden value="{{qs['limit']}}">
   @include('search/parts/search-fields-selection')
 </form>
-@include('components/divider')
+@!component('components/divider', { height: '4px' })
 <div class="search-fields-buttons">
   <button type="button" id="search-hide-button" class="button danger">
     <i class="fa fa-door-closed"></i> Fermer

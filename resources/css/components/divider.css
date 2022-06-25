@@ -2,7 +2,7 @@
   width: 100%;
   border: none;
   height: var(--divider-height);
-  background: #CCC;
+  background: var(--divider-color);
   display: inline-block;
   margin-top: 10px;
 }

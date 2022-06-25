@@ -176,5 +176,6 @@
   --form-fileds-mandatory-shadow: var(--form-fileds-mandatory);
 
   /* Divider */
-  --divider-height: 4px;
+  --divider-height: 1px;
+  --divider-color: #ccc;
 }

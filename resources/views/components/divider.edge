@@ -1,1 +1,4 @@
-<hr class="divider" />
+@set('style_height', height ? `--divider-height:${height};` : '')
+@set('style_color', color ? `--divider-color:${color};` : '')
+
+<hr class="divider" style="{{style_height}} {{style_color}}"/>
