@@ -46,8 +46,8 @@
 
 /* Responsive */
 
-@media screen and (min-width: 750px) {
-  .search-field {
-   
+@media screen and (min-width: 650px) {
+  .search-field .form-select {
+   width: 90%;
   }
 }

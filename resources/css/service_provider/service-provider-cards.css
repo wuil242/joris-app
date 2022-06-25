@@ -7,12 +7,6 @@
   padding: 1.5rem;
 }
 
-@media only screen and (min-width: 475px) {
-  .service-provider-cards {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 @media only screen and (min-width: 650px) {
   .service-provider-cards {
     justify-content: flex-start;
@@ -32,6 +26,5 @@
 
 @media only screen and (min-width: 1200px) {
   .service-provider-cards {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }

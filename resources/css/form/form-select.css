@@ -5,13 +5,26 @@
   width: 50%;
 }
 
+.form-select * {
+  text-align: center;
+}
+
 .form-select-button {
   padding: 7px;
   font-size: 1.1rem;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   border-color: var(--form-select-button-border-color);
+  width: 100%;
+}
+
+.form-select-button .form-select-text {
+}
+
+.form-select-button .form-select-icon {
+  justify-self: right;
+  background-color: aqua;
 }
 
 .form-select-button i {
@@ -26,7 +39,7 @@
   left: 0;
   background-color: var(--form-select-content-bg-color);
   box-shadow: 0 0 2px 1px var(--form-select-content-shadow-color);
-  z-index: var(--layer-bottom);
+  z-index: var(--layer-middle);
 }
 
 .form-select-input {

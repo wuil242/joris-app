@@ -1,7 +1,7 @@
 .divider {
   width: 100%;
   border: none;
-  height: 1.5px;
+  height: var(--divider-height);
   background: #CCC;
   display: block;
 }

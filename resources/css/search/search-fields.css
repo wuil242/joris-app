@@ -28,3 +28,39 @@
   background: var(--grey-color);
   border-color: var(--grey-color);
 }
+
+.search-fields-buttons {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  gap: 10px;
+}
+
+/* Responsive */
+@media only screen and (min-width: 650px) {
+  .search-fields {
+    flex-direction: row;
+    justify-content: baseline;
+    align-content: baseline;
+    align-items: baseline;
+  }
+
+  .search-fields-buttons {
+    display: none;
+    background-color: lightgreen;
+  }
+}
+
+
+@media only screen and (min-width: 750px) {
+  .service-provider-cards {
+  }
+}
+
+@media only screen and (min-width: 950px) {
+  .service-provider-cards {
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+}
