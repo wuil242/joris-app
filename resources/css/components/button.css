@@ -53,3 +53,13 @@
   --button-text-color: var(--button-danger-hover-text-color); 
 }
 
+.button.success {
+  --button-bg-color: var(--button-success-bg-color);
+  --button-text-color: var(--button-success-text-color);
+}
+
+.button:hover.success {
+  --button-bg-color: var(--button-success-hover-bg-color);
+  --button-text-color: var(--button-success-hover-text-color); 
+}
+
