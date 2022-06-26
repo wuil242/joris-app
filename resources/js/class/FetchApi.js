@@ -20,6 +20,7 @@ export default class FetchApi {
       .then(data => {
           url.searchParams.delete('count')
           url.searchParams.delete('ajax')
+          url.searchParams.delete('page')
           window.history.replaceState(null, document.title, url)
           res(data)
         })

@@ -1,6 +1,6 @@
-import '../../css/search/all.css'
+  import '../../css/search/all.css'
 import FormSelect from '../components/FormSelect'
-import { debounce, scrollToElement, addLoaderToElement, addLoaderToButton, getFullUrl, throttle, str2Dom, isLargeScreen } from '../helpers'
+import { debounce, scrollToElement, addLoaderToElement, addLoaderToButton, getFullUrl, throttle, str2Dom, isLargeScreen, removeLoaderToElement } from '../helpers'
 import Sticky from '../components/Sticky'
 import FetchApi from '../class/FetchApi'
 
@@ -9,27 +9,60 @@ import FetchApi from '../class/FetchApi'
 const $searchFilter = document.getElementById('search-filter')
 const $searchResult = document.getElementById('search-result')
 const $skeleton = document.getElementById('service-provider-card-skeleton')
-const {show, hide, fixed} = { show: 'is-show', hide: 'is-hide', static: 'fixed' } 
+const $loader_element = document.getElementById('loader-element')
+const $search_content = document.getElementById('search-content')
+
+const FILTER_STATE = { SHOW: 'is-show', HIDE: 'is-hide', FIXED: 'fixed' }
+
 
 let LAST_FILTER_CHOICE = ''
 let LAST_FILTER_CONTENT = ''
 
+
+function active_loading() {
+  return addLoaderToElement($search_content, $loader_element)
+}
+
+/**
+ * 
+ * @param {HTMLElement} $loader_element 
+ */
+function deactive_loading($loader_element) {
+  removeLoaderToElement($search_content, $loader_element)
+}
+
 /**
  * 
  * @param {HTMLElement} $el
+ * @param {HTMLFormElement} $form formulaire contenant le champ de la page actuelle
  * 
  */
- function bind_more_button_event($el) {
-  $el.addEventListener('click', () => {
-    const page = $el.dataset.page
-    
+function bind_more_button_event($form) {
+  const $more_button = document.getElementById('more-button')
+  
+  if(!$more_button) return
+
+  const $add_card_position = document.getElementById('service-provider-replace')
+  
+  $more_button.addEventListener('click', () => {
+    const $loader = active_loading()
+    const page = $more_button.dataset.page
+    $form.querySelector('#search-page').value = page
+
+    FetchApi.getCardWithFilter($form)
+      .then(({html, count}) => {
+        if(count > 0) {
+          $add_card_position.innerHTML = html
+          bind_more_button_event($form)
+          deactive_loading($loader)
+        }
+      })
   })
 }
 
 function init_filter() {
   const $btnShowFilter = document.getElementById('search-show-button')
   const $btnHideFilter = document.getElementById('search-hide-button')
-  const $more_button = document.getElementById('more-button')
 
   $searchFilter.classList.add('is-hide')
 
@@ -38,37 +71,33 @@ function init_filter() {
       LAST_FILTER_CONTENT = $searchFilter.innerHTML
     }
     
-    $searchFilter.classList.replace(hide, show)
-    $searchFilter.classList.add(fixed)
+    $searchFilter.classList.replace(FILTER_STATE.HIDE, FILTER_STATE.SHOW)
+    $searchFilter.classList.add(FILTER_STATE.FIXED)
     $searchFilter.focus()
   })
   
   $btnHideFilter.addEventListener('click', () => {
-    $searchFilter.classList.replace(show, hide)
-    $searchFilter.classList.remove(fixed)
+    $searchFilter.classList.replace(FILTER_STATE.SHOW, FILTER_STATE.HIDE)
+    $searchFilter.classList.remove(FILTER_STATE.FIXED)
     $searchFilter.innerHTML = LAST_FILTER_CONTENT
     LAST_FILTER_CONTENT = ''
     init_page_events_binding()
   })
       
-  if($more_button) bind_more_button_event($more_button)
 }
-
 
 /**
  * 
  * @param {HTMLFormElement} $form 
  */
 function auto_filter($form) {
-
+  const $loader = active_loading()
 
   FetchApi.getCardWithFilter($form)
-    .then(({filter, count, html}) => {
+    .then(({filter, html}) => {
       $searchFilter.innerHTML = filter
 
-      $searchFilter.getBoundingClientRect()
-      
-      if($searchFilter.classList.contains(fixed)) {
+      if($searchFilter.classList.contains(FILTER_STATE.FIXED)) {
         init_page_events_binding()
         document.querySelector('#search-show-button').click()
         return
@@ -79,20 +108,12 @@ function auto_filter($form) {
         const element = $skeleton.content.cloneNode(true)
         $searchResult.appendChild(element)
       }
-      
-      if(count <= 0) {
-        $searchResult.innerHTML = html
-        init_page_events_binding()
-        return
-      }
-
-      for (let index = 0; index < count; index++) {
-        $searchResult.removeChild($searchResult.lastElementChild)
-      }
 
       $searchResult.innerHTML = html
 
       init_page_events_binding()
+
+      deactive_loading($loader)
     })
 }
 
@@ -112,6 +133,8 @@ function init_filtering() {
       auto_filter($form)
     })
   })
+  
+   bind_more_button_event($form)
 }
 
 /**
@@ -134,4 +157,3 @@ Sticky.define({
   element: '#search-filter',
   scrollValue: 150
 })
-
