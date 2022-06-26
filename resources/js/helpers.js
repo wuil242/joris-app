@@ -1,8 +1,3 @@
-export const LOADER_DEFAULT_CLASS = {
-  IDENTITY: 'is-loader-element',
-  IS_LOADING: 'is-loading',
-}
-
 /**
  *
  * @param {Function} callback
@@ -75,42 +70,57 @@ export function scrollToElement($el) {
  * renvoi une methode remove() premettant de supprimer le loader courrent
  *
  * @param {HTMLDivElement} $el element acceuillant le loader
- * @param {HTMLElement} $loader_element element servant de loader
- * @returns {{remove: () => void, loader: HTMLElement} }
+ * @param {HTMLElement} $loader element servant de loader
+ * @returns { {remove: () => void} }
  */
-export function addLoaderToElement($el, $loader_element) {
-  $loader_element = $loader_element.cloneNode(true)
+export function addLoaderToElement($el, $loader) {
+  console.log($loader)
+  $loader = $loader.cloneNode(true)
   const { position } = window.getComputedStyle($el, null)
 
   if (position === '' || position === 'static') {
     $el.style.setProperty('position', 'relative')
   }
 
-  $loader_element.classList.add(LOADER_DEFAULT_CLASS.IDENTITY, LOADER_DEFAULT_CLASS.IS_LOADING)
-  $el.appendChild($loader_element)
+  $el.appendChild($loader)
 
-  return {remove: () => removeLoaderToElement($el, $loader_element)}
+  return {remove: () => removeLoaderToElement($el, $loader)}
 }
 
 /**
  * ajout une classe loader en position absolue a l'element
  *
  * @param {HTMLDivElement} $el
- * @param {HTMLElement} $loader_element
+ * @param {HTMLElement} $loader
  */
-export function removeLoaderToElement($el, $loader_element) {
-  $el.removeChild($loader_element)
+export function removeLoaderToElement($el, $loader) {
+  $el.removeChild($loader)
   $el.style.removeProperty('position', 'relative')
 }
 
 /**
- * ajout un loader en position absolue a l'element represantant un boutton
+ * ajout le loader en position absolue a l'element represantant un boutton
  *
  * @param {HTMLElement} $el
+ * @param {HTMLElement} $loader
+ * @returns { {remove: () => void} }
  */
-export function addLoaderToButton($el) {
-  $el.setAttribute('disabled', '')
-  $el.innerHTML += '<div class="loader-button"></div>'
+export function addLoaderToButton($el, $loader) {
+  $loader = $loader.cloneNode(true)
+  $el.style.setProperty('pointer-events', 'none')
+  $el.appendChild($loader)
+  return {remove: () => removeLoaderToButton($el, $loader)}
+}
+
+/**
+ * retire le loader loader en position absolue a l'element represantant un boutton
+ *
+ * @param {HTMLElement} $el
+ * @param {HTMLElement} $loader
+ */
+export function removeLoaderToButton($el, $loader) {
+  $el.style.removeProperty('pointer-events')
+  $el.removeChild($loader)
 }
 
 /**
@@ -144,4 +154,13 @@ export function removeInputErrorsAfterFocus(
 
 export function isLargeScreen() {
   return window.innerWidth > 650
+}
+
+/**
+ * 
+ * @param {string} selector 
+ * @returns {HTMLElement}
+ */
+export function getElementFromTemplate(selector) {
+  return document.querySelector(selector).content.firstElementChild
 }

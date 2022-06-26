@@ -27,7 +27,9 @@ export default class SearchesController {
     const cityId = Number.parseInt(qs.city, 10) || 0
     const arrondissementId = Number.parseInt(qs.arrondissement, 10) || 0
     const quaterId = Number.parseInt(qs.quater, 10) || 0
-    const page =  Number.parseInt(qs.page, 10) || 1
+    let page =  Number.parseInt(qs.page, 10) || 1
+
+    if(page === 0) page = 1
 
     const filterLocation:FilterLoactionOptions = {cityId, arrondissementId, quaterId}
 
@@ -73,12 +75,6 @@ export default class SearchesController {
         .orderBy(this.ORDER, 'desc')
         .paginate(page, this.LIMIT)
     }
-
-    // let rand = Math.round(Math.random() * 3) * serviceProviders.length
-    // rand = rand > this.LIMIT ? this.LIMIT : rand
-    // for (let index = 0; index < rand; index++) {
-    //   serviceProviders.push(...serviceProviders)
-    // }
 
     if(request.ajax() && qs?.ajax === '') {
 

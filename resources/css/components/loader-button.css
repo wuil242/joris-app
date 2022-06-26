@@ -5,16 +5,11 @@
   right: 0;
   bottom: 0;
   border-radius: var(--loader-button-radius);
-  background-color: var(--loader-button-bg-color);
+  background-color: var(--button-bg-color);
 
   font-size: .5em;
 
-  z-index: var(--layer-middle);
-}
-
-.loader-button:hover::before, 
-.loader-button:hover::after {
-  border-top-color: var(--loader-button-color);
+  z-index: var(--layer-middle-down);
 }
 
 .loader-button::before, .loader-button::after {
@@ -27,11 +22,6 @@
   height: 1.5em;
   width: 1.5em;
 
-  
-  border-top: solid .45em var(--loader-button-color);
-  border-right: solid .45em transparent;
-  border-bottom: solid .45em transparent;
-  border-left: solid .45em var(--loader-button-color);
 
 
   border-radius: 50%;
@@ -42,6 +32,11 @@
 
 .loader-button:before {
   /* border-top: solid .4em transparent; */
+  
+  border-top: solid .45em var(--button-text-color);
+  border-right: solid .45em transparent;
+  border-bottom: solid .45em transparent;
+  border-left: solid .45em var(--button-text-color);
   animation: rotate 1s  infinite;
 }
 

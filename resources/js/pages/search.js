@@ -10,6 +10,7 @@ import {
   str2Dom,
   isLargeScreen,
   removeLoaderToElement,
+  getElementFromTemplate,
 } from '../helpers'
 import Sticky from '../components/Sticky'
 import FetchApi from '../class/FetchApi'
@@ -19,7 +20,8 @@ import FetchApi from '../class/FetchApi'
 const $searchFilter = document.getElementById('search-filter')
 const $searchResult = document.getElementById('search-result')
 const $searchResultContent = document.getElementById('search-result-content')
-const $loader_element = document.getElementById('loader-element')
+const $loaderElement = getElementFromTemplate('#loader-element-template')
+const $loaderButton = getElementFromTemplate('#loader-button-template')
 
 const FILTER_STATE = { SHOW: 'is-show', HIDE: 'is-hide', FIXED: 'fixed' }
 
@@ -28,8 +30,35 @@ let LAST_FILTER_CONTENT = ''
 
 
 function active_loading() {
-  return addLoaderToElement($searchResult, $loader_element)
+  return addLoaderToElement($searchResult, $loaderElement)
 }
+
+/**
+ * 
+ * @param {NodeList<HTMLElement> | HTMLElement[] | HTMLFormElement}  $el cann be collection of fields or form connaints fields
+ * @returns {Promise<{remove: () => void}[]}
+ */
+ function active_filter_loading($el) {
+  const loaders = []
+  if($el?.nodeName?.toLowerCase() === 'form') {
+    $el = $el.querySelectorAll('.js-select')
+  }
+
+  const [$btnSubmitFilter, $btnShowFilter] = document.querySelectorAll('#search-submit, #search-hide-button')//document.querySelectorAll('#search-show-button', '#search-submit')
+  
+  $el = [...$el, $btnShowFilter, $btnSubmitFilter]
+  
+  return new Promise((res, rej) => {
+    $el.forEach(($filter, index) => {
+      const loader = addLoaderToButton($filter, $loaderButton) //, $loaderElement)
+      loaders.push(loader)
+      if(index === $el.length - 1) res(loaders)
+    })
+  })
+
+
+}
+
 
 /**
  *
@@ -51,11 +80,14 @@ function bind_more_button_event($form) {
     
     $pageField.value = page
 
+    const filter_loader = active_filter_loading($form)
+
     FetchApi.getCardWithFilter($form).then(({ html, count }) => {
         $add_card_position.innerHTML = html
         bind_more_button_event($form)
         $pageField.value = ''
         loader.remove()
+        filter_loader.then( loaders => loaders.forEach(l => l.remove()) )
     })
   })
 }
@@ -113,9 +145,10 @@ function auto_filter($form) {
 /**
  *
  * @param {SubmitEvent} e
+ * @param {HTMLFormElement}  $filterFields
  * @param {HTMLFormElement} $form
  */
-function submit_filter(e, $form) {
+function submit_filter(e, $filterFields, $form) {
   e.preventDefault()
 
   const $btnHideFilter = document.getElementById('search-hide-button')
@@ -125,7 +158,9 @@ function submit_filter(e, $form) {
     return 
   }
 
-  const loader = addLoaderToElement($searchFilter, $loader_element)
+  const loader = addLoaderToElement($searchFilter, $loaderElement)
+
+  active_filter_loading($filterFields)
 
   FetchApi.getCardWithFilter($form).then(({ html, filter }) => {
     $searchResultContent.innerHTML = html
@@ -136,20 +171,21 @@ function submit_filter(e, $form) {
   })
 }
 
-
 /**
  * 
  * @param {CustomEvent<string>} e
+ * @param {HTMLFormElement} $filterFields
  * @param {HTMLFormElement} $form
  * @returns 
  */
-function submit_auto_filter(e, $form) {
+function submit_auto_filter(e, $filterFields, $form) {
   const filter_value = e.detail
 
   if (LAST_FILTER_CHOICE === filter_value) return
 
   LAST_FILTER_CHOICE = filter_value
 
+  active_filter_loading($filterFields)
   auto_filter($form)
 }
 
@@ -157,10 +193,10 @@ function init_filtering() {
   const $form = document.getElementById('form-search-provider')
   const $filterFields = $form.querySelectorAll('.js-select')
 
-  $form.addEventListener('submit', (e) => submit_filter(e, $form))
+  $form.addEventListener('submit', (e) => submit_filter(e, $filterFields, $form))
 
   $filterFields.forEach(($filter) => {
-    $filter.addEventListener(FormSelect.EVENT.SELECTED, (e) => submit_auto_filter(e, $form))
+    $filter.addEventListener(FormSelect.EVENT.SELECTED, (e) => submit_auto_filter(e, $filterFields, $form))
   })
 
   bind_more_button_event($form)

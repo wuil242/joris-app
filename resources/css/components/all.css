@@ -15,11 +15,11 @@
 @import 'header-menu-topbar';
 @import 'top-button';
 @import 'title';
-@import 'loader';
 @import 'link';
 /* @import 'alert'; */
 @import 'header-profil';
 @import 'message.css';
 @import 'divider.css';
-@import 'loader_element'
+@import 'loader-element';
+@import 'loader-button';
 

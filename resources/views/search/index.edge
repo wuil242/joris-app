@@ -9,7 +9,12 @@
 
 @section('content')
 
-@include('components/loader_element')
+<template id="loader-element-template">
+  @include('components/loader_element')
+</template>
+<template id="loader-button-template">
+  @include('components/loader_button')
+</template>
 
 <template id="service-provider-card-skeleton">
   @include('service_provider/parts/service_provider_card_skeleton')
