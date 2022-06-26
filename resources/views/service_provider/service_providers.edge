@@ -3,10 +3,11 @@
    @!component('service_provider/parts/service-provider-card', {sp, qs})
   @endeach
   @if(serviceProviders.hasMorePages)
-    <div style="width: 50px; height: 50px; background-color: red;" id="service-provider-replace">Replace to Sp</div>
-    <button class="button rounded bordered search-more-button " type="submit" id="more-button" data-page="{{serviceProviders.currentPage + 1}}">
-      <i class="fa fa-plus"></i>
-    </button>
+    <div id="service-provider-replace">
+      <button class="button rounded bordered search-more-button " type="submit" id="more-button" data-page="{{serviceProviders.currentPage + 1}}">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
   @endif
 @else
   <span class="search-empty" id="search-empty-message">Aucun Prestaire Trouver</span>

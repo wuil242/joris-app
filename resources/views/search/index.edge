@@ -9,6 +9,8 @@
 
 @section('content')
 
+@include('components/loader_element')
+
 <template id="service-provider-card-skeleton">
   @include('service_provider/parts/service_provider_card_skeleton')
 </template>
@@ -18,7 +20,7 @@
   icon: 'map-marked-alt'
 })
 
-<section class="search-content">
+<section class="search-content" id="search-content">
   @include('search/parts/search-filter-button')
   <aside id="search-filter" class="search-filter is-hide">
     @include('search/parts/search-fields')
