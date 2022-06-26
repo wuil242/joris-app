@@ -76,7 +76,7 @@ export function scrollToElement($el) {
  *
  * @param {HTMLDivElement} $el element acceuillant le loader
  * @param {HTMLElement} $loader_element element servant de loader
- * @returns {{remove: () => void} }
+ * @returns {{remove: () => void, loader: HTMLElement} }
  */
 export function addLoaderToElement($el, $loader_element) {
   $loader_element = $loader_element.cloneNode(true)
@@ -89,10 +89,7 @@ export function addLoaderToElement($el, $loader_element) {
   $loader_element.classList.add(LOADER_DEFAULT_CLASS.IDENTITY, LOADER_DEFAULT_CLASS.IS_LOADING)
   $el.appendChild($loader_element)
 
-  function remove() {
-    removeLoaderToElement($el, $loader_element)
-  }
-  return {remove}
+  return {remove: () => removeLoaderToElement($el, $loader_element)}
 }
 
 /**

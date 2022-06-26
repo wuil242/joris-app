@@ -18,9 +18,8 @@ import FetchApi from '../class/FetchApi'
 
 const $searchFilter = document.getElementById('search-filter')
 const $searchResult = document.getElementById('search-result')
-const $skeleton = document.getElementById('service-provider-card-skeleton')
+const $searchResultContent = document.getElementById('search-result-content')
 const $loader_element = document.getElementById('loader-element')
-const $search_content = document.getElementById('search-content')
 
 const FILTER_STATE = { SHOW: 'is-show', HIDE: 'is-hide', FIXED: 'fixed' }
 
@@ -105,17 +104,9 @@ function auto_filter($form) {
       return
     }
 
-    $searchResult.innerHTML = ''
-    for (let index = 0; index < 10; index++) {
-      const element = $skeleton.content.cloneNode(true)
-      $searchResult.appendChild(element)
-    }
-
-    $searchResult.innerHTML = html
-
+    $searchResultContent.innerHTML = html
     init_page_events_binding()
-
-    if (loader) loader.remove()
+    if(loader) loader.remove()
   })
 }
 
@@ -137,7 +128,7 @@ function submit_filter(e, $form) {
   const loader = addLoaderToElement($searchFilter, $loader_element)
 
   FetchApi.getCardWithFilter($form).then(({ html, filter }) => {
-    $searchResult.innerHTML = html
+    $searchResultContent.innerHTML = html
     loader.remove()
     $btnHideFilter.click()
     $searchFilter.innerHTML = filter
