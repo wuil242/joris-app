@@ -8,7 +8,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(203, 203, 206, 0.774);
-  z-index: var(--layer-middle);
+  z-index: var(--layer-middle-down);
 }
 
 .loader-element::after,
