@@ -2,6 +2,7 @@
   /* Layer | niveaux de chaque calque */
   --layer-top: 75;
   --layer-middle: 50;
+  --layer-middle-down: 45;
   --layer-bottom: 25;
 
   /* Logo Colors */

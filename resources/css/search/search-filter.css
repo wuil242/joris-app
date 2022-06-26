@@ -35,7 +35,7 @@
   bottom: 25%;
   width: fit-content;
   height: fit-content;
-  z-index: var(--layer-middle);
+  z-index: var(--layer-middle-down);
 }
 
 @media only screen and (min-width: 650px) {

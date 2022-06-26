@@ -8,7 +8,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(203, 203, 206, 0.774);
-  z-index: var(--layer-bottom);
+  z-index: var(--layer-middle);
 }
 
 .loader-element::after,
@@ -22,7 +22,6 @@
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
   border-radius: 50%;
-  animation: loader-spin 2s infinite linear;
 }
 
 .loader-element::after {
@@ -30,6 +29,7 @@
   background-color: #ccc;
   border-bottom-color: rgb(52, 42, 95);
   border-right-color: rgb(52, 42, 95);
+  animation: loader-spin 1.5s infinite linear;
 }
 
 .loader-element.is-loading {

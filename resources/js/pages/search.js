@@ -1,6 +1,16 @@
-  import '../../css/search/all.css'
+import '../../css/search/all.css'
 import FormSelect from '../components/FormSelect'
-import { debounce, scrollToElement, addLoaderToElement, addLoaderToButton, getFullUrl, throttle, str2Dom, isLargeScreen, removeLoaderToElement } from '../helpers'
+import {
+  debounce,
+  scrollToElement,
+  addLoaderToElement,
+  addLoaderToButton,
+  getFullUrl,
+  throttle,
+  str2Dom,
+  isLargeScreen,
+  removeLoaderToElement,
+} from '../helpers'
 import Sticky from '../components/Sticky'
 import FetchApi from '../class/FetchApi'
 
@@ -14,7 +24,6 @@ const $search_content = document.getElementById('search-content')
 
 const FILTER_STATE = { SHOW: 'is-show', HIDE: 'is-hide', FIXED: 'fixed' }
 
-
 let LAST_FILTER_CHOICE = ''
 let LAST_FILTER_CONTENT = ''
 
@@ -24,39 +33,36 @@ function active_loading() {
 }
 
 /**
- * 
- * @param {HTMLElement} $loader_element 
+ *
+ * @param {HTMLElement} $loader_element
  */
 function deactive_loading($loader_element) {
   removeLoaderToElement($search_content, $loader_element)
 }
 
 /**
- * 
+ *
  * @param {HTMLElement} $el
  * @param {HTMLFormElement} $form formulaire contenant le champ de la page actuelle
- * 
+ *
  */
 function bind_more_button_event($form) {
   const $more_button = document.getElementById('more-button')
-  
-  if(!$more_button) return
+
+  if (!$more_button) return
 
   const $add_card_position = document.getElementById('service-provider-replace')
-  
+
   $more_button.addEventListener('click', () => {
     const $loader = active_loading()
     const page = $more_button.dataset.page
     $form.querySelector('#search-page').value = page
 
-    FetchApi.getCardWithFilter($form)
-      .then(({html, count}) => {
-        if(count > 0) {
-          $add_card_position.innerHTML = html
-          bind_more_button_event($form)
-          deactive_loading($loader)
-        }
-      })
+    FetchApi.getCardWithFilter($form).then(({ html, count }) => {
+        $add_card_position.innerHTML = html
+        bind_more_button_event($form)
+        deactive_loading($loader)
+    })
   })
 }
 
@@ -67,15 +73,15 @@ function init_filter() {
   $searchFilter.classList.add('is-hide')
 
   $btnShowFilter.addEventListener('click', () => {
-    if(LAST_FILTER_CONTENT === '') {
+    if (LAST_FILTER_CONTENT === '') {
       LAST_FILTER_CONTENT = $searchFilter.innerHTML
     }
-    
+
     $searchFilter.classList.replace(FILTER_STATE.HIDE, FILTER_STATE.SHOW)
     $searchFilter.classList.add(FILTER_STATE.FIXED)
     $searchFilter.focus()
   })
-  
+
   $btnHideFilter.addEventListener('click', () => {
     $searchFilter.classList.replace(FILTER_STATE.SHOW, FILTER_STATE.HIDE)
     $searchFilter.classList.remove(FILTER_STATE.FIXED)
@@ -83,61 +89,89 @@ function init_filter() {
     LAST_FILTER_CONTENT = ''
     init_page_events_binding()
   })
-      
 }
 
 /**
- * 
- * @param {HTMLFormElement} $form 
+ *
+ * @param {HTMLFormElement} $form
  */
 function auto_filter($form) {
   const isFixedFilterBox = $searchFilter.classList.contains(FILTER_STATE.FIXED)
   let $loader = null
 
-  if(!isFixedFilterBox) $loader = active_loading()
+  if (!isFixedFilterBox) $loader = active_loading()
 
-  FetchApi.getCardWithFilter($form)
-    .then(({filter, html}) => {
-      $searchFilter.innerHTML = filter
+  FetchApi.getCardWithFilter($form).then(({ filter, html }) => {
+    $searchFilter.innerHTML = filter
 
-      if(isFixedFilterBox) {
-        init_page_events_binding()
-        document.querySelector('#search-show-button').click()
-        return
-      }
-
-      $searchResult.innerHTML = ''
-      for (let index = 0; index < 10; index++) {
-        const element = $skeleton.content.cloneNode(true)
-        $searchResult.appendChild(element)
-      }
-
-      $searchResult.innerHTML = html
-
+    if (isFixedFilterBox) {
       init_page_events_binding()
+      document.querySelector('#search-show-button').click()
+      return
+    }
 
-      if($loader) deactive_loading($loader)
-    })
+    $searchResult.innerHTML = ''
+    for (let index = 0; index < 10; index++) {
+      const element = $skeleton.content.cloneNode(true)
+      $searchResult.appendChild(element)
+    }
+
+    $searchResult.innerHTML = html
+
+    init_page_events_binding()
+
+    if ($loader) deactive_loading($loader)
+  })
+}
+
+/**
+ *
+ * @param {SubmitEvent} e
+ * @param {HTMLFormElement} $form
+ */
+function submit_filter(e, $form) {
+  e.preventDefault()
+
+  const $btnHideFilter = document.getElementById('search-hide-button')
+  const $loader = addLoaderToElement($searchFilter, $loader_element)
+
+  FetchApi.getCardWithFilter($form).then(({ html, filter }) => {
+    $searchResult.innerHTML = html
+    removeLoaderToElement($searchFilter, $loader)
+    $btnHideFilter.click()
+    $searchFilter.innerHTML = filter
+    init_page_events_binding()
+  })
+}
+
+
+/**
+ * 
+ * @param {CustomEvent<string>} e
+ * @param {HTMLFormElement} $form
+ * @returns 
+ */
+function submit_auto_filter(e, $form) {
+  const filter_value = e.detail
+
+  if (LAST_FILTER_CHOICE === filter_value) return
+
+  LAST_FILTER_CHOICE = filter_value
+
+  auto_filter($form)
 }
 
 function init_filtering() {
   const $form = document.getElementById('form-search-provider')
   const $filterFields = $form.querySelectorAll('.js-select')
 
-  $filterFields.forEach($filter => {
+  $form.addEventListener('submit', (e) => submit_filter(e, $form))
 
-    $filter.addEventListener(FormSelect.EVENT.SELECTED, (e) => {
-      const filter_value = e.detail
-      
-      if(LAST_FILTER_CHOICE === filter_value) return
-      
-      LAST_FILTER_CHOICE = filter_value
-     
-      auto_filter($form)
-    })
+  $filterFields.forEach(($filter) => {
+    $filter.addEventListener(FormSelect.EVENT.SELECTED, (e) => submit_auto_filter(e, $form))
   })
-  
-   bind_more_button_event($form)
+
+  bind_more_button_event($form)
 }
 
 /**
@@ -158,5 +192,5 @@ Sticky.define({
 
 Sticky.define({
   element: '#search-filter',
-  scrollValue: 150
+  scrollValue: 150,
 })

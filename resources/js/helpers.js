@@ -69,6 +69,7 @@ export function scrollToElement($el) {
   })
 }
 
+//TODO: refactor: retourner un foction qui permet de desactiver le loader
 /**
  * ajout une classe loader en position absolue a l'element
  *
@@ -98,7 +99,6 @@ export function addLoaderToElement($el, $loader_element) {
  */
 export function removeLoaderToElement($el, $loader_element) {
   $el.style.removeProperty('position', 'relative')
-console.log($loader_element)
   $el.removeChild($loader_element)
 }
 
