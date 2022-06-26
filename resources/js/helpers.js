@@ -102,8 +102,8 @@ export function addLoaderToElement($el, $loader_element) {
  * @param {HTMLElement} $loader_element
  */
 export function removeLoaderToElement($el, $loader_element) {
-  $el.style.removeProperty('position', 'relative')
   $el.removeChild($loader_element)
+  $el.style.removeProperty('position', 'relative')
 }
 
 /**

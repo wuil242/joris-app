@@ -1,6 +1,7 @@
 :root {
   /* Layer | niveaux de chaque calque */
   --layer-top: 75;
+  --layer-middle-up: 65;
   --layer-middle: 50;
   --layer-middle-down: 45;
   --layer-bottom: 25;

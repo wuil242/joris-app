@@ -29,7 +29,7 @@ let LAST_FILTER_CONTENT = ''
 
 
 function active_loading() {
-  return addLoaderToElement($search_content, $loader_element)
+  return addLoaderToElement($searchResult, $loader_element)
 }
 
 /**
@@ -48,11 +48,14 @@ function bind_more_button_event($form) {
   $more_button.addEventListener('click', () => {
     const loader = active_loading()
     const page = $more_button.dataset.page
-    $form.querySelector('#search-page').value = page
+    const $pageField = $form.querySelector('#search-page')
+    
+    $pageField.value = page
 
     FetchApi.getCardWithFilter($form).then(({ html, count }) => {
         $add_card_position.innerHTML = html
         bind_more_button_event($form)
+        $pageField.value = ''
         loader.remove()
     })
   })
@@ -125,6 +128,12 @@ function submit_filter(e, $form) {
   e.preventDefault()
 
   const $btnHideFilter = document.getElementById('search-hide-button')
+
+  if(LAST_FILTER_CONTENT === $searchFilter.innerHTML) {
+    $btnHideFilter.click()
+    return 
+  }
+
   const loader = addLoaderToElement($searchFilter, $loader_element)
 
   FetchApi.getCardWithFilter($form).then(({ html, filter }) => {
