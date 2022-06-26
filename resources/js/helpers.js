@@ -69,13 +69,14 @@ export function scrollToElement($el) {
   })
 }
 
-//TODO: refactor: retourner un foction qui permet de desactiver le loader
 /**
- * ajout une classe loader en position absolue a l'element
+ * ajout d'element servant de loader dans un autre element parent
+ * 
+ * renvoi une methode remove() premettant de supprimer le loader courrent
  *
- * @param {HTMLDivElement} $el
- * @param {HTMLElement} $loader_element
- * @return {HTMLElement} loader cloner
+ * @param {HTMLDivElement} $el element acceuillant le loader
+ * @param {HTMLElement} $loader_element element servant de loader
+ * @returns {{remove: () => void} }
  */
 export function addLoaderToElement($el, $loader_element) {
   $loader_element = $loader_element.cloneNode(true)
@@ -88,7 +89,10 @@ export function addLoaderToElement($el, $loader_element) {
   $loader_element.classList.add(LOADER_DEFAULT_CLASS.IDENTITY, LOADER_DEFAULT_CLASS.IS_LOADING)
   $el.appendChild($loader_element)
 
-  return $loader_element
+  function remove() {
+    removeLoaderToElement($el, $loader_element)
+  }
+  return {remove}
 }
 
 /**
