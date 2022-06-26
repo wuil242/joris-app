@@ -16,6 +16,12 @@
 .search-filter.is-hide {
   display: none;
 }
+.search-filter.fixed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
 
 .search-filter .divider {
   display: none;

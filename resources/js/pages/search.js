@@ -128,13 +128,16 @@ function init_filter() {
  * @param {HTMLFormElement} $form 
  */
 function auto_filter($form) {
-  const $loader = active_loading()
+  const isFixedFilterBox = $searchFilter.classList.contains(FILTER_STATE.FIXED)
+  let $loader = null
+
+  if(!isFixedFilterBox) $loader = active_loading()
 
   FetchApi.getCardWithFilter($form)
     .then(({filter, html}) => {
       $searchFilter.innerHTML = filter
 
-      if($searchFilter.classList.contains(FILTER_STATE.FIXED)) {
+      if(isFixedFilterBox) {
         init_page_events_binding()
         document.querySelector('#search-show-button').click()
         return
@@ -150,7 +153,7 @@ function auto_filter($form) {
 
       init_page_events_binding()
 
-      deactive_loading($loader)
+      if($loader) deactive_loading($loader)
     })
 }
 
