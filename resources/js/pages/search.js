@@ -34,14 +34,6 @@ function active_loading() {
 
 /**
  *
- * @param {HTMLElement} $loader_element
- */
-function deactive_loading($loader_element) {
-  removeLoaderToElement($search_content, $loader_element)
-}
-
-/**
- *
  * @param {HTMLElement} $el
  * @param {HTMLFormElement} $form formulaire contenant le champ de la page actuelle
  *
@@ -54,14 +46,14 @@ function bind_more_button_event($form) {
   const $add_card_position = document.getElementById('service-provider-replace')
 
   $more_button.addEventListener('click', () => {
-    const $loader = active_loading()
+    const loader = active_loading()
     const page = $more_button.dataset.page
     $form.querySelector('#search-page').value = page
 
     FetchApi.getCardWithFilter($form).then(({ html, count }) => {
         $add_card_position.innerHTML = html
         bind_more_button_event($form)
-        deactive_loading($loader)
+        loader.remove()
     })
   })
 }
@@ -97,9 +89,9 @@ function init_filter() {
  */
 function auto_filter($form) {
   const isFixedFilterBox = $searchFilter.classList.contains(FILTER_STATE.FIXED)
-  let $loader = null
+  let loader = null
 
-  if (!isFixedFilterBox) $loader = active_loading()
+  if (!isFixedFilterBox) loader = active_loading()
 
   FetchApi.getCardWithFilter($form).then(({ filter, html }) => {
     $searchFilter.innerHTML = filter
@@ -120,7 +112,7 @@ function auto_filter($form) {
 
     init_page_events_binding()
 
-    if ($loader) deactive_loading($loader)
+    if (loader) loader.remove()
   })
 }
 
@@ -133,11 +125,11 @@ function submit_filter(e, $form) {
   e.preventDefault()
 
   const $btnHideFilter = document.getElementById('search-hide-button')
-  const $loader = addLoaderToElement($searchFilter, $loader_element)
+  const loader = addLoaderToElement($searchFilter, $loader_element)
 
   FetchApi.getCardWithFilter($form).then(({ html, filter }) => {
     $searchResult.innerHTML = html
-    removeLoaderToElement($searchFilter, $loader)
+    loader.remove()
     $btnHideFilter.click()
     $searchFilter.innerHTML = filter
     init_page_events_binding()
