@@ -27,6 +27,7 @@ const $loaderElement = getElementFromTemplate('#loader-element-template')
 const $loaderButton = getElementFromTemplate('#loader-button-template')
 
 const FILTER_STATE = { SHOW: 'is-show', HIDE: 'is-hide', FIXED: 'fixed' }
+const FILTER_FIELD_NAMES = ['city', 'arrondissement', 'quater']
 
 /**
  * 
@@ -210,18 +211,39 @@ function submit_filter(e, $filterFields, $form) {
 }
 
 /**
+ * reset all field on right depend to left field
  * 
- * @param {CustomEvent<string>} e
+ * @param {string} field 
+ * @param {string[]} filterFieldNames 
+ * @param {HTMLFormElement} $form 
+ */
+function reset_filter_fields_dependence(field, filterFieldNames, $form) {
+  for (let index in filterFieldNames) {
+    if(field === filterFieldNames[index]) {
+      while(index < filterFieldNames.length - 1) {
+        index++
+        const $filter_field = $form.querySelector(`[name=${filterFieldNames[index]}]`)
+        $filter_field.value = 0
+      }
+    }
+  }
+}
+
+/**
+ * 
+ * @param {CustomEvent<{field: string, text: string, value: string}>} e
  * @param {HTMLFormElement} $filterFields
  * @param {HTMLFormElement} $form
  * @returns 
  */
 function submit_auto_filter(e, $filterFields, $form) {
-  const filter_value = e.detail
+  const {field, text} = e.detail
 
-  if (LAST_FILTER_CHOICE === filter_value) return
+  reset_filter_fields_dependence(field, FILTER_FIELD_NAMES, $form)
 
-  LAST_FILTER_CHOICE = filter_value
+  if (LAST_FILTER_CHOICE === text) return
+
+  LAST_FILTER_CHOICE = text
 
   active_filter_loading($filterFields)
   auto_filter($form)

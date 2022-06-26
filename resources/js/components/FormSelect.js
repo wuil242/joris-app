@@ -10,6 +10,11 @@ export default class FormSelect {
     SELECTED: 'form-select'
   }
 
+  static SELECTOR = {
+    SEARCH_INPUT: '.js-form-select-input',
+    SELECT_INPUT: 'select'
+  }
+
   /**
    * 
    * @param {HTMLElement} el 
@@ -17,12 +22,12 @@ export default class FormSelect {
   constructor($root) {
     this.$root = $root
     this.$select = this.$root.querySelector('.js-select-content')
-    this.$input = this.$root.querySelector('.js-form-select-input')
+    this.$input = this.$root.querySelector(FormSelect.SELECTOR.SEARCH_INPUT)
     this.$options = this.$root.querySelector('.js-slelect-options')
     this.$lis = Array.from(this.$options.querySelectorAll('.js-slelect-option'))
     this.$button = this.$root.querySelector('.js-select-button')
     this.$icon = this.$root.querySelector('.js-form-select-search-icon')
-    this.$select_hidden = this.$root.querySelector('select')
+    this.$select_hidden = this.$root.querySelector(FormSelect.SELECTOR.SELECT_INPUT)
     this.disabled = false
 
 
@@ -132,11 +137,16 @@ export default class FormSelect {
    * @param {PointerEvent} e 
    */
   emitSelection(e) {
-    this.$select_hidden.value = e.target.dataset.value
-    this.$button.firstElementChild.innerText = e.target.innerText
+    const field = this.$select_hidden.name
+    const text = e.target.innerText
+    const value =  e.target.dataset.value
+
+    this.$select_hidden.value = value
+    this.$button.firstElementChild.innerText = text
     this.$select.classList.remove('active')
 
-    this.$root.dispatchEvent(new CustomEvent(FormSelect.EVENT.SELECTED, {detail: e.target.innerText}))
+    const detail = {field, text, value}
+    this.$root.dispatchEvent(new CustomEvent(FormSelect.EVENT.SELECTED, {detail}))
     
     this.$input.value = ''
     this.showAllOption(this.$lis)
@@ -163,4 +173,5 @@ export default class FormSelect {
       }
     })
   }
+
 }
