@@ -26,9 +26,11 @@
     @include('search/parts/search-fields')
   </aside>
 
-  <section class="service-provider-cards" id="search-result">
-    @!component('service_provider/service_providers', {serviceProviders, qs})
-  </section>
+  <div id="search-result">
+    <section class="service-provider-cards" id="search-result-content">
+      @!component('service_provider/service_providers', {serviceProviders, qs})
+    </section>
+  </div>
 </section>
 
 @include('components/top-button')
