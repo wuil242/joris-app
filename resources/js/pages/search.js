@@ -36,7 +36,7 @@ function active_loading() {
 
 /**
  * 
- * @param {NodeList<HTMLElement> | HTMLElement[] | HTMLFormElement}  $el cann be collection of fields or form connaints fields
+ * @param {NodeListOf<HTMLElement> | HTMLElement[] | HTMLFormElement}  $el can be collection of fields or form connaints fields
  * @returns {Promise<{remove: () => void}[]}
  */
  function active_filter_loading($el) {
@@ -56,8 +56,6 @@ function active_loading() {
       if(index === $el.length - 1) res(loaders)
     })
   })
-
-
 }
 
 
