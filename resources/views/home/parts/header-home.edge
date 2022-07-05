@@ -1,4 +1,6 @@
 <header class="header-home">
+  @include('home/parts/header_carroussel')
+  @include('home/parts/header_shadow')
   @include('components/header-menu-topbar')
   <div class="header-home-bottom">
     <p class="home-welcome">Bienvenue</p>
@@ -13,7 +15,9 @@
     </div>
   </div>
   
-  <a class="header-home-arrow" href="#home-introduce">
-    <i class="fa fa-chevron-down"></i>
-  </a>
+  <div class="header-home-arrow">
+    <a href="#home-introduce" title="allez vers le contenu de la page">
+      <i  class="fa fa-chevron-down"></i>
+    </a>
+  </div>
 </header>
