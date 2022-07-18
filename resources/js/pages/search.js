@@ -1,19 +1,12 @@
 import '../../css/search/all.css'
 import FormSelect from '../components/FormSelect'
 import {
-  debounce,
-  scrollToElement,
   addLoaderToElement,
   addLoaderToButton,
-  getFullUrl,
-  throttle,
-  str2Dom,
-  isLargeScreen,
-  removeLoaderToElement,
   getElementFromTemplate,
 } from '../helpers'
 import Sticky from '../components/Sticky'
-import FetchApi from '../class/FetchApi'
+import FetchApi, { API_LAST_URL } from '../class/FetchApi'
 
 // TODO: ajout d'un panier permettant d'accumuler les prestataire
 
@@ -28,7 +21,6 @@ const FILTER_FIELD_NAMES = ['city', 'arrondissement', 'quater']
 
 let LAST_FILTER_CHOICE = ''
 let LAST_FILTER_CONTENT = ''
-
 
 function active_loading() {
   return addLoaderToElement($searchResult, $loaderElement)
@@ -76,9 +68,6 @@ function bind_more_button_event($form) {
 
 
   $more_button.addEventListener('click', (e) => {
-    e.stopImmediatePropagation()
-    e.stopPropagation()
-
     const loader = active_loading()
     const page = $more_button.dataset.page
     const $pageField = $form.querySelector('#search-page')
@@ -86,10 +75,9 @@ function bind_more_button_event($form) {
     $pageField.value = page
 
     const filter_loader = active_filter_loading($form)
-
     FetchApi.getCardWithFilter($form).then(({ html, count }) => {
       if($add_card_position) $add_card_position.remove()        
-      $searchResultContent.innerHTML += html
+        $searchResultContent.innerHTML += html
         bind_more_button_event($form)
         $pageField.value = ''
         loader.remove()
@@ -106,6 +94,7 @@ function init_filter() {
   $searchFilter.classList.add('is-hide')
 
   $btnShowFilter.addEventListener('click', () => {
+
     if (LAST_FILTER_CONTENT === '') {
       LAST_FILTER_CONTENT = $searchFilter.innerHTML
     }
@@ -116,11 +105,15 @@ function init_filter() {
   })
 
   $btnHideFilter.addEventListener('click', () => {
+    if (API_LAST_URL.href !== window.location.href) {
+      window.history.replaceState(null, '', API_LAST_URL.href)
+    }
+
     $searchFilter.classList.replace(FILTER_STATE.SHOW, FILTER_STATE.HIDE)
     $searchFilter.classList.remove(FILTER_STATE.FIXED)
     $searchFilter.innerHTML = LAST_FILTER_CONTENT
     LAST_FILTER_CONTENT = ''
-    init_page_events_binding()
+    init_page_events_binding(false)
   })
 }
 
@@ -217,7 +210,11 @@ function submit_auto_filter(e, $filterFields, $form) {
   auto_filter($form)
 }
 
-function init_filtering() {
+/**
+ * 
+ * @param {boolean} isBindMore 
+ */
+function init_filtering(isBindMore) {
   const $form = document.getElementById('form-search-provider')
   const $filterFields = $form.querySelectorAll('.js-select')
 
@@ -227,16 +224,17 @@ function init_filtering() {
     $filter.addEventListener(FormSelect.EVENT.SELECTED, (e) => submit_auto_filter(e, $filterFields, $form))
   })
 
-  bind_more_button_event($form)
+  if(isBindMore) bind_more_button_event($form)
 }
 
 /**
  * init all binding event functions
+ * @param {boolean} isBindMore
  */
-function init_page_events_binding() {
+function init_page_events_binding(isBindMore = true) {
   FormSelect.init()
   init_filter()
-  init_filtering()
+  init_filtering(isBindMore)
 }
 
 init_page_events_binding()

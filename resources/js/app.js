@@ -18,7 +18,6 @@ document.querySelectorAll('.form-submit')
       } catch (error) {
         $submit_button.parentElement.parentElement.submit()
       }
-      console.log($submit_button)
     })
   })
 

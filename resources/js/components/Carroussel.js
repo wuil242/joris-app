@@ -79,7 +79,6 @@ export default class Carroussel {
       this.nextItem()
     }
 
-    console.log('change')
   }
 
   goTo(index) {
