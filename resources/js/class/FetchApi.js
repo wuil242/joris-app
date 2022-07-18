@@ -12,6 +12,7 @@ export default class FetchApi {
   static getCardWithFilter($form) {
     return new Promise((res, rej) => {
       const url = getFullUrl($form)
+      console.log(url)
       url.searchParams.set('count', '')
       url.searchParams.set('ajax', '')
       

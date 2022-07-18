@@ -45,7 +45,7 @@ function active_loading() {
     $el = $el.querySelectorAll('.js-select')
   }
 
-  const [$btnSubmitFilter, $btnShowFilter] = document.querySelectorAll('#search-submit, #search-hide-button')//document.querySelectorAll('#search-show-button', '#search-submit')
+  const [$btnSubmitFilter, $btnShowFilter] = document.querySelectorAll('#search-submit, #search-hide-button')
   
   $el = [...$el, $btnShowFilter, $btnSubmitFilter]
   
@@ -68,11 +68,17 @@ function active_loading() {
 function bind_more_button_event($form) {
   const $more_button = document.getElementById('more-button')
 
+
+
   if (!$more_button) return
 
   const $add_card_position = document.getElementById('service-provider-replace')
 
-  $more_button.addEventListener('click', () => {
+
+  $more_button.addEventListener('click', (e) => {
+    e.stopImmediatePropagation()
+    e.stopPropagation()
+
     const loader = active_loading()
     const page = $more_button.dataset.page
     const $pageField = $form.querySelector('#search-page')
@@ -82,11 +88,13 @@ function bind_more_button_event($form) {
     const filter_loader = active_filter_loading($form)
 
     FetchApi.getCardWithFilter($form).then(({ html, count }) => {
-        $add_card_position.innerHTML = html
+      if($add_card_position) $add_card_position.remove()        
+      $searchResultContent.innerHTML += html
         bind_more_button_event($form)
         $pageField.value = ''
         loader.remove()
         filter_loader.then( loaders => loaders.forEach(l => l.remove()) )
+
     })
   })
 }

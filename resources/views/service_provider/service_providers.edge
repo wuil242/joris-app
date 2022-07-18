@@ -3,7 +3,7 @@
    @!component('service_provider/parts/service-provider-card', {sp, qs})
   @endeach
   @if(serviceProviders.hasMorePages)
-    <div id="service-provider-replace">
+    <div class="service-provider-replace" id="service-provider-replace">
       <button class="button rounded bordered search-more-button " type="submit" id="more-button" data-page="{{serviceProviders.currentPage + 1}}">
         <i class="fa fa-plus"></i>
       </button>
