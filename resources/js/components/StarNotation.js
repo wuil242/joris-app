@@ -40,13 +40,46 @@ class StarNotation {
 
   }
 
-  /** 
-   * @param {string} selector
-   * @param {string} icon_selector
+  /**
+   * 
+   * @param {string} starSelector 
+   * @param {string} inputSelector 
    */
-  static init(selector, icon_selector) {
-    const items = Array.from(document.querySelectorAll(selector))
-    return items.map(item => new StarNotation(item, icon_selector))
+  static initInput(starSelector, inputSelector) {
+    const items = Array.from(document.querySelectorAll(starSelector))
+    const el_note_input = document.querySelector(inputSelector)
+
+    items.forEach(el => {
+
+      el.addEventListener('pointerenter', () => {
+        const value = +el.dataset.value
+    
+        items.forEach(elem => elem.classList.replace('fa', 'far'))
+        
+        el_note_input.value = value
+    
+        for (let i = 0; i < value; i++) {
+          const index = i
+    
+          items[index].classList.replace('far', 'fa')
+        }
+    
+      })
+    
+    })
+
+  }
+
+  /**
+   * @param {
+   * {containerSelector: string, iconSelector: string, starSelector: string, inputSelector: string}
+   * } selectors
+   */
+  static init({containerSelector, iconSelector, starSelector, inputSelector}) {
+    let items = Array.from(document.querySelectorAll(containerSelector))
+    items = items.map(item => new StarNotation(item, iconSelector))
+    this.initInput(starSelector, inputSelector)
+    return items
   }
 
 }

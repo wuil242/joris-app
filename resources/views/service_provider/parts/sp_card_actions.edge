@@ -5,8 +5,8 @@
   {{--  <a href="#" class="service-provider-card-actions-icon" title="ajout au favoris">
     <i class="far fa-heart"></i>
   </a>  --}}
-  @if(auth.isLoggedIn && !user_already_noted)
-  <a href="#" class="service-provider-card-actions-icon js-sp-card-pencil" data-id="{{sp.id}}" title="voir plus">
+  @if(!user_already_noted)
+  <a href="#" class="service-provider-card-actions-icon js-sp-card-pencil" data-id="{{sp.id}}" title="commenter">
     <i class="fa fa-pencil-alt"></i>
   </a>
   @endif

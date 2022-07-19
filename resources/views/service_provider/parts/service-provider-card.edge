@@ -1,4 +1,5 @@
-@set('user_already_noted', sp.votes?.find(vote => vote.serviceProviderId === sp.id))
+@set('is_user_voted', sp.votes.find(s => s.userId === auth.user?.id))
+@set('user_already_noted', auth.isLoggedIn && is_user_voted && sp.note > 1)
 
 <article class="service-provider-card" data-id="{{sp.id}}">
   <header class="service-provider-card-header">
@@ -39,9 +40,15 @@
     <p class="service-provider-card-location"><i class="fa fa-map-marker-alt"></i> {{sp.address.city.name}}</p>
     <p class="service-provider-card-location"><i class="fa fa-home"></i> {{sp.full_address}}</p>
 
-    @if(auth.isLoggedIn && !user_already_noted)  
-    <div class="service-provider-card-notation js-sp-card-notation" data-id="{{sp.id}}">
-      <div class="card-notation-content">
+   
+  </div>
+  @if(!user_already_noted)  
+  <div class="service-provider-card-notation js-sp-card-notation card-action-hide" data-id="{{sp.id}}">
+    <div class="card-notation-content">
+      @if(!auth.isLoggedIn)
+        <p class="card-notation-message">Veuillez vous connecté pour laisser un avis sur ce prestaire</p>
+        @include('components/header-auth-buttons')
+      @else
         <h3>Notation</h3>
         <form action="{{ route('ServiceProvidersController.vote') }}" method="post" class="card-notation-form">
           {{ csrfField() }}
@@ -56,40 +63,8 @@
           </div>
           <button type="submit" href="" class="button">noter</button>
         </form>
-      </div>
+      @endif
     </div>
-    @endif
   </div>
-
-  
+  @endif
 </article>
-
-<style>
-
-  .card-action-layout {
-  }
-
-
-  .card-action-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  .card-action-hide-enter {
-    display: none;
-  }
-
-  .card-action-hide {
-    transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-    transform: translate3d(150%, 0, 0);
-    /* opacity: 0; */
-  }
-
-  .card-action-show {
-    display: block;
-    transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-    transform: translate3d(0, 0, 0);
-  }
-
-</style>
