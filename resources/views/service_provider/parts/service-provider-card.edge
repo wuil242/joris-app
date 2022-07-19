@@ -49,19 +49,25 @@
         <p class="card-notation-message">Veuillez vous connecté pour laisser un avis sur ce prestaire</p>
         @include('components/header-auth-buttons')
       @else
-        <h3>Notation</h3>
+        <h1 class="card-notation-title">Avis</h1>
         <form action="{{ route('ServiceProvidersController.vote') }}" method="post" class="card-notation-form">
           {{ csrfField() }}
+        
+          <label for="comment" class="card-notation-comment">commentaire</label>
+          <textarea name="comment"  class="form-textarea card-notation-comment-input"></textarea>
           <input type="number" hidden value="1" id="sp-card-note" name="note">
           <input type="number" hidden value="{{sp.id}}" id="sp-card-note" name="serviceProviderId">
-          <div>
+          <div class="card-notation-star">
             <i class="fa fa-star card-notation-form-star js-card-notation-star" data-value="1"></i>
             <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="2"></i>
             <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="3"></i>
             <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="4"></i>
             <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="5"></i>
           </div>
-          <button type="submit" href="" class="button">noter</button>
+          <button type="submit" class="button card-notation-submit">
+            Envoyer
+            <i class="far fa-paper-plane"></i>
+          </button>
         </form>
       @endif
     </div>

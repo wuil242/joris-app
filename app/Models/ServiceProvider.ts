@@ -94,7 +94,7 @@ export default class ServiceProvider extends BaseModel {
       return 1
     }
 
-    const average = (this.votes.map(v => v.note).reduce((a, b) => a + b) * 5) / this.votes.length
+    const average = this.votes.map(v => v.note).reduce((a, b) => a + b) / this.votes.length
     return average <= 0 ? 1 : (average > 5 ? 5 : average) 
   }
 }

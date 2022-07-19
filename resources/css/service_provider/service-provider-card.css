@@ -197,14 +197,15 @@
   font-size: 1.5rem;
 }
 
-.service-provider-card-notation .card-notation-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.card-notation-content {
   width: 100%;
-  height: 60%;
-  gap: .1em;
+  height: 100%;
+  text-align: center;
+  padding: 1em 0;
+}
+
+.card-notation-title {
+  font-weight: bold;
 }
 
 .card-notation-form {
@@ -212,15 +213,40 @@
   display: flex;
   flex-direction: column;
   gap: .5em;
+  align-items: center;
+}
+
+.card-notation-message {
+  text-align: center;
+  font-size: .9rem;
+  padding: 3.5em .5em 1em .5em;
+}
+
+.card-notation-comment {
+  color: grey; 
+  font-size: .9rem;
+  font-weight: bold;
+}
+
+.card-notation-comment-input {
+  width: 90%;
+  height: 150px;
+  font-size: 1.1rem;
+}
+
+.card-notation-star {
   cursor: pointer;
-  /* background: red; */
 }
 
 .card-notation-form-star {
-  color: rgb(224, 199, 55);
+  color: #FF9529;
 }
 
 .card-notation-form-star:hover {
+}
+
+.card-notation-submit {
+  width: 50%;
 }
 
 @keyframes straigthAhead {

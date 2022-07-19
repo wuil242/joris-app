@@ -71,15 +71,14 @@ class StarNotation {
   }
 
   /**
-   * @param {
-   * {containerSelector: string, iconSelector: string, starSelector: string, inputSelector: string}
-   * } selectors
+   * 
+   * @param {string} containerSelector 
+   * @param {string} iconSelector 
+   * @returns 
    */
-  static init({containerSelector, iconSelector, starSelector, inputSelector}) {
-    let items = Array.from(document.querySelectorAll(containerSelector))
-    items = items.map(item => new StarNotation(item, iconSelector))
-    this.initInput(starSelector, inputSelector)
-    return items
+  static init(containerSelector, iconSelector) {
+    const items = Array.from(document.querySelectorAll(containerSelector))
+    return items.map(item => new StarNotation(item, iconSelector))
   }
 
 }

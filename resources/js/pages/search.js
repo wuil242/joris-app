@@ -25,9 +25,5 @@ Sticky.define({
 
 CardAction.create('.js-sp-card-pencil', '.js-sp-card-notation')
 
-StarNotation.init({
-  containerSelector: '.js-star-notation',
-  iconSelector: '.js-star',
-  starSelector: '.js-card-notation-star',
-  inputSelector: '#sp-card-note'
-})
+StarNotation.init('.js-star-notation', '.js-star')
+StarNotation.initInput('.js-card-notation-star', '#sp-card-note')
