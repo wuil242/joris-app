@@ -201,7 +201,7 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  padding: 1em 0;
+  padding: .6em 0;
 }
 
 .card-notation-title {
@@ -209,7 +209,7 @@
 }
 
 .card-notation-form {
-  font-size: 1.9rem;
+  font-size: 1.7rem;
   display: flex;
   flex-direction: column;
   gap: .5em;
@@ -230,7 +230,7 @@
 
 .card-notation-comment-input {
   width: 90%;
-  height: 150px;
+  height: 125px;
   font-size: 1.1rem;
 }
 
@@ -243,6 +243,7 @@
 }
 
 .card-notation-form-star:hover {
+  color: #ff8000;
 }
 
 .card-notation-submit {

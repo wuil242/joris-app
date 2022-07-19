@@ -52,9 +52,11 @@
         <h1 class="card-notation-title">Avis</h1>
         <form action="{{ route('ServiceProvidersController.vote') }}" method="post" class="card-notation-form">
           {{ csrfField() }}
-        
+          
           <label for="comment" class="card-notation-comment">commentaire</label>
           <textarea name="comment"  class="form-textarea card-notation-comment-input"></textarea>
+          @!component('form/form_error', {name: 'comment'})
+          
           <input type="number" hidden value="1" id="sp-card-note" name="note">
           <input type="number" hidden value="{{sp.id}}" id="sp-card-note" name="serviceProviderId">
           <div class="card-notation-star">

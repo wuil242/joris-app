@@ -1,4 +1,4 @@
-import { schema, rules} from '@ioc:Adonis/Core/Validator'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 
 export const COUNTRY_CODE = '+242'
@@ -24,37 +24,39 @@ export const PASSWORD_MAX_LENGHT = 24
 export const PASSWORD_REGEX = /^[a-zA-Z0-9\-]+$/ //FIXME: trouver une meilleur regex pour les password
 export const PASSWORD_CONFIRM_FILED_NAME = 'password_confirm'
 
+export const COMMENT_MAX_LENGTH = 255
+
 export const VALIDATION_SCHEMA = {
   LASTNAME: {
     lastname: schema.string({ trim: true }, [
-      rules.minLength(NAME_MIN_LENGHTH), 
-      rules.maxLength(NAME_MAX_LENGTH), 
-      rules.regex(NAME_REGEX) 
+      rules.minLength(NAME_MIN_LENGHTH),
+      rules.maxLength(NAME_MAX_LENGTH),
+      rules.regex(NAME_REGEX)
     ])
   },
   FIRSTNAME: {
-    firstname: schema.string({ trim: true }, [ 
-      rules.minLength(NAME_MIN_LENGHTH), 
-      rules.maxLength(NAME_MAX_LENGTH), 
-      rules.regex(NAME_REGEX) 
+    firstname: schema.string({ trim: true }, [
+      rules.minLength(NAME_MIN_LENGHTH),
+      rules.maxLength(NAME_MAX_LENGTH),
+      rules.regex(NAME_REGEX)
     ])
   },
   ADDRESS: {
-    address: schema.string({ trim: true }, [ 
-      rules.minLength(ADDRESS_MIN_LENGTH), 
-      rules.maxLength(ADDRESS_MAX_LENGTH) 
+    address: schema.string({ trim: true }, [
+      rules.minLength(ADDRESS_MIN_LENGTH),
+      rules.maxLength(ADDRESS_MAX_LENGTH)
     ])
   },
   EMAIL: {
-    email: schema.string({ trim: true }, [ rules.email() ])
+    email: schema.string({ trim: true }, [rules.email()])
   },
   TEL: {
-    tel: schema.string({ trim: true }, [ rules.regex(PHONE_NUMBER_REGEX) ])
+    tel: schema.string({ trim: true }, [rules.regex(PHONE_NUMBER_REGEX)])
   },
   MESSAGE: {
-    message: schema.string({ trim: true }, [ 
+    message: schema.string({ trim: true }, [
       rules.minLength(MESSAGE_LENGTH.MIN),
-      rules.maxLength(MESSAGE_LENGTH.MAX) 
+      rules.maxLength(MESSAGE_LENGTH.MAX)
     ])
   },
   PASSWORD: {
@@ -74,16 +76,18 @@ export const VALIDATION_SCHEMA = {
   },
   POLICY: {
     policy: schema.boolean()
-  }
+  },
+  NOTE: { note: schema.number([rules.unsigned()]) },
 }
 
 export const VALIDATION_OPTIONAL_SCHEMA = {
-  TEL: { tel: schema.string.optional({ trim: true }, [ rules.regex(PHONE_NUMBER_REGEX) ]) },
-  EMAIL: { email: schema.string.optional({trim: true}, [rules.email()]) },
-  REMEMBER_ME: {remember_me: schema.boolean.optional() }
+  TEL: { tel: schema.string.optional({ trim: true }, [rules.regex(PHONE_NUMBER_REGEX)]) },
+  EMAIL: { email: schema.string.optional({ trim: true }, [rules.email()]) },
+  REMEMBER_ME: { remember_me: schema.boolean.optional() },
+  COMMENT: { comment: schema.string.optional({ trim: true }, [rules.maxLength(COMMENT_MAX_LENGTH)]) }
 }
 
-export const VALIDATION_MESSAGE  = {
+export const VALIDATION_MESSAGE = {
   DEFAULT: {
     required: 'ce champ est requis!',
     email: 'cet email n\'est pas valide!',
@@ -118,5 +122,8 @@ export const VALIDATION_MESSAGE  = {
   },
   POLICY: {
     'policy.required': 'acceptez les condition d\'utilisation'
+  },
+  COMMENT: {
+    'comment.maxLength': `commentaire trop long! ${COMMENT_MAX_LENGTH} caractères maximum`
   }
 }

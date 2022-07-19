@@ -43,5 +43,5 @@ export default class User extends BaseModel {
     }
   }
 
-  public get fullname() { return this.lastname + ' ' + this.firstname}
+  public get fullname() { return this.lastname + ' ' + this.firstname }  
 }

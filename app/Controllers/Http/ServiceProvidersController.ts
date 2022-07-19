@@ -79,12 +79,16 @@ export default class ServiceProvidersController {
   }
 
   public async vote({request, response, auth}: HttpContextContract) {
+
     const validation = schema.create({
-      note: schema.number([rules.unsigned()]),
-      serviceProviderId: schema.number([rules.unsigned()])
+      serviceProviderId: schema.number([rules.unsigned()]),
+      ...VALIDATION_SCHEMA.NOTE,
+      ...VALIDATION_OPTIONAL_SCHEMA.COMMENT
     })
 
-    const payload = await request.validate({schema: validation})
+    const messages = {...VALIDATION_MESSAGE.COMMENT}
+    console.log('IN', request.all())
+    const payload = await request.validate({schema: validation, messages})
 
     if(payload.note < 1) {
       payload.note = 1
