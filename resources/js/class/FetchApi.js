@@ -26,4 +26,20 @@ export default class FetchApi {
     })
   }
 
+  /**
+   * 
+   * @param {string|number} serviceProviderId 
+   * @param {string|number} page 
+   */
+  static getComments(serviceProviderId, page) {
+    return new Promise((res, rej) => {
+      const url = window.location.origin + `/comments/${serviceProviderId}/${page}`
+
+      fetch(url, {headers})
+        .then(r => r.json())
+        .then(({html}) => res(html))
+        .catch(reason => rej(reason))
+    })
+  }
+
 }

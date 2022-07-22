@@ -9,6 +9,8 @@ import {string} from '@ioc:Adonis/Core/Helpers'
 import ServiceProviderVote from 'App/Models/ServiceProviderVote'
 
 export default class ServiceProvidersController {
+  private COMMENT_LIMIT = 5
+
   public async index({ view }: HttpContextContract) {
     return await view.render('service_provider/enroll')
   }
@@ -99,6 +101,23 @@ export default class ServiceProvidersController {
     await ServiceProviderVote.create({...payload, userId: auth.user?.id})
 
     return response.redirect().back()
+  }
+
+  public async comments({view, params, response}: HttpContextContract) {
+    const id = params.serviceProviderId
+    let page = params.page || 1
+
+    if(page <= 0) page = 1
+    
+    const votes = await ServiceProviderVote.query()
+                    .where('serviceProviderId', id)
+                    .whereNotNull('comment')
+                    .preload('user')
+                    .orderBy('id', 'desc')
+                    .paginate(page, this.COMMENT_LIMIT)
+                    
+    const html = await view.render('service_provider/comments', {votes})
+    return response.json({html})
   }
 
   public async show({ }: HttpContextContract) { }

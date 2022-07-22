@@ -42,6 +42,10 @@
 }
 
 
+.service-provider-card-jobs:hover {
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
+
 .service-provider-card-job {
   padding: .25em .5em;
   font-size: .9em;
@@ -127,9 +131,10 @@
 .service-provider-card-description {
   color: var(--color-grey);
   padding: .2em .4em;
-  text-align: justify;
+  text-align: left;
   max-height: 100px;
   overflow: hidden;
+  font-size: .95em;
 }
 
 .service-provider-card-ask {
@@ -185,7 +190,8 @@
   gap: .25em;
 }
 
-.service-provider-card-notation {
+.service-provider-card-notation,
+.service-provider-card-comment {
   position: absolute;
   top: 0; 
   right: 0;
@@ -195,6 +201,7 @@
   z-index: var(--layer-middle);
   border-radius: 4px;
   font-size: 1.5rem;
+  overflow: hidden auto;
 }
 
 .card-notation-content {
@@ -218,8 +225,8 @@
 
 .card-notation-message {
   text-align: center;
-  font-size: .9rem;
-  padding: 3.5em .5em 1em .5em;
+  font-size: 1rem;
+  padding: 2em .5em 1em .5em;
 }
 
 .card-notation-comment {
@@ -247,7 +254,7 @@
 }
 
 .card-notation-submit {
-  width: 50%;
+  width: 60%;
 }
 
 @keyframes straigthAhead {

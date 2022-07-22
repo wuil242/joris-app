@@ -2,6 +2,11 @@ import '../../css/service_provider/card-action.css'
 
 export default class CardAction {
 
+  static EVENT = {
+    OPENED: 'card_action_opened',
+    CLOSED: 'card_action_closed'
+  }
+
   constructor(opener, modal) {
     /**
      * @type {HTMLElement} 
@@ -23,7 +28,6 @@ export default class CardAction {
     this.modal.classList.add('card-action-hide')
     this.modal.classList.add('card-action-hide-enter')
     this.bindEvents()
-    this.openModal()
   }
 
   addHideButton() {
@@ -59,8 +63,7 @@ export default class CardAction {
     this.modal.classList.remove('card-action-hide')
     this.modal.classList.add('card-action-show')
 
-    this.modal.addEventListener('transitionend', () => {
-    })
+    this.modal.dispatchEvent(new Event(CardAction.EVENT.OPENED))
   }
 
   closeModal() {
@@ -79,9 +82,17 @@ export default class CardAction {
 
   /**
    * 
+   * @param {(e?: Event) => void} cb 
+   */
+  onOpen(cb) {
+    this.modal.addEventListener(CardAction.EVENT.OPENED, cb)
+  }
+
+  /**
+   * 
    * @param {string} selector 
    * @param {string} modal_layout_selector 
-   * @returns 
+   * @returns {CardAction[]}
    */
   static create(selector, modal_layout_selector) {
     const elems = Array.from(document.querySelectorAll(selector))
@@ -89,11 +100,11 @@ export default class CardAction {
     return elems.map(el => {
       const id = +el.dataset.id
       const modal = modals.find(elem => +elem.dataset.id === id)
-      if (modal) {
-        return new CardAction(el, modal)
+      if (!modal) {
+        throw new Error(`element id [${el.dataset.id}] not correspond to layout id [${modal?.dataset.id}]`)
       }
-      console.log(el, modals)
-      throw new Error(`element id [${el.dataset.id}] not correspond to layout id [${modal?.dataset.id}]`)
+
+      return new CardAction(el, modal)
     })
   }
 

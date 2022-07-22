@@ -174,4 +174,7 @@
   /* Form Fields Mandatory */
   --form-fileds-mandatory: var(--color-grey);
   --form-fileds-mandatory-shadow: var(--form-fileds-mandatory);
+
+  /* Star */
+  --star-color: #FF9529;
 }

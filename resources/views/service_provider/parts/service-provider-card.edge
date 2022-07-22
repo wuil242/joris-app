@@ -34,7 +34,7 @@
     @include('components/divider')
     @include('service_provider/parts/sp_card_note')
 
-    <p class="service-provider-card-description">{{sp.description}}</p>
+    <p class="service-provider-card-description">{{excerpt(sp.description, 255)}}</p>
 
     @include('components/divider')
     <p class="service-provider-card-location"><i class="fa fa-map-marker-alt"></i> {{sp.address.city.name}}</p>
@@ -75,4 +75,7 @@
     </div>
   </div>
   @endif
+  <div class="service-provider-card-comment js-sp-card-comments card-action-hide" data-id="{{sp.id}}">
+    <div id="service-provider-comments"></div>
+  </div>
 </article>

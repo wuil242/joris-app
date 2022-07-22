@@ -7,9 +7,10 @@
 
 .service-provider-electors {
   display: flex;
-  /* flex-direction: column; */
-  justify-content: flex-start;
   align-items: center;
+  line-height: 50%;
+  gap: .25em;
+  font-weight: 400;
 }
 
 .service-provider-note {

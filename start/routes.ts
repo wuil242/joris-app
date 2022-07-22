@@ -68,6 +68,9 @@ Route.group(() => {
        .middleware('BanCheck')
        .as('user.password.reset')
 
+  Route.get('/comments/:serviceProviderId/:page', 'ServiceProvidersController.comments')
+       .where('serviceProviderId', Route.matchers.number())
+       .where('page', Route.matchers.number())
 
 }).middleware('silentAuth')
 

@@ -1,0 +1,37 @@
+@if(votes.length <= 0 )
+  <p class="service-provider-no-comments">Aucun commentaire</p>
+@else
+  @if(votes.currentPage === 1)
+    <h1 class="service-provider-comment-title">Commentaires</h1>
+    <ul class="service-provider-comments-list" id="service-provider-comments-list">
+  @endif
+
+  @each(vote in votes)
+      <li class="service-provider-comment">
+        <div class="service-provider-comment-top">
+          @if(vote.profil_image)
+            <img class="service-provider-comment-image" src="/favicon.jpg" >
+          @else
+            <i class="far fa-user-circle service-provider-comment-image"></i>
+          @endif
+          <div class="service-provider-comment-data">
+            <p class="service-provider-comment-username">{{excerpt(vote.user.fullname, 15)}}</p>
+            <div class="service-provider-comment-note">
+              @each(n in new Array(vote.note))
+                <i class="fa fa-star"></i>
+              @endeach
+            </div>
+          </div>
+        </div>
+        <p class="service-provider-comment-content">{{vote.comment}}</p>
+      </li>
+  @endeach
+
+  @if(votes.hasMorePages)
+    <button class="button service-provider-comment-more" id="btn-more-comment" data-page="{{votes.currentPage + 1}}">Afficher Plus</button>
+  @endif
+
+  @if(votes.currentPage === 1)
+    </ul>
+  @endif
+@endif
