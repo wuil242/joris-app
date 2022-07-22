@@ -9,8 +9,13 @@
   @each(vote in votes)
       <li class="service-provider-comment">
         <div class="service-provider-comment-top">
-          @if(vote.profil_image)
-            <img class="service-provider-comment-image" src="/favicon.jpg" >
+          @if(vote.user.profil_image)
+            @!component('components/directus_image', {
+              src: vote.user.profil_image,
+              key: 'user-profil-sm',
+              className: 'service-provider-comment-image',
+              alt: vote.user.fullname
+            })
           @else
             <i class="far fa-user-circle service-provider-comment-image"></i>
           @endif

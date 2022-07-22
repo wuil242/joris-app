@@ -1,4 +1,4 @@
-<img src="{{ src ? `${env('DIRECTUS_ASSETS_URL') + src + '?key=service-provider-card'}` : '/favicon.jpg'}}" 
+<img src="{{ src ? `${env('DIRECTUS_ASSETS_URL') + src + `?key=${key || 'service-provider-card'}`}` : '/favicon.jpg'}}" 
 class="{{className}}" 
 alt="{{alt}}"
 id="{{src}}"
