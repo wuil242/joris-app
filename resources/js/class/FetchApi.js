@@ -2,6 +2,9 @@ import { getFullUrl } from "../helpers"
 
 const headers = {'X-Requested-With': 'XMLHttpRequest'}
 
+export let API_LAST_URL = new URL(window.location.href)
+
+
 export default class FetchApi {
 
   /**
@@ -21,6 +24,7 @@ export default class FetchApi {
           url.searchParams.delete('count')
           url.searchParams.delete('ajax')
           url.searchParams.delete('page')
+          API_LAST_URL.href = window.location.href
           window.history.replaceState(null, document.title, url)
           res(data)
         })

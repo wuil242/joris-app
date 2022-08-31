@@ -4,6 +4,7 @@
   align-items: center;
   line-height: 1;
   padding: 0 5px;
+  z-index: var(--layer-top);
 }
 
 .header-menu-topbar-fake {

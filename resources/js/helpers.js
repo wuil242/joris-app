@@ -74,7 +74,6 @@ export function scrollToElement($el) {
  * @returns { {remove: () => void} }
  */
 export function addLoaderToElement($el, $loader) {
-  console.log($loader)
   $loader = $loader.cloneNode(true)
   const { position } = window.getComputedStyle($el, null)
 

@@ -29,7 +29,7 @@ export default class SearchesController {
     const quaterId = Number.parseInt(qs.quater, 10) || 0
     let page =  Number.parseInt(qs.page, 10) || 1
 
-    if(page === 0) page = 1
+    if(page < 0) page = 1
 
     const filterLocation:FilterLoactionOptions = {cityId, arrondissementId, quaterId}
 
@@ -88,6 +88,7 @@ export default class SearchesController {
         qs,
 
       })
+
 
       const html = await view.render('service_provider/service_providers', {
         serviceProviders, qs
