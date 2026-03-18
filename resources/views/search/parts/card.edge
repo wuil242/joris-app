@@ -1,0 +1,36 @@
+<style>
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 5px;
+    background: #ccc;
+  }
+  .card {
+    padding: 10px;
+    border: solid 2px red;
+  }
+
+  .card strong {
+    font-weight: bold;
+  }
+
+  .card {
+    transform: scale(.8);
+    width: 90%
+  }
+</style>
+
+<div class="cards">
+  @each(sp in serviceProviders)
+   <div class="card">
+     <ul>
+      <li>name: {{sp.lastname}}</li>
+      <li>job: {{sp.jobs ? sp.jobs[0]?.name : undfined}}</li>
+      <li>city: {{sp.adress?.city?.name}}</li>
+      <li>arr: {{sp.adress?.arrondissement?.name}}</li>
+      <li>quater: {{sp.adress?.quater?.name}}</li>
+    </ul>
+    {{--  {{inspect(sp.adress)}}  --}}
+   </div>
+  @endeach
+</div>

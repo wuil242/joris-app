@@ -1,0 +1,29 @@
+.user-profil-image-edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  gap: 10px;
+}
+
+.user-profil-image-edit > .user-profil-image {
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+
+  padding: 2px;
+  box-shadow: 0 0 2px black;
+  border-radius: 50%;
+}
+
+.user-profil-error {
+  color: var(--color-danger);
+}
+
+.user-profil-modify {
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  margin-top: 5px;
+}

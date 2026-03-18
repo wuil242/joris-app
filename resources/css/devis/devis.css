@@ -1,0 +1,19 @@
+.devis {
+
+}
+
+.devis-content {
+  margin-top: 30px;
+}
+
+.devis-form {
+}
+
+/* Responsive */
+@media only screen and (min-width: 950px) {
+  .devis-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: flex-start;
+  }
+}

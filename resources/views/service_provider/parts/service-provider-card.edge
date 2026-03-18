@@ -1,0 +1,81 @@
+@set('is_user_voted', sp.votes.find(s => s.userId === auth.user?.id))
+@set('user_already_noted', auth.isLoggedIn && is_user_voted && sp.note > 1)
+
+<article class="service-provider-card" data-id="{{sp.id}}">
+  <header class="service-provider-card-header">
+    @set('sp_photo', sp?.photo ? `${env('DIRECTUS_ASSETS_URL') + sp.photo + '?key=service-provider-card'}` : '/favicon.jpg')
+    <img src="{{ sp_photo }}" 
+         class="service-provider-card-image"
+         style="object-fit: {{sp_photo === '/favicon.jpg' ? 'contain' : ''}}"
+         alt="prestaire ayant pour metier {{sp.jobs.map(job => job.name).join(' ou ')}}" 
+    />
+    <div class="service-provider-card-jobs">
+      @if(sp.jobs.length > 1)
+        @!component('service_provider/parts/service-provider-job', {
+          job: sp.jobs.filter(job => job.id.toString() === qs['job'])[0] || sp.jobs[0],
+          jobsLength: sp.jobs.length,
+        })
+        @each(job in sp.jobs)
+          @!component('service_provider/parts/service-provider-job', {job, isMore: true})
+        @endeach
+        @else
+          @!component('service_provider/parts/service-provider-job', {job: sp.jobs[0]})
+        @endif
+    </div>
+    @include('service_provider/parts/sp_card_actions')
+  </header>
+  <a href="{{route('devis.client')}}?sp={{sp.id}}" class="service-provider-card-ask">Demender un devis</a>
+  <div class="service-provider-card-content">
+    <div class="service-provider-card-top">
+     <p class="service-provider-card-name">{{sp.fullname}}</p>
+     @include('service_provider/parts/service_provider_card_social_media')
+    </div>
+
+    @include('components/divider')
+    @include('service_provider/parts/sp_card_note')
+
+    <p class="service-provider-card-description">{{excerpt(sp.description, 255)}}</p>
+
+    @include('components/divider')
+    <p class="service-provider-card-location"><i class="fa fa-map-marker-alt"></i> {{sp.address.city.name}}</p>
+    <p class="service-provider-card-location"><i class="fa fa-home"></i> {{sp.full_address}}</p>
+
+   
+  </div>
+  @if(!user_already_noted)  
+  <div class="service-provider-card-notation js-sp-card-notation card-action-hide" data-id="{{sp.id}}">
+    <div class="card-notation-content">
+      @if(!auth.isLoggedIn)
+        <p class="card-notation-message">Veuillez vous connecté pour laisser un avis sur ce prestaire</p>
+        @include('components/header-auth-buttons')
+      @else
+        <h1 class="card-notation-title">Avis</h1>
+        <form action="{{ route('ServiceProvidersController.vote') }}" method="post" class="card-notation-form">
+          {{ csrfField() }}
+          
+          <label for="comment" class="card-notation-comment">commentaire</label>
+          <textarea name="comment"  class="form-textarea card-notation-comment-input"></textarea>
+          @!component('form/form_error', {name: 'comment'})
+          
+          <input type="number" hidden value="1" id="sp-card-note" name="note">
+          <input type="number" hidden value="{{sp.id}}" id="sp-card-note" name="serviceProviderId">
+          <div class="card-notation-star">
+            <i class="fa fa-star card-notation-form-star js-card-notation-star" data-value="1"></i>
+            <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="2"></i>
+            <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="3"></i>
+            <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="4"></i>
+            <i class="far fa-star card-notation-form-star js-card-notation-star" data-value="5"></i>
+          </div>
+          <button type="submit" class="button card-notation-submit">
+            Envoyer
+            <i class="far fa-paper-plane"></i>
+          </button>
+        </form>
+      @endif
+    </div>
+  </div>
+  @endif
+  <div class="service-provider-card-comment js-sp-card-comments card-action-hide" data-id="{{sp.id}}">
+    <div id="service-provider-comments"></div>
+  </div>
+</article>

@@ -1,0 +1,19 @@
+@layout('layouts/page')
+@set('title', title || (type === 'success' ? 'envoi reussi' : 'echec d\'envoi'))
+@set('description', description)
+
+@section('head')
+@endsection
+
+@section('content')
+<div class="message {{type === 'success' ? 'is-success' : 'is-error'}}">
+  <div class="message-content">
+    <img class="message-icon" src="{{type === 'success' ? '/succes.png' : '/annuler.png'}}">
+    <p class="message-text">{{message}}</p>
+  </div>
+</div>
+<div class="message-links">
+  <a href="{{route('serviceProvider.find')}}" title="trouver un prestataire"  class="link">trouver un prestataire</a>
+  <a href="{{route('devis.entreprise')}}"  title="demende devis pour entreprise" class="link">demender un devis pour les entreprises</a>
+</div>
+@endsection

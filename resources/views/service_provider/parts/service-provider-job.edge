@@ -1,0 +1,8 @@
+<span class="service-provider-card-job {{isMore ? 'is-more' : ''}} {{jobsLength ? 'is-many' : ''}}" 
+style="background-color:{{job.bg_color}}; color:{{job.color}}"
+>
+  {{job.name}}
+  @if(jobsLength)
+  (+{{jobsLength - 1}})
+  @endif
+</span>

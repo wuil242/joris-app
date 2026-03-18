@@ -1,0 +1,32 @@
+@!component('search/parts/search-field', {
+  title: 'Metiers',
+  items: jobs,
+  id: 'job',
+  value: qs['job'] || '0',
+  icon: 'briefcase',
+})
+
+@!component('search/parts/search-field', {
+  title: 'Villes',
+  items: cities,
+  id: 'city',
+  gender: 'f',
+  value: qs['city'] || '0',
+  icon: 'city'
+})
+
+@!component('search/parts/search-field', {
+title: 'Arrondissements',
+items: arrondissements,
+id: 'arrondissement',
+value: qs['arrondissement'] || '0',
+icon: 'map-marker-alt'
+})
+
+@!component('search/parts/search-field', {
+  title: 'Quartiers',
+  items: quaters,
+  id: 'quater',
+  value: qs['quater'] || '0',
+  icon: 'map-marker-alt'
+})

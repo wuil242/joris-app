@@ -1,0 +1,37 @@
+/* elements de la page d'acceuil */
+
+.home-welcome {
+  padding: 0 0 20px 0;
+  color: var(--home-welcome);
+  font-size: 1.2rem;
+}
+
+.home-site-explain {
+  width: 90%;
+  padding: 10px;
+  font-size: 1.3rem!important;
+  color: var(--home-site-explain);
+}
+
+.home-provider-button {
+  border-color: var(--home-provider-button-border);
+  color: var(--home-provider-button);
+  background-color: var(--home-provider-button-bg);
+}
+
+.home-provider-button:hover {
+  --home-provider-button: var(--home-provider-button-hover);
+  --home-provider-button-bg: var(--home-provider-button-hover-bg);
+}
+
+/* Responsive */
+@media screen and (min-width: 650px) {
+  .home-site-title {
+    font-size: 3.5rem;
+  }
+
+  .home-site-explain {
+    width: 60%;
+    font-size: 1.5rem;
+  }
+}

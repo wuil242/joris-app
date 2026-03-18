@@ -1,0 +1,78 @@
+/* entête de la page d'acceuil */
+
+.header-home {
+  min-height: 100vh;
+  color: rgba(197, 193, 193, 0.877);
+  display: grid;
+  grid-template-columns: 100fr;
+  grid-template-rows: 10fr 50fr;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.header-home-arrow {
+  /* background-color: red; */
+  text-align: center;
+  position: relative;
+  bottom: 8px;
+  font-size: 2rem;
+
+  color: var(--home-arrow);
+
+  z-index: var(--layer-bottom);
+  animation: .7s homeArrowMove ease-in-out  7;
+}
+
+
+/* bottom of the header */
+.header-home-bottom {
+  margin-top: 1.5rem;
+  padding: 0 15px;
+  position: relative;
+  bottom: 0;
+  color: var(--home-header-bottom);
+  /* margin-top: 2em; */
+  /*  margin-left: 15px; */
+}
+
+.header-home-buttons {
+  padding: 15px;
+  display: flex;
+  gap: 25px;
+  /* background: limegreen;  */
+}
+
+.header-home .header-menu-items {
+  --header-menu-text-color: var(--home-menu-text);
+  --header-menu-item-underline: var(--home-menu-item-underline);
+  --header-submenu-triangle-color: var(--home-submenu-triangle);
+}
+
+.header-home .header-menu-site-title {
+  --site-name: var(--home-site-name);
+}
+
+.header-home .header-menu-actions-login {
+  --header-menu-text-color: var(--home-action-login);
+  --header-menu-item-underline: var(--home-action-login-underline);
+}
+
+/* Annimations */
+@keyframes homeArrowMove {
+  0% {
+    transform: translateY(0%);
+  }
+
+  100% {
+    transform: translateY(30%);
+  }
+}
+
+/* Responsive */
+
+@media screen and (min-width: 1300px) {
+
+  .header-home-bottom {
+    padding: 1vw 1.5vw;
+  }
+}

@@ -1,0 +1,28 @@
+.witness {
+  background-color: var(--text-color);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.witness-image {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+  background-color: var(--grey-color);
+  object-fit: cover;
+}
+
+.witness-text {
+  color: var(--text-second-color);
+}
+
+.witness-name {
+  color: var(--grey-color);
+  margin-bottom: 1em;
+}

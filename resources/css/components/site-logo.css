@@ -1,0 +1,16 @@
+.site-logo {
+  width: auto;
+  height: 3rem;
+  border-radius: 2px;
+  object-fit: contain;
+}
+
+/* Events */
+
+
+/* @media screen and (min-width: 1300px) {
+  .header-menu-topbar {
+    position: absolute;
+    background-color: var(--grey-color);
+  }
+} */

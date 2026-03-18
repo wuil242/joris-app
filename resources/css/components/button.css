@@ -1,0 +1,65 @@
+.button {
+  position: relative;
+  border: solid 2px var(--button-border-color);
+  padding: 0.7em 0.9em;
+  border-radius: 4px;
+
+  font-size: 1rem;
+  text-align: center;
+  text-decoration: none;
+
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+
+  cursor: pointer;
+}
+
+.button:disabled {
+  background-color: var(--button-disabled-bg-color);
+  color: var(--button-disabled-color);
+}
+
+.button:hover,
+.button:active {
+  --button-bg-color: var(--button-hover-bg-color);
+  --button-text-color: var(--button-hover-text-color);
+}
+
+.button.outline {
+  --button-border-color: var(--button-text-color); 
+  --button-bg-color: var(--button-hover-bg-color);
+  --button-text-color: var(--button-hover-text-color);
+}
+
+/* Modifiers */
+.button.rounded {
+  border-radius: 50%;
+}
+
+.button.bordered {
+  --button-border-color: var(--button-text-color);
+  font-weight: bold;
+}
+
+
+/* Variants */
+.button.danger {
+  --button-bg-color: var(--button-danger-bg-color);
+  --button-text-color: var(--button-danger-text-color);
+}
+
+.button:hover.danger {
+  --button-bg-color: var(--button-danger-hover-bg-color);
+  --button-text-color: var(--button-danger-hover-text-color); 
+}
+
+.button.success {
+  --button-bg-color: var(--button-success-bg-color);
+  --button-text-color: var(--button-success-text-color);
+}
+
+.button:hover.success {
+  --button-bg-color: var(--button-success-hover-bg-color);
+  --button-text-color: var(--button-success-hover-text-color); 
+}
+

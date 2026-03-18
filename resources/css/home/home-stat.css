@@ -1,0 +1,38 @@
+.home-stat {
+  background-color: var(--text-color);
+}
+
+.home-stat-content {
+  margin-left: .5em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.home-stat-icon {
+  width: 60%;
+  height: 90px;
+  background-color: #ccc;
+}
+
+.home-stat-icon img {
+  display: none;
+}
+
+.home-stat-title {
+  font-size: 1.2rem;
+  color: var(--text-second-color);
+}
+
+.home-stat-separator {
+  height: 4px;
+  background-color: var(--danger-color);
+  border: none;
+  width: 30%;
+}
+
+.home-stat-text {
+  font-size: 1rem;
+  color: var(--grey-color);
+}

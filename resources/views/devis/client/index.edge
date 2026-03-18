@@ -1,0 +1,105 @@
+@layout('layouts/page')
+@set('title', 'Trouver un prestataire')
+@set('description', 'Trouver un prestataire')
+
+@section('head')
+  @entryPointScripts('devis')
+  @entryPointStyles('devis')
+@endsection
+
+@section('content')
+
+@!component('components/title', {
+  text: 'Soumettre un devis',
+})
+
+@if(serviceProviders)
+{{inspect(serviceProviders.map(sp => sp.id))}}
+@endif
+
+<section class="devis-content">
+  <aside class="devis-service-provider">
+    @!component('components/service_provider_box', {serviceProviders})
+  </aside>
+<form action="{{route('devis.client.submit')}}" class="form devis-form" method="POST">
+  {{ csrfField() }}
+  @each(serviceProvider in serviceProviders)
+  <input type="number" name="serviceProviderIds[]" value="{{serviceProvider.id}}" hidden>  
+  @endeach
+
+  @!component('form/form_input', {
+    label: 'Nom(s)',
+    required: true,
+    name: 'lastname',
+    type: 'text',
+    rules: [
+      'le(s) nom(s) doit contenir au moins 3 caratère', 
+      'le(s) nom(s) doit contenir au plus 20 caratère', 
+      'le(s) nom(s) ne peu contenir que des letters et des tirets(-), mais pas de tiret à la fin.'
+    ],
+    value: auth?.user?.lastname
+  })
+
+  @!component('form/form_input', {
+    label: 'Prénom(s)',
+    required: true,
+    name: 'firstname',
+    type: 'text',
+    rules: [
+      'le(s) prénom(s) doit contenir au moins 3 caratère', 
+      'le(s) prénom(s) doit contenir au plus 20 caratère', 
+      'le(s) prénom(s) ne peu contenir que des letters et des tirets(-), mais pas de tiret à la fin.'
+    ],
+    value: auth?.user?.firstname
+  })
+
+  @!component('form/form_input', {
+    label: 'Numéro de téléphone',
+    required: true,
+    name: 'tel',
+    type: 'tel',
+    rule: ['le numéro de téléphone doit être sous la forme (06|05|04|22)XXX-XX-XX'],
+    value: auth?.user?.tel
+  })
+
+  {{--  @!component('form/form_input', {
+    label: 'Adresse',
+    required: true,
+    name: 'address',
+    type: 'address',
+    placeholder: 'ex: 98, rue mbimi mfilou la base',
+    value: auth?.user?.address
+  })  --}}
+
+  @!component('form/form_textarea', {
+    label: 'Message',
+    required: true,
+    name: 'message',
+    type: 'message',
+    rules: [
+      'le message doit contenir au moins 15 caratère', 
+      'le message doit contenir au plus 255 caratère', 
+      `le message ne peu contenir que des letters(même accentué), des chiffres
+      et les caractères spéciaux suivant: "()-_'<>[]/\\`
+    ]
+  })
+
+  <button class="button form-submit" type="submit">
+    Demander un devis <i class="fa fa-paper-plane"></i>
+  </button>
+  
+  {{--  <label for="lastname" class="form-label">Nom</label>
+  <input type="text" name="lastname" class="form-input" value="{{auth?.user ? auth.user.firstname : ''}}{{flashMessages.has('lastname') ? flashMessages.get('lastname') : ''}}" {{auth.user ? 'readonly' : ''}}>
+  <label for="firstname" class="form-label">Prenom</label>
+  <input type="text" name="firstname" class="form-input" value="{{auth?.user ? auth.user.lastname : ''}}{{flashMessages.has('firstname') ? flashMessages.get('firstname') : ''}}" {{auth.user ? 'readonly' : ''}}>
+  <label for="tel" class="form-label">Numero</label>
+  <input type="tel" name="tel" class="form-input" value="{{auth?.user ? auth.user.tel : ''}}{{flashMessages.has('tel') ? flashMessages.get('tel') : ''}}" {{auth.user ? 'readonly' : ''}}>
+  <label for="address" class="form-label">Addresse</label>
+  <input type="text" name="address" class="form-input" placeholder="ex: 98 rue mbimi, miflou la base" value="{{flashMessages.has('address') ? flashMessages.get('address') : ''}}" {{auth.user ? 'readonly' : ''}}>
+  <label for="message" class="form-label">Message</label>
+  <textarea name="message" class="form-input" placeholder="decrivez vos besions">{{flashMessages.has('message') ? flashMessages.get('message') : ''}}</textarea>
+  <button class="button" type="submit">Envoyer</button>  --}}
+</form>
+</section>
+
+@endsection

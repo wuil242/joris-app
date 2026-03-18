@@ -1,0 +1,43 @@
+@layout('layouts/page')
+@set('title', 'Trouver un prestataire')
+@set('description', 'Trouver un prestataire')
+
+@section('head')
+   @entryPointStyles('search')
+   @entryPointScripts('search')
+@endsection
+
+@section('content')
+
+<template id="loader-element-template">
+  @include('components/loader_element')
+</template>
+<template id="loader-button-template">
+  @include('components/loader_button')
+</template>
+
+<template id="service-provider-card-skeleton">
+  @include('service_provider/parts/service_provider_card_skeleton')
+</template>
+
+@!component('components/title', {
+  text: 'Trouver Un Prestaire',
+  icon: 'map-marked-alt'
+})
+
+<section class="search-content" id="search-content">
+  @include('search/parts/search-filter-button')
+  <aside id="search-filter" class="search-filter is-hide">
+    @include('search/parts/search-fields')
+  </aside>
+
+  <div id="search-result">
+    <section class="service-provider-cards" id="search-result-content">
+      @!component('service_provider/service_providers', {serviceProviders, qs})
+    </section>
+  </div>
+</section>
+
+@include('components/top-button')
+
+@endsection

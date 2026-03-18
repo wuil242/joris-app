@@ -1,0 +1,67 @@
+<ul class="header-menu-items">
+  <li class="header-menu-item {{ request.url() === '/' ? 'active' : '' }}">
+    <a href="/">Acceuil</a>
+  </li>
+
+  <li class="header-menu-item {{ request.url() === route('serviceProvider.find') ? 'active' : '' }}">
+    <a href="{{route('serviceProvider.find')}}">Trouver Un Prestataire</a>
+  </li>
+
+  <li class="header-menu-item {{ request.url() ===  route('devis.entreprise') ? 'active' : '' }}">
+    <a href="{{route('devis.entreprise')}}">Entreprise</a>
+  </li>
+
+  @set('isEnrollRoute',  request.url() === route('serviceProvider.enroll'))
+  @set('isPolicyRoute', request.url() === route('serviceProvider.policy'))
+  <nav class="header-submenu {{ isEnrollRoute || isPolicyRoute ? 'active' : '' }}">
+    <input type="checkbox" id="submenu-provider-{{prefix}}">
+    <label class="header-submenu-label" for="submenu-provider-{{prefix}}">Espace Prestataire</label>
+    <ul class="header-submenu-items">
+      @!component('components/header_submenu_item', {
+        route: route('serviceProvider.enroll'),
+        text: 'S\'enrôler',
+        active: isEnrollRoute
+      })
+
+      @!component('components/header_submenu_item', {
+        route: route('serviceProvider.policy'),
+        text: 'Politiques de confidentialitées',
+        active: isPolicyRoute
+      })
+
+    </ul>
+  </nav>
+
+  @set('isContactRoute', request.url() === route('infos.contact-us'))
+  @set('isAboutRoute', request.url() === route('infos.about'))
+  @set('isPolicyRoute', request.url() === route('infos.policy'))
+
+  <nav class="header-submenu {{isContactRoute || isAboutRoute || isPolicyRoute ? 'active' : ''}}">
+    <input type="checkbox" id="submenu-infos-{{prefix}}">
+    <label class="header-submenu-label" for="submenu-infos-{{prefix}}">Infos</label>
+    <ul class="header-submenu-items">
+      @!component('components/header_submenu_item', {
+        route: route('infos.contact-us'),
+        text: 'Nous-Contcter',
+        active: isContactRoute
+      })
+
+      @!component('components/header_submenu_item', {
+        route: route('infos.about'),
+        text: 'A-props',
+        active: isAboutRoute
+      })
+
+      @!component('components/header_submenu_item', {
+        route: route('infos.policy'),
+        text: 'Politiques des donées',
+        active: isPolicyRoute
+      })
+    </ul>
+  </nav>
+  @if(!auth?.isLoggedIn)
+   @include('components/header-auth-buttons')
+  @else
+    @include('components/header_profil')
+  @endif
+</ul>

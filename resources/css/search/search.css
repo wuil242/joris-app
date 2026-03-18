@@ -1,0 +1,38 @@
+.search-empty {
+  font-size: 2rem;
+  color: var(--text-color);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  margin-bottom: 50vh;
+}
+  
+
+/* Responsive */
+
+@media screen and (min-width: 450px) {
+  .search-empty {
+    flex-direction: column;
+    grid-column: span 2;
+  }
+}
+
+@media screen and (min-width: 750px) {
+
+  .search-empty {
+    align-items: center;
+    justify-content: center;
+  }
+
+}
+
+
+@media screen and (min-width: 950px) {
+  .search-empty {
+    grid-column: span 3;
+  }
+}

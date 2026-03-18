@@ -1,0 +1,17 @@
+.header-page {
+}
+
+.header-page .header-menu-actions-sign_up.button:hover,
+.header-page .header-menu-actions-sign_up.button:active {
+  --button-bg-color: var(--button-hover-bg-color);
+  --button-text-color: var(--button-hover-text-color);
+  --button-border-color: var(--button-text-color);
+}
+
+.header-page .header-menu-button:hover {
+  border: solid 2px var(--header-menu-button-bg-color);
+}
+
+.header-page .header-auth-buttons {
+  --button-border-color: var(--button-text-color)
+}

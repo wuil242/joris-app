@@ -1,0 +1,29 @@
+<div class="form-field">
+  @if(label)
+<div class="form-input-infos">
+  <div>
+    @!component('form/form_rule', {rule, rules})
+    <label for="{{name}}" class="form-label {{required ? 'required' : ''}}">{{label}}</label>
+  </div>
+  @includeIf(optional, 'form/form_optional')
+</div>
+@endif
+
+<input 
+  {{--  {{required ? 'required' : ''}}    --}}
+  type="{{type || 'text'}}"
+  class="form-input {{type === 'password' ? 'js-password-field' : ''}} {{flashMessages.has('errors.'+ name) ? 'is-error' : ''}}" 
+  name="{{name}}"
+  placeholder="{{placeholder ? placeholder : ''}}"
+  @set('flash_value', flashMessages.has(name) ? flashMessages.get(name) : '')
+  value="{{ value || flash_value }}"
+  {{autocomplete ? 'autocomplete="new-password"' : ''}}
+  {{readonly ? 'readonly' : ''}}
+/>
+@if(type === 'password')
+<i class="is-password far fa-eye" data-name="{{name}}"></i>
+@endif
+
+@!component('form/form_error', {name})
+</div>
+  

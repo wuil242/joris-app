@@ -19,16 +19,78 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import Database from '@ioc:Adonis/Lucid/Database'
 
-Route.get('/', async ({ view }) => {
-  return view.render('home/index')
-})
+Route.get('/envoi-reussi', ({request, view }) => {
+  const {title, description, message} = request.qs()
+  return view.render('message', {title, description, type: 'success', message})
+}).as('message.success')
 
-Route.get('/sign-up', 'AuthController.index').as('sign-up')
-Route.get('/login', 'AuthController.login').as('login')
+Route.get('/envoi-echouer', ({request, view }) => {
+  const {title, description, message} = request.qs()
+  return view.render('message', {title, description, type: 'error', message})
+}).as('message.error')
 
-//TODO: mettre en place la connexion des utilisateurs
-Route.post('/login', 'UsersController.login')
+Route.group(() => {
+  Route.get('/', async ({view}) => {
+    const testimonies = await Database.from('testimonies').select('*').orderBy('id', 'desc').limit(4)
+    return await view.render('home/index', {testimonies})
+  })
 
-//TODO: mettre en place l'inscription des utilisateurs
-Route.post('/sign-up', 'UsersController.store')
+  Route.get('/recherche', 'SearchesController.index').as('serviceProvider.find')
+
+  Route.get('/devis/client', 'ClientDevisController.index').as('devis.client')
+  Route.post('/devis/client', 'ClientDevisController.store')
+       .middleware('BanCheck')
+       .as('devis.client.submit')
+
+
+  Route.get('/devis/entreprise', 'EntrepriseDevisController.index').as('devis.entreprise')
+  Route.post('/devis/entreprise', 'EntrepriseDevisController.store')
+       .middleware('BanCheck')
+       .as('devis.entreprise.submit')
+
+
+  Route.get('/prestataire/enrolement', 'ServiceProvidersController.index').as('serviceProvider.enroll')
+  Route.get('/prestataire/plotique-de-confidentialite', 'ServiceProvidersController.policy').as('serviceProvider.policy')
+  Route.post('/prestataire/enrolement', 'ServiceProvidersController.store')
+       .middleware('BanCheck')
+       .as('serviceProvider.enroll.submit')
+
+  Route.get('/nous-contact%C3%A9', 'InfosController.contact').as('infos.contact-us')
+  Route.get('/%C3%A0-propos', 'InfosController.about').as('infos.about')
+  Route.get('/politique-de-confidentialit%C3%A9e', 'InfosController.policy').as('infos.policy')
+
+
+  //TODO: mettre en place la renitilisation du mot de passe
+  Route.get('/reset-password', 'UsersController.resetPassword').as('user.password')
+  Route.post('/reset-password', 'UsersController.sendRestPasswordCode')
+       .middleware('BanCheck')
+       .as('user.password.reset')
+
+  Route.get('/comments/:serviceProviderId/:page', 'ServiceProvidersController.comments')
+       .where('serviceProviderId', Route.matchers.number())
+       .where('page', Route.matchers.number())
+
+}).middleware('silentAuth')
+
+Route.group(() => {
+  Route.get('/inscription', 'AuthController.index').as('sign-up')
+  Route.post('/inscription', 'UsersController.store').as('sign-up.submit')
+
+  Route.get('/connexion', 'AuthController.login').as('login')
+  Route.post('/connexion', 'UsersController.login').as('login.submit')
+
+}).middleware(['userGuard', 'BanCheck'])
+
+Route.group(() => {
+  Route.post('/logout', 'UsersController.logout').as('logout')
+  
+  Route.get('/profil', 'UsersController.profil').as('user.profil')
+  
+  Route.post('/profil', 'UsersController.update').as('user.update')
+  Route.post('/profil/image', 'UsersController.imageUpdate').as('user.image.update')
+
+  Route.post('/prestataire/notation', 'ServiceProvidersController.vote')
+  
+}).middleware('auth')

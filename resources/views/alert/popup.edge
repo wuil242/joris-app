@@ -1,0 +1,5 @@
+@if(flashMessages.has('alert'))
+@!component('components/alert', {
+  ...flashMessages.get('alert')
+})  
+@endif

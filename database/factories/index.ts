@@ -1,12 +1,12 @@
 import Factory from '@ioc:Adonis/Lucid/Factory'
-import user from 'App/Models/user'
+import User from 'App/Models/User'
 
-export const UserFactory = Factory.define(user, ({faker}) => {
+export const UserFactory = Factory.define(User, ({ faker }) => {
   return {
     lastname: faker.name.lastName(),
     firstname: faker.name.firstName(),
-    tel: faker.phone.phoneNumber(),
+    tel: faker.phone.phoneNumber('06#######'),
     email: faker.internet.email(),
-    password: '1234'
+    password: '1234',
   }
 }).build()

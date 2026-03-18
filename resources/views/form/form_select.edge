@@ -1,0 +1,31 @@
+<div class="form-select js-select" id="form-select-{{name}}">
+  <select name="{{name}}" hidden value="{{value[optionValue.toString()]}}">
+    @each(option in options)
+      <option 
+        {{value[optionValue.toString()] === option[optionValue.toString()] ? 'selected' : ''}}
+        value="{{option[optionValue.toString()]}}"
+      >
+        {{option[optionContent.toString()]}}
+      </option>
+    @endeach
+  </select>
+  <button type="button" class="button form-select-button js-select-button">    
+    <span class="form-select-text">{{ value[optionContent.toString()] }}</span>
+    <i class="form-select-icon fa fa-chevron-down"></i>
+  </button>
+  <div class="form-select-content js-select-content">
+    <div class="form-select-search">
+      <input class="form-select-input js-form-select-input" type="search">
+      <i class="form-select-search-icon js-form-select-search-icon fa fa-search"></i>
+    </div>
+    <ul class="form-select-options js-slelect-options">
+      @each(option in options)
+      <a href="#form-select-{{name}}">
+        <li class="form-select-option js-slelect-option" data-value="{{option[optionValue.toString()]}}">
+          {{option[optionContent.toString()]}}
+        </li>
+      </a>
+      @endeach
+    </ul>
+  </div>
+</div>

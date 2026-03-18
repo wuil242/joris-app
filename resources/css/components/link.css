@@ -1,0 +1,11 @@
+.link {
+  font-weight: lighter;
+  font-size: .9rem;
+  
+  transition: font-size .3s;
+}
+
+.link:hover, .link:active {
+  font-size: 1rem;
+  text-decoration: underline;
+}

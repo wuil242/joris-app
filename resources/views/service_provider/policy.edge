@@ -1,0 +1,21 @@
+@layout('layouts/page')
+@set('title', 'Devenir prestataire')
+@set('description', 'Demande d\'enrolement d\'un prestataire')
+
+@section('head')
+
+@endsection
+
+@section('content')
+
+@include('alert/popup')
+
+@!component('components/title', {
+  text: 'Politique de confidentialite',
+})
+
+<p>
+  Les regle a suivre pour devenir prestataires 
+</p>
+
+@endsection

@@ -1,0 +1,13 @@
+@each((testimony, key) in testimonies)
+<div class="witness" >
+{{key + 1}}
+  {{--  <img class="witness-image"  src="{{asset('assets/images/header_bg.jpeg')}}" alt="witness image">  --}}
+  @!component('components/directus_image', {
+    src: testimony.image,
+    alt: 'temoignage',
+    className: 'witness-image'
+  })
+  <p class="witness-text">{{testimony.message}}</p>
+  <p class="witness-name">{{testimony.fullname}}</p>
+</div>
+@endeach

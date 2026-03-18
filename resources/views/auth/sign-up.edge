@@ -1,13 +1,41 @@
 @layout('layouts/page')
+@set('title', 'creer un compte')
+@set('description', 'creer un compte et rejoingnez la famille')
 
-@set('title', 'sign-up')
-@set('description', 'the sign-up page')
+@section('head')
+@endsection
 
 @section('content')
-<h1>Sign Up</h1>
-<form action="{{ route('sign-up') }}" method="post">
-  <input type="text" name="name">
-  <input type="submit">
-  {{ csrfField() }}
-</form>
+
+@!component('components/title', {
+  text: 'Creer un compte',
+})
+
+
+<section class="layout-two-block">
+  
+  <p>
+    Creer un compte
+  </p>
+  {{--  {{inspect(flashMessages)}}  --}}
+  @set('ref',  request.qs().ref ? '?ref=' + request.qs().ref : '')
+  <form class="form" action="{{ route('sign-up.submit') + ref }}" method="post">
+    {{ csrfField() }}
+    @include('form/parts/lastname')
+    @include('form/parts/firstname')
+    @include('form/parts/tel')
+    @!component('form/parts/email', {optional: true})
+    @include('form/parts/password')
+    @include('form/parts/password_confirm')
+   
+    @include('form/form_policy')
+    @!component('form/form_checkbox', {text: 'Se souvenir de moi', name: 'remember_me'})
+  
+    @!component('form/form_submit', {
+      text: 'Se connecter'
+    })
+
+  </form>
+  </section>
+
 @endsection

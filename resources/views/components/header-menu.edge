@@ -1,0 +1,9 @@
+<div class="js-close-menu header-menu hide scroll">
+  <div class="header-menu-hidden js-menu-hidden" title="cliquer pour fermer le menu"></div>
+  <nav class="header-menu-content">
+    <button class="header-menu-close" id="button-close">X</button>
+    @!component('components/header-menu-items', {prefix: 'sticky'})
+  </nav>
+</div>
+@include('components/header-menu-static')
+@include('components/header-menu-button')

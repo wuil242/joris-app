@@ -1,12 +1,48 @@
 @layout('layouts/page')
+@set('title', 'nous contactez')
+@set('description', 'contactez nous pour plus d\'information ou d\'autres besion specifique')
 
-@set('title', 'login')
-@set('description', 'the login page')
+@section('head')
+@endsection
 
 @section('content')
-  <form action="/login" method="post">
-    <input type="text" name="userId" placeholder="email or tel">
-    <input type="password" name="password" placeholder="password">
-    <input class="button" type="submit" value="Connexion">
+
+@!component('components/title', {
+  text: 'Connexion',
+})
+
+
+<section class="layout-two-block">
+  
+  <p>
+    Connecter vous a votre compte
+  </p>
+  
+  @set('ref',  request.qs().ref ? '?ref=' + request.qs().ref : '')
+  <form class="form" action="{{ route('login.submit') + ref }}" method="post">
+    {{ csrfField() }}
+
+    @include('form/form_global_error')
+    
+    @!component('form/form_input', {
+      name: 'userId',
+      label: 'Email ou Numero de Telephone',
+      // rule: 'renseignez un numero de telephone ou un email'
+    })
+    
+    @!component('form/form_input', {
+      label: 'Mot de passe',
+      name: 'password',
+      type: 'password',
+      autocomplete: true
+    })
+
+    @!component('form/form_checkbox', {text: 'Se souvenir de moi', name: 'remember_me'})
+  
+    @!component('form/form_submit', {
+      text: 'Se connecter'
+    })
   </form>
+  </section>
+
 @endsection

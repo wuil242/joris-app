@@ -1,0 +1,34 @@
+@set('isLoginOrSignRoute', request.url() === route('login') || request.url() === route('sign-up'))
+@set('ref', isLoginOrSignRoute ? '' : '?ref=' + request.url() || flashMessages.get('ref'))
+
+<div class="header-menu-site-infos">
+    <a href="/">
+      <img src="/favicon.jpg" class="site-logo" alt="logo du site">
+    </a>
+  <a href="/">
+    <h1 class="header-menu-site-title site-name">
+      IProvider|Congo
+    </h1>
+  </a>
+</div>
+<div class="header-menu-actions">
+@if(auth.isLoggedIn)
+  @include('components/header_profil')
+@else
+  <a class="header-menu-actions-login header-menu-item {{ request.url() ===  route('login') ? 'active' : '' }}" href="{{ route('login')  + ref}}">Se connecter</a>
+  <a class="header-menu-actions-sign_up button" href="{{ route('sign-up') + ref}}">Créer un compte</a>
+@endif
+<div class="{{openMenu || '' }} header-menu hide scroll">
+  @if(openMenu)
+    <div class="header-menu-hidden js-menu-hidden" title="cliquer pour fermer le menu"></div>
+  @endif
+  <nav class="header-menu-content">
+    <button class="button rounded header-menu-close" id="button-close">x</button>
+    @!component('components/header-menu-items', {prefix: stickyPrefix || 'home-sticky'})
+  </nav>
+</div>
+<nav class="header-menu-static">
+  @!component('components/header-menu-items', {prefix: staticPrefix || 'home-static'})
+</nav>
+@include('components/header-menu-button')
+</div>

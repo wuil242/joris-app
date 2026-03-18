@@ -6,20 +6,23 @@
      ||||    |||      |||  |||   |||||  |||        \\\  |||  |||       |||       ||||    |||||    |||||                                                        
     ||||    |||      |||  ||||||||     |||          \\\|||  |||       |||       ||||    ||||||||||||||                                                          
 
-                                  #### bdwd@bouss.cg ####                                                                                                   
+                                  #### wuil@bdwd.cg ####                                                                                                   
   -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{{description || 'joris-app-description'}}">
   <meta name="author" content="wuil<bdwd@bouss.cg>">
-  <title>{{title || 'joris-app-title'}}</title>
+  <title>IProvider | {{title || 'IProvider'}}</title>
+  <link rel="shortcut icon" href="/favicon.jpg">
   @entryPointStyles('app')
   @entryPointScripts('app')
+  @!section('head')
 </head>
 <body>
+
     @!section('menu')
     <main>
         @!section('content')

@@ -1,0 +1,47 @@
+.top-button {
+  position: fixed;
+  top: 50%;
+  bottom: 50%;
+  right: 0;
+  /* width: 2rem;
+  height: 2rem; */
+  /* border-radius: 50%; */
+  color: var(--top-button);
+  transform: translate3d(100%, 0, 0);
+  transition: .3s;
+
+  z-index: var(--layer-middle);
+}
+
+.top-button i {
+  background-color: var(--top-button-bg);
+  padding: .4em .8em;
+  /* border-radius: 50%; */
+  border-radius:  3px 0 0 3px;
+}
+
+/* Events */
+
+.top-button.active {
+  transform: translate3d(0, 0, 0);
+}
+
+
+/* Annimation */
+
+@keyframes arrowMove {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  } 
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* responsive */
+@media only screen and (min-width: 650px) {
+  .top-button i {
+    font-size: 1.5rem;
+  }
+}
